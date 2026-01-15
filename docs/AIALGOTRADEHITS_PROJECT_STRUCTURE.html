@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AIAlgoTradeHits.com - Project Structure Documentation</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px;
+            line-height: 1.6;
+            color: #333;
+        }
+        h1 {
+            color: #1a73e8;
+            border-bottom: 3px solid #1a73e8;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #34a853;
+            margin-top: 30px;
+            border-left: 4px solid #34a853;
+            padding-left: 15px;
+        }
+        h3 {
+            color: #ea4335;
+            margin-top: 20px;
+        }
+        .header-info {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+        .header-info h1 {
+            color: white;
+            border-bottom: 2px solid rgba(255,255,255,0.3);
+            margin-top: 0;
+        }
+        .folder-tree {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            font-family: 'Consolas', 'Courier New', monospace;
+            font-size: 14px;
+            border-left: 4px solid #1a73e8;
+            overflow-x: auto;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 14px;
+        }
+        th {
+            background: #1a73e8;
+            color: white;
+            padding: 12px;
+            text-align: left;
+        }
+        td {
+            padding: 10px 12px;
+            border-bottom: 1px solid #ddd;
+        }
+        tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+        tr:hover {
+            background: #e8f0fe;
+        }
+        .badge {
+            display: inline-block;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+        .badge-primary { background: #1a73e8; color: white; }
+        .badge-success { background: #34a853; color: white; }
+        .badge-warning { background: #fbbc04; color: #333; }
+        .badge-danger { background: #ea4335; color: white; }
+        .section-box {
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .github-url {
+            background: #24292e;
+            color: #58a6ff;
+            padding: 10px 15px;
+            border-radius: 6px;
+            font-family: monospace;
+            display: block;
+            margin: 10px 0;
+        }
+        .footer {
+            margin-top: 50px;
+            padding-top: 20px;
+            border-top: 2px solid #ddd;
+            text-align: center;
+            color: #666;
+            font-size: 12px;
+        }
+        @media print {
+            body { padding: 20px; }
+            .section-box { box-shadow: none; border: 1px solid #ccc; }
+        }
+    </style>
+</head>
+<body>
+    <div class="header-info">
+        <h1>AIAlgoTradeHits.com</h1>
+        <p><strong>Project Structure &amp; GitHub Documentation</strong></p>
+        <p>Version: 5.4.0 | Date: January 15, 2026</p>
+        <p>GCP Project: <code>aialgotradehits</code></p>
+    </div>
+
+    <h2>1. GitHub Repository</h2>
+    <div class="section-box">
+        <p><strong>Repository URL:</strong></p>
+        <a class="github-url" href="https://github.com/irfanqazi-web/AIAlgoTradeHits.com">https://github.com/irfanqazi-web/AIAlgoTradeHits.com</a>
+
+        <table>
+            <tr>
+                <td><strong>Owner</strong></td>
+                <td>irfanqazi-web</td>
+            </tr>
+            <tr>
+                <td><strong>Branch</strong></td>
+                <td>main</td>
+            </tr>
+            <tr>
+                <td><strong>Local Path</strong></td>
+                <td>C:\1AITrading\Trading</td>
+            </tr>
+            <tr>
+                <td><strong>Architecture</strong></td>
+                <td>Monorepo (Single Repository)</td>
+            </tr>
+        </table>
+    </div>
+
+    <h2>2. Complete Folder Structure</h2>
+    <div class="folder-tree">
+<pre>
+C:\1AITrading\Trading\
+│
+├── cloud_functions/           # GCP Cloud Functions (35 functions)
+│   ├── 5min/                  # 5-minute interval data fetcher
+│   ├── ai/                    # AI processing function
+│   ├── all_assets/            # All assets fetcher
+│   ├── analyst/               # Analyst recommendations
+│   ├── api/                   # Trading API endpoints
+│   ├── bulletproof/           # Main bulletproof fetcher ⭐
+│   ├── daily/                 # Daily data fetcher
+│   ├── daily_stocks/          # Daily stocks specific
+│   ├── dedup/                 # Deduplication function
+│   ├── earnings/              # Earnings data fetcher
+│   ├── etf_analytics/         # ETF analytics processor
+│   ├── finnhub_news/          # Finnhub news fetcher
+│   ├── fred/                  # FRED economic data
+│   ├── fundamentals/          # Fundamentals data
+│   ├── hourly/                # Hourly data fetcher
+│   ├── interest_rates/        # Interest rates fetcher
+│   ├── legacy/                # Legacy functions
+│   ├── market_movers/         # Market movers tracker
+│   ├── max_quota/             # Max quota optimizer
+│   ├── ml_analysis/           # ML analysis processor
+│   ├── ml_ops/                # ML operations ⭐
+│   ├── monitoring/            # Monitoring &amp; alerts
+│   ├── multi_source/          # Multi-source aggregator
+│   ├── opportunity_report/    # Opportunity reports
+│   ├── pdf_report/            # PDF report generator
+│   ├── smart_search/          # Smart search function
+│   ├── stocks_5min/           # Stocks 5-min data
+│   ├── stocks_daily/          # Stocks daily data
+│   ├── stocks_hourly/         # Stocks hourly data
+│   ├── twelvedata/            # TwelveData fetcher ⭐
+│   ├── twelvedata_stocks/     # TwelveData stocks
+│   ├── walk_forward/          # Walk-forward analysis
+│   ├── weekly_capacity/       # Weekly capacity planner
+│   ├── weekly_cryptos/        # Weekly crypto data
+│   └── weekly_stocks/         # Weekly stocks data
+│
+├── cloud_run/                 # GCP Cloud Run Services (4 services)
+│   ├── agentic_ai_trading_system/   # AI trading agents
+│   ├── agentic_trading_system/      # Trading automation
+│   ├── ml_training/                 # ML model training
+│   └── trading_agent/               # Trading agent service
+│
+├── dashboard/                 # Frontend Applications
+│   └── stock-price-app/       # React Trading Dashboard ⭐
+│       ├── src/               # Source code (TypeScript)
+│       ├── public/            # Static assets
+│       └── dist/              # Production build
+│
+├── shared/                    # Shared Modules
+│   ├── metrics/               # Metrics collection
+│   ├── models/                # ML models
+│   ├── shared_ai_modules/     # Shared AI code
+│   ├── shared_backend/        # Shared backend services
+│   └── utils/                 # Utility functions
+│
+├── scripts/                   # Utility Scripts (353 files)
+│   ├── backfill_*.py          # Data backfill scripts
+│   ├── check_*.py             # Validation scripts
+│   ├── deploy_*.py            # Deployment scripts
+│   └── ...                    # Various utilities
+│
+├── docs/                      # Documentation
+│   ├── CLAUDE.md              # Claude Code instructions
+│   ├── masterquery.md         # Master specifications
+│   └── *.md                   # Various docs
+│
+├── .gitignore                 # Git ignore rules
+├── .env                       # Environment variables (not in git)
+└── .env.coinmarketcap         # CoinMarketCap config (not in git)
+</pre>
+    </div>
+
+    <h2>3. Cloud Functions Detail</h2>
+    <div class="section-box">
+        <h3>Primary Functions (Active)</h3>
+        <table>
+            <tr>
+                <th>Function</th>
+                <th>Purpose</th>
+                <th>Trigger</th>
+                <th>Status</th>
+            </tr>
+            <tr>
+                <td><strong>bulletproof</strong></td>
+                <td>Master fetcher for all assets with error tolerance</td>
+                <td>HTTP / Scheduler</td>
+                <td><span class="badge badge-success">Active</span></td>
+            </tr>
+            <tr>
+                <td><strong>twelvedata</strong></td>
+                <td>TwelveData API integration (outputsize=5000)</td>
+                <td>HTTP / Scheduler</td>
+                <td><span class="badge badge-success">Active</span></td>
+            </tr>
+            <tr>
+                <td><strong>api</strong></td>
+                <td>Trading API endpoints</td>
+                <td>HTTP</td>
+                <td><span class="badge badge-success">Active</span></td>
+            </tr>
+            <tr>
+                <td><strong>ml_ops</strong></td>
+                <td>ML model operations and predictions</td>
+                <td>HTTP / Scheduler</td>
+                <td><span class="badge badge-success">Active</span></td>
+            </tr>
+            <tr>
+                <td><strong>monitoring</strong></td>
+                <td>System monitoring and alerts</td>
+                <td>Scheduler</td>
+                <td><span class="badge badge-success">Active</span></td>
+            </tr>
+        </table>
+
+        <h3>Data Collection Functions</h3>
+        <table>
+            <tr>
+                <th>Function</th>
+                <th>Interval</th>
+                <th>Assets</th>
+            </tr>
+            <tr>
+                <td>daily / daily_stocks</td>
+                <td>Daily (1 AM ET)</td>
+                <td>Stocks, ETFs</td>
+            </tr>
+            <tr>
+                <td>hourly / stocks_hourly</td>
+                <td>Hourly</td>
+                <td>Stocks, Crypto</td>
+            </tr>
+            <tr>
+                <td>5min / stocks_5min</td>
+                <td>5 minutes</td>
+                <td>Active stocks</td>
+            </tr>
+            <tr>
+                <td>weekly_stocks / weekly_cryptos</td>
+                <td>Weekly</td>
+                <td>All assets</td>
+            </tr>
+        </table>
+
+        <h3>Analytics Functions</h3>
+        <table>
+            <tr>
+                <th>Function</th>
+                <th>Purpose</th>
+            </tr>
+            <tr>
+                <td>ml_analysis</td>
+                <td>Machine learning analysis on market data</td>
+            </tr>
+            <tr>
+                <td>etf_analytics</td>
+                <td>ETF performance and composition analysis</td>
+            </tr>
+            <tr>
+                <td>walk_forward</td>
+                <td>Walk-forward backtesting validation</td>
+            </tr>
+            <tr>
+                <td>market_movers</td>
+                <td>Track top gainers/losers</td>
+            </tr>
+            <tr>
+                <td>opportunity_report</td>
+                <td>Generate trading opportunity reports</td>
+            </tr>
+        </table>
+
+        <h3>External Data Functions</h3>
+        <table>
+            <tr>
+                <th>Function</th>
+                <th>Data Source</th>
+                <th>Data Type</th>
+            </tr>
+            <tr>
+                <td>fred</td>
+                <td>Federal Reserve (FRED)</td>
+                <td>Economic indicators</td>
+            </tr>
+            <tr>
+                <td>finnhub_news</td>
+                <td>Finnhub</td>
+                <td>Market news &amp; sentiment</td>
+            </tr>
+            <tr>
+                <td>earnings</td>
+                <td>Multiple sources</td>
+                <td>Earnings calendar &amp; data</td>
+            </tr>
+            <tr>
+                <td>fundamentals</td>
+                <td>TwelveData</td>
+                <td>Company fundamentals</td>
+            </tr>
+            <tr>
+                <td>interest_rates</td>
+                <td>FRED</td>
+                <td>Interest rate data</td>
+            </tr>
+        </table>
+    </div>
+
+    <h2>4. Cloud Run Services</h2>
+    <div class="section-box">
+        <table>
+            <tr>
+                <th>Service</th>
+                <th>Purpose</th>
+                <th>URL Pattern</th>
+            </tr>
+            <tr>
+                <td><strong>trading_agent</strong></td>
+                <td>Automated trading agent with AI decisions</td>
+                <td>trading-agent-*.run.app</td>
+            </tr>
+            <tr>
+                <td><strong>ml_training</strong></td>
+                <td>ML model training pipeline</td>
+                <td>ml-training-*.run.app</td>
+            </tr>
+            <tr>
+                <td><strong>agentic_ai_trading_system</strong></td>
+                <td>Multi-agent AI trading system</td>
+                <td>agentic-ai-*.run.app</td>
+            </tr>
+            <tr>
+                <td><strong>agentic_trading_system</strong></td>
+                <td>Rule-based trading automation</td>
+                <td>agentic-trading-*.run.app</td>
+            </tr>
+        </table>
+    </div>
+
+    <h2>5. Trading Dashboard</h2>
+    <div class="section-box">
+        <table>
+            <tr>
+                <td><strong>Location</strong></td>
+                <td>dashboard/stock-price-app/</td>
+            </tr>
+            <tr>
+                <td><strong>Framework</strong></td>
+                <td>React + TypeScript + Vite</td>
+            </tr>
+            <tr>
+                <td><strong>Deployment</strong></td>
+                <td>GCP Cloud Run</td>
+            </tr>
+            <tr>
+                <td><strong>Features</strong></td>
+                <td>
+                    • Multi-timeframe charts (Daily, Hourly, 5min)<br>
+                    • 24 Technical indicators<br>
+                    • Growth Score &amp; Sentiment display<br>
+                    • AI Trading signals<br>
+                    • Smart Search
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <h2>6. API Endpoints</h2>
+    <div class="section-box">
+        <p><strong>Base URL:</strong> <code>https://trading-api-*.us-central1.run.app</code></p>
+        <table>
+            <tr>
+                <th>Endpoint</th>
+                <th>Method</th>
+                <th>Purpose</th>
+            </tr>
+            <tr>
+                <td>/api/ai/trading-signals</td>
+                <td>GET</td>
+                <td>Generate buy/sell signals</td>
+            </tr>
+            <tr>
+                <td>/api/ai/rise-cycle-candidates</td>
+                <td>GET</td>
+                <td>EMA crossover detection</td>
+            </tr>
+            <tr>
+                <td>/api/ai/ml-predictions</td>
+                <td>GET</td>
+                <td>ML model predictions</td>
+            </tr>
+            <tr>
+                <td>/api/ai/growth-screener</td>
+                <td>GET</td>
+                <td>High growth score scanner</td>
+            </tr>
+            <tr>
+                <td>/api/ai/text-to-sql</td>
+                <td>POST</td>
+                <td>Natural language queries</td>
+            </tr>
+        </table>
+    </div>
+
+    <h2>7. BigQuery Schema</h2>
+    <div class="section-box">
+        <p><strong>Project:</strong> <code>aialgotradehits</code></p>
+        <p><strong>Dataset:</strong> <code>crypto_trading_data</code></p>
+        <table>
+            <tr>
+                <th>Table</th>
+                <th>Description</th>
+            </tr>
+            <tr>
+                <td>stocks_daily_clean</td>
+                <td>Daily stock data with indicators</td>
+            </tr>
+            <tr>
+                <td>stocks_hourly_clean</td>
+                <td>Hourly stock data</td>
+            </tr>
+            <tr>
+                <td>crypto_daily_clean</td>
+                <td>Daily crypto data with indicators</td>
+            </tr>
+            <tr>
+                <td>crypto_hourly_clean</td>
+                <td>Hourly crypto data</td>
+            </tr>
+        </table>
+        <p><strong>ML Dataset:</strong> <code>aialgotradehits.ml_models</code></p>
+    </div>
+
+    <h2>8. Deployment Commands</h2>
+    <div class="section-box">
+        <h3>Deploy Cloud Function</h3>
+        <div class="folder-tree">
+<pre>
+cd cloud_functions/bulletproof
+gcloud functions deploy bulletproof-fetcher \
+  --gen2 --runtime=python312 --region=us-central1 \
+  --entry-point=bulletproof_fetch --trigger-http \
+  --allow-unauthenticated --memory=4096MB \
+  --timeout=540s --project=aialgotradehits
+</pre>
+        </div>
+
+        <h3>Deploy Dashboard to Cloud Run</h3>
+        <div class="folder-tree">
+<pre>
+cd dashboard/stock-price-app
+gcloud run deploy trading-app \
+  --source . --platform managed \
+  --region us-central1 --allow-unauthenticated \
+  --port 8080 --project aialgotradehits
+</pre>
+        </div>
+
+        <h3>Git Commands</h3>
+        <div class="folder-tree">
+<pre>
+# Push changes
+git add -A
+git commit -m "Your message"
+git push origin main
+
+# View status
+git status
+git log --oneline -5
+</pre>
+        </div>
+    </div>
+
+    <h2>9. Local Development</h2>
+    <div class="section-box">
+        <div class="folder-tree">
+<pre>
+# Trading Dashboard
+cd dashboard/stock-price-app
+npm install
+npm run dev      # Development server at localhost:5173
+npm run build    # Production build
+
+# Python Scripts
+cd scripts
+python check_bigquery_counts.py
+python monitor_twelvedata_quota.py
+</pre>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p><strong>AIAlgoTradeHits.com</strong> - AI Trading Data Pipeline</p>
+        <p>Document generated on January 15, 2026</p>
+        <p>GitHub: <a href="https://github.com/irfanqazi-web/AIAlgoTradeHits.com">irfanqazi-web/AIAlgoTradeHits.com</a></p>
+    </div>
+</body>
+</html>

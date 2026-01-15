@@ -1,0 +1,1999 @@
+{
+  "investments": [
+    {
+      "investment_id": "INV-01",
+      "uii": "015-000000001",
+      "name": "Taxpayer Services Modernization",
+      "short_name": "TSM",
+      "description": "Digital taxpayer services including Online Account, IRS.gov, Direct File, and self-service tools",
+      "category": "MISSION",
+      "investment_type": "major-it",
+      "cd_owner": "Jim Keith",
+      "cd_title": "Coordinating Director - Taxpayer Services",
+      "rd_team": [
+        "Joe Gibbons"
+      ],
+      "re_team": [
+        "Mike Donaldson",
+        "Greg Ellis"
+      ],
+      "pm_team": [
+        "John Bursie"
+      ],
+      "budget_fy25": 456000000,
+      "current_phase": "CONTROL",
+      "health": "green",
+      "sub_projects": 12,
+      "cost_variance": -2.1,
+      "schedule_days": 0
+    },
+    {
+      "investment_id": "INV-02",
+      "uii": "015-000000002",
+      "name": "Tax Processing Transformation",
+      "short_name": "TPT",
+      "description": "Core tax processing including CADE 2, IMF replacement, MeF, and return processing systems",
+      "category": "MISSION",
+      "investment_type": "major-it",
+      "cd_owner": "Miji Mathews",
+      "cd_title": "Coordinating Director - Tax Processing",
+      "rd_team": [
+        "Rangam Subramanian"
+      ],
+      "re_team": [
+        "Pavan Vemuri"
+      ],
+      "pm_team": [
+        "Lillie Wilburn"
+      ],
+      "budget_fy25": 389000000,
+      "current_phase": "CONTROL",
+      "health": "green",
+      "sub_projects": 15,
+      "cost_variance": 1.5,
+      "schedule_days": 5
+    },
+    {
+      "investment_id": "INV-03",
+      "uii": "015-000000003",
+      "name": "Compliance Systems Enhancement",
+      "short_name": "CSE",
+      "description": "Examination, collection, ACA, and criminal investigation systems",
+      "category": "MISSION",
+      "investment_type": "major-it",
+      "cd_owner": "Eric Markow",
+      "cd_title": "Coordinating Director - Compliance",
+      "rd_team": [
+        "Andrew Hanna"
+      ],
+      "re_team": [
+        "Eric R. Smith",
+        "Mohan Vasa"
+      ],
+      "pm_team": [
+        "James Vergauwen"
+      ],
+      "budget_fy25": 234000000,
+      "current_phase": "CONTROL",
+      "health": "yellow",
+      "sub_projects": 8,
+      "cost_variance": 8.2,
+      "schedule_days": 15
+    },
+    {
+      "investment_id": "INV-04",
+      "uii": "015-000000004",
+      "name": "Filing Season Infrastructure",
+      "short_name": "FSI",
+      "description": "Filing season readiness, legislative changes, refund processing, and annual updates",
+      "category": "MISSION",
+      "investment_type": "major-it",
+      "cd_owner": "Craig Drake",
+      "cd_title": "Coordinating Director - Filing Season",
+      "rd_team": [
+        "Gbemi Acholonu"
+      ],
+      "re_team": [
+        "Larry Bullock"
+      ],
+      "pm_team": [],
+      "budget_fy25": 178000000,
+      "current_phase": "CONTROL",
+      "health": "green",
+      "sub_projects": 6,
+      "cost_variance": -1.0,
+      "schedule_days": -3
+    },
+    {
+      "investment_id": "INV-05",
+      "uii": "015-000000005",
+      "name": "API Platform & Integration",
+      "short_name": "API",
+      "description": "Enterprise APIs, microservices platform, and integration services",
+      "category": "FOUNDATIONAL",
+      "investment_type": "major-it",
+      "cd_owner": "Rob King",
+      "cd_title": "Coordinating Director - API Platform",
+      "rd_team": [
+        "George Contos",
+        "Brian Wright"
+      ],
+      "re_team": [
+        "Erek Borowski",
+        "Shane Smith"
+      ],
+      "pm_team": [
+        "Tony Antonious"
+      ],
+      "budget_fy25": 145000000,
+      "current_phase": "CONTROL",
+      "health": "green",
+      "sub_projects": 10,
+      "cost_variance": 0.5,
+      "schedule_days": 0
+    },
+    {
+      "investment_id": "INV-06",
+      "uii": "015-000000006",
+      "name": "Enterprise Infrastructure",
+      "short_name": "EI",
+      "description": "Data centers, cloud services, network, storage, and compute infrastructure",
+      "category": "FOUNDATIONAL",
+      "investment_type": "major-it",
+      "cd_owner": "Lou Capece",
+      "cd_title": "Coordinating Director - Infrastructure",
+      "rd_team": [
+        "Shelderick Bailey",
+        "Babu V."
+      ],
+      "re_team": [
+        "Lou Ferraro",
+        "Val Mance"
+      ],
+      "pm_team": [
+        "Haren Punatar"
+      ],
+      "budget_fy25": 312000000,
+      "current_phase": "CONTROL",
+      "health": "green",
+      "sub_projects": 14,
+      "cost_variance": 2.0,
+      "schedule_days": 0
+    },
+    {
+      "investment_id": "INV-07",
+      "uii": "015-000000007",
+      "name": "Cybersecurity & Privacy",
+      "short_name": "CSP",
+      "description": "Security operations, identity management, threat protection, and privacy compliance",
+      "category": "FOUNDATIONAL",
+      "investment_type": "major-it",
+      "cd_owner": "Houman Rasouli",
+      "cd_title": "Coordinating Director - Cybersecurity",
+      "rd_team": [
+        "Shelia Walker"
+      ],
+      "re_team": [
+        "Anthony Gillespie",
+        "Jaret Trail"
+      ],
+      "pm_team": [
+        "Ajeesh Cherian"
+      ],
+      "budget_fy25": 267000000,
+      "current_phase": "CONTROL",
+      "health": "yellow",
+      "sub_projects": 9,
+      "cost_variance": 12.5,
+      "schedule_days": 10
+    },
+    {
+      "investment_id": "INV-08",
+      "uii": "015-000000008",
+      "name": "End User Digital Services",
+      "short_name": "EUDS",
+      "description": "Employee workstations, collaboration tools, and productivity suite",
+      "category": "FOUNDATIONAL",
+      "investment_type": "non-major-it",
+      "cd_owner": "Tanya Chiaravalle",
+      "cd_title": "Coordinating Director - End User Services",
+      "rd_team": [
+        "Kafi Grigsby",
+        "Dave Potock"
+      ],
+      "re_team": [
+        "Tony Early"
+      ],
+      "pm_team": [
+        "LaShawndra Bills"
+      ],
+      "budget_fy25": 98000000,
+      "current_phase": "CONTROL",
+      "health": "green",
+      "sub_projects": 5,
+      "cost_variance": 1.0,
+      "schedule_days": 0
+    },
+    {
+      "investment_id": "INV-09",
+      "uii": "015-000000009",
+      "name": "IT Strategy & PMO",
+      "short_name": "SPMO",
+      "description": "IT strategy, enterprise architecture, portfolio management, and governance",
+      "category": "FOUNDATIONAL",
+      "investment_type": "non-major-it",
+      "cd_owner": "Courtney Williams",
+      "cd_title": "Coordinating Director - Strategy & PMO",
+      "rd_team": [
+        "Melissa Kaminin"
+      ],
+      "re_team": [],
+      "pm_team": [
+        "Folashade Pullen"
+      ],
+      "budget_fy25": 67000000,
+      "current_phase": "STEADY_STATE",
+      "health": "green",
+      "sub_projects": 4,
+      "cost_variance": 0.0,
+      "schedule_days": 0
+    }
+  ],
+  "forms": [
+    {
+      "form_id": "CPIC-001",
+      "form_name": "Strategic Planning Document",
+      "form_code": "SPD-001",
+      "functional_area": "Strategy",
+      "investment_id": "INV-02",
+      "cpic_phase": "Preselect",
+      "fiscal_year": 2025,
+      "status": "In Review",
+      "risk_level": "Low"
+    },
+    {
+      "form_id": "CPIC-002",
+      "form_name": "Needs Identification Report",
+      "form_code": "NIR-001",
+      "functional_area": "Business Analysis",
+      "investment_id": "INV-03",
+      "cpic_phase": "Preselect",
+      "fiscal_year": 2025,
+      "status": "In Review",
+      "risk_level": "Low"
+    },
+    {
+      "form_id": "CPIC-003",
+      "form_name": "Initial Screening Criteria",
+      "form_code": "ISC-001",
+      "functional_area": "Governance",
+      "investment_id": "INV-04",
+      "cpic_phase": "Preselect",
+      "fiscal_year": 2025,
+      "status": "Approved",
+      "risk_level": "Low"
+    },
+    {
+      "form_id": "CPIC-004",
+      "form_name": "Preliminary Business Case",
+      "form_code": "PBC-001",
+      "functional_area": "Investment Planning",
+      "investment_id": "INV-05",
+      "cpic_phase": "Preselect",
+      "fiscal_year": 2025,
+      "status": "In Review",
+      "risk_level": "Medium"
+    },
+    {
+      "form_id": "CPIC-005",
+      "form_name": "Portfolio Prioritization Request",
+      "form_code": "PPR-001",
+      "functional_area": "Strategy",
+      "investment_id": "INV-06",
+      "cpic_phase": "Preselect",
+      "fiscal_year": 2025,
+      "status": "In Review",
+      "risk_level": "Low"
+    },
+    {
+      "form_id": "CPIC-006",
+      "form_name": "Mission Alignment Assessment",
+      "form_code": "MAA-001",
+      "functional_area": "Strategy",
+      "investment_id": "INV-07",
+      "cpic_phase": "Preselect",
+      "fiscal_year": 2025,
+      "status": "Approved",
+      "risk_level": "Low"
+    },
+    {
+      "form_id": "CPIC-007",
+      "form_name": "Resource Availability Check",
+      "form_code": "RAC-001",
+      "functional_area": "Resource Management",
+      "investment_id": "INV-08",
+      "cpic_phase": "Preselect",
+      "fiscal_year": 2025,
+      "status": "In Review",
+      "risk_level": "Low"
+    },
+    {
+      "form_id": "CPIC-008",
+      "form_name": "Technical Feasibility Study",
+      "form_code": "TFS-001",
+      "functional_area": "Enterprise Architecture",
+      "investment_id": "INV-09",
+      "cpic_phase": "Preselect",
+      "fiscal_year": 2025,
+      "status": "In Review",
+      "risk_level": "Medium"
+    },
+    {
+      "form_id": "CPIC-009",
+      "form_name": "Budget Authority Request",
+      "form_code": "BAR-001",
+      "functional_area": "Financial Analysis",
+      "investment_id": "INV-01",
+      "cpic_phase": "Preselect",
+      "fiscal_year": 2025,
+      "status": "Approved",
+      "risk_level": "Low"
+    },
+    {
+      "form_id": "CPIC-010",
+      "form_name": "Stakeholder Identification",
+      "form_code": "SID-001",
+      "functional_area": "Strategy",
+      "investment_id": "INV-02",
+      "cpic_phase": "Preselect",
+      "fiscal_year": 2025,
+      "status": "In Review",
+      "risk_level": "Low"
+    },
+    {
+      "form_id": "CPIC-011",
+      "form_name": "Initial Risk Screening",
+      "form_code": "IRS-001",
+      "functional_area": "Risk Management",
+      "investment_id": "INV-03",
+      "cpic_phase": "Preselect",
+      "fiscal_year": 2025,
+      "status": "In Review",
+      "risk_level": "Low"
+    },
+    {
+      "form_id": "CPIC-012",
+      "form_name": "Capability Gap Assessment",
+      "form_code": "CGA-001",
+      "functional_area": "Enterprise Architecture",
+      "investment_id": "INV-04",
+      "cpic_phase": "Preselect",
+      "fiscal_year": 2025,
+      "status": "Approved",
+      "risk_level": "Medium"
+    },
+    {
+      "form_id": "CPIC-013",
+      "form_name": "Investment Proposal Draft",
+      "form_code": "IPD-001",
+      "functional_area": "Investment Planning",
+      "investment_id": "INV-05",
+      "cpic_phase": "Preselect",
+      "fiscal_year": 2025,
+      "status": "In Review",
+      "risk_level": "Low"
+    },
+    {
+      "form_id": "CPIC-014",
+      "form_name": "CIO Endorsement Request",
+      "form_code": "CER-001",
+      "functional_area": "Governance",
+      "investment_id": "INV-06",
+      "cpic_phase": "Preselect",
+      "fiscal_year": 2025,
+      "status": "In Review",
+      "risk_level": "Low"
+    },
+    {
+      "form_id": "CPIC-015",
+      "form_name": "IRB Submission Package",
+      "form_code": "ISP-001",
+      "functional_area": "Governance",
+      "investment_id": "INV-07",
+      "cpic_phase": "Preselect",
+      "fiscal_year": 2025,
+      "status": "Approved",
+      "risk_level": "Low"
+    },
+    {
+      "form_id": "CPIC-016",
+      "form_name": "OMB Exhibit 300 Business Case",
+      "form_code": "BC-300-001",
+      "functional_area": "Investment Planning",
+      "investment_id": "INV-08",
+      "cpic_phase": "Select",
+      "fiscal_year": 2025,
+      "status": "Approved",
+      "risk_level": "Low"
+    },
+    {
+      "form_id": "CPIC-017",
+      "form_name": "Investment Screening Criteria",
+      "form_code": "ISC-001",
+      "functional_area": "Investment Planning",
+      "investment_id": "INV-09",
+      "cpic_phase": "Select",
+      "fiscal_year": 2025,
+      "status": "Completed",
+      "risk_level": "Low"
+    },
+    {
+      "form_id": "CPIC-018",
+      "form_name": "Alternatives Analysis",
+      "form_code": "AA-001",
+      "functional_area": "Investment Planning",
+      "investment_id": "INV-01",
+      "cpic_phase": "Select",
+      "fiscal_year": 2025,
+      "status": "Approved",
+      "risk_level": "Medium"
+    },
+    {
+      "form_id": "CPIC-019",
+      "form_name": "Cost-Benefit Analysis",
+      "form_code": "CBA-001",
+      "functional_area": "Financial Analysis",
+      "investment_id": "INV-02",
+      "cpic_phase": "Select",
+      "fiscal_year": 2025,
+      "status": "Completed",
+      "risk_level": "Low"
+    },
+    {
+      "form_id": "CPIC-020",
+      "form_name": "Risk Assessment Detailed",
+      "form_code": "RAD-001",
+      "functional_area": "Risk Management",
+      "investment_id": "INV-03",
+      "cpic_phase": "Select",
+      "fiscal_year": 2025,
+      "status": "Approved",
+      "risk_level": "Low"
+    },
+    {
+      "form_id": "CPIC-021",
+      "form_name": "Strategic Alignment Assessment",
+      "form_code": "SAA-001",
+      "functional_area": "Strategy",
+      "investment_id": "INV-04",
+      "cpic_phase": "Select",
+      "fiscal_year": 2025,
+      "status": "Completed",
+      "risk_level": "Medium"
+    },
+    {
+      "form_id": "CPIC-022",
+      "form_name": "Architecture Review Request",
+      "form_code": "ARR-001",
+      "functional_area": "Enterprise Architecture",
+      "investment_id": "INV-05",
+      "cpic_phase": "Select",
+      "fiscal_year": 2025,
+      "status": "Approved",
+      "risk_level": "Low"
+    },
+    {
+      "form_id": "CPIC-023",
+      "form_name": "Security Requirements Document",
+      "form_code": "SRD-001",
+      "functional_area": "Cybersecurity",
+      "investment_id": "INV-06",
+      "cpic_phase": "Select",
+      "fiscal_year": 2025,
+      "status": "Completed",
+      "risk_level": "Low"
+    },
+    {
+      "form_id": "CPIC-024",
+      "form_name": "Investment Proposal Final",
+      "form_code": "IPF-001",
+      "functional_area": "Investment Planning",
+      "investment_id": "INV-07",
+      "cpic_phase": "Select",
+      "fiscal_year": 2025,
+      "status": "Approved",
+      "risk_level": "Medium"
+    },
+    {
+      "form_id": "CPIC-025",
+      "form_name": "Stakeholder Analysis Complete",
+      "form_code": "SAC-001",
+      "functional_area": "Strategy",
+      "investment_id": "INV-08",
+      "cpic_phase": "Select",
+      "fiscal_year": 2025,
+      "status": "Completed",
+      "risk_level": "Low"
+    },
+    {
+      "form_id": "CPIC-026",
+      "form_name": "Capability Gap Analysis Final",
+      "form_code": "CGAF-001",
+      "functional_area": "Enterprise Architecture",
+      "investment_id": "INV-09",
+      "cpic_phase": "Select",
+      "fiscal_year": 2025,
+      "status": "Approved",
+      "risk_level": "Low"
+    },
+    {
+      "form_id": "CPIC-027",
+      "form_name": "Resource Requirements Plan",
+      "form_code": "RRP-001",
+      "functional_area": "Resource Management",
+      "investment_id": "INV-01",
+      "cpic_phase": "Select",
+      "fiscal_year": 2025,
+      "status": "Completed",
+      "risk_level": "Medium"
+    },
+    {
+      "form_id": "CPIC-028",
+      "form_name": "Procurement Strategy",
+      "form_code": "PS-001",
+      "functional_area": "Acquisition",
+      "investment_id": "INV-02",
+      "cpic_phase": "Select",
+      "fiscal_year": 2025,
+      "status": "Approved",
+      "risk_level": "Low"
+    },
+    {
+      "form_id": "CPIC-029",
+      "form_name": "Performance Measures Plan",
+      "form_code": "PMP-001",
+      "functional_area": "Performance",
+      "investment_id": "INV-03",
+      "cpic_phase": "Select",
+      "fiscal_year": 2025,
+      "status": "Completed",
+      "risk_level": "Low"
+    },
+    {
+      "form_id": "CPIC-030",
+      "form_name": "IRB Review Package",
+      "form_code": "IRP-001",
+      "functional_area": "Governance",
+      "investment_id": "INV-04",
+      "cpic_phase": "Select",
+      "fiscal_year": 2025,
+      "status": "Approved",
+      "risk_level": "Medium"
+    },
+    {
+      "form_id": "CPIC-031",
+      "form_name": "EA Compliance Certification",
+      "form_code": "EAC-001",
+      "functional_area": "Enterprise Architecture",
+      "investment_id": "INV-05",
+      "cpic_phase": "Select",
+      "fiscal_year": 2025,
+      "status": "Completed",
+      "risk_level": "Low"
+    },
+    {
+      "form_id": "CPIC-032",
+      "form_name": "Privacy Impact Assessment Initial",
+      "form_code": "PIA-I-001",
+      "functional_area": "Privacy",
+      "investment_id": "INV-06",
+      "cpic_phase": "Select",
+      "fiscal_year": 2025,
+      "status": "Approved",
+      "risk_level": "Low"
+    },
+    {
+      "form_id": "CPIC-033",
+      "form_name": "Section 508 Assessment",
+      "form_code": "S508-001",
+      "functional_area": "Compliance",
+      "investment_id": "INV-07",
+      "cpic_phase": "Select",
+      "fiscal_year": 2025,
+      "status": "Completed",
+      "risk_level": "Medium"
+    },
+    {
+      "form_id": "CPIC-034",
+      "form_name": "Budget Formulation Package",
+      "form_code": "BFP-001",
+      "functional_area": "Financial Analysis",
+      "investment_id": "INV-08",
+      "cpic_phase": "Select",
+      "fiscal_year": 2025,
+      "status": "Approved",
+      "risk_level": "Low"
+    },
+    {
+      "form_id": "CPIC-035",
+      "form_name": "Governance Structure Plan",
+      "form_code": "GSP-001",
+      "functional_area": "Governance",
+      "investment_id": "INV-09",
+      "cpic_phase": "Select",
+      "fiscal_year": 2025,
+      "status": "Completed",
+      "risk_level": "Low"
+    },
+    {
+      "form_id": "CPIC-036",
+      "form_name": "Communication Plan",
+      "form_code": "CP-001",
+      "functional_area": "Strategy",
+      "investment_id": "INV-01",
+      "cpic_phase": "Select",
+      "fiscal_year": 2025,
+      "status": "Approved",
+      "risk_level": "Medium"
+    },
+    {
+      "form_id": "CPIC-037",
+      "form_name": "Training Needs Assessment",
+      "form_code": "TNA-001",
+      "functional_area": "Training",
+      "investment_id": "INV-02",
+      "cpic_phase": "Select",
+      "fiscal_year": 2025,
+      "status": "Completed",
+      "risk_level": "Low"
+    },
+    {
+      "form_id": "CPIC-038",
+      "form_name": "Transition Planning Document",
+      "form_code": "TPD-001",
+      "functional_area": "Project Management",
+      "investment_id": "INV-03",
+      "cpic_phase": "Select",
+      "fiscal_year": 2025,
+      "status": "Approved",
+      "risk_level": "Low"
+    },
+    {
+      "form_id": "CPIC-039",
+      "form_name": "CIO Approval Package",
+      "form_code": "CAP-001",
+      "functional_area": "Governance",
+      "investment_id": "INV-04",
+      "cpic_phase": "Select",
+      "fiscal_year": 2025,
+      "status": "Completed",
+      "risk_level": "Medium"
+    },
+    {
+      "form_id": "CPIC-040",
+      "form_name": "Monthly Status Report",
+      "form_code": "MSR-001",
+      "functional_area": "Reporting",
+      "investment_id": "INV-05",
+      "cpic_phase": "Control",
+      "fiscal_year": 2025,
+      "status": "Active",
+      "risk_level": "Low"
+    },
+    {
+      "form_id": "CPIC-041",
+      "form_name": "Baseline Change Request",
+      "form_code": "BCR-001",
+      "functional_area": "Change Management",
+      "investment_id": "INV-06",
+      "cpic_phase": "Control",
+      "fiscal_year": 2025,
+      "status": "In Progress",
+      "risk_level": "Low"
+    },
+    {
+      "form_id": "CPIC-042",
+      "form_name": "Earned Value Management Report",
+      "form_code": "EVM-001",
+      "functional_area": "Financial Analysis",
+      "investment_id": "INV-07",
+      "cpic_phase": "Control",
+      "fiscal_year": 2025,
+      "status": "Completed",
+      "risk_level": "Medium"
+    },
+    {
+      "form_id": "CPIC-043",
+      "form_name": "Risk Register Update",
+      "form_code": "RRU-001",
+      "functional_area": "Risk Management",
+      "investment_id": "INV-08",
+      "cpic_phase": "Control",
+      "fiscal_year": 2025,
+      "status": "Pending",
+      "risk_level": "Low"
+    },
+    {
+      "form_id": "CPIC-044",
+      "form_name": "TechStat Review Preparation",
+      "form_code": "TSP-001",
+      "functional_area": "Governance",
+      "investment_id": "INV-09",
+      "cpic_phase": "Control",
+      "fiscal_year": 2025,
+      "status": "Active",
+      "risk_level": "Low"
+    },
+    {
+      "form_id": "CPIC-045",
+      "form_name": "Contractor Performance Report",
+      "form_code": "CPR-001",
+      "functional_area": "Acquisition",
+      "investment_id": "INV-01",
+      "cpic_phase": "Control",
+      "fiscal_year": 2025,
+      "status": "In Progress",
+      "risk_level": "Low"
+    },
+    {
+      "form_id": "CPIC-046",
+      "form_name": "Quality Assurance Report",
+      "form_code": "QAR-001",
+      "functional_area": "Quality",
+      "investment_id": "INV-02",
+      "cpic_phase": "Control",
+      "fiscal_year": 2025,
+      "status": "Completed",
+      "risk_level": "Medium"
+    },
+    {
+      "form_id": "CPIC-047",
+      "form_name": "Security Assessment Report",
+      "form_code": "SAR-001",
+      "functional_area": "Cybersecurity",
+      "investment_id": "INV-03",
+      "cpic_phase": "Control",
+      "fiscal_year": 2025,
+      "status": "Pending",
+      "risk_level": "Low"
+    },
+    {
+      "form_id": "CPIC-048",
+      "form_name": "Project Schedule Update",
+      "form_code": "PSU-001",
+      "functional_area": "Project Management",
+      "investment_id": "INV-04",
+      "cpic_phase": "Control",
+      "fiscal_year": 2025,
+      "status": "Active",
+      "risk_level": "Low"
+    },
+    {
+      "form_id": "CPIC-049",
+      "form_name": "Budget Execution Report",
+      "form_code": "BER-001",
+      "functional_area": "Financial Analysis",
+      "investment_id": "INV-05",
+      "cpic_phase": "Control",
+      "fiscal_year": 2025,
+      "status": "In Progress",
+      "risk_level": "Low"
+    },
+    {
+      "form_id": "CPIC-050",
+      "form_name": "Release Management Plan",
+      "form_code": "RMP-001",
+      "functional_area": "Development",
+      "investment_id": "INV-06",
+      "cpic_phase": "Control",
+      "fiscal_year": 2025,
+      "status": "Completed",
+      "risk_level": "Medium"
+    },
+    {
+      "form_id": "CPIC-051",
+      "form_name": "Infrastructure Change Request",
+      "form_code": "ICR-001",
+      "functional_area": "Infrastructure",
+      "investment_id": "INV-07",
+      "cpic_phase": "Control",
+      "fiscal_year": 2025,
+      "status": "Pending",
+      "risk_level": "Low"
+    },
+    {
+      "form_id": "CPIC-052",
+      "form_name": "Testing Progress Report",
+      "form_code": "TPR-001",
+      "functional_area": "Quality",
+      "investment_id": "INV-08",
+      "cpic_phase": "Control",
+      "fiscal_year": 2025,
+      "status": "Active",
+      "risk_level": "Low"
+    },
+    {
+      "form_id": "CPIC-053",
+      "form_name": "Privacy Impact Assessment",
+      "form_code": "PIA-001",
+      "functional_area": "Privacy",
+      "investment_id": "INV-09",
+      "cpic_phase": "Control",
+      "fiscal_year": 2025,
+      "status": "In Progress",
+      "risk_level": "Low"
+    },
+    {
+      "form_id": "CPIC-054",
+      "form_name": "Authority to Operate Request",
+      "form_code": "ATO-001",
+      "functional_area": "Cybersecurity",
+      "investment_id": "INV-01",
+      "cpic_phase": "Control",
+      "fiscal_year": 2025,
+      "status": "Completed",
+      "risk_level": "Medium"
+    },
+    {
+      "form_id": "CPIC-055",
+      "form_name": "Data Quality Report",
+      "form_code": "DQR-001",
+      "functional_area": "Data Management",
+      "investment_id": "INV-02",
+      "cpic_phase": "Control",
+      "fiscal_year": 2025,
+      "status": "Pending",
+      "risk_level": "Low"
+    },
+    {
+      "form_id": "CPIC-056",
+      "form_name": "Training Status Report",
+      "form_code": "TSR-001",
+      "functional_area": "Training",
+      "investment_id": "INV-03",
+      "cpic_phase": "Control",
+      "fiscal_year": 2025,
+      "status": "Active",
+      "risk_level": "Low"
+    },
+    {
+      "form_id": "CPIC-057",
+      "form_name": "Operational Readiness Review",
+      "form_code": "ORR-001",
+      "functional_area": "Operations",
+      "investment_id": "INV-04",
+      "cpic_phase": "Control",
+      "fiscal_year": 2025,
+      "status": "In Progress",
+      "risk_level": "Low"
+    },
+    {
+      "form_id": "CPIC-058",
+      "form_name": "CIO Evaluation Comments",
+      "form_code": "CEC-001",
+      "functional_area": "Governance",
+      "investment_id": "INV-05",
+      "cpic_phase": "Control",
+      "fiscal_year": 2025,
+      "status": "Completed",
+      "risk_level": "Medium"
+    },
+    {
+      "form_id": "CPIC-059",
+      "form_name": "Treasury DO Report",
+      "form_code": "TDR-001",
+      "functional_area": "Reporting",
+      "investment_id": "INV-06",
+      "cpic_phase": "Control",
+      "fiscal_year": 2025,
+      "status": "Pending",
+      "risk_level": "Low"
+    },
+    {
+      "form_id": "CPIC-060",
+      "form_name": "OMB ITDB Submission",
+      "form_code": "ITDB-001",
+      "functional_area": "Reporting",
+      "investment_id": "INV-07",
+      "cpic_phase": "Control",
+      "fiscal_year": 2025,
+      "status": "Active",
+      "risk_level": "Low"
+    },
+    {
+      "form_id": "CPIC-061",
+      "form_name": "FITARA Compliance Report",
+      "form_code": "FCR-001",
+      "functional_area": "Compliance",
+      "investment_id": "INV-08",
+      "cpic_phase": "Control",
+      "fiscal_year": 2025,
+      "status": "In Progress",
+      "risk_level": "Low"
+    },
+    {
+      "form_id": "CPIC-062",
+      "form_name": "Enterprise License Agreement",
+      "form_code": "ELA-001",
+      "functional_area": "Acquisition",
+      "investment_id": "INV-09",
+      "cpic_phase": "Control",
+      "fiscal_year": 2025,
+      "status": "Completed",
+      "risk_level": "Medium"
+    },
+    {
+      "form_id": "CPIC-063",
+      "form_name": "Cloud Migration Status",
+      "form_code": "CMS-001",
+      "functional_area": "Infrastructure",
+      "investment_id": "INV-01",
+      "cpic_phase": "Control",
+      "fiscal_year": 2025,
+      "status": "Pending",
+      "risk_level": "Low"
+    },
+    {
+      "form_id": "CPIC-064",
+      "form_name": "DevSecOps Maturity Assessment",
+      "form_code": "DMA-001",
+      "functional_area": "Development",
+      "investment_id": "INV-02",
+      "cpic_phase": "Control",
+      "fiscal_year": 2025,
+      "status": "Active",
+      "risk_level": "Low"
+    },
+    {
+      "form_id": "CPIC-065",
+      "form_name": "Incident Response Report",
+      "form_code": "IRR-001",
+      "functional_area": "Cybersecurity",
+      "investment_id": "INV-03",
+      "cpic_phase": "Control",
+      "fiscal_year": 2025,
+      "status": "In Progress",
+      "risk_level": "Low"
+    },
+    {
+      "form_id": "CPIC-066",
+      "form_name": "Accessibility Compliance",
+      "form_code": "AC-001",
+      "functional_area": "Compliance",
+      "investment_id": "INV-04",
+      "cpic_phase": "Control",
+      "fiscal_year": 2025,
+      "status": "Completed",
+      "risk_level": "Medium"
+    },
+    {
+      "form_id": "CPIC-067",
+      "form_name": "API Governance Report",
+      "form_code": "AGR-001",
+      "functional_area": "Enterprise Architecture",
+      "investment_id": "INV-05",
+      "cpic_phase": "Control",
+      "fiscal_year": 2025,
+      "status": "Pending",
+      "risk_level": "Low"
+    },
+    {
+      "form_id": "CPIC-068",
+      "form_name": "System Health Dashboard",
+      "form_code": "SHD-001",
+      "functional_area": "Operations",
+      "investment_id": "INV-06",
+      "cpic_phase": "Control",
+      "fiscal_year": 2025,
+      "status": "Active",
+      "risk_level": "Low"
+    },
+    {
+      "form_id": "CPIC-069",
+      "form_name": "Technical Debt Assessment",
+      "form_code": "TDA-001",
+      "functional_area": "Development",
+      "investment_id": "INV-07",
+      "cpic_phase": "Control",
+      "fiscal_year": 2025,
+      "status": "In Progress",
+      "risk_level": "Low"
+    },
+    {
+      "form_id": "CPIC-070",
+      "form_name": "Workforce Planning Report",
+      "form_code": "WPR-001",
+      "functional_area": "Resource Management",
+      "investment_id": "INV-08",
+      "cpic_phase": "Control",
+      "fiscal_year": 2025,
+      "status": "Completed",
+      "risk_level": "Medium"
+    },
+    {
+      "form_id": "CPIC-071",
+      "form_name": "Disaster Recovery Test Report",
+      "form_code": "DRT-001",
+      "functional_area": "Operations",
+      "investment_id": "INV-09",
+      "cpic_phase": "Control",
+      "fiscal_year": 2025,
+      "status": "Pending",
+      "risk_level": "Low"
+    },
+    {
+      "form_id": "CPIC-072",
+      "form_name": "Capacity Planning Report",
+      "form_code": "CAPR-001",
+      "functional_area": "Infrastructure",
+      "investment_id": "INV-01",
+      "cpic_phase": "Control",
+      "fiscal_year": 2025,
+      "status": "Active",
+      "risk_level": "Low"
+    },
+    {
+      "form_id": "CPIC-073",
+      "form_name": "Change Advisory Board Minutes",
+      "form_code": "CAB-001",
+      "functional_area": "Change Management",
+      "investment_id": "INV-02",
+      "cpic_phase": "Control",
+      "fiscal_year": 2025,
+      "status": "In Progress",
+      "risk_level": "Low"
+    },
+    {
+      "form_id": "CPIC-074",
+      "form_name": "Sprint Review Summary",
+      "form_code": "SRS-001",
+      "functional_area": "Development",
+      "investment_id": "INV-03",
+      "cpic_phase": "Control",
+      "fiscal_year": 2025,
+      "status": "Completed",
+      "risk_level": "Medium"
+    },
+    {
+      "form_id": "CPIC-075",
+      "form_name": "Vendor Performance Scorecard",
+      "form_code": "VPS-001",
+      "functional_area": "Acquisition",
+      "investment_id": "INV-04",
+      "cpic_phase": "Control",
+      "fiscal_year": 2025,
+      "status": "Pending",
+      "risk_level": "Low"
+    },
+    {
+      "form_id": "CPIC-076",
+      "form_name": "Integration Testing Report",
+      "form_code": "ITR-001",
+      "functional_area": "Quality",
+      "investment_id": "INV-05",
+      "cpic_phase": "Control",
+      "fiscal_year": 2025,
+      "status": "Active",
+      "risk_level": "Low"
+    },
+    {
+      "form_id": "CPIC-077",
+      "form_name": "User Acceptance Testing",
+      "form_code": "UAT-001",
+      "functional_area": "Quality",
+      "investment_id": "INV-06",
+      "cpic_phase": "Control",
+      "fiscal_year": 2025,
+      "status": "In Progress",
+      "risk_level": "Low"
+    },
+    {
+      "form_id": "CPIC-078",
+      "form_name": "Deployment Checklist",
+      "form_code": "DCL-001",
+      "functional_area": "Operations",
+      "investment_id": "INV-07",
+      "cpic_phase": "Control",
+      "fiscal_year": 2025,
+      "status": "Completed",
+      "risk_level": "Medium"
+    },
+    {
+      "form_id": "CPIC-079",
+      "form_name": "Configuration Management Report",
+      "form_code": "CMR-001",
+      "functional_area": "Operations",
+      "investment_id": "INV-08",
+      "cpic_phase": "Control",
+      "fiscal_year": 2025,
+      "status": "Pending",
+      "risk_level": "Low"
+    },
+    {
+      "form_id": "CPIC-080",
+      "form_name": "Performance Baseline Update",
+      "form_code": "PBU-001",
+      "functional_area": "Performance",
+      "investment_id": "INV-09",
+      "cpic_phase": "Control",
+      "fiscal_year": 2025,
+      "status": "Active",
+      "risk_level": "Low"
+    },
+    {
+      "form_id": "CPIC-081",
+      "form_name": "Scope Change Impact Analysis",
+      "form_code": "SCIA-001",
+      "functional_area": "Change Management",
+      "investment_id": "INV-01",
+      "cpic_phase": "Control",
+      "fiscal_year": 2025,
+      "status": "In Progress",
+      "risk_level": "Low"
+    },
+    {
+      "form_id": "CPIC-082",
+      "form_name": "Schedule Variance Report",
+      "form_code": "SVR-001",
+      "functional_area": "Project Management",
+      "investment_id": "INV-02",
+      "cpic_phase": "Control",
+      "fiscal_year": 2025,
+      "status": "Completed",
+      "risk_level": "Medium"
+    },
+    {
+      "form_id": "CPIC-083",
+      "form_name": "Cost Variance Report",
+      "form_code": "CVR-001",
+      "functional_area": "Financial Analysis",
+      "investment_id": "INV-03",
+      "cpic_phase": "Control",
+      "fiscal_year": 2025,
+      "status": "Pending",
+      "risk_level": "Low"
+    },
+    {
+      "form_id": "CPIC-084",
+      "form_name": "Resource Utilization Report",
+      "form_code": "RUR-001",
+      "functional_area": "Resource Management",
+      "investment_id": "INV-04",
+      "cpic_phase": "Control",
+      "fiscal_year": 2025,
+      "status": "Active",
+      "risk_level": "Low"
+    },
+    {
+      "form_id": "CPIC-085",
+      "form_name": "Milestone Achievement Report",
+      "form_code": "MAR-001",
+      "functional_area": "Project Management",
+      "investment_id": "INV-05",
+      "cpic_phase": "Control",
+      "fiscal_year": 2025,
+      "status": "In Progress",
+      "risk_level": "Low"
+    },
+    {
+      "form_id": "CPIC-086",
+      "form_name": "Issue Resolution Log",
+      "form_code": "IRL-001",
+      "functional_area": "Project Management",
+      "investment_id": "INV-06",
+      "cpic_phase": "Control",
+      "fiscal_year": 2025,
+      "status": "Completed",
+      "risk_level": "Medium"
+    },
+    {
+      "form_id": "CPIC-087",
+      "form_name": "Decision Log Update",
+      "form_code": "DLU-001",
+      "functional_area": "Governance",
+      "investment_id": "INV-07",
+      "cpic_phase": "Control",
+      "fiscal_year": 2025,
+      "status": "Pending",
+      "risk_level": "Low"
+    },
+    {
+      "form_id": "CPIC-088",
+      "form_name": "Action Item Tracker",
+      "form_code": "AIT-001",
+      "functional_area": "Project Management",
+      "investment_id": "INV-08",
+      "cpic_phase": "Control",
+      "fiscal_year": 2025,
+      "status": "Active",
+      "risk_level": "Low"
+    },
+    {
+      "form_id": "CPIC-089",
+      "form_name": "Communication Status",
+      "form_code": "CS-001",
+      "functional_area": "Strategy",
+      "investment_id": "INV-09",
+      "cpic_phase": "Control",
+      "fiscal_year": 2025,
+      "status": "In Progress",
+      "risk_level": "Low"
+    },
+    {
+      "form_id": "CPIC-090",
+      "form_name": "Stakeholder Engagement Report",
+      "form_code": "SER-001",
+      "functional_area": "Strategy",
+      "investment_id": "INV-01",
+      "cpic_phase": "Control",
+      "fiscal_year": 2025,
+      "status": "Completed",
+      "risk_level": "Medium"
+    },
+    {
+      "form_id": "CPIC-091",
+      "form_name": "Benefits Tracking Report",
+      "form_code": "BTR-001",
+      "functional_area": "Performance",
+      "investment_id": "INV-02",
+      "cpic_phase": "Control",
+      "fiscal_year": 2025,
+      "status": "Pending",
+      "risk_level": "Low"
+    },
+    {
+      "form_id": "CPIC-092",
+      "form_name": "Quality Metrics Dashboard",
+      "form_code": "QMD-001",
+      "functional_area": "Quality",
+      "investment_id": "INV-03",
+      "cpic_phase": "Control",
+      "fiscal_year": 2025,
+      "status": "Active",
+      "risk_level": "Low"
+    },
+    {
+      "form_id": "CPIC-093",
+      "form_name": "Security Posture Report",
+      "form_code": "SPR-001",
+      "functional_area": "Cybersecurity",
+      "investment_id": "INV-04",
+      "cpic_phase": "Control",
+      "fiscal_year": 2025,
+      "status": "In Progress",
+      "risk_level": "Low"
+    },
+    {
+      "form_id": "CPIC-094",
+      "form_name": "Compliance Status Report",
+      "form_code": "CSR-001",
+      "functional_area": "Compliance",
+      "investment_id": "INV-05",
+      "cpic_phase": "Control",
+      "fiscal_year": 2025,
+      "status": "Completed",
+      "risk_level": "Medium"
+    },
+    {
+      "form_id": "CPIC-095",
+      "form_name": "EA Alignment Review",
+      "form_code": "EAR-001",
+      "functional_area": "Enterprise Architecture",
+      "investment_id": "INV-06",
+      "cpic_phase": "Control",
+      "fiscal_year": 2025,
+      "status": "Pending",
+      "risk_level": "Low"
+    },
+    {
+      "form_id": "CPIC-096",
+      "form_name": "Data Architecture Update",
+      "form_code": "DAU-001",
+      "functional_area": "Enterprise Architecture",
+      "investment_id": "INV-07",
+      "cpic_phase": "Control",
+      "fiscal_year": 2025,
+      "status": "Active",
+      "risk_level": "Low"
+    },
+    {
+      "form_id": "CPIC-097",
+      "form_name": "Technology Stack Report",
+      "form_code": "TSTR-001",
+      "functional_area": "Development",
+      "investment_id": "INV-08",
+      "cpic_phase": "Control",
+      "fiscal_year": 2025,
+      "status": "In Progress",
+      "risk_level": "Low"
+    },
+    {
+      "form_id": "CPIC-098",
+      "form_name": "Infrastructure Capacity Report",
+      "form_code": "ICPR-001",
+      "functional_area": "Infrastructure",
+      "investment_id": "INV-09",
+      "cpic_phase": "Control",
+      "fiscal_year": 2025,
+      "status": "Completed",
+      "risk_level": "Medium"
+    },
+    {
+      "form_id": "CPIC-099",
+      "form_name": "Network Performance Report",
+      "form_code": "NPR-001",
+      "functional_area": "Infrastructure",
+      "investment_id": "INV-01",
+      "cpic_phase": "Control",
+      "fiscal_year": 2025,
+      "status": "Pending",
+      "risk_level": "Low"
+    },
+    {
+      "form_id": "CPIC-100",
+      "form_name": "Database Performance Report",
+      "form_code": "DPR-001",
+      "functional_area": "Infrastructure",
+      "investment_id": "INV-02",
+      "cpic_phase": "Control",
+      "fiscal_year": 2025,
+      "status": "Active",
+      "risk_level": "Low"
+    },
+    {
+      "form_id": "CPIC-101",
+      "form_name": "Application Performance Report",
+      "form_code": "APR-001",
+      "functional_area": "Development",
+      "investment_id": "INV-03",
+      "cpic_phase": "Control",
+      "fiscal_year": 2025,
+      "status": "In Progress",
+      "risk_level": "Low"
+    },
+    {
+      "form_id": "CPIC-102",
+      "form_name": "User Experience Report",
+      "form_code": "UXR-001",
+      "functional_area": "Development",
+      "investment_id": "INV-04",
+      "cpic_phase": "Control",
+      "fiscal_year": 2025,
+      "status": "Completed",
+      "risk_level": "Medium"
+    },
+    {
+      "form_id": "CPIC-103",
+      "form_name": "Agile Velocity Report",
+      "form_code": "AVR-001",
+      "functional_area": "Development",
+      "investment_id": "INV-05",
+      "cpic_phase": "Control",
+      "fiscal_year": 2025,
+      "status": "Pending",
+      "risk_level": "Low"
+    },
+    {
+      "form_id": "CPIC-104",
+      "form_name": "Sprint Burndown Chart",
+      "form_code": "SBC-001",
+      "functional_area": "Development",
+      "investment_id": "INV-06",
+      "cpic_phase": "Control",
+      "fiscal_year": 2025,
+      "status": "Active",
+      "risk_level": "Low"
+    },
+    {
+      "form_id": "CPIC-105",
+      "form_name": "Product Backlog Status",
+      "form_code": "PBS-001",
+      "functional_area": "Development",
+      "investment_id": "INV-07",
+      "cpic_phase": "Control",
+      "fiscal_year": 2025,
+      "status": "In Progress",
+      "risk_level": "Low"
+    },
+    {
+      "form_id": "CPIC-106",
+      "form_name": "Feature Completion Report",
+      "form_code": "FCR2-001",
+      "functional_area": "Development",
+      "investment_id": "INV-08",
+      "cpic_phase": "Control",
+      "fiscal_year": 2025,
+      "status": "Completed",
+      "risk_level": "Medium"
+    },
+    {
+      "form_id": "CPIC-107",
+      "form_name": "Bug Resolution Report",
+      "form_code": "BRR-001",
+      "functional_area": "Quality",
+      "investment_id": "INV-09",
+      "cpic_phase": "Control",
+      "fiscal_year": 2025,
+      "status": "Pending",
+      "risk_level": "Low"
+    },
+    {
+      "form_id": "CPIC-108",
+      "form_name": "Code Review Summary",
+      "form_code": "CRS-001",
+      "functional_area": "Development",
+      "investment_id": "INV-01",
+      "cpic_phase": "Control",
+      "fiscal_year": 2025,
+      "status": "Active",
+      "risk_level": "Low"
+    },
+    {
+      "form_id": "CPIC-109",
+      "form_name": "Technical Review Report",
+      "form_code": "TRR-001",
+      "functional_area": "Enterprise Architecture",
+      "investment_id": "INV-02",
+      "cpic_phase": "Control",
+      "fiscal_year": 2025,
+      "status": "In Progress",
+      "risk_level": "Low"
+    },
+    {
+      "form_id": "CPIC-110",
+      "form_name": "Environment Status Report",
+      "form_code": "ESR-001",
+      "functional_area": "Infrastructure",
+      "investment_id": "INV-03",
+      "cpic_phase": "Control",
+      "fiscal_year": 2025,
+      "status": "Completed",
+      "risk_level": "Medium"
+    },
+    {
+      "form_id": "CPIC-111",
+      "form_name": "Release Readiness Report",
+      "form_code": "RRR-001",
+      "functional_area": "Development",
+      "investment_id": "INV-04",
+      "cpic_phase": "Control",
+      "fiscal_year": 2025,
+      "status": "Pending",
+      "risk_level": "Low"
+    },
+    {
+      "form_id": "CPIC-112",
+      "form_name": "Go-Live Checklist",
+      "form_code": "GLC-001",
+      "functional_area": "Operations",
+      "investment_id": "INV-05",
+      "cpic_phase": "Control",
+      "fiscal_year": 2025,
+      "status": "Active",
+      "risk_level": "Low"
+    },
+    {
+      "form_id": "CPIC-113",
+      "form_name": "Hypercare Status Report",
+      "form_code": "HSR-001",
+      "functional_area": "Operations",
+      "investment_id": "INV-06",
+      "cpic_phase": "Control",
+      "fiscal_year": 2025,
+      "status": "In Progress",
+      "risk_level": "Low"
+    },
+    {
+      "form_id": "CPIC-114",
+      "form_name": "Knowledge Base Update",
+      "form_code": "KBU-001",
+      "functional_area": "Training",
+      "investment_id": "INV-07",
+      "cpic_phase": "Control",
+      "fiscal_year": 2025,
+      "status": "Completed",
+      "risk_level": "Medium"
+    },
+    {
+      "form_id": "CPIC-115",
+      "form_name": "Support Ticket Analysis",
+      "form_code": "STA-001",
+      "functional_area": "Operations",
+      "investment_id": "INV-08",
+      "cpic_phase": "Control",
+      "fiscal_year": 2025,
+      "status": "Pending",
+      "risk_level": "Low"
+    },
+    {
+      "form_id": "CPIC-116",
+      "form_name": "SLA Performance Report",
+      "form_code": "SLAPR-001",
+      "functional_area": "Operations",
+      "investment_id": "INV-09",
+      "cpic_phase": "Control",
+      "fiscal_year": 2025,
+      "status": "Active",
+      "risk_level": "Low"
+    },
+    {
+      "form_id": "CPIC-117",
+      "form_name": "Availability Report",
+      "form_code": "AVL-001",
+      "functional_area": "Operations",
+      "investment_id": "INV-01",
+      "cpic_phase": "Control",
+      "fiscal_year": 2025,
+      "status": "In Progress",
+      "risk_level": "Low"
+    },
+    {
+      "form_id": "CPIC-118",
+      "form_name": "SPIKE Submission Package",
+      "form_code": "SSP-001",
+      "functional_area": "Reporting",
+      "investment_id": "INV-02",
+      "cpic_phase": "Control",
+      "fiscal_year": 2025,
+      "status": "Completed",
+      "risk_level": "Medium"
+    },
+    {
+      "form_id": "CPIC-119",
+      "form_name": "Executive Dashboard Update",
+      "form_code": "EDU-001",
+      "functional_area": "Reporting",
+      "investment_id": "INV-03",
+      "cpic_phase": "Control",
+      "fiscal_year": 2025,
+      "status": "Pending",
+      "risk_level": "Low"
+    },
+    {
+      "form_id": "CPIC-120",
+      "form_name": "Post-Implementation Review",
+      "form_code": "PIR-001",
+      "functional_area": "Evaluation",
+      "investment_id": "INV-04",
+      "cpic_phase": "Evaluate",
+      "fiscal_year": 2025,
+      "status": "Active",
+      "risk_level": "Low"
+    },
+    {
+      "form_id": "CPIC-121",
+      "form_name": "Operational Analysis",
+      "form_code": "OA-001",
+      "functional_area": "Evaluation",
+      "investment_id": "INV-05",
+      "cpic_phase": "Evaluate",
+      "fiscal_year": 2025,
+      "status": "Scheduled",
+      "risk_level": "Low"
+    },
+    {
+      "form_id": "CPIC-122",
+      "form_name": "Benefits Realization Report",
+      "form_code": "BRR2-001",
+      "functional_area": "Evaluation",
+      "investment_id": "INV-06",
+      "cpic_phase": "Evaluate",
+      "fiscal_year": 2025,
+      "status": "Pending",
+      "risk_level": "Low"
+    },
+    {
+      "form_id": "CPIC-123",
+      "form_name": "Customer Satisfaction Survey",
+      "form_code": "CSS-001",
+      "functional_area": "Evaluation",
+      "investment_id": "INV-07",
+      "cpic_phase": "Evaluate",
+      "fiscal_year": 2025,
+      "status": "Draft",
+      "risk_level": "Low"
+    },
+    {
+      "form_id": "CPIC-124",
+      "form_name": "Performance Metrics Review",
+      "form_code": "PMR-001",
+      "functional_area": "Performance",
+      "investment_id": "INV-08",
+      "cpic_phase": "Evaluate",
+      "fiscal_year": 2025,
+      "status": "Active",
+      "risk_level": "Low"
+    },
+    {
+      "form_id": "CPIC-125",
+      "form_name": "Total Cost of Ownership",
+      "form_code": "TCO-001",
+      "functional_area": "Financial Analysis",
+      "investment_id": "INV-09",
+      "cpic_phase": "Evaluate",
+      "fiscal_year": 2025,
+      "status": "Scheduled",
+      "risk_level": "Low"
+    },
+    {
+      "form_id": "CPIC-126",
+      "form_name": "Lessons Learned",
+      "form_code": "LL-001",
+      "functional_area": "Evaluation",
+      "investment_id": "INV-01",
+      "cpic_phase": "Evaluate",
+      "fiscal_year": 2025,
+      "status": "Pending",
+      "risk_level": "Low"
+    },
+    {
+      "form_id": "CPIC-127",
+      "form_name": "Investment Continuation Assessment",
+      "form_code": "ICA-001",
+      "functional_area": "Investment Planning",
+      "investment_id": "INV-02",
+      "cpic_phase": "Evaluate",
+      "fiscal_year": 2025,
+      "status": "Draft",
+      "risk_level": "Low"
+    },
+    {
+      "form_id": "CPIC-128",
+      "form_name": "Technology Refresh Assessment",
+      "form_code": "TRA-001",
+      "functional_area": "Enterprise Architecture",
+      "investment_id": "INV-03",
+      "cpic_phase": "Evaluate",
+      "fiscal_year": 2025,
+      "status": "Active",
+      "risk_level": "Low"
+    },
+    {
+      "form_id": "CPIC-129",
+      "form_name": "Portfolio Optimization Review",
+      "form_code": "POR-001",
+      "functional_area": "Strategy",
+      "investment_id": "INV-04",
+      "cpic_phase": "Evaluate",
+      "fiscal_year": 2025,
+      "status": "Scheduled",
+      "risk_level": "Low"
+    },
+    {
+      "form_id": "CPIC-130",
+      "form_name": "Service Level Achievement",
+      "form_code": "SLA-001",
+      "functional_area": "Operations",
+      "investment_id": "INV-05",
+      "cpic_phase": "Evaluate",
+      "fiscal_year": 2025,
+      "status": "Pending",
+      "risk_level": "Low"
+    },
+    {
+      "form_id": "CPIC-131",
+      "form_name": "Operational Efficiency Report",
+      "form_code": "OER-001",
+      "functional_area": "Operations",
+      "investment_id": "INV-06",
+      "cpic_phase": "Evaluate",
+      "fiscal_year": 2025,
+      "status": "Draft",
+      "risk_level": "Low"
+    },
+    {
+      "form_id": "CPIC-132",
+      "form_name": "User Adoption Report",
+      "form_code": "UAR-001",
+      "functional_area": "Evaluation",
+      "investment_id": "INV-07",
+      "cpic_phase": "Evaluate",
+      "fiscal_year": 2025,
+      "status": "Active",
+      "risk_level": "Low"
+    },
+    {
+      "form_id": "CPIC-133",
+      "form_name": "Business Value Assessment",
+      "form_code": "BVA-001",
+      "functional_area": "Evaluation",
+      "investment_id": "INV-08",
+      "cpic_phase": "Evaluate",
+      "fiscal_year": 2025,
+      "status": "Scheduled",
+      "risk_level": "Low"
+    },
+    {
+      "form_id": "CPIC-134",
+      "form_name": "Investment Closeout Report",
+      "form_code": "ICR2-001",
+      "functional_area": "Investment Planning",
+      "investment_id": "INV-09",
+      "cpic_phase": "Evaluate",
+      "fiscal_year": 2025,
+      "status": "Pending",
+      "risk_level": "Low"
+    }
+  ],
+  "workflows": [
+    {
+      "id": "WF-01",
+      "name": "Investment Creation & Approval",
+      "phase": "PRESELECT-SELECT",
+      "duration": "8-12 weeks",
+      "steps": [
+        "Strategic Planning",
+        "Needs Identification",
+        "Initial Screening",
+        "Preliminary Business Case",
+        "Portfolio Prioritization",
+        "IRB Review",
+        "CIO Approval"
+      ],
+      "forms_required": [
+        "SPD-001",
+        "NIR-001",
+        "ISC-001",
+        "PBC-001",
+        "PPR-001",
+        "IRB-001"
+      ],
+      "solution_a": "Full process for sub-projects",
+      "solution_b": "Category-specific (Major: Full, Significant: Abbreviated, Infrastructure: Technical)"
+    },
+    {
+      "id": "WF-02",
+      "name": "Baseline Change Request (BCR)",
+      "phase": "CONTROL",
+      "duration": "2-4 weeks",
+      "steps": [
+        "PM identifies need",
+        "BCR Form in SPIKE",
+        "IPM Review",
+        "Treasury CPIC Review",
+        "OMB Notification",
+        "IT Dashboard Update"
+      ],
+      "forms_required": [
+        "BCR-001",
+        "SCIA-001"
+      ],
+      "thresholds": {
+        "warning": "10% variance",
+        "critical": "30% variance"
+      },
+      "solution_a": "Investment-level BCRs",
+      "solution_b": "Major: CCB Required, Significant: Manager Approval, Infrastructure: CAB Required"
+    },
+    {
+      "id": "WF-03",
+      "name": "Monthly Reporting Cycle",
+      "phase": "CONTROL",
+      "duration": "10-15 days",
+      "deadline": "15th of month (internal), 19th of month (SPIKE/OMB)",
+      "steps": [
+        "Data Collection (1st-15th)",
+        "Portfolio Manager Review (15th-17th)",
+        "CIO Comments (17th-18th)",
+        "SPIKE Submission (19th)"
+      ],
+      "forms_required": [
+        "MSR-001",
+        "EVM-001",
+        "RRU-001",
+        "CEC-001"
+      ],
+      "solution_a": "9 Investment Reports consolidated",
+      "solution_b": "15 Investment Reports (Major + Significant + Infrastructure)"
+    },
+    {
+      "id": "WF-04",
+      "name": "Project Initiation",
+      "phase": "SELECT-CONTROL",
+      "duration": "2-3 weeks",
+      "steps": [
+        "Project Charter",
+        "Kickoff Meeting",
+        "Baseline Establishment",
+        "Resource Assignment",
+        "Schedule Creation"
+      ],
+      "forms_required": [
+        "PCH-001",
+        "RRP-001",
+        "PMP-001"
+      ],
+      "solution_a": "Sub-project initiation under investment",
+      "solution_b": "Major: PMO Full, Significant: PMO Standard, Infrastructure: ITIL Aligned"
+    },
+    {
+      "id": "WF-05",
+      "name": "Risk Escalation & TechStat",
+      "phase": "CONTROL",
+      "duration": "1-2 weeks",
+      "steps": [
+        "Risk Identification",
+        "Impact Assessment",
+        "CIO Notification",
+        "TechStat Scheduling",
+        "Evidence Gathering",
+        "Corrective Actions"
+      ],
+      "forms_required": [
+        "RAD-001",
+        "TSP-001"
+      ],
+      "thresholds": {
+        "warning": "10% variance",
+        "techstat_trigger": "30% variance"
+      },
+      "solution_a": "All investments eligible",
+      "solution_b": "TechStat: Major only, Escalation: Significant, Security Focus: Infrastructure"
+    },
+    {
+      "id": "WF-06",
+      "name": "Annual Budget Submission",
+      "phase": "PRESELECT",
+      "duration": "6-8 weeks",
+      "calendar": {
+        "draft": "August",
+        "passback": "January",
+        "cj": "February",
+        "msr": "June"
+      },
+      "steps": [
+        "Budget Formulation",
+        "IT Portfolio Summary",
+        "Business Case Update",
+        "Treasury Review",
+        "OMB Submission"
+      ],
+      "forms_required": [
+        "BFP-001",
+        "BC-300-001",
+        "BUD-001"
+      ],
+      "solution_a": "9 Investment budget packages",
+      "solution_b": "Major: Exhibit 300, Significant: Exhibit 53, Infrastructure: Tech Budget"
+    },
+    {
+      "id": "WF-07",
+      "name": "Investment Health Assessment",
+      "phase": "CONTROL-EVALUATE",
+      "duration": "3-4 weeks",
+      "steps": [
+        "Performance Data Collection",
+        "Metric Analysis",
+        "Health Score Calculation",
+        "CIO Rating Assignment",
+        "Action Plan Development"
+      ],
+      "forms_required": [
+        "HLT-001",
+        "PMR-001",
+        "CIO-001"
+      ],
+      "solution_a": "Investment-level health scores",
+      "solution_b": "Major: CIO Rating (1-4), Significant: Standard Scoring, Infrastructure: Capacity Scoring"
+    },
+    {
+      "id": "WF-08",
+      "name": "Treasury Monthly CIO Review",
+      "phase": "CONTROL",
+      "duration": "As needed",
+      "triggers": [
+        "10% variance trending",
+        "Metrics 10-30% out of range",
+        "Key metrics 30%+ out of range",
+        "TechStat recommendation"
+      ],
+      "steps": [
+        "Issue Identification",
+        "Evidence Gathering",
+        "CIO Briefing",
+        "Action Item Tracking",
+        "Follow-up Verification"
+      ],
+      "forms_required": [
+        "TDR-001",
+        "CEC-001"
+      ],
+      "solution_a": "Portfolio-level review",
+      "solution_b": "Category-specific reviews (Major: OMB Visibility, Significant: Internal, Infrastructure: Technical)"
+    }
+  ],
+  "role_permissions": {
+    "CIO": {
+      "level": 0,
+      "view": [
+        "all_investments",
+        "all_projects",
+        "executive_dashboard",
+        "all_forms"
+      ],
+      "approve": [
+        "investment_reports",
+        "irb_submissions",
+        "budget_requests",
+        "techstat"
+      ],
+      "edit": []
+    },
+    "Coordinating_Director": {
+      "level": 1,
+      "view": [
+        "own_investment",
+        "own_projects",
+        "investment_dashboard",
+        "investment_forms"
+      ],
+      "approve": [
+        "project_reports",
+        "bcr_under_5m",
+        "risk_medium",
+        "monthly_reports"
+      ],
+      "edit": [
+        "own_investment_forms"
+      ]
+    },
+    "Resource_Director": {
+      "level": 2,
+      "view": [
+        "own_investment",
+        "resource_dashboard",
+        "resource_forms"
+      ],
+      "approve": [
+        "resource_allocations",
+        "project_scope_under_500k"
+      ],
+      "edit": [
+        "resource_forms",
+        "project_reports"
+      ]
+    },
+    "Responsible_Engineer": {
+      "level": 3,
+      "view": [
+        "own_projects",
+        "technical_dashboard",
+        "technical_forms"
+      ],
+      "approve": [
+        "technical_reviews",
+        "quality_gates"
+      ],
+      "edit": [
+        "technical_forms",
+        "risk_register"
+      ]
+    },
+    "Product_Manager": {
+      "level": 4,
+      "view": [
+        "own_projects",
+        "product_dashboard",
+        "project_forms"
+      ],
+      "approve": [],
+      "edit": [
+        "project_status",
+        "sprint_reports",
+        "backlog"
+      ]
+    },
+    "Admin": {
+      "level": 0,
+      "view": [
+        "all"
+      ],
+      "approve": [
+        "all"
+      ],
+      "edit": [
+        "all"
+      ]
+    }
+  }
+}

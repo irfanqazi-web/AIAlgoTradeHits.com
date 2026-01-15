@@ -1,0 +1,50 @@
+[
+  {
+    "name": "EURIBOR 3-Month",
+    "rate": 3.4069047619047628,
+    "currency": "EUR",
+    "country": "European Union",
+    "source": "ECB",
+    "timestamp": "2025-11-26T22:08:41.242326"
+  },
+  {
+    "name": "EURIBOR 6-Month",
+    "rate": 3.536,
+    "currency": "EUR",
+    "country": "European Union",
+    "source": "ECB",
+    "timestamp": "2025-11-26T22:08:42.285174"
+  },
+  {
+    "name": "EURIBOR 1-Year",
+    "rate": 3.860238095238095,
+    "currency": "EUR",
+    "country": "European Union",
+    "source": "ECB",
+    "timestamp": "2025-11-26T22:08:43.394930"
+  },
+  {
+    "name": "SOFR (Secured Overnight Financing Rate)",
+    "rate": 4.01,
+    "currency": "USD",
+    "country": "United States",
+    "source": "NY Fed",
+    "timestamp": "2025-11-26T22:08:44.180959"
+  },
+  {
+    "name": "Federal Funds Effective Rate",
+    "rate": 3.88,
+    "currency": "USD",
+    "country": "United States",
+    "source": "NY Fed",
+    "timestamp": "2025-11-26T22:08:44.925288"
+  },
+  {
+    "name": "Overnight Bank Funding Rate",
+    "rate": 3.88,
+    "currency": "USD",
+    "country": "United States",
+    "source": "NY Fed",
+    "timestamp": "2025-11-26T22:08:45.739049"
+  }
+]

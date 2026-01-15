@@ -1,0 +1,8 @@
+functions-framework==3.*
+google-cloud-bigquery==3.11.4
+pandas==2.0.3
+numpy==1.24.3
+requests==2.31.0
+ta==0.11.0
+pyarrow>=12.0.0
+db-dtypes>=1.1.1

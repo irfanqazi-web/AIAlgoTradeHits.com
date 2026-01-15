@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crypto & Stock Market Data API Comparison</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        
+        header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+        
+        .intro {
+            padding: 30px;
+            background: #f8f9fa;
+            border-bottom: 3px solid #667eea;
+        }
+        
+        .intro h2 {
+            color: #1e3c72;
+            margin-bottom: 15px;
+        }
+        
+        .comparison-table {
+            padding: 30px;
+            overflow-x: auto;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+        }
+        
+        thead {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        
+        th {
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 1.05em;
+        }
+        
+        td {
+            padding: 15px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        tbody tr:hover {
+            background: #f8f9ff;
+            transition: background 0.3s ease;
+        }
+        
+        tbody tr:nth-child(even) {
+            background: #fafafa;
+        }
+        
+        .provider-name {
+            font-weight: 600;
+            color: #1e3c72;
+            font-size: 1.1em;
+        }
+        
+        .check {
+            color: #28a745;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+        
+        .cross {
+            color: #dc3545;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+        
+        .partial {
+            color: #ffc107;
+            font-weight: bold;
+        }
+        
+        .note {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin: 20px 30px;
+            border-radius: 4px;
+        }
+        
+        .note strong {
+            color: #856404;
+        }
+        
+        .features-section {
+            padding: 30px;
+            background: #f8f9fa;
+        }
+        
+        .features-section h2 {
+            color: #1e3c72;
+            margin-bottom: 20px;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+        }
+        
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .feature-card {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            border-top: 4px solid #667eea;
+        }
+        
+        .feature-card h3 {
+            color: #1e3c72;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+        
+        .feature-card ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .feature-card li {
+            padding: 8px 0;
+            padding-left: 25px;
+            position: relative;
+        }
+        
+        .feature-card li:before {
+            content: "▸";
+            position: absolute;
+            left: 0;
+            color: #667eea;
+            font-weight: bold;
+        }
+        
+        .pricing-section {
+            padding: 30px;
+        }
+        
+        .pricing-section h2 {
+            color: #1e3c72;
+            margin-bottom: 20px;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+        }
+        
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-top: 20px;
+        }
+        
+        .pricing-card {
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 25px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .pricing-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+        
+        .pricing-card h3 {
+            color: #1e3c72;
+            margin-bottom: 15px;
+            font-size: 1.5em;
+        }
+        
+        .pricing-card .price {
+            font-size: 2em;
+            color: #667eea;
+            font-weight: bold;
+            margin: 15px 0;
+        }
+        
+        .pricing-card ul {
+            list-style: none;
+            text-align: left;
+            margin-top: 20px;
+        }
+        
+        .pricing-card li {
+            padding: 8px 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        
+        .recommended {
+            border: 3px solid #667eea;
+            position: relative;
+        }
+        
+        .recommended::before {
+            content: "RECOMMENDED";
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #667eea;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.8em;
+            font-weight: bold;
+        }
+        
+        footer {
+            background: #1e3c72;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 0;
+        }
+        
+        .legend {
+            padding: 20px 30px;
+            background: #e8f4f8;
+            border-radius: 8px;
+            margin: 20px 30px;
+        }
+        
+        .legend h3 {
+            color: #1e3c72;
+            margin-bottom: 10px;
+        }
+        
+        .legend-items {
+            display: flex;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📊 Crypto & Stock Market Data API Comparison</h1>
+            <p>Comprehensive analysis of unified API sources for real-time and historical market data</p>
+            <p style="font-size: 0.9em; margin-top: 10px;">Last Updated: November 2025</p>
+        </header>
+        
+        <div class="intro">
+            <h2>Overview</h2>
+            <p>This document compares leading API providers that offer <strong>both cryptocurrency and stock market data</strong> from a single, unified source. The focus is on providers offering high-speed, authentic OHLCV (Open, High, Low, Close, Volume) data with additional trading metrics including trade volume, number of trades, and where available, unique trader counts.</p>
+            <p style="margin-top: 15px;"><strong>Key Requirements:</strong> Real-time to daily data intervals (1 second to daily), OHLCV format, institutional-grade accuracy, and comprehensive coverage of both crypto and equity markets.</p>
+        </div>
+        
+        <div class="intro" style="background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%); border-bottom: 3px solid #4caf50;">
+            <h2 style="color: #2e7d32;">💰 Quick Pricing Summary</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-top: 20px;">
+                <div style="background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                    <h3 style="color: #1e3c72; margin-bottom: 10px;">Polygon.io</h3>
+                    <div style="font-size: 1.5em; color: #667eea; font-weight: bold;">$29-$399/mo</div>
+                    <p style="margin-top: 10px; font-size: 0.9em; color: #666;">Free tier with delayed data<br><strong style="color: #1e3c72;">Best for: Speed & precision</strong></p>
+                </div>
+                <div style="background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); border: 2px solid #4caf50;">
+                    <h3 style="color: #1e3c72; margin-bottom: 10px;">Twelve Data ⭐</h3>
+                    <div style="font-size: 1.5em; color: #667eea; font-weight: bold;">FREE-$399/mo</div>
+                    <p style="margin-top: 10px; font-size: 0.9em; color: #666;">800 calls/day free tier<br><strong style="color: #1e3c72;">Best for: Value & coverage</strong></p>
+                </div>
+                <div style="background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                    <h3 style="color: #1e3c72; margin-bottom: 10px;">Alpha Vantage</h3>
+                    <div style="font-size: 1.5em; color: #667eea; font-weight: bold;">FREE-$499/mo</div>
+                    <p style="margin-top: 10px; font-size: 0.9em; color: #666;">500 calls/day free tier<br><strong style="color: #1e3c72;">Best for: Beginners & research</strong></p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="comparison-table">
+            <h2 style="color: #1e3c72; margin-bottom: 20px;">Main Comparison Table</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Provider</th>
+                        <th>Subscription Cost</th>
+                        <th>Stocks</th>
+                        <th>Crypto</th>
+                        <th>Min Interval</th>
+                        <th>OHLCV</th>
+                        <th>Trade Count</th>
+                        <th>Trader Count</th>
+                        <th>Real-time</th>
+                        <th>WebSocket</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="provider-name">Polygon.io (Massive)</td>
+                        <td><strong>$29-$399/mo</strong><br><span style="font-size: 0.85em; color: #666;">Free: Limited delayed</span></td>
+                        <td><span class="check">✓</span> US Stocks, Options</td>
+                        <td><span class="check">✓</span> Major Exchanges</td>
+                        <td><strong>1 second</strong></td>
+                        <td><span class="check">✓</span></td>
+                        <td><span class="check">✓</span> Built-in (n field)</td>
+                        <td><span class="cross">✗</span></td>
+                        <td><span class="check">✓</span> ~20ms latency</td>
+                        <td><span class="check">✓</span></td>
+                    </tr>
+                    <tr>
+                        <td class="provider-name">Twelve Data</td>
+                        <td><strong>FREE - $399/mo</strong><br><span style="font-size: 0.85em; color: #666;">Free: 800 calls/day</span></td>
+                        <td><span class="check">✓</span> Global Stocks, ETFs</td>
+                        <td><span class="check">✓</span> 180+ Exchanges</td>
+                        <td><strong>1 minute</strong></td>
+                        <td><span class="check">✓</span></td>
+                        <td><span class="partial">~</span> Indirect</td>
+                        <td><span class="cross">✗</span></td>
+                        <td><span class="check">✓</span> ~170ms latency</td>
+                        <td><span class="check">✓</span></td>
+                    </tr>
+                    <tr>
+                        <td class="provider-name">Alpha Vantage</td>
+                        <td><strong>FREE - $49+/mo</strong><br><span style="font-size: 0.85em; color: #666;">Free: 500 calls/day</span></td>
+                        <td><span class="check">✓</span> Global Stocks</td>
+                        <td><span class="check">✓</span> Major Pairs</td>
+                        <td><strong>1 minute</strong></td>
+                        <td><span class="check">✓</span></td>
+                        <td><span class="cross">✗</span></td>
+                        <td><span class="cross">✗</span></td>
+                        <td><span class="check">✓</span></td>
+                        <td><span class="cross">✗</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <div class="legend">
+            <h3>Legend</h3>
+            <div class="legend-items">
+                <div class="legend-item">
+                    <span class="check">✓</span>
+                    <span>Fully Available</span>
+                </div>
+                <div class="legend-item">
+                    <span class="partial">~</span>
+                    <span>Partially Available / Requires Calculation</span>
+                </div>
+                <div class="legend-item">
+                    <span class="cross">✗</span>
+                    <span>Not Available</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="note">
+            <strong>Important Note on "Number of Traders":</strong> The metric "unique traders per time period" is generally not available through public market data APIs. This information requires exchange-level access and is typically proprietary. The APIs reviewed provide "number of trades" (transaction count) but not unique participant counts. For trader-level analytics, direct exchange API access or specialized institutional data providers would be required.
+        </div>
+        
+        <div class="features-section">
+            <h2>Detailed Feature Comparison</h2>
+            
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h3>🔷 Polygon.io (Massive)</h3>
+                    <ul>
+                        <li><strong>Data Coverage:</strong> US stocks, options, forex, crypto from major exchanges (Coinbase, Bitfinex, Bitstamp, Kraken)</li>
+                        <li><strong>Historical Data:</strong> Tick-level since 2004 for stocks, varies for crypto</li>
+                        <li><strong>Intervals:</strong> 1 second, 1 minute, 5 min, 15 min, 30 min, hour, day</li>
+                        <li><strong>OHLCV Fields:</strong> Open, High, Low, Close, Volume, VWAP, Number of Transactions (n)</li>
+                        <li><strong>Latency:</strong> ~20ms average for real-time data</li>
+                        <li><strong>API Types:</strong> REST, WebSocket</li>
+                        <li><strong>Special Features:</strong> Dark pool data, pre/post-market, tick-level trades, L2/L3 order book</li>
+                        <li><strong>Rate Limits:</strong> No daily limits on paid plans</li>
+                        <li><strong>Documentation:</strong> Comprehensive with SDKs for multiple languages</li>
+                    </ul>
+                </div>
+                
+                <div class="feature-card">
+                    <h3>🔷 Twelve Data</h3>
+                    <ul>
+                        <li><strong>Data Coverage:</strong> 50+ countries stocks, 180+ crypto exchanges, forex, commodities, ETFs, indices</li>
+                        <li><strong>Historical Data:</strong> 20+ years for stocks, extensive crypto history</li>
+                        <li><strong>Intervals:</strong> 1 min, 5 min, 15 min, 30 min, 45 min, 1 hour, 2 hour, 4 hour, 8 hour, day, week, month</li>
+                        <li><strong>OHLCV Fields:</strong> Open, High, Low, Close, Volume (trade count derivable from volume analysis)</li>
+                        <li><strong>Latency:</strong> ~170ms average for real-time WebSocket</li>
+                        <li><strong>API Types:</strong> REST, WebSocket</li>
+                        <li><strong>Special Features:</strong> 100+ technical indicators, fundamentals data, pre/post-market</li>
+                        <li><strong>Rate Limits:</strong> Varies by plan (800/min on Basic)</li>
+                        <li><strong>Documentation:</strong> Excellent with Excel/Sheets add-ons, multiple SDKs</li>
+                    </ul>
+                </div>
+                
+                <div class="feature-card">
+                    <h3>🔷 Alpha Vantage</h3>
+                    <ul>
+                        <li><strong>Data Coverage:</strong> Global stocks, forex, crypto, commodities, economic indicators</li>
+                        <li><strong>Historical Data:</strong> 20+ years for stocks, extensive crypto (Bitcoin since 2011)</li>
+                        <li><strong>Intervals:</strong> 1 min, 5 min, 15 min, 30 min, 60 min, daily, weekly, monthly</li>
+                        <li><strong>OHLCV Fields:</strong> Open, High, Low, Close, Volume, Adjusted Close</li>
+                        <li><strong>Latency:</strong> Good for historical, real-time varies</li>
+                        <li><strong>API Types:</strong> REST only (no native WebSocket)</li>
+                        <li><strong>Special Features:</strong> 60+ technical indicators, fundamental data, economic indicators, AI-powered news sentiment</li>
+                        <li><strong>Rate Limits:</strong> 500 calls/day free tier</li>
+                        <li><strong>Documentation:</strong> Comprehensive, officially NASDAQ licensed, Excel/Sheets add-ons</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="comparison-table">
+            <h2 style="color: #1e3c72; margin-bottom: 20px;">Pricing Tier Comparison</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Tier Level</th>
+                        <th>Polygon.io</th>
+                        <th>Twelve Data</th>
+                        <th>Alpha Vantage</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Free Tier</strong></td>
+                        <td>$0 - Limited delayed data</td>
+                        <td><strong>$0 - 800 calls/day</strong></td>
+                        <td><strong>$0 - 500 calls/day</strong></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Entry Level</strong></td>
+                        <td><strong>$29/mo</strong> - Real-time stocks</td>
+                        <td><strong>$29.99/mo</strong> - 400 calls/min</td>
+                        <td><strong>$49.99/mo</strong> - 30 calls/min</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Mid Tier</strong></td>
+                        <td><strong>$99/mo</strong> - All assets</td>
+                        <td><strong>$79.99/mo</strong> - WebSocket + Extended</td>
+                        <td><strong>$99.99/mo</strong> - 75 calls/min</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Professional</strong></td>
+                        <td><strong>$399/mo</strong> - Full features</td>
+                        <td><strong>$149.99/mo</strong> - Advanced features</td>
+                        <td><strong>$149.99/mo</strong> - 120 calls/min</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Premium</strong></td>
+                        <td>Custom Enterprise</td>
+                        <td><strong>$399.99/mo</strong> - Mega plan</td>
+                        <td><strong>$249.99-$499.99/mo</strong></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Enterprise</strong></td>
+                        <td>Custom Pricing</td>
+                        <td>Custom Pricing</td>
+                        <td>Custom Pricing</td>
+                    </tr>
+                </tbody>
+            </table>
+            <p style="margin-top: 15px; color: #666; font-size: 0.95em;"><strong>Note:</strong> Prices are approximate and subject to change. Additional discounts may be available for annual subscriptions, students, or startups. Contact providers directly for current pricing.</p>
+        </div>
+        
+        <div class="comparison-table">
+            <h2 style="color: #1e3c72; margin-bottom: 20px;">Cost Per Feature Analysis</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Feature</th>
+                        <th>Polygon.io Cost</th>
+                        <th>Twelve Data Cost</th>
+                        <th>Alpha Vantage Cost</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Real-time Data Access</strong></td>
+                        <td>$29/mo minimum</td>
+                        <td>FREE tier available</td>
+                        <td>FREE tier available</td>
+                    </tr>
+                    <tr>
+                        <td><strong>WebSocket Streaming</strong></td>
+                        <td>$29/mo minimum</td>
+                        <td>$79.99/mo (Pro tier)</td>
+                        <td>Not available natively</td>
+                    </tr>
+                    <tr>
+                        <td><strong>1-Second Intervals</strong></td>
+                        <td>$29/mo minimum</td>
+                        <td>Not available</td>
+                        <td>Not available</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Tick-Level Data</strong></td>
+                        <td>$29/mo minimum</td>
+                        <td>Not available</td>
+                        <td>Not available</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Number of Trades Field</strong></td>
+                        <td>$29/mo minimum (built-in)</td>
+                        <td>Not directly available</td>
+                        <td>Not available</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Global Stock Coverage</strong></td>
+                        <td>$99/mo (US focused)</td>
+                        <td>FREE tier (50+ countries)</td>
+                        <td>FREE tier (global)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Technical Indicators</strong></td>
+                        <td>Limited set included</td>
+                        <td>100+ indicators (all tiers)</td>
+                        <td>60+ indicators (all tiers)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>No Rate Limits</strong></td>
+                        <td>$29/mo minimum</td>
+                        <td>$399.99/mo (Mega)</td>
+                        <td>Custom Enterprise only</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <div class="pricing-section">
+            <h2>Pricing Overview</h2>
+            
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <h3>Polygon.io</h3>
+                    <div class="price">From $29/mo</div>
+                    <ul>
+                        <li><strong>Free Tier:</strong> $0/month - Limited delayed data, basic access</li>
+                        <li><strong>Starter:</strong> $29/month - Real-time stocks, 5 concurrent connections</li>
+                        <li><strong>Developer:</strong> $99/month - All assets (stocks, options, forex, crypto)</li>
+                        <li><strong>Advanced:</strong> $399/month - Full features, unlimited connections</li>
+                        <li><strong>Enterprise:</strong> Custom pricing - Dedicated support, SLA</li>
+                        <li>✓ No daily call limits on paid plans</li>
+                        <li>✓ 20% student discount available</li>
+                        <li>✓ Tick-level data included</li>
+                    </ul>
+                </div>
+                
+                <div class="pricing-card recommended">
+                    <h3>Twelve Data</h3>
+                    <div class="price">From $0/mo</div>
+                    <ul>
+                        <li><strong>Free:</strong> $0/month - 800 calls/day, 8 calls/min, basic data</li>
+                        <li><strong>Basic:</strong> $29.99/month - Real-time, 400 calls/min</li>
+                        <li><strong>Pro:</strong> $79.99/month - WebSocket, extended hours</li>
+                        <li><strong>Ultra:</strong> $149.99/month - Advanced features</li>
+                        <li><strong>Mega:</strong> $399.99/month - Full access, premium support</li>
+                        <li><strong>Enterprise:</strong> Custom - Dedicated infrastructure</li>
+                        <li>✓ No hidden fees, cancel anytime</li>
+                        <li>✓ 14-day money-back guarantee</li>
+                    </ul>
+                </div>
+                
+                <div class="pricing-card">
+                    <h3>Alpha Vantage</h3>
+                    <div class="price">From $0/mo</div>
+                    <ul>
+                        <li><strong>Free:</strong> $0/month - 500 requests/day, 5 calls/min</li>
+                        <li><strong>30 Calls/Min:</strong> $49.99/month - Increased rate limits</li>
+                        <li><strong>75 Calls/Min:</strong> $99.99/month - Higher throughput</li>
+                        <li><strong>120 Calls/Min:</strong> $149.99/month - Professional tier</li>
+                        <li><strong>300 Calls/Min:</strong> $249.99/month - Advanced tier</li>
+                        <li><strong>1200 Calls/Min:</strong> $499.99/month - Premium tier</li>
+                        <li><strong>Enterprise:</strong> Custom pricing - Unlimited calls, SLA</li>
+                        <li>✓ Premium support on paid plans</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="comparison-table">
+            <h2 style="color: #1e3c72; margin-bottom: 20px;">Data Granularity Comparison</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Provider</th>
+                        <th>Tick-Level Data</th>
+                        <th>Second Bars</th>
+                        <th>Minute Bars</th>
+                        <th>Hourly/Daily</th>
+                        <th>Historical Depth</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="provider-name">Polygon.io</td>
+                        <td><span class="check">✓</span> Full tick data</td>
+                        <td><span class="check">✓</span> 1-second aggs</td>
+                        <td><span class="check">✓</span> 1, 5, 15, 30 min</td>
+                        <td><span class="check">✓</span> All intervals</td>
+                        <td>Since 2004 (stocks)</td>
+                    </tr>
+                    <tr>
+                        <td class="provider-name">Twelve Data</td>
+                        <td><span class="cross">✗</span></td>
+                        <td><span class="cross">✗</span></td>
+                        <td><span class="check">✓</span> 1, 5, 15, 30, 45 min</td>
+                        <td><span class="check">✓</span> All intervals</td>
+                        <td>20+ years</td>
+                    </tr>
+                    <tr>
+                        <td class="provider-name">Alpha Vantage</td>
+                        <td><span class="cross">✗</span></td>
+                        <td><span class="cross">✗</span></td>
+                        <td><span class="check">✓</span> 1, 5, 15, 30, 60 min</td>
+                        <td><span class="check">✓</span> All intervals</td>
+                        <td>20+ years</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <div class="comparison-table">
+            <h2 style="color: #1e3c72; margin-bottom: 20px;">Additional Metrics & Indicators</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Provider</th>
+                        <th>Trade Volume</th>
+                        <th>Number of Trades</th>
+                        <th>VWAP</th>
+                        <th>Technical Indicators</th>
+                        <th>Fundamentals</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="provider-name">Polygon.io</td>
+                        <td><span class="check">✓</span> In OHLCV</td>
+                        <td><span class="check">✓</span> Native field (n)</td>
+                        <td><span class="check">✓</span> Included</td>
+                        <td><span class="partial">~</span> Some indicators</td>
+                        <td><span class="check">✓</span> Extensive</td>
+                    </tr>
+                    <tr>
+                        <td class="provider-name">Twelve Data</td>
+                        <td><span class="check">✓</span> In OHLCV</td>
+                        <td><span class="partial">~</span> Via analysis</td>
+                        <td><span class="check">✓</span> Available</td>
+                        <td><span class="check">✓</span> 100+ indicators</td>
+                        <td><span class="check">✓</span> Extensive</td>
+                    </tr>
+                    <tr>
+                        <td class="provider-name">Alpha Vantage</td>
+                        <td><span class="check">✓</span> In OHLCV</td>
+                        <td><span class="cross">✗</span></td>
+                        <td><span class="partial">~</span> Calculable</td>
+                        <td><span class="check">✓</span> 60+ indicators</td>
+                        <td><span class="check">✓</span> Available</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <div class="features-section">
+            <h2>Recommendation Summary</h2>
+            
+            <div class="feature-grid">
+                <div class="feature-card" style="border-top-color: #28a745;">
+                    <h3>🏆 Best for High-Speed Trading</h3>
+                    <p><strong>Polygon.io (Massive)</strong></p>
+                    <p style="color: #667eea; font-size: 1.2em; font-weight: bold; margin: 10px 0;">$29-$399/mo</p>
+                    <ul>
+                        <li>Lowest latency (~20ms)</li>
+                        <li>1-second interval data</li>
+                        <li>Tick-level access</li>
+                        <li>Built-in trade count (n field)</li>
+                        <li>No daily call limits on paid plans</li>
+                        <li>Ideal for algorithmic trading, HFT</li>
+                        <li><strong>Best Value:</strong> $99/mo for all assets</li>
+                    </ul>
+                </div>
+                
+                <div class="feature-card" style="border-top-color: #28a745;">
+                    <h3>🏆 Best Value & Features</h3>
+                    <p><strong>Twelve Data</strong></p>
+                    <p style="color: #667eea; font-size: 1.2em; font-weight: bold; margin: 10px 0;">FREE - $399/mo</p>
+                    <ul>
+                        <li><strong>Free tier: 800 calls/day</strong></li>
+                        <li>Global coverage (50+ countries)</li>
+                        <li>100+ technical indicators included</li>
+                        <li>180+ crypto exchanges</li>
+                        <li>Excellent documentation & support</li>
+                        <li>WebSocket available at $79.99/mo</li>
+                        <li><strong>Best for budget-conscious developers</strong></li>
+                    </ul>
+                </div>
+                
+                <div class="feature-card" style="border-top-color: #28a745;">
+                    <h3>🏆 Best for Beginners & Research</h3>
+                    <p><strong>Alpha Vantage</strong></p>
+                    <p style="color: #667eea; font-size: 1.2em; font-weight: bold; margin: 10px 0;">FREE - $499/mo</p>
+                    <ul>
+                        <li><strong>Generous free tier: 500 calls/day</strong></li>
+                        <li>Simple REST API</li>
+                        <li>Excellent for learning & prototyping</li>
+                        <li>NASDAQ officially licensed</li>
+                        <li>Great for small projects & research</li>
+                        <li>60+ technical indicators on all tiers</li>
+                        <li><strong>Best for academic & hobby projects</strong></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="note" style="background: #d1ecf1; border-color: #0c5460;">
+            <strong>Final Recommendation:</strong> For professional applications requiring the most granular data with trade counts and highest speed, <strong>Polygon.io</strong> is the optimal choice. For the best balance of features, coverage, and value, <strong>Twelve Data</strong> offers excellent capabilities at competitive pricing with a usable free tier. For beginners or small-scale projects, <strong>Alpha Vantage</strong> provides an excellent starting point with generous free access.
+        </div>
+        
+        <div class="intro" style="margin-top: 0;">
+            <h2>Additional Considerations</h2>
+            <ul style="margin-left: 20px; margin-top: 15px;">
+                <li><strong>Integration Complexity:</strong> All three providers offer well-documented APIs with SDKs in multiple languages (Python, JavaScript, Go, Java, etc.)</li>
+                <li><strong>Data Quality:</strong> Polygon.io sources from SIPs and direct exchange connections; Twelve Data aggregates from multiple institutional sources; Alpha Vantage is NASDAQ officially licensed</li>
+                <li><strong>Support:</strong> Enterprise plans typically include dedicated support, SLAs, and custom solutions</li>
+                <li><strong>Scalability:</strong> Polygon.io and Twelve Data offer unlimited API calls on higher tiers, suitable for scaling applications</li>
+                <li><strong>Market Coverage:</strong> Twelve Data offers the most global coverage; Polygon.io focuses on US markets with expanding international coverage</li>
+            </ul>
+        </div>
+        
+        <footer>
+            <p><strong>Document Information</strong></p>
+            <p>This comparison is based on publicly available information as of November 2025</p>
+            <p>For the most current pricing and features, please visit the respective provider websites</p>
+            <p style="margin-top: 15px; font-size: 0.9em;">
+                <strong>Provider Websites:</strong><br>
+                Polygon.io: https://polygon.io | Twelve Data: https://twelvedata.com | Alpha Vantage: https://www.alphavantage.co
+            </p>
+        </footer>
+    </div>
+</body>
+</html>

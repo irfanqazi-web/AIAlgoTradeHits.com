@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DEPLOY_STOCK_FUNCTION</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #24292e;
+            background: #ffffff;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            margin-top: 24px;
+            margin-bottom: 16px;
+            font-weight: 600;
+            line-height: 1.25;
+        }
+        h1 { border-bottom: 1px solid #eaecef; padding-bottom: 0.3em; }
+        h2 { border-bottom: 1px solid #eaecef; padding-bottom: 0.3em; }
+        code {
+            background-color: rgba(27,31,35,0.05);
+            border-radius: 3px;
+            font-size: 85%;
+            margin: 0;
+            padding: 0.2em 0.4em;
+            font-family: 'Courier New', monospace;
+        }
+        pre {
+            background-color: #f6f8fa;
+            border-radius: 3px;
+            font-size: 85%;
+            line-height: 1.45;
+            overflow: auto;
+            padding: 16px;
+        }
+        pre code {
+            background-color: transparent;
+            border: 0;
+            display: inline;
+            line-height: inherit;
+            margin: 0;
+            overflow: visible;
+            padding: 0;
+            word-wrap: normal;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 16px 0;
+        }
+        table th, table td {
+            border: 1px solid #dfe2e5;
+            padding: 6px 13px;
+        }
+        table tr:nth-child(2n) {
+            background-color: #f6f8fa;
+        }
+        blockquote {
+            border-left: 4px solid #dfe2e5;
+            color: #6a737d;
+            padding: 0 1em;
+            margin: 0;
+        }
+        a {
+            color: #0366d6;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+<h1>Deploy Stock Cloud Function - Manual Steps</h1>
+<h2>Status Update</h2>
+<p>✅ <strong>BigQuery Table Created</strong>: <code>cryptobot-462709.crypto_trading_data.stock_analysis</code> (81 fields)
+🔄 <strong>Historical Data Upload</strong>: IN PROGRESS (~40/97 stocks uploaded)
+⏳ <strong>Cloud Function</strong>: Ready to deploy
+⏳ <strong>Cloud Scheduler</strong>: Ready to create</p>
+<hr />
+<h2>Step 1: Deploy Cloud Function (Manual)</h2>
+<p>Since gcloud has a module issue on your system, deploy using Google Cloud Console:</p>
+<h3>Option A: Via Google Cloud Console (Easiest)</h3>
+<ol>
+<li><strong>Go to Cloud Functions</strong>:</li>
+<li>
+<p>Open: https://console.cloud.google.com/functions/list?project=cryptobot-462709</p>
+</li>
+<li>
+<p><strong>Create Function</strong>:</p>
+</li>
+<li>Click "CREATE FUNCTION"</li>
+<li>Choose <strong>2nd gen</strong></li>
+<li>Function name: <code>daily-stock-fetcher</code></li>
+<li>Region: <code>us-central1</code></li>
+<li>Trigger: HTTP</li>
+<li>Authentication: Allow unauthenticated invocations</li>
+<li>
+<p>Click "SAVE" then "NEXT"</p>
+</li>
+<li>
+<p><strong>Configure Code</strong>:</p>
+</li>
+<li>Runtime: Python 3.11</li>
+<li>Entry point: <code>daily_stock_fetch</code></li>
+<li>Source code: Inline editor</li>
+</ol>
+<p>Copy the contents from:
+   - <code>cloud_function_daily_stocks/main.py</code> → main.py (in editor)
+   - <code>cloud_function_daily_stocks/requirements.txt</code> → requirements.txt (in editor)</p>
+<ol>
+<li><strong>Advanced Settings</strong>:</li>
+<li>Memory: 2 GiB</li>
+<li>Timeout: 540 seconds</li>
+<li>
+<p>Max instances: 1</p>
+</li>
+<li>
+<p><strong>Click "DEPLOY"</strong> (takes 2-3 minutes)</p>
+</li>
+<li>
+<p><strong>Get Function URL</strong>:</p>
+</li>
+<li>After deployment, copy the trigger URL</li>
+<li>Example: <code>https://us-central1-cryptobot-462709.cloudfunctions.net/daily-stock-fetcher</code></li>
+</ol>
+<h3>Option B: Fix gcloud and Deploy</h3>
+<p>If you want to fix gcloud:</p>
+<pre class="codehilite"><code class="language-bash"># Fix Python path for gcloud
+set CLOUDSDK_PYTHON=C:\Users\irfan\AppData\Local\Programs\Python\Python313\python.exe
+
+# Then deploy
+cd cloud_function_daily_stocks
+gcloud functions deploy daily-stock-fetcher \
+  --gen2 \
+  --runtime python311 \
+  --region us-central1 \
+  --source . \
+  --entry-point daily_stock_fetch \
+  --trigger-http \
+  --allow-unauthenticated \
+  --timeout 540 \
+  --memory 2Gi \
+  --max-instances 1 \
+  --project cryptobot-462709
+</code></pre>
+
+<hr />
+<h2>Step 2: Create Cloud Scheduler</h2>
+<p>Once the Cloud Function is deployed, create the daily scheduler:</p>
+<pre class="codehilite"><code class="language-bash"># Delete existing scheduler if any
+gcloud scheduler jobs delete daily-stock-fetch-job \
+  --location us-central1 \
+  --project cryptobot-462709 \
+  --quiet
+
+# Create new scheduler (midnight ET daily)
+gcloud scheduler jobs create http daily-stock-fetch-job \
+  --location us-central1 \
+  --schedule &quot;0 0 * * *&quot; \
+  --uri https://us-central1-cryptobot-462709.cloudfunctions.net/daily-stock-fetcher \
+  --http-method GET \
+  --time-zone America/New_York \
+  --project cryptobot-462709 \
+  --description &quot;Daily stock data fetch with Elliott Wave and Fibonacci&quot;
+</code></pre>
+
+<hr />
+<h2>Step 3: Test the Function</h2>
+<p>Test manually:</p>
+<pre class="codehilite"><code class="language-bash"># Via curl
+curl https://us-central1-cryptobot-462709.cloudfunctions.net/daily-stock-fetcher
+
+# Or manually trigger scheduler
+gcloud scheduler jobs run daily-stock-fetch-job \
+  --location us-central1 \
+  --project cryptobot-462709
+</code></pre>
+
+<hr />
+<h2>Step 4: Verify Data in BigQuery</h2>
+<p>Check that data is being populated:</p>
+<pre class="codehilite"><code class="language-sql">-- Count total records
+SELECT COUNT(*) as total_records, COUNT(DISTINCT symbol) as unique_stocks
+FROM `cryptobot-462709.crypto_trading_data.stock_analysis`;
+
+-- View latest data with Elliott Wave
+SELECT
+  symbol,
+  company_name,
+  sector,
+  DATE(datetime) as date,
+  close,
+  elliott_wave_degree,
+  wave_position,
+  fib_618,
+  rsi,
+  macd
+FROM `cryptobot-462709.crypto_trading_data.stock_analysis`
+ORDER BY datetime DESC
+LIMIT 20;
+</code></pre>
+
+<hr />
+<h2>Current Status</h2>
+<p><strong>Historical Data Upload Progress</strong>:
+- The upload script is currently running
+- Processing: ~40/97 stocks completed
+- Each stock: 126 days × 81 fields = full technical analysis
+- ETA: ~3-4 minutes remaining</p>
+<p><strong>When Upload Completes</strong>:
+- You'll have ~12,222 rows in BigQuery
+- 97 stocks × 126 days each
+- All with Elliott Wave &amp; Fibonacci levels</p>
+<hr />
+<h2>File Locations</h2>
+<p>All files are in: <code>C:\Users\irfan\OneDrive - Aretec, Inc\Desktop\1AITrading\Trading\</code></p>
+<ul>
+<li><strong>Cloud Function Code</strong>: <code>cloud_function_daily_stocks/main.py</code></li>
+<li><strong>Requirements</strong>: <code>cloud_function_daily_stocks/requirements.txt</code></li>
+<li><strong>Historical Data</strong>: <code>stock_6month_ohlc_data.csv</code></li>
+<li><strong>Documentation</strong>: <code>STOCK_DEPLOYMENT_GUIDE.md</code></li>
+</ul>
+<hr />
+<h2>Next Steps After Deployment</h2>
+<ol>
+<li>✅ Historical data uploaded to BigQuery</li>
+<li>✅ Daily Cloud Function deployed</li>
+<li>✅ Cloud Scheduler created</li>
+<li>📊 Integrate into trading app (stock-price-app)</li>
+<li>📈 Add stock charts with Elliott Wave overlays</li>
+<li>🎯 Create trading signals based on Fibonacci levels</li>
+</ol>
+<hr />
+<p><strong>Note</strong>: The historical data upload is currently running in the background. You can check progress in the terminal where it's executing. Once complete, you'll see: "UPLOAD COMPLETE - Total rows uploaded: 12222"</p>
+</body>
+</html>

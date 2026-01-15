@@ -1,0 +1,340 @@
+# MCP Toolbox Configuration for AIAlgoTradeHits Trading Platform
+# Reference: Google ADK Text-to-SQL Reference Guide
+# Documentation: https://github.com/googleapis/genai-toolbox
+
+sources:
+  # BigQuery Data Warehouse - Primary data source for trading analytics
+  bigquery-trading:
+    kind: bigquery
+    project: aialgotradehits
+    dataset: crypto_trading_data
+
+tools:
+  # ============== STOCK DATA TOOLS ==============
+
+  get-stock-daily-data:
+    kind: bigquery-sql
+    source: bigquery-trading
+    description: Get daily stock data with technical indicators for a specific symbol
+    parameters:
+      - name: symbol
+        type: string
+        description: Stock ticker symbol (e.g., AAPL, MSFT, TSLA)
+      - name: limit
+        type: integer
+        description: Number of records to return (default 100)
+    statement: |
+      SELECT symbol, name, sector, datetime, open, high, low, close, volume,
+             percent_change, rsi, macd, macd_signal, macd_histogram,
+             sma_20, sma_50, sma_200, adx, atr, bollinger_upper, bollinger_lower,
+             week_52_high, week_52_low
+      FROM `aialgotradehits.crypto_trading_data.v2_stocks_daily`
+      WHERE symbol = @symbol
+      ORDER BY datetime DESC
+      LIMIT @limit;
+
+  search-stocks-by-criteria:
+    kind: bigquery-sql
+    source: bigquery-trading
+    description: Search stocks by technical criteria (RSI, MACD, ADX, price)
+    parameters:
+      - name: rsi_max
+        type: float
+        description: Maximum RSI value (use 30 for oversold)
+      - name: rsi_min
+        type: float
+        description: Minimum RSI value (use 70 for overbought)
+      - name: sector
+        type: string
+        description: Sector filter (Technology, Healthcare, Energy, etc.)
+      - name: limit
+        type: integer
+        description: Number of results
+    statement: |
+      WITH latest AS (
+        SELECT *, ROW_NUMBER() OVER (PARTITION BY symbol ORDER BY datetime DESC) as rn
+        FROM `aialgotradehits.crypto_trading_data.v2_stocks_daily`
+      )
+      SELECT symbol, name, sector, close, percent_change, rsi, macd, adx, volume
+      FROM latest
+      WHERE rn = 1
+        AND (@rsi_max IS NULL OR rsi <= @rsi_max)
+        AND (@rsi_min IS NULL OR rsi >= @rsi_min)
+        AND (@sector IS NULL OR sector = @sector)
+        AND rsi IS NOT NULL
+      ORDER BY rsi ASC
+      LIMIT @limit;
+
+  get-top-stock-gainers:
+    kind: bigquery-sql
+    source: bigquery-trading
+    description: Get top performing stocks by daily percent change
+    parameters:
+      - name: limit
+        type: integer
+        description: Number of top gainers to return
+    statement: |
+      WITH latest AS (
+        SELECT *, ROW_NUMBER() OVER (PARTITION BY symbol ORDER BY datetime DESC) as rn
+        FROM `aialgotradehits.crypto_trading_data.v2_stocks_daily`
+      )
+      SELECT symbol, name, sector, close, percent_change, volume, rsi, macd
+      FROM latest
+      WHERE rn = 1 AND percent_change IS NOT NULL
+      ORDER BY percent_change DESC
+      LIMIT @limit;
+
+  get-top-stock-losers:
+    kind: bigquery-sql
+    source: bigquery-trading
+    description: Get worst performing stocks by daily percent change
+    parameters:
+      - name: limit
+        type: integer
+        description: Number of top losers to return
+    statement: |
+      WITH latest AS (
+        SELECT *, ROW_NUMBER() OVER (PARTITION BY symbol ORDER BY datetime DESC) as rn
+        FROM `aialgotradehits.crypto_trading_data.v2_stocks_daily`
+      )
+      SELECT symbol, name, sector, close, percent_change, volume, rsi, macd
+      FROM latest
+      WHERE rn = 1 AND percent_change IS NOT NULL
+      ORDER BY percent_change ASC
+      LIMIT @limit;
+
+  get-stock-breakouts:
+    kind: bigquery-sql
+    source: bigquery-trading
+    description: Find stocks breaking 52-week highs (potential breakouts)
+    parameters:
+      - name: limit
+        type: integer
+        description: Number of breakout candidates
+    statement: |
+      WITH latest AS (
+        SELECT *, ROW_NUMBER() OVER (PARTITION BY symbol ORDER BY datetime DESC) as rn
+        FROM `aialgotradehits.crypto_trading_data.v2_stocks_daily`
+      )
+      SELECT symbol, name, sector, close, week_52_high,
+             ROUND(close / week_52_high * 100, 2) as pct_of_52w_high,
+             percent_change, volume, rsi, adx
+      FROM latest
+      WHERE rn = 1
+        AND close >= week_52_high * 0.95
+        AND week_52_high IS NOT NULL
+      ORDER BY pct_of_52w_high DESC
+      LIMIT @limit;
+
+  # ============== CRYPTO DATA TOOLS ==============
+
+  get-crypto-daily-data:
+    kind: bigquery-sql
+    source: bigquery-trading
+    description: Get daily cryptocurrency data with technical indicators
+    parameters:
+      - name: symbol
+        type: string
+        description: Crypto symbol (e.g., BTCUSD, ETHUSD)
+      - name: limit
+        type: integer
+        description: Number of records
+    statement: |
+      SELECT symbol, name, datetime, open, high, low, close, volume,
+             percent_change, rsi, macd, macd_signal, macd_histogram,
+             sma_20, sma_50, sma_200, adx, atr, bollinger_upper, bollinger_lower
+      FROM `aialgotradehits.crypto_trading_data.v2_crypto_daily`
+      WHERE symbol = @symbol
+      ORDER BY datetime DESC
+      LIMIT @limit;
+
+  get-top-crypto-gainers:
+    kind: bigquery-sql
+    source: bigquery-trading
+    description: Get top performing cryptocurrencies
+    parameters:
+      - name: limit
+        type: integer
+        description: Number of results
+    statement: |
+      WITH latest AS (
+        SELECT *, ROW_NUMBER() OVER (PARTITION BY symbol ORDER BY datetime DESC) as rn
+        FROM `aialgotradehits.crypto_trading_data.v2_crypto_daily`
+      )
+      SELECT symbol, name, close, percent_change, volume, rsi, macd
+      FROM latest
+      WHERE rn = 1
+      ORDER BY percent_change DESC NULLS LAST
+      LIMIT @limit;
+
+  search-oversold-cryptos:
+    kind: bigquery-sql
+    source: bigquery-trading
+    description: Find oversold cryptocurrencies (RSI below 30)
+    parameters:
+      - name: limit
+        type: integer
+        description: Number of results
+    statement: |
+      WITH latest AS (
+        SELECT *, ROW_NUMBER() OVER (PARTITION BY symbol ORDER BY datetime DESC) as rn
+        FROM `aialgotradehits.crypto_trading_data.v2_crypto_daily`
+      )
+      SELECT symbol, name, close, percent_change, rsi, macd, adx
+      FROM latest
+      WHERE rn = 1 AND rsi < 30 AND rsi IS NOT NULL
+      ORDER BY rsi ASC
+      LIMIT @limit;
+
+  # ============== FOREX DATA TOOLS ==============
+
+  get-forex-daily-data:
+    kind: bigquery-sql
+    source: bigquery-trading
+    description: Get daily forex pair data
+    parameters:
+      - name: symbol
+        type: string
+        description: Forex pair (e.g., EUR/USD, GBP/USD)
+      - name: limit
+        type: integer
+        description: Number of records
+    statement: |
+      SELECT symbol, datetime, open, high, low, close,
+             percent_change, rsi, macd, atr
+      FROM `aialgotradehits.crypto_trading_data.v2_forex_daily`
+      WHERE symbol = @symbol
+      ORDER BY datetime DESC
+      LIMIT @limit;
+
+  # ============== TECHNICAL ANALYSIS TOOLS ==============
+
+  get-technical-indicators:
+    kind: bigquery-sql
+    source: bigquery-trading
+    description: Get comprehensive technical indicators for any asset
+    parameters:
+      - name: symbol
+        type: string
+        description: Asset symbol
+      - name: asset_type
+        type: string
+        description: Asset type (stocks, crypto, forex, etfs, indices, commodities)
+    statement: |
+      WITH latest AS (
+        SELECT *, ROW_NUMBER() OVER (PARTITION BY symbol ORDER BY datetime DESC) as rn
+        FROM `aialgotradehits.crypto_trading_data.v2_${asset_type}_daily`
+        WHERE symbol = @symbol
+      )
+      SELECT symbol, datetime, close,
+             rsi, macd, macd_signal, macd_histogram,
+             sma_20, sma_50, sma_200,
+             ema_12, ema_26, ema_50,
+             adx, atr, cci,
+             bollinger_upper, bollinger_middle, bollinger_lower,
+             stoch_k, stoch_d, williams_r
+      FROM latest
+      WHERE rn = 1;
+
+  find-strong-trends:
+    kind: bigquery-sql
+    source: bigquery-trading
+    description: Find assets with strong trends (ADX > 25) and bullish MACD
+    parameters:
+      - name: asset_type
+        type: string
+        description: Asset type (stocks, crypto, forex)
+      - name: limit
+        type: integer
+        description: Number of results
+    statement: |
+      WITH latest AS (
+        SELECT *, ROW_NUMBER() OVER (PARTITION BY symbol ORDER BY datetime DESC) as rn
+        FROM `aialgotradehits.crypto_trading_data.v2_${asset_type}_daily`
+      )
+      SELECT symbol, name, close, percent_change, adx, macd, macd_signal, rsi
+      FROM latest
+      WHERE rn = 1
+        AND adx > 25
+        AND macd > macd_signal
+        AND adx IS NOT NULL
+      ORDER BY adx DESC
+      LIMIT @limit;
+
+  # ============== CROSS-ASSET COMPARISON TOOLS ==============
+
+  compare-assets:
+    kind: bigquery-sql
+    source: bigquery-trading
+    description: Compare multiple assets side by side
+    parameters:
+      - name: symbols
+        type: string
+        description: Comma-separated symbols (e.g., AAPL,MSFT,GOOGL)
+      - name: asset_type
+        type: string
+        description: Asset type
+    statement: |
+      WITH latest AS (
+        SELECT *, ROW_NUMBER() OVER (PARTITION BY symbol ORDER BY datetime DESC) as rn
+        FROM `aialgotradehits.crypto_trading_data.v2_${asset_type}_daily`
+        WHERE symbol IN UNNEST(SPLIT(@symbols, ','))
+      )
+      SELECT symbol, name, close, percent_change, rsi, macd, adx, volume
+      FROM latest
+      WHERE rn = 1
+      ORDER BY percent_change DESC;
+
+  # ============== WEEKLY SUMMARY TOOLS ==============
+
+  get-weekly-summary:
+    kind: bigquery-sql
+    source: bigquery-trading
+    description: Get weekly summary data for an asset type
+    parameters:
+      - name: asset_type
+        type: string
+        description: Asset type (stocks, crypto, forex, etfs, indices, commodities)
+      - name: limit
+        type: integer
+        description: Number of results
+    statement: |
+      SELECT symbol, name, close, percent_change,
+             week_52_high, week_52_low, rsi, macd, adx
+      FROM `aialgotradehits.crypto_trading_data.v2_${asset_type}_weekly_summary`
+      ORDER BY percent_change DESC NULLS LAST
+      LIMIT @limit;
+
+# ============== TOOLSETS ==============
+
+toolsets:
+  # Complete trading toolset for general queries
+  trading-analysis:
+    - get-stock-daily-data
+    - get-crypto-daily-data
+    - get-forex-daily-data
+    - get-technical-indicators
+    - search-stocks-by-criteria
+    - search-oversold-cryptos
+    - find-strong-trends
+    - compare-assets
+
+  # Market scanning toolset
+  market-scanner:
+    - get-top-stock-gainers
+    - get-top-stock-losers
+    - get-stock-breakouts
+    - get-top-crypto-gainers
+    - search-oversold-cryptos
+    - find-strong-trends
+
+  # Technical analysis focused
+  technical-analysis:
+    - get-technical-indicators
+    - find-strong-trends
+    - get-stock-breakouts
+
+  # Weekly analysis
+  weekly-analysis:
+    - get-weekly-summary
+    - compare-assets

@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Logo Shapes: The Psychology of Design | YouInvent.Tech</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.8;
+            color: #2c3e50;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        
+        .hero {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            padding: 60px 40px;
+            text-align: center;
+        }
+        
+        .hero h1 {
+            font-size: 3em;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .hero p {
+            font-size: 1.3em;
+            opacity: 0.95;
+        }
+        
+        .youinvent-logo-section {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%);
+            padding: 60px 40px;
+            text-align: center;
+            color: white;
+        }
+        
+        .logo-container {
+            background: white;
+            padding: 60px;
+            border-radius: 20px;
+            margin: 40px auto;
+            max-width: 800px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+        }
+        
+        .youinvent-logo {
+            text-align: center;
+            margin: 40px 0;
+        }
+        
+        .logo-graphic {
+            width: 300px;
+            height: 300px;
+            margin: 0 auto 30px;
+            position: relative;
+        }
+        
+        .logo-text {
+            font-size: 3.5em;
+            font-weight: bold;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #ff6b6b 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 10px;
+        }
+        
+        .logo-tagline {
+            font-size: 1.2em;
+            color: #7f8c8d;
+            font-style: italic;
+        }
+        
+        .content {
+            padding: 60px 40px;
+        }
+        
+        .section {
+            margin: 50px 0;
+        }
+        
+        .section-title {
+            font-size: 2.5em;
+            color: #2c3e50;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 4px solid #667eea;
+        }
+        
+        .shape-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin: 40px 0;
+        }
+        
+        .shape-card {
+            background: #f8f9fa;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-top: 5px solid #667eea;
+        }
+        
+        .shape-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+        
+        .shape-icon {
+            font-size: 4em;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .shape-name {
+            font-size: 2em;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        .shape-meaning {
+            font-size: 1.2em;
+            color: #667eea;
+            font-weight: 600;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .shape-description {
+            color: #555;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+        
+        .brand-examples {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .brand-tag {
+            background: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            font-weight: 600;
+            color: #667eea;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .youinvent-section {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            padding: 60px 40px;
+            margin: 60px 0;
+            border-radius: 20px;
+            color: white;
+        }
+        
+        .youinvent-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .feature-box {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 30px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            text-align: center;
+        }
+        
+        .feature-icon {
+            font-size: 3em;
+            margin-bottom: 15px;
+        }
+        
+        .feature-title {
+            font-size: 1.4em;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .logo-design-rationale {
+            background: #e8f5e9;
+            padding: 40px;
+            border-radius: 15px;
+            margin: 40px 0;
+        }
+        
+        .footer {
+            background: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 40px;
+        }
+        
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2em;
+            }
+            
+            .logo-text {
+                font-size: 2em;
+            }
+            
+            .shape-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="hero">
+            <h1>🎨 Logo Shapes</h1>
+            <p>The Psychology of Shapes in Logo Design</p>
+        </div>
+        
+        <!-- YouInvent.Tech Logo Section -->
+        <div class="youinvent-logo-section">
+            <h2 style="font-size: 2.5em; margin-bottom: 20px;">Introducing YouInvent.Tech</h2>
+            <p style="font-size: 1.3em; margin-bottom: 40px;">Empowering Inventors to Transform Ideas into Reality</p>
+            
+            <div class="logo-container">
+                <div class="youinvent-logo">
+                    <div class="logo-graphic">
+                        <svg viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+                            <!-- Outer hexagon (structure/tech) -->
+                            <polygon points="150,20 250,80 250,180 150,240 50,180 50,80" 
+                                     fill="none" stroke="url(#gradient1)" stroke-width="6"/>
+                            
+                            <!-- Inner lightbulb shape (innovation) -->
+                            <circle cx="150" cy="110" r="45" fill="url(#gradient2)"/>
+                            <path d="M 130 150 Q 130 165 140 170 L 160 170 Q 170 165 170 150 Z" fill="url(#gradient2)"/>
+                            <rect x="140" y="170" width="20" height="15" rx="2" fill="#764ba2"/>
+                            
+                            <!-- Growth arrows -->
+                            <path d="M 90 130 L 70 150 L 90 170" fill="none" stroke="#ff6b6b" stroke-width="5" stroke-linecap="round"/>
+                            <path d="M 210 130 L 230 150 L 210 170" fill="none" stroke="#ff6b6b" stroke-width="5" stroke-linecap="round"/>
+                            
+                            <!-- Connection dots -->
+                            <circle cx="150" cy="230" r="8" fill="#667eea"/>
+                            <circle cx="235" cy="185" r="8" fill="#764ba2"/>
+                            <circle cx="65" cy="185" r="8" fill="#ff6b6b"/>
+                            
+                            <!-- Gradients -->
+                            <defs>
+                                <linearGradient id="gradient1" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+                                    <stop offset="50%" style="stop-color:#764ba2;stop-opacity:1" />
+                                    <stop offset="100%" style="stop-color:#ff6b6b;stop-opacity:1" />
+                                </linearGradient>
+                                <linearGradient id="gradient2" x1="0%" y1="0%" x2="0%" y2="100%">
+                                    <stop offset="0%" style="stop-color:#ffd700;stop-opacity:1" />
+                                    <stop offset="100%" style="stop-color:#ffa500;stop-opacity:1" />
+                                </linearGradient>
+                            </defs>
+                        </svg>
+                    </div>
+                    
+                    <div class="logo-text">YouInvent.Tech</div>
+                    <div class="logo-tagline">From Ideas to Impact</div>
+                </div>
+                
+                <div class="logo-design-rationale">
+                    <h3 style="color: #2c3e50; font-size: 1.8em; margin-bottom: 20px; text-align: center;">🎯 Logo Design Rationale</h3>
+                    <ul style="color: #555; line-height: 2.2; margin-left: 30px;">
+                        <li><strong>Hexagon:</strong> Represents structure, technology, and connectivity - the foundation of your platform</li>
+                        <li><strong>Lightbulb:</strong> Universal symbol of innovation, ideas, and invention at the heart of your mission</li>
+                        <li><strong>Outward Arrows:</strong> Symbolize growth, expansion, and scaling ideas into products</li>
+                        <li><strong>Connection Dots:</strong> Represent partnership, collaboration, and the inventor community</li>
+                        <li><strong>Color Gradient:</strong> Blue to purple to red represents the journey from idea (blue - trust) through innovation (purple - creativity) to market success (red - passion/energy)</li>
+                        <li><strong>Golden Lightbulb:</strong> Represents the value and brilliance of each inventor's ideas</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <!-- About YouInvent.Tech -->
+        <div class="youinvent-section">
+            <h2 style="font-size: 2.5em; margin-bottom: 20px; text-align: center;">What We Do</h2>
+            <p style="font-size: 1.2em; text-align: center; max-width: 800px; margin: 0 auto 40px;">YouInvent.Tech is a social enterprise dedicated to partnering with inventors at every stage of their journey. We provide the tools, support, and resources needed to transform brilliant ideas into market-ready products.</p>
+            
+            <div class="youinvent-features">
+                <div class="feature-box">
+                    <div class="feature-icon">💡</div>
+                    <div class="feature-title">Ideation Tools</div>
+                    <p>Advanced platforms for brainstorming, prototyping, and refining your inventions</p>
+                </div>
+                
+                <div class="feature-box">
+                    <div class="feature-icon">💰</div>
+                    <div class="feature-title">Financial Support</div>
+                    <p>Funding, grants, and investment connections to bring your ideas to life</p>
+                </div>
+                
+                <div class="feature-box">
+                    <div class="feature-icon">🚀</div>
+                    <div class="feature-title">Growth Partnership</div>
+                    <p>Expert mentorship and scaling strategies to grow from concept to market</p>
+                </div>
+                
+                <div class="feature-box">
+                    <div class="feature-icon">🤝</div>
+                    <div class="feature-title">Community Access</div>
+                    <p>Connect with fellow inventors, manufacturers, and industry experts</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Logo Psychology Content -->
+        <div class="content">
+            <div class="section">
+                <div class="section-title">Understanding Logo Shape Psychology</div>
+                <p style="font-size: 1.2em; margin-bottom: 30px;">Every shape carries psychological associations that influence how people perceive your brand. Understanding these subtle yet powerful connections can help you choose the perfect shape for your logo design.</p>
+            </div>
+            
+            <div class="shape-grid">
+                <!-- Circle -->
+                <div class="shape-card">
+                    <div class="shape-icon">⭕</div>
+                    <div class="shape-name">Circle</div>
+                    <div class="shape-meaning">Continuous & Inclusive</div>
+                    <div class="shape-description">
+                        Circles represent unity, wholeness, and eternity. They evoke feelings of community, friendship, love, and relationships. Perfect for brands emphasizing connection and inclusivity.
+                    </div>
+                    <div class="brand-examples">
+                        <span class="brand-tag">Spotify</span>
+                        <span class="brand-tag">Target</span>
+                        <span class="brand-tag">Nivea</span>
+                        <span class="brand-tag">Pinterest</span>
+                    </div>
+                </div>
+                
+                <!-- Square -->
+                <div class="shape-card">
+                    <div class="shape-icon">⬜</div>
+                    <div class="shape-name">Square</div>
+                    <div class="shape-meaning">Balanced & Stable</div>
+                    <div class="shape-description">
+                        Squares and rectangles convey strength, professionalism, efficiency, and reliability. They represent order and conformity, making them ideal for established, trustworthy brands.
+                    </div>
+                    <div class="brand-examples">
+                        <span class="brand-tag">BBC News</span>
+                        <span class="brand-tag">Microsoft</span>
+                        <span class="brand-tag">Uniqlo</span>
+                        <span class="brand-tag">LinkedIn</span>
+                    </div>
+                </div>
+                
+                <!-- Triangle -->
+                <div class="shape-card">
+                    <div class="shape-icon">🔺</div>
+                    <div class="shape-name">Triangle</div>
+                    <div class="shape-meaning">Dynamic & Directional</div>
+                    <div class="shape-description">
+                        Triangles symbolize power, progress, direction, and purpose. They can suggest innovation, masculinity, and leadership. Pointing upward implies growth and stability.
+                    </div>
+                    <div class="brand-examples">
+                        <span class="brand-tag">Adidas</span>
+                        <span class="brand-tag">Delta</span>
+                        <span class="brand-tag">Google Play</span>
+                        <span class="brand-tag">Reebok</span>
+                    </div>
+                </div>
+                
+                <!-- Hexagon -->
+                <div class="shape-card">
+                    <div class="shape-icon">⬡</div>
+                    <div class="shape-name">Hexagon</div>
+                    <div class="shape-meaning">Structured & Connected</div>
+                    <div class="shape-description">
+                        Hexagons represent unity, balance, and efficiency - found in nature's honeycombs. They suggest innovation, technology, and interconnectedness, perfect for tech brands.
+                    </div>
+                    <div class="brand-examples">
+                        <span class="brand-tag">Slack</span>
+                        <span class="brand-tag">Chase</span>
+                        <span class="brand-tag">Samsung</span>
+                        <span class="brand-tag">Bumble</span>
+                    </div>
+                </div>
+                
+                <!-- Oval -->
+                <div class="shape-card">
+                    <div class="shape-icon">⭕</div>
+                    <div class="shape-name">Oval</div>
+                    <div class="shape-meaning">Elegant & Approachable</div>
+                    <div class="shape-description">
+                        Ovals combine the unity of circles with unique character. They convey sophistication, elegance, and femininity while remaining friendly and approachable.
+                    </div>
+                    <div class="brand-examples">
+                        <span class="brand-tag">A&W</span>
+                        <span class="brand-tag">Jacuzzi</span>
+                        <span class="brand-tag">Toyota</span>
+                        <span class="brand-tag">Ford</span>
+                    </div>
+                </div>
+                
+                <!-- Abstract -->
+                <div class="shape-card">
+                    <div class="shape-icon">✨</div>
+                    <div class="shape-name">Abstract</div>
+                    <div class="shape-meaning">Unique & Conceptual</div>
+                    <div class="shape-description">
+                        Abstract shapes are unique, memorable, and conceptual. They allow brands to create distinctive identities that stand out while conveying complex ideas and values.
+                    </div>
+                    <div class="brand-examples">
+                        <span class="brand-tag">BP</span>
+                        <span class="brand-tag">CBC</span>
+                        <span class="brand-tag">Squarespace</span>
+                        <span class="brand-tag">Airbnb</span>
+                    </div>
+                </div>
+                
+                <!-- Organic -->
+                <div class="shape-card">
+                    <div class="shape-icon">🍃</div>
+                    <div class="shape-name">Organic</div>
+                    <div class="shape-meaning">Natural & Expressive</div>
+                    <div class="shape-description">
+                        Organic shapes are free-flowing, natural, and expressive. They convey authenticity, creativity, and a connection to nature - perfect for food, beverage, and lifestyle brands.
+                    </div>
+                    <div class="brand-examples">
+                        <span class="brand-tag">Somersby</span>
+                        <span class="brand-tag">SoundCloud</span>
+                        <span class="brand-tag">Toblerone</span>
+                        <span class="brand-tag">Innocent</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Application to YouInvent.Tech -->
+            <div class="section" style="background: #f8f9fa; padding: 40px; border-radius: 15px; margin-top: 60px;">
+                <h2 style="color: #2c3e50; font-size: 2.2em; margin-bottom: 30px;">Why This Logo Works for YouInvent.Tech</h2>
+                
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
+                    <div style="background: white; padding: 25px; border-radius: 12px; border-left: 5px solid #667eea;">
+                        <h3 style="color: #667eea; margin-bottom: 15px;">🏗 Structured Foundation</h3>
+                        <p>The hexagon provides a stable, technological framework - representing the robust platform and tools you provide to inventors.</p>
+                    </div>
+                    
+                    <div style="background: white; padding: 25px; border-radius: 12px; border-left: 5px solid #764ba2;">
+                        <h3 style="color: #764ba2; margin-bottom: 15px;">💡 Innovation Core</h3>
+                        <p>The central lightbulb is the universal symbol of ideas and invention - the heart of what your inventors bring to the table.</p>
+                    </div>
+                    
+                    <div style="background: white; padding: 25px; border-radius: 12px; border-left: 5px solid #ff6b6b;">
+                        <h3 style="color: #ff6b6b; margin-bottom: 15px;">📈 Growth Dynamic</h3>
+                        <p>Outward-facing arrows demonstrate your mission: taking ideas and expanding them into successful products and businesses.</p>
+                    </div>
+                    
+                    <div style="background: white; padding: 25px; border-radius: 12px; border-left: 5px solid #4ecdc4;">
+                        <h3 style="color: #4ecdc4; margin-bottom: 15px;">🤝 Connected Community</h3>
+                        <p>The connection points emphasize partnership, collaboration, and the network effect of your inventor community.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Choosing Your Logo Shape -->
+            <div class="section" style="margin-top: 60px;">
+                <h2 style="color: #2c3e50; font-size: 2.2em; margin-bottom: 30px;">How to Choose the Right Shape for Your Logo</h2>
+                
+                <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 40px; border-radius: 15px; color: white;">
+                    <ol style="line-height: 2.5; font-size: 1.1em; margin-left: 30px;">
+                        <li><strong>Identify Your Brand Values:</strong> What do you want your brand to represent? Stability? Innovation? Community?</li>
+                        <li><strong>Consider Your Audience:</strong> Who are you trying to reach? Different shapes appeal to different demographics.</li>
+                        <li><strong>Analyze Competitors:</strong> What shapes dominate your industry? Should you align or differentiate?</li>
+                        <li><strong>Think About Versatility:</strong> Will your logo work across all media - digital, print, merchandise?</li>
+                        <li><strong>Test Multiple Options:</strong> Create mockups with different shapes and gather feedback.</li>
+                        <li><strong>Combine Shapes Strategically:</strong> Like YouInvent.Tech, you can combine shapes to convey multiple messages.</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <h2 style="margin-bottom: 20px;">Ready to Bring Your Invention to Life?</h2>
+            <p style="font-size: 1.2em; margin-bottom: 30px;">Join YouInvent.Tech and transform your ideas into reality with the right tools, funding, and support.</p>
+            <div style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;">
+                <button style="background: #ff6b6b; color: white; border: none; padding: 15px 40px; border-radius: 30px; font-size: 1.1em; cursor: pointer; font-weight: bold;">Get Started</button>
+                <button style="background: transparent; color: white; border: 2px solid white; padding: 15px 40px; border-radius: 30px; font-size: 1.1em; cursor: pointer; font-weight: bold;">Learn More</button>
+            </div>
+            <p style="margin-top: 40px; opacity: 0.8;">© 2025 YouInvent.Tech - Empowering Inventors Worldwide</p>
+        </div>
+    </div>
+</body>
+</html>

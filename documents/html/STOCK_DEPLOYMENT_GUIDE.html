@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>STOCK_DEPLOYMENT_GUIDE</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #24292e;
+            background: #ffffff;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            margin-top: 24px;
+            margin-bottom: 16px;
+            font-weight: 600;
+            line-height: 1.25;
+        }
+        h1 { border-bottom: 1px solid #eaecef; padding-bottom: 0.3em; }
+        h2 { border-bottom: 1px solid #eaecef; padding-bottom: 0.3em; }
+        code {
+            background-color: rgba(27,31,35,0.05);
+            border-radius: 3px;
+            font-size: 85%;
+            margin: 0;
+            padding: 0.2em 0.4em;
+            font-family: 'Courier New', monospace;
+        }
+        pre {
+            background-color: #f6f8fa;
+            border-radius: 3px;
+            font-size: 85%;
+            line-height: 1.45;
+            overflow: auto;
+            padding: 16px;
+        }
+        pre code {
+            background-color: transparent;
+            border: 0;
+            display: inline;
+            line-height: inherit;
+            margin: 0;
+            overflow: visible;
+            padding: 0;
+            word-wrap: normal;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 16px 0;
+        }
+        table th, table td {
+            border: 1px solid #dfe2e5;
+            padding: 6px 13px;
+        }
+        table tr:nth-child(2n) {
+            background-color: #f6f8fa;
+        }
+        blockquote {
+            border-left: 4px solid #dfe2e5;
+            color: #6a737d;
+            padding: 0 1em;
+            margin: 0;
+        }
+        a {
+            color: #0366d6;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+<h1>Stock Data Pipeline - Deployment Guide</h1>
+<h2>Overview</h2>
+<p>This guide covers the deployment and usage of the daily stock data collection system with Elliott Wave theory and Fibonacci analysis for major US stocks, mirroring the crypto data pipeline.</p>
+<h2>What's Included</h2>
+<h3>1. Stock Coverage</h3>
+<ul>
+<li><strong>100+ major US stocks</strong> across sectors:</li>
+<li>Tech Giants (FAANG+): AAPL, MSFT, GOOGL, AMZN, META, NVDA, TSLA, NFLX</li>
+<li>Financial: JPM, BAC, WFC, GS, MS, C, V, MA</li>
+<li>Healthcare: JNJ, UNH, PFE, ABBV, TMO, MRK</li>
+<li>Energy: XOM, CVX, COP, SLB, EOG</li>
+<li>Consumer: WMT, HD, MCD, NKE, SBUX</li>
+<li>Industrial: BA, CAT, HON, UNP, UPS</li>
+<li>ETFs: SPY, QQQ, DIA, IWM, VTI, VOO</li>
+</ul>
+<h3>2. Technical Indicators (81 Total Fields)</h3>
+<p><strong>Same comprehensive indicators as crypto:</strong></p>
+<h4>Price &amp; Volume Data</h4>
+<ul>
+<li>OHLC (Open, High, Low, Close)</li>
+<li>Volume, Dividends, Stock Splits</li>
+</ul>
+<h4>Moving Averages</h4>
+<ul>
+<li>SMA (20, 50, 200)</li>
+<li>EMA (12, 26, 50)</li>
+</ul>
+<h4>Momentum Indicators</h4>
+<ul>
+<li>RSI, MACD, ROC, Momentum</li>
+<li>Stochastic Oscillator, Williams %R</li>
+</ul>
+<h4>Volatility</h4>
+<ul>
+<li>Bollinger Bands, ATR</li>
+</ul>
+<h4>Trend Indicators</h4>
+<ul>
+<li>ADX, +DI, -DI</li>
+</ul>
+<h4>Oscillators</h4>
+<ul>
+<li>CCI, PPO, Ultimate Oscillator, Awesome Oscillator</li>
+</ul>
+<h4>Volume Indicators</h4>
+<ul>
+<li>OBV, PVO</li>
+</ul>
+<h4>Advanced Indicators</h4>
+<ul>
+<li>KAMA, TRIX</li>
+</ul>
+<h3>3. Elliott Wave Analysis</h3>
+<ul>
+<li><strong>wave_degree</strong>: Classification (Minute, Minor, Intermediate, Primary, Cycle)</li>
+<li><strong>wave_position</strong>: Current wave (1-5)</li>
+<li><strong>impulse_wave_count</strong>: Impulse waves detected</li>
+<li><strong>corrective_wave_count</strong>: Corrective waves detected</li>
+<li><strong>wave_1_high</strong> through <strong>wave_5_high</strong>: Wave peak prices</li>
+<li><strong>trend_direction</strong>: 1 (up), -1 (down), 0 (sideways)</li>
+<li><strong>trend_strength</strong>: ADX-based strength</li>
+<li><strong>volatility_regime</strong>: low, normal, high</li>
+</ul>
+<h3>4. Fibonacci Analysis</h3>
+<p><strong>Retracement Levels:</strong>
+- fib_0, fib_236, fib_382, fib_500, fib_618, fib_786, fib_100</p>
+<p><strong>Extension Levels:</strong>
+- fib_ext_1272, fib_ext_1618, fib_ext_2618</p>
+<p><strong>Distance Metrics:</strong>
+- dist_to_fib_236, dist_to_fib_382, dist_to_fib_500, dist_to_fib_618</p>
+<h3>5. Additional Fields</h3>
+<ul>
+<li><strong>Price Changes</strong>: 1d, 5d, 20d percentage changes</li>
+<li><strong>Company Info</strong>: sector, industry, exchange</li>
+<li><strong>Helper Fields</strong>: swing_high, swing_low, local_maxima, local_minima</li>
+</ul>
+<h2>Deployment Steps</h2>
+<h3>Option A: Automated Setup (Recommended)</h3>
+<p>Run the complete setup script:</p>
+<pre class="codehilite"><code class="language-bash">python setup_stock_pipeline.py
+</code></pre>
+
+<p>This will automatically:
+1. Create BigQuery table
+2. Fetch 6 months historical data
+3. Upload with technical indicators
+4. Deploy Cloud Function
+5. Set up Cloud Scheduler</p>
+<h3>Option B: Manual Step-by-Step Setup</h3>
+<h4>Step 1: Install Dependencies</h4>
+<pre class="codehilite"><code class="language-bash">pip install yfinance pandas numpy google-cloud-bigquery
+</code></pre>
+
+<h4>Step 2: Create BigQuery Table</h4>
+<pre class="codehilite"><code class="language-bash">python create_stock_bigquery_schema.py
+</code></pre>
+
+<p>Verify table creation:</p>
+<pre class="codehilite"><code class="language-bash">bq show cryptobot-462709:crypto_trading_data.stock_analysis
+</code></pre>
+
+<h4>Step 3: Fetch Historical Data (6 Months)</h4>
+<pre class="codehilite"><code class="language-bash">python stock_data_fetcher_6months.py
+</code></pre>
+
+<p>This creates:
+- <code>stock_6month_ohlc_data.csv</code> - Raw OHLC data
+- <code>stock_6month_summary.csv</code> - Summary statistics
+- <code>stock_symbols_list.csv</code> - Stock symbols list</p>
+<h4>Step 4: Upload Historical Data to BigQuery</h4>
+<pre class="codehilite"><code class="language-bash">python upload_stocks_to_bigquery.py
+</code></pre>
+
+<p>This processes each stock:
+- Calculates 81 technical indicators
+- Computes Elliott Wave patterns
+- Calculates Fibonacci levels
+- Uploads to BigQuery</p>
+<h4>Step 5: Deploy Cloud Function</h4>
+<pre class="codehilite"><code class="language-bash">cd cloud_function_daily_stocks
+python deploy_via_api.py
+</code></pre>
+
+<p>Or use gcloud directly:</p>
+<pre class="codehilite"><code class="language-bash">gcloud functions deploy daily-stock-fetcher \
+  --gen2 \
+  --runtime python311 \
+  --region us-central1 \
+  --source . \
+  --entry-point daily_stock_fetch \
+  --trigger-http \
+  --allow-unauthenticated \
+  --timeout 540 \
+  --memory 2Gi \
+  --project cryptobot-462709
+</code></pre>
+
+<h4>Step 6: Set Up Cloud Scheduler</h4>
+<pre class="codehilite"><code class="language-bash">gcloud scheduler jobs create http daily-stock-fetch-job \
+  --location us-central1 \
+  --schedule &quot;0 0 * * *&quot; \
+  --uri https://us-central1-cryptobot-462709.cloudfunctions.net/daily-stock-fetcher \
+  --http-method GET \
+  --time-zone America/New_York \
+  --project cryptobot-462709 \
+  --description &quot;Daily stock data fetch with technical indicators&quot;
+</code></pre>
+
+<h2>Verification Steps</h2>
+<h3>1. Test Cloud Function Manually</h3>
+<pre class="codehilite"><code class="language-bash">curl https://us-central1-cryptobot-462709.cloudfunctions.net/daily-stock-fetcher
+</code></pre>
+
+<h3>2. Check BigQuery Data</h3>
+<pre class="codehilite"><code class="language-sql">-- Count records by symbol
+SELECT
+  symbol,
+  company_name,
+  sector,
+  COUNT(*) as days,
+  MIN(date) as first_date,
+  MAX(date) as last_date
+FROM `cryptobot-462709.crypto_trading_data.stock_analysis`
+GROUP BY symbol, company_name, sector
+ORDER BY days DESC;
+</code></pre>
+
+<h3>3. Verify Elliott Wave Data</h3>
+<pre class="codehilite"><code class="language-sql">SELECT
+  symbol,
+  company_name,
+  close,
+  elliott_wave_degree,
+  wave_position,
+  trend_direction,
+  fib_618,
+  fib_500,
+  rsi,
+  macd
+FROM `cryptobot-462709.crypto_trading_data.stock_analysis`
+WHERE DATE(datetime) = CURRENT_DATE() - 1
+  AND elliott_wave_degree IS NOT NULL
+ORDER BY close DESC
+LIMIT 20;
+</code></pre>
+
+<h3>4. Check Fibonacci Levels</h3>
+<pre class="codehilite"><code class="language-sql">SELECT
+  symbol,
+  close,
+  fib_618,
+  fib_500,
+  fib_382,
+  dist_to_fib_618,
+  dist_to_fib_500,
+  trend_direction
+FROM `cryptobot-462709.crypto_trading_data.stock_analysis`
+WHERE DATE(datetime) = CURRENT_DATE() - 1
+  AND ABS(dist_to_fib_618) &lt; 3  -- Within 3% of golden ratio
+ORDER BY ABS(dist_to_fib_618) ASC
+LIMIT 10;
+</code></pre>
+
+<h2>Example Trading Queries</h2>
+<h3>Find Stocks in Wave 3 (Strong Uptrend)</h3>
+<pre class="codehilite"><code class="language-sql">SELECT
+  symbol,
+  company_name,
+  sector,
+  close,
+  wave_position,
+  wave_3_high,
+  trend_direction,
+  rsi,
+  adx,
+  macd
+FROM `cryptobot-462709.crypto_trading_data.stock_analysis`
+WHERE DATE(datetime) = CURRENT_DATE() - 1
+  AND wave_position = 3
+  AND trend_direction = 1
+  AND rsi &lt; 70  -- Not overbought
+  AND adx &gt; 25  -- Strong trend
+ORDER BY adx DESC
+LIMIT 10;
+</code></pre>
+
+<h3>Find Stocks at Fibonacci Support</h3>
+<pre class="codehilite"><code class="language-sql">SELECT
+  symbol,
+  company_name,
+  sector,
+  close,
+  fib_618,
+  fib_500,
+  dist_to_fib_618,
+  rsi,
+  macd,
+  trend_direction
+FROM `cryptobot-462709.crypto_trading_data.stock_analysis`
+WHERE DATE(datetime) = CURRENT_DATE() - 1
+  AND ABS(dist_to_fib_618) &lt; 2  -- Within 2% of 61.8% level
+  AND rsi &lt; 40  -- Oversold
+  AND trend_direction = 1
+ORDER BY rsi ASC
+LIMIT 10;
+</code></pre>
+
+<h3>Tech Stocks with Best Momentum</h3>
+<pre class="codehilite"><code class="language-sql">SELECT
+  symbol,
+  company_name,
+  close,
+  price_change_1d,
+  price_change_5d,
+  price_change_20d,
+  rsi,
+  macd,
+  adx,
+  volume
+FROM `cryptobot-462709.crypto_trading_data.stock_analysis`
+WHERE DATE(datetime) = CURRENT_DATE() - 1
+  AND sector = 'Technology'
+  AND price_change_1d &gt; 0
+  AND rsi &gt; 50
+  AND macd &gt; macd_signal
+ORDER BY price_change_5d DESC
+LIMIT 15;
+</code></pre>
+
+<h3>Combine Elliott Wave + Fibonacci + Technicals</h3>
+<pre class="codehilite"><code class="language-sql">WITH analysis AS (
+  SELECT
+    symbol,
+    company_name,
+    sector,
+    close,
+    elliott_wave_degree,
+    wave_position,
+    trend_direction,
+    fib_618,
+    fib_500,
+    dist_to_fib_618,
+    dist_to_fib_500,
+    rsi,
+    macd,
+    macd_signal,
+    adx,
+    volume
+  FROM `cryptobot-462709.crypto_trading_data.stock_analysis`
+  WHERE DATE(datetime) = CURRENT_DATE() - 1
+)
+SELECT *
+FROM analysis
+WHERE
+  -- Elliott Wave: Wave 3 or early Wave 4
+  wave_position IN (3, 4)
+  -- Fibonacci: Near key retracement
+  AND (ABS(dist_to_fib_500) &lt; 3 OR ABS(dist_to_fib_618) &lt; 3)
+  -- Trend: Uptrend
+  AND trend_direction = 1
+  -- RSI: Not overbought
+  AND rsi BETWEEN 40 AND 70
+  -- MACD: Positive
+  AND macd &gt; macd_signal
+  -- ADX: Strong trend
+  AND adx &gt; 25
+ORDER BY adx DESC, rsi ASC
+LIMIT 20;
+</code></pre>
+
+<h2>Monitoring</h2>
+<h3>Check Function Logs</h3>
+<pre class="codehilite"><code class="language-bash">gcloud functions logs read daily-stock-fetcher \
+  --project cryptobot-462709 \
+  --limit 50
+</code></pre>
+
+<h3>Verify Scheduler</h3>
+<pre class="codehilite"><code class="language-bash">gcloud scheduler jobs describe daily-stock-fetch-job \
+  --location us-central1 \
+  --project cryptobot-462709
+</code></pre>
+
+<h3>Manually Trigger Scheduler</h3>
+<pre class="codehilite"><code class="language-bash">gcloud scheduler jobs run daily-stock-fetch-job \
+  --location us-central1 \
+  --project cryptobot-462709
+</code></pre>
+
+<h3>Check Data Freshness</h3>
+<pre class="codehilite"><code class="language-sql">SELECT
+  DATE(datetime) as date,
+  COUNT(DISTINCT symbol) as unique_stocks,
+  COUNT(*) as total_records,
+  COUNTIF(elliott_wave_degree IS NOT NULL) as with_elliott_wave,
+  COUNTIF(fib_618 IS NOT NULL) as with_fibonacci
+FROM `cryptobot-462709.crypto_trading_data.stock_analysis`
+WHERE DATE(datetime) &gt;= CURRENT_DATE() - 7
+GROUP BY date
+ORDER BY date DESC;
+</code></pre>
+
+<h2>Cost Estimates</h2>
+<p>Monthly costs for stock pipeline:</p>
+<ul>
+<li><strong>Cloud Functions</strong>: ~$4/month</li>
+<li>Executions: ~30/month (daily)</li>
+<li>Duration: ~3 minutes per run</li>
+<li>
+<p>Memory: 2GB</p>
+</li>
+<li>
+<p><strong>BigQuery Storage</strong>: ~$2/month</p>
+</li>
+<li>
+<p>100 stocks × 81 fields × 365 days</p>
+</li>
+<li>
+<p><strong>Cloud Scheduler</strong>: $0.10/month</p>
+</li>
+</ul>
+<p><strong>Total Estimated Cost</strong>: ~$6-7/month</p>
+<p>Combined with crypto pipeline: ~$13-17/month total</p>
+<h2>Troubleshooting</h2>
+<h3>Issue: Yahoo Finance Rate Limiting</h3>
+<p>If you encounter rate limiting:
+1. Increase sleep time in <code>fetch_daily_stock_data()</code> to 1-2 seconds
+2. Split stock list into batches</p>
+<h3>Issue: Elliott Wave Not Detected</h3>
+<p>Some stocks may not have enough volatility:
+- Requires minimum 13 daily candles
+- Needs identifiable swing highs/lows
+- Check <code>swing_high</code> and <code>swing_low</code> fields</p>
+<h3>Issue: Schema Mismatch</h3>
+<p>If schema errors occur:</p>
+<pre class="codehilite"><code class="language-bash"># Drop and recreate table
+bq rm -f cryptobot-462709:crypto_trading_data.stock_analysis
+python create_stock_bigquery_schema.py
+</code></pre>
+
+<h3>Issue: Function Timeout</h3>
+<p>If function times out:
+1. Increase timeout to 540s (already set)
+2. Reduce number of stocks in STOCK_SYMBOLS list
+3. Split into multiple functions by sector</p>
+<h2>Integration with Trading App</h2>
+<p>The stock data is now available alongside crypto data:</p>
+<pre class="codehilite"><code class="language-javascript">// Query stock data from BigQuery
+const stockQuery = `
+  SELECT * FROM \`cryptobot-462709.crypto_trading_data.stock_analysis\`
+  WHERE DATE(datetime) = CURRENT_DATE() - 1
+  ORDER BY symbol
+`;
+</code></pre>
+
+<p>Display Elliott Wave and Fibonacci levels on stock charts alongside crypto charts.</p>
+<h2>Files Created</h2>
+<pre class="codehilite"><code>Trading/
+├── stock_data_fetcher_6months.py          # Historical data fetcher
+├── create_stock_bigquery_schema.py        # BigQuery table setup
+├── upload_stocks_to_bigquery.py           # Upload with indicators
+├── setup_stock_pipeline.py                # Automated setup script
+├── cloud_function_daily_stocks/
+│   ├── main.py                            # Cloud Function code
+│   ├── requirements.txt                   # Dependencies
+│   └── deploy_via_api.py                  # Deployment script
+└── STOCK_DEPLOYMENT_GUIDE.md             # This file
+</code></pre>
+
+<h2>Next Steps</h2>
+<ol>
+<li>
+<p><strong>Test the pipeline</strong>:
+   <code>bash
+   python setup_stock_pipeline.py</code></p>
+</li>
+<li>
+<p><strong>Verify data</strong>:
+   <code>bash
+   bq query --use_legacy_sql=false 'SELECT COUNT(*) FROM crypto_trading_data.stock_analysis'</code></p>
+</li>
+<li>
+<p><strong>Integrate into trading app</strong>: Add stock charts alongside crypto</p>
+</li>
+<li>
+<p><strong>Set up alerts</strong>: Create alerts when stocks hit Fibonacci levels or complete wave patterns</p>
+</li>
+<li>
+<p><strong>Backfill more history</strong> (optional): Extend to 1+ years for better Elliott Wave detection</p>
+</li>
+</ol>
+<hr />
+<p><strong>Last Updated</strong>: 2025-11-07
+<strong>Version</strong>: 1.0
+<strong>Project</strong>: cryptobot-462709
+<strong>Data Source</strong>: Yahoo Finance (yfinance)</p>
+</body>
+</html>

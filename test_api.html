@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>API Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background: #0a0e27;
+            color: white;
+        }
+        .section {
+            margin: 20px 0;
+            padding: 15px;
+            background: #1a1e3a;
+            border-radius: 8px;
+        }
+        button {
+            padding: 10px 20px;
+            margin: 5px;
+            background: #3b82f6;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #2563eb;
+        }
+        pre {
+            background: #0d1117;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        .success { color: #10b981; }
+        .error { color: #ef4444; }
+    </style>
+</head>
+<body>
+    <h1>Local API Test</h1>
+
+    <div class="section">
+        <h2>Stock Endpoints (NVDA)</h2>
+        <button onclick="testEndpoint('/api/stocks/history?symbol=NVDA&limit=5', 'stock-daily')">Test Daily</button>
+        <button onclick="testEndpoint('/api/stocks/15min/history?symbol=NVDA&limit=5', 'stock-15min')">Test 15min</button>
+        <button onclick="testEndpoint('/api/stocks/5min/history?symbol=NVDA&limit=5', 'stock-5min')">Test 5min</button>
+        <button onclick="testEndpoint('/api/summary/stock', 'stock-summary')">Test Summary</button>
+        <pre id="stock-daily"></pre>
+        <pre id="stock-15min"></pre>
+        <pre id="stock-5min"></pre>
+        <pre id="stock-summary"></pre>
+    </div>
+
+    <div class="section">
+        <h2>Crypto Endpoints (BTC/USD)</h2>
+        <button onclick="testEndpoint('/api/crypto/daily/history?pair=BTC/USD&limit=5', 'crypto-daily')">Test Daily</button>
+        <button onclick="testEndpoint('/api/crypto/15min/history?pair=BTC/USD&limit=5', 'crypto-15min')">Test 15min</button>
+        <button onclick="testEndpoint('/api/crypto/5min/history?pair=BTC/USD&limit=5', 'crypto-5min')">Test 5min</button>
+        <button onclick="testEndpoint('/api/summary/crypto', 'crypto-summary')">Test Summary</button>
+        <pre id="crypto-daily"></pre>
+        <pre id="crypto-15min"></pre>
+        <pre id="crypto-5min"></pre>
+        <pre id="crypto-summary"></pre>
+    </div>
+
+    <script>
+        async function testEndpoint(endpoint, elementId) {
+            const element = document.getElementById(elementId);
+            element.innerHTML = 'Loading...';
+
+            try {
+                const response = await fetch(`http://localhost:8080${endpoint}`);
+                const data = await response.json();
+
+                if (response.ok) {
+                    element.innerHTML = '<span class="success">✓ Success</span>\n' + JSON.stringify(data, null, 2);
+                } else {
+                    element.innerHTML = '<span class="error">✗ Error</span>\n' + JSON.stringify(data, null, 2);
+                }
+            } catch (error) {
+                element.innerHTML = '<span class="error">✗ Error: ' + error.message + '</span>';
+            }
+        }
+    </script>
+</body>
+</html>

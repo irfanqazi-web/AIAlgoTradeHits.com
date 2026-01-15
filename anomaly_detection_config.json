@@ -1,0 +1,42 @@
+{
+  "name": "price_anomaly_detector",
+  "description": "Detect unusual price movements in stocks and crypto",
+  "metrics": [
+    {
+      "name": "price_spike",
+      "description": "Detect sudden price spikes",
+      "aggregation": "DELTA_PERCENT",
+      "threshold_high": 5.0,
+      "threshold_low": -5.0
+    },
+    {
+      "name": "volume_surge",
+      "description": "Detect unusual volume",
+      "aggregation": "RATIO_TO_AVERAGE",
+      "threshold_high": 3.0,
+      "window_size": 20
+    },
+    {
+      "name": "rsi_extreme",
+      "description": "Detect extreme RSI values",
+      "aggregation": "VALUE",
+      "threshold_high": 80,
+      "threshold_low": 20
+    },
+    {
+      "name": "bollinger_breakout",
+      "description": "Detect Bollinger Band breakouts",
+      "aggregation": "CUSTOM",
+      "condition": "close > bollinger_upper OR close < bollinger_lower"
+    }
+  ],
+  "alert_settings": {
+    "email_notification": true,
+    "severity_levels": [
+      "CRITICAL",
+      "WARNING",
+      "INFO"
+    ],
+    "cooldown_minutes": 60
+  }
+}

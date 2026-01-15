@@ -1,0 +1,336 @@
+[
+  {
+    "title": "Readme",
+    "filename": "README.md",
+    "type": "markdown",
+    "md_url": "https://storage.googleapis.com/trading-app-documents/md/README.md",
+    "html_url": "https://storage.googleapis.com/trading-app-documents/html/README.html",
+    "category": "General Documentation"
+  },
+  {
+    "title": "Daily Crypto Fetcher Summary",
+    "filename": "DAILY_CRYPTO_FETCHER_SUMMARY.md",
+    "type": "markdown",
+    "md_url": "https://storage.googleapis.com/trading-app-documents/md/DAILY_CRYPTO_FETCHER_SUMMARY.md",
+    "html_url": "https://storage.googleapis.com/trading-app-documents/html/DAILY_CRYPTO_FETCHER_SUMMARY.html",
+    "category": "Planning & Features"
+  },
+  {
+    "title": "Deployment Status Report",
+    "filename": "DEPLOYMENT_STATUS_REPORT.md",
+    "type": "markdown",
+    "md_url": "https://storage.googleapis.com/trading-app-documents/md/DEPLOYMENT_STATUS_REPORT.md",
+    "html_url": "https://storage.googleapis.com/trading-app-documents/html/DEPLOYMENT_STATUS_REPORT.html",
+    "category": "Deployment"
+  },
+  {
+    "title": "Complete Deployment Summary",
+    "filename": "COMPLETE_DEPLOYMENT_SUMMARY.md",
+    "type": "markdown",
+    "md_url": "https://storage.googleapis.com/trading-app-documents/md/COMPLETE_DEPLOYMENT_SUMMARY.md",
+    "html_url": "https://storage.googleapis.com/trading-app-documents/html/COMPLETE_DEPLOYMENT_SUMMARY.html",
+    "category": "Deployment"
+  },
+  {
+    "title": "Deploy All With Indicators",
+    "filename": "deploy_all_with_indicators.md",
+    "type": "markdown",
+    "md_url": "https://storage.googleapis.com/trading-app-documents/md/deploy_all_with_indicators.md",
+    "html_url": "https://storage.googleapis.com/trading-app-documents/html/deploy_all_with_indicators.html",
+    "category": "Deployment"
+  },
+  {
+    "title": "Deployment Complete With Indicators",
+    "filename": "DEPLOYMENT_COMPLETE_WITH_INDICATORS.md",
+    "type": "markdown",
+    "md_url": "https://storage.googleapis.com/trading-app-documents/md/DEPLOYMENT_COMPLETE_WITH_INDICATORS.md",
+    "html_url": "https://storage.googleapis.com/trading-app-documents/html/DEPLOYMENT_COMPLETE_WITH_INDICATORS.html",
+    "category": "Deployment"
+  },
+  {
+    "title": "Cryptobot Deployment Complete",
+    "filename": "CRYPTOBOT_DEPLOYMENT_COMPLETE.md",
+    "type": "markdown",
+    "md_url": "https://storage.googleapis.com/trading-app-documents/md/CRYPTOBOT_DEPLOYMENT_COMPLETE.md",
+    "html_url": "https://storage.googleapis.com/trading-app-documents/html/CRYPTOBOT_DEPLOYMENT_COMPLETE.html",
+    "category": "Deployment"
+  },
+  {
+    "title": "Final Deployment Status",
+    "filename": "FINAL_DEPLOYMENT_STATUS.md",
+    "type": "markdown",
+    "md_url": "https://storage.googleapis.com/trading-app-documents/md/FINAL_DEPLOYMENT_STATUS.md",
+    "html_url": "https://storage.googleapis.com/trading-app-documents/html/FINAL_DEPLOYMENT_STATUS.html",
+    "category": "Deployment"
+  },
+  {
+    "title": "Quick Start Guide",
+    "filename": "QUICK_START_GUIDE.md",
+    "type": "markdown",
+    "md_url": "https://storage.googleapis.com/trading-app-documents/md/QUICK_START_GUIDE.md",
+    "html_url": "https://storage.googleapis.com/trading-app-documents/html/QUICK_START_GUIDE.html",
+    "category": "Technical Guides"
+  },
+  {
+    "title": "Deployment Complete Status",
+    "filename": "DEPLOYMENT_COMPLETE_STATUS.md",
+    "type": "markdown",
+    "md_url": "https://storage.googleapis.com/trading-app-documents/md/DEPLOYMENT_COMPLETE_STATUS.md",
+    "html_url": "https://storage.googleapis.com/trading-app-documents/html/DEPLOYMENT_COMPLETE_STATUS.html",
+    "category": "Deployment"
+  },
+  {
+    "title": "Final Completion Report",
+    "filename": "FINAL_COMPLETION_REPORT.md",
+    "type": "markdown",
+    "md_url": "https://storage.googleapis.com/trading-app-documents/md/FINAL_COMPLETION_REPORT.md",
+    "html_url": "https://storage.googleapis.com/trading-app-documents/html/FINAL_COMPLETION_REPORT.html",
+    "category": "General Documentation"
+  },
+  {
+    "title": "Claude",
+    "filename": "CLAUDE.md",
+    "type": "markdown",
+    "md_url": "https://storage.googleapis.com/trading-app-documents/md/CLAUDE.md",
+    "html_url": "https://storage.googleapis.com/trading-app-documents/html/CLAUDE.html",
+    "category": "General Documentation"
+  },
+  {
+    "title": "Timeout Fix Guide",
+    "filename": "TIMEOUT_FIX_GUIDE.md",
+    "type": "markdown",
+    "md_url": "https://storage.googleapis.com/trading-app-documents/md/TIMEOUT_FIX_GUIDE.md",
+    "html_url": "https://storage.googleapis.com/trading-app-documents/html/TIMEOUT_FIX_GUIDE.html",
+    "category": "Technical Guides"
+  },
+  {
+    "title": "Elliott Wave Deployment Guide",
+    "filename": "ELLIOTT_WAVE_DEPLOYMENT_GUIDE.md",
+    "type": "markdown",
+    "md_url": "https://storage.googleapis.com/trading-app-documents/md/ELLIOTT_WAVE_DEPLOYMENT_GUIDE.md",
+    "html_url": "https://storage.googleapis.com/trading-app-documents/html/ELLIOTT_WAVE_DEPLOYMENT_GUIDE.html",
+    "category": "Deployment"
+  },
+  {
+    "title": "Stock Deployment Guide",
+    "filename": "STOCK_DEPLOYMENT_GUIDE.md",
+    "type": "markdown",
+    "md_url": "https://storage.googleapis.com/trading-app-documents/md/STOCK_DEPLOYMENT_GUIDE.md",
+    "html_url": "https://storage.googleapis.com/trading-app-documents/html/STOCK_DEPLOYMENT_GUIDE.html",
+    "category": "Deployment"
+  },
+  {
+    "title": "Stock Pipeline Complete",
+    "filename": "STOCK_PIPELINE_COMPLETE.md",
+    "type": "markdown",
+    "md_url": "https://storage.googleapis.com/trading-app-documents/md/STOCK_PIPELINE_COMPLETE.md",
+    "html_url": "https://storage.googleapis.com/trading-app-documents/html/STOCK_PIPELINE_COMPLETE.html",
+    "category": "Deployment"
+  },
+  {
+    "title": "Deploy Stock Function",
+    "filename": "DEPLOY_STOCK_FUNCTION.md",
+    "type": "markdown",
+    "md_url": "https://storage.googleapis.com/trading-app-documents/md/DEPLOY_STOCK_FUNCTION.md",
+    "html_url": "https://storage.googleapis.com/trading-app-documents/html/DEPLOY_STOCK_FUNCTION.html",
+    "category": "Deployment"
+  },
+  {
+    "title": "Complete Project Status",
+    "filename": "COMPLETE_PROJECT_STATUS.md",
+    "type": "markdown",
+    "md_url": "https://storage.googleapis.com/trading-app-documents/md/COMPLETE_PROJECT_STATUS.md",
+    "html_url": "https://storage.googleapis.com/trading-app-documents/html/COMPLETE_PROJECT_STATUS.html",
+    "category": "Deployment"
+  },
+  {
+    "title": "Stock Function Deployment Complete",
+    "filename": "STOCK_FUNCTION_DEPLOYMENT_COMPLETE.md",
+    "type": "markdown",
+    "md_url": "https://storage.googleapis.com/trading-app-documents/md/STOCK_FUNCTION_DEPLOYMENT_COMPLETE.md",
+    "html_url": "https://storage.googleapis.com/trading-app-documents/html/STOCK_FUNCTION_DEPLOYMENT_COMPLETE.html",
+    "category": "Deployment"
+  },
+  {
+    "title": "Full Stack Deployment Complete",
+    "filename": "FULL_STACK_DEPLOYMENT_COMPLETE.md",
+    "type": "markdown",
+    "md_url": "https://storage.googleapis.com/trading-app-documents/md/FULL_STACK_DEPLOYMENT_COMPLETE.md",
+    "html_url": "https://storage.googleapis.com/trading-app-documents/html/FULL_STACK_DEPLOYMENT_COMPLETE.html",
+    "category": "Deployment"
+  },
+  {
+    "title": "Trading App Deployment Complete",
+    "filename": "TRADING_APP_DEPLOYMENT_COMPLETE.md",
+    "type": "markdown",
+    "md_url": "https://storage.googleapis.com/trading-app-documents/md/TRADING_APP_DEPLOYMENT_COMPLETE.md",
+    "html_url": "https://storage.googleapis.com/trading-app-documents/html/TRADING_APP_DEPLOYMENT_COMPLETE.html",
+    "category": "Deployment"
+  },
+  {
+    "title": "Quick Access",
+    "filename": "QUICK_ACCESS.md",
+    "type": "markdown",
+    "md_url": "https://storage.googleapis.com/trading-app-documents/md/QUICK_ACCESS.md",
+    "html_url": "https://storage.googleapis.com/trading-app-documents/html/QUICK_ACCESS.html",
+    "category": "Technical Guides"
+  },
+  {
+    "title": "Cost Analysis And Optimization",
+    "filename": "COST_ANALYSIS_AND_OPTIMIZATION.md",
+    "type": "markdown",
+    "md_url": "https://storage.googleapis.com/trading-app-documents/md/COST_ANALYSIS_AND_OPTIMIZATION.md",
+    "html_url": "https://storage.googleapis.com/trading-app-documents/html/COST_ANALYSIS_AND_OPTIMIZATION.html",
+    "category": "Business Analysis"
+  },
+  {
+    "title": "Ai Capabilities Roadmap",
+    "filename": "AI_CAPABILITIES_ROADMAP.md",
+    "type": "markdown",
+    "md_url": "https://storage.googleapis.com/trading-app-documents/md/AI_CAPABILITIES_ROADMAP.md",
+    "html_url": "https://storage.googleapis.com/trading-app-documents/html/AI_CAPABILITIES_ROADMAP.html",
+    "category": "Planning & Features"
+  },
+  {
+    "title": "App Menu Structure",
+    "filename": "APP_MENU_STRUCTURE.md",
+    "type": "markdown",
+    "md_url": "https://storage.googleapis.com/trading-app-documents/md/APP_MENU_STRUCTURE.md",
+    "html_url": "https://storage.googleapis.com/trading-app-documents/html/APP_MENU_STRUCTURE.html",
+    "category": "Planning & Features"
+  },
+  {
+    "title": "Complete Application Summary",
+    "filename": "COMPLETE_APPLICATION_SUMMARY.md",
+    "type": "markdown",
+    "md_url": "https://storage.googleapis.com/trading-app-documents/md/COMPLETE_APPLICATION_SUMMARY.md",
+    "html_url": "https://storage.googleapis.com/trading-app-documents/html/COMPLETE_APPLICATION_SUMMARY.html",
+    "category": "Deployment"
+  },
+  {
+    "title": "Trading App Completion Summary",
+    "filename": "TRADING_APP_COMPLETION_SUMMARY.md",
+    "type": "markdown",
+    "md_url": "https://storage.googleapis.com/trading-app-documents/md/TRADING_APP_COMPLETION_SUMMARY.md",
+    "html_url": "https://storage.googleapis.com/trading-app-documents/html/TRADING_APP_COMPLETION_SUMMARY.html",
+    "category": "Planning & Features"
+  },
+  {
+    "title": "Multi User Deployment Summary",
+    "filename": "MULTI_USER_DEPLOYMENT_SUMMARY.md",
+    "type": "markdown",
+    "md_url": "https://storage.googleapis.com/trading-app-documents/md/MULTI_USER_DEPLOYMENT_SUMMARY.md",
+    "html_url": "https://storage.googleapis.com/trading-app-documents/html/MULTI_USER_DEPLOYMENT_SUMMARY.html",
+    "category": "Deployment"
+  },
+  {
+    "title": "User Invitation Template",
+    "filename": "USER_INVITATION_TEMPLATE.md",
+    "type": "markdown",
+    "md_url": "https://storage.googleapis.com/trading-app-documents/md/USER_INVITATION_TEMPLATE.md",
+    "html_url": "https://storage.googleapis.com/trading-app-documents/html/USER_INVITATION_TEMPLATE.html",
+    "category": "User Management"
+  },
+  {
+    "title": "Deployment Complete",
+    "filename": "DEPLOYMENT_COMPLETE.md",
+    "type": "markdown",
+    "md_url": "https://storage.googleapis.com/trading-app-documents/md/DEPLOYMENT_COMPLETE.md",
+    "html_url": "https://storage.googleapis.com/trading-app-documents/html/DEPLOYMENT_COMPLETE.html",
+    "category": "Deployment"
+  },
+  {
+    "title": "Trading App Updates Plan",
+    "filename": "TRADING_APP_UPDATES_PLAN.md",
+    "type": "markdown",
+    "md_url": "https://storage.googleapis.com/trading-app-documents/md/TRADING_APP_UPDATES_PLAN.md",
+    "html_url": "https://storage.googleapis.com/trading-app-documents/html/TRADING_APP_UPDATES_PLAN.html",
+    "category": "Planning & Features"
+  },
+  {
+    "title": "Option 2 Implementation Status",
+    "filename": "OPTION_2_IMPLEMENTATION_STATUS.md",
+    "type": "markdown",
+    "md_url": "https://storage.googleapis.com/trading-app-documents/md/OPTION_2_IMPLEMENTATION_STATUS.md",
+    "html_url": "https://storage.googleapis.com/trading-app-documents/html/OPTION_2_IMPLEMENTATION_STATUS.html",
+    "category": "Deployment"
+  },
+  {
+    "title": "Option 2 Complete",
+    "filename": "OPTION_2_COMPLETE.md",
+    "type": "markdown",
+    "md_url": "https://storage.googleapis.com/trading-app-documents/md/OPTION_2_COMPLETE.md",
+    "html_url": "https://storage.googleapis.com/trading-app-documents/html/OPTION_2_COMPLETE.html",
+    "category": "Deployment"
+  },
+  {
+    "title": "THE CANDLESTICK TRADING BIBLE",
+    "filename": "THE CANDLESTICK TRADING BIBLE.pdf",
+    "type": "pdf",
+    "pdf_url": "https://storage.googleapis.com/trading-app-documents/pdf/THE%20CANDLESTICK%20TRADING%20BIBLE.pdf",
+    "category": "Trading Education"
+  },
+  {
+    "title": "Trading Application Requirements Document",
+    "filename": "Trading Application Requirements Document.pdf",
+    "type": "pdf",
+    "pdf_url": "https://storage.googleapis.com/trading-app-documents/pdf/Trading%20Application%20Requirements%20Document.pdf",
+    "category": "Planning & Features"
+  },
+  {
+    "title": "AIAlgoTradeHits.com - Complete Implementation Plan",
+    "filename": "AIAlgoTradeHits.com - Complete Implementation Plan.pdf",
+    "type": "pdf",
+    "pdf_url": "https://storage.googleapis.com/trading-app-documents/pdf/AIAlgoTradeHits.com%20-%20Complete%20Implementation%20Plan.pdf",
+    "category": "Deployment"
+  },
+  {
+    "title": "backtesting algorithm",
+    "filename": "backtesting algorithm.docx",
+    "type": "docx",
+    "docx_url": "https://storage.googleapis.com/trading-app-documents/docx/backtesting%20algorithm.docx",
+    "category": "Trading Education"
+  },
+  {
+    "title": "ccxt pro",
+    "filename": "ccxt pro.docx",
+    "type": "docx",
+    "docx_url": "https://storage.googleapis.com/trading-app-documents/docx/ccxt%20pro.docx",
+    "category": "General Documentation"
+  },
+  {
+    "title": "bitcoin sentiment logic",
+    "filename": "bitcoin sentiment logic.docx",
+    "type": "docx",
+    "docx_url": "https://storage.googleapis.com/trading-app-documents/docx/bitcoin%20sentiment%20logic.docx",
+    "category": "Trading Education"
+  },
+  {
+    "title": "Crypto Stock Platform comparison",
+    "filename": "Crypto Stock Platform comparison.docx",
+    "type": "docx",
+    "docx_url": "https://storage.googleapis.com/trading-app-documents/docx/Crypto%20Stock%20Platform%20comparison.docx",
+    "category": "Technical Guides"
+  },
+  {
+    "title": "Trading Application Requirements Document",
+    "filename": "Trading Application Requirements Document.docx",
+    "type": "docx",
+    "docx_url": "https://storage.googleapis.com/trading-app-documents/docx/Trading%20Application%20Requirements%20Document.docx",
+    "category": "Planning & Features"
+  },
+  {
+    "title": "Fibanocci Curves and Elliot wave theory",
+    "filename": "Fibanocci Curves and Elliot wave theory.docx",
+    "type": "docx",
+    "docx_url": "https://storage.googleapis.com/trading-app-documents/docx/Fibanocci%20Curves%20and%20Elliot%20wave%20theory.docx",
+    "category": "General Documentation"
+  },
+  {
+    "title": "Newsletter Insights",
+    "filename": "Newsletter Insights.docx",
+    "type": "docx",
+    "docx_url": "https://storage.googleapis.com/trading-app-documents/docx/Newsletter%20Insights.docx",
+    "category": "General Documentation"
+  }
+]

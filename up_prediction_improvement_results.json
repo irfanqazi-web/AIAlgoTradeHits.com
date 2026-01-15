@@ -1,0 +1,17 @@
+{
+  "model_name": "rise_cycle_predictor_v1",
+  "features_used": 27,
+  "class_balancing": "Undersampling (50/50 split)",
+  "confidence_thresholds": {
+    "STRONG_BUY": "80%+",
+    "BUY": "70-80%",
+    "WEAK_BUY": "60-70%"
+  },
+  "key_features": [
+    "rise_cycle_score",
+    "ema_bullish",
+    "macd_hist_change",
+    "rsi_momentum_3d",
+    "volume_ratio"
+  ]
+}

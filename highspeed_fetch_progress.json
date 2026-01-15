@@ -1,0 +1,31 @@
+{
+  "completed": [
+    "cryptos:BTC/USD",
+    "cryptos:ETH/USD",
+    "cryptos:BNB/USD",
+    "cryptos:XRP/USD",
+    "cryptos:SOL/USD",
+    "cryptos:DOGE/USD",
+    "cryptos:ADA/USD",
+    "cryptos:AVAX/USD",
+    "cryptos:LINK/USD",
+    "cryptos:DOT/USD",
+    "cryptos:TRX/USD",
+    "cryptos:SHIB/USD",
+    "cryptos:LTC/USD",
+    "cryptos:ATOM/USD",
+    "cryptos:UNI/USD",
+    "cryptos:XMR/USD",
+    "cryptos:ETC/USD",
+    "cryptos:XLM/USD",
+    "cryptos:BCH/USD"
+  ],
+  "api_calls": 20,
+  "last_run": "2025-12-06T13:49:07.699775+00:00",
+  "errors": [
+    {
+      "symbol": "MATIC/USD",
+      "error": "**symbol** or **figi** parameter is missing or invalid. Please provide a valid symbol according to API documentation: https://twelvedata.com/docs#reference-data"
+    }
+  ]
+}

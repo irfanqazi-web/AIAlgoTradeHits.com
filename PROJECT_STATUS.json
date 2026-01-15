@@ -1,0 +1,48 @@
+{
+  "project": "AIAlgoTradeHits",
+  "last_updated": "2025-12-06",
+  "bigquery_project": "aialgotradehits",
+  "dataset": "crypto_trading_data",
+
+  "completed_tasks": [
+    "Migrated BigQuery data from cryptobot-462709 to aialgotradehits (2.78M rows)",
+    "Cleaned up 39 redundant tables (now 37 streamlined tables)",
+    "Strategy Dashboard integrated",
+    "MarketingAI platform created",
+    "Downgraded Claude Max to Claude Pro"
+  ],
+
+  "in_progress_tasks": [
+    "Fetching weekly historical data for all 7 asset types with 82 indicators"
+  ],
+
+  "pending_tasks": [
+    "Update Trading app code references from cryptobot to aialgotradehits",
+    "Create AI Training section with Vertex AI and Gemini 2.5",
+    "Resume daily/hourly/5min data downloads"
+  ],
+
+  "bigquery_tables": {
+    "total": 37,
+    "historical_daily": ["v2_stocks_historical_daily", "v2_etfs_historical_daily", "v2_forex_historical_daily", "v2_indices_historical_daily", "v2_commodities_historical_daily", "v2_cryptos_historical_daily"],
+    "daily": ["v2_stocks_daily", "v2_crypto_daily", "v2_etfs_daily", "v2_forex_daily", "v2_indices_daily", "v2_commodities_daily"],
+    "hourly": ["v2_stocks_hourly", "v2_crypto_hourly", "v2_etfs_hourly", "v2_forex_hourly", "v2_indices_hourly", "v2_commodities_hourly"],
+    "5min": ["v2_stocks_5min", "v2_crypto_5min", "v2_etfs_5min", "v2_forex_5min", "v2_indices_5min", "v2_commodities_5min"],
+    "weekly_summary": ["v2_stocks_weekly_summary", "v2_cryptos_weekly_summary", "v2_etfs_weekly_summary", "v2_forex_weekly_summary", "v2_indices_weekly_summary", "v2_commodities_weekly_summary"],
+    "support": ["v2_stocks_master", "users", "trading_strategies", "search_history", "interest_rates", "btc_ai_training_daily", "nvda_ai_training_daily"]
+  },
+
+  "asset_types": ["stocks", "crypto", "etfs", "forex", "indices", "commodities", "funds"],
+
+  "weekly_data_fetcher": {
+    "script": "weekly_all_assets_fetcher.py",
+    "fields": 82,
+    "progress_file": "weekly_all_assets_progress.json"
+  },
+
+  "twelvedata": {
+    "plan": "$229 Growing Plan",
+    "rate_limit": "800 calls/min",
+    "api_key": "16ee060fd4d34a628a14bcb6f0167565"
+  }
+}

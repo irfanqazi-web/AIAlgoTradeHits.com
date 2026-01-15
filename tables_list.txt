@@ -1,0 +1,52 @@
+             tableId              Type    Labels        Time Partitioning               Clustered Fields         
+ ------------------------------- ------- -------- ------------------------------ ------------------------------- 
+  _temp_features_AAPL             TABLE                                                                          
+  _temp_features_DIA              TABLE                                                                          
+  _temp_features_ETHUSD           TABLE                                                                          
+  _temp_features_IWM              TABLE                                                                          
+  _temp_features_MSFT             TABLE                                                                          
+  _temp_features_NVDA             TABLE                                                                          
+  _temp_features_SOLUSD           TABLE                                                                          
+  analyst_earnings_estimates      TABLE                                                                          
+  analyst_eps_trend               TABLE                                                                          
+  analyst_price_targets           TABLE                                                                          
+  analyst_recommendations         TABLE                                                                          
+  btc_ai_training_daily           TABLE                                                                          
+  dividends_calendar              TABLE                                                                          
+  earnings_calendar               TABLE                                                                          
+  etf_holdings                    TABLE                                                                          
+  etf_performance                 TABLE                                                                          
+  etf_profile                     TABLE                                                                          
+  etf_risk                        TABLE                                                                          
+  exchange_schedule               TABLE                                                                          
+  fund_holders                    TABLE                                                                          
+  fundamentals_balance_sheet      TABLE                                                                          
+  fundamentals_cash_flow          TABLE                                                                          
+  fundamentals_company_profile    TABLE                                                                          
+  fundamentals_income_statement   TABLE                                                                          
+  fundamentals_statistics         TABLE                                                                          
+  insider_transactions            TABLE                                                                          
+  institutional_holders           TABLE                                                                          
+  interest_rates                  TABLE            DAY (field: fetch_date)        country, timeframe, rate_name  
+  ipo_calendar                    TABLE                                                                          
+  market_movers                   TABLE                                                                          
+  market_state                    TABLE                                                                          
+  mutual_fund_performance         TABLE                                                                          
+  mutual_fund_profile             TABLE                                                                          
+  mutual_fund_ratings             TABLE                                                                          
+  nvda_ai_training_daily          TABLE                                                                          
+  paper_trades                    TABLE            DAY (field: entry_datetime)    strategy_id, symbol            
+  rise_cycles                     TABLE            DAY (field: trade_date)        symbol                         
+  search_history                  TABLE                                                                          
+  sec_edgar_filings               TABLE                                                                          
+  sector_momentum_rankings        TABLE            DAY (field: ranking_date)      sector                         
+  splits_calendar                 TABLE                                                                          
+  stocks_5min_clean               TABLE            DAY (field: datetime)          symbol, sector, exchange       
+  stocks_daily_clean              TABLE            MONTH (field: datetime)        symbol, sector, exchange       
+  stocks_hourly_clean             TABLE            DAY (field: datetime)          symbol, sector, exchange       
+  stocks_unified_daily            TABLE                                                                          
+  strategy_backtests              TABLE                                                                          
+  strategy_daily_summary          TABLE            DAY (field: trade_date)        strategy_id                    
+  strategy_signals                TABLE            DAY (field: signal_datetime)   strategy_id, symbol            
+  trading_strategies              TABLE                                                                          
+  users                           TABLE                                                                          

@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QUICK_START_GUIDE</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #24292e;
+            background: #ffffff;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            margin-top: 24px;
+            margin-bottom: 16px;
+            font-weight: 600;
+            line-height: 1.25;
+        }
+        h1 { border-bottom: 1px solid #eaecef; padding-bottom: 0.3em; }
+        h2 { border-bottom: 1px solid #eaecef; padding-bottom: 0.3em; }
+        code {
+            background-color: rgba(27,31,35,0.05);
+            border-radius: 3px;
+            font-size: 85%;
+            margin: 0;
+            padding: 0.2em 0.4em;
+            font-family: 'Courier New', monospace;
+        }
+        pre {
+            background-color: #f6f8fa;
+            border-radius: 3px;
+            font-size: 85%;
+            line-height: 1.45;
+            overflow: auto;
+            padding: 16px;
+        }
+        pre code {
+            background-color: transparent;
+            border: 0;
+            display: inline;
+            line-height: inherit;
+            margin: 0;
+            overflow: visible;
+            padding: 0;
+            word-wrap: normal;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 16px 0;
+        }
+        table th, table td {
+            border: 1px solid #dfe2e5;
+            padding: 6px 13px;
+        }
+        table tr:nth-child(2n) {
+            background-color: #f6f8fa;
+        }
+        blockquote {
+            border-left: 4px solid #dfe2e5;
+            color: #6a737d;
+            padding: 0 1em;
+            margin: 0;
+        }
+        a {
+            color: #0366d6;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+<h1>Quick Start Guide - cryptobot-462709 Trading Pipeline</h1>
+<h2>Current Status: 95% Complete ✓</h2>
+<p>All infrastructure is deployed. You just need to run 3 simple commands to complete the setup.</p>
+<hr />
+<h2>Complete Setup in 3 Steps</h2>
+<h3>Step 1: Make Functions Public (Required for Schedulers)</h3>
+<p>Run these three commands in your terminal:</p>
+<pre class="codehilite"><code class="language-bash">gcloud functions add-invoker-policy-binding daily-crypto-fetcher --region=us-central1 --member=allUsers --project=cryptobot-462709
+
+gcloud functions add-invoker-policy-binding hourly-crypto-fetcher --region=us-central1 --member=allUsers --project=cryptobot-462709
+
+gcloud functions add-invoker-policy-binding fivemin-top10-fetcher --region=us-central1 --member=allUsers --project=cryptobot-462709
+</code></pre>
+
+<p><strong>Time:</strong> 1-2 minutes</p>
+<h3>Step 2: Trigger Functions to Populate Tables</h3>
+<p>After Step 1 completes, run these commands:</p>
+<pre class="codehilite"><code class="language-bash"># Trigger Daily Function (will run 15-20 minutes)
+curl https://daily-crypto-fetcher-cnyn5l4u2a-uc.a.run.app
+
+# Trigger Hourly Function (will run 12-15 minutes)
+curl https://hourly-crypto-fetcher-cnyn5l4u2a-uc.a.run.app
+
+# Trigger 5-Minute Function (will run 5-7 minutes)
+curl https://fivemin-top10-fetcher-cnyn5l4u2a-uc.a.run.app
+</code></pre>
+
+<p><strong>Note:</strong> These run in the background. You can close the terminal.</p>
+<p><strong>Time:</strong> 20-30 minutes total (running in background)</p>
+<h3>Step 3: Verify Data is Populating</h3>
+<p>After ~30 minutes, check your BigQuery tables:</p>
+<pre class="codehilite"><code class="language-bash">python check_bigquery_counts.py
+</code></pre>
+
+<p><strong>Expected Results:</strong>
+- Daily table: ~675 records
+- Hourly table: ~675 records
+- 5-Minute table: ~120 records</p>
+<hr />
+<h2>Optional: Deploy Trading Application</h2>
+<p>If you want the web-based trading dashboard:</p>
+<pre class="codehilite"><code class="language-bash">cd stock-price-app
+
+gcloud run deploy crypto-trading-app \
+  --source . \
+  --platform managed \
+  --region us-central1 \
+  --allow-unauthenticated \
+  --port 8080 \
+  --project cryptobot-462709
+</code></pre>
+
+<p><strong>Time:</strong> 5-10 minutes</p>
+<hr />
+<h2>What Happens After Setup</h2>
+<p>Once complete, your system will automatically:</p>
+<p>✓ <strong>Collect daily data</strong> at midnight ET every night
+✓ <strong>Collect hourly data</strong> every hour
+✓ <strong>Collect 5-minute data</strong> for top 10 gainers every 5 minutes
+✓ <strong>Calculate 29 technical indicators</strong> for all data
+✓ <strong>Store everything in BigQuery</strong> for your AI trading algorithms</p>
+<p><strong>No further action required!</strong></p>
+<hr />
+<h2>Quick Verification</h2>
+<h3>Check Schedulers are Running</h3>
+<pre class="codehilite"><code class="language-bash">gcloud scheduler jobs list --project=cryptobot-462709 --location=us-central1
+</code></pre>
+
+<p>All three should show <code>STATE: ENABLED</code></p>
+<h3>Check Latest Data</h3>
+<pre class="codehilite"><code class="language-sql">-- Run in BigQuery Console
+SELECT MAX(datetime) as latest_data, COUNT(*) as records
+FROM `cryptobot-462709.crypto_trading_data.crypto_analysis`;
+</code></pre>
+
+<hr />
+<h2>Deployed Infrastructure</h2>
+<table>
+<thead>
+<tr>
+<th>Component</th>
+<th>Status</th>
+<th>Details</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>BigQuery Dataset</td>
+<td>✓ Complete</td>
+<td>3 tables with 29 indicators each</td>
+</tr>
+<tr>
+<td>Daily Cloud Function</td>
+<td>✓ Deployed</td>
+<td>Runs at midnight ET</td>
+</tr>
+<tr>
+<td>Hourly Cloud Function</td>
+<td>✓ Deployed</td>
+<td>Runs every hour</td>
+</tr>
+<tr>
+<td>5-Min Cloud Function</td>
+<td>✓ Deployed</td>
+<td>Runs every 5 minutes</td>
+</tr>
+<tr>
+<td>Daily Scheduler</td>
+<td>✓ Enabled</td>
+<td>Auto-triggers daily function</td>
+</tr>
+<tr>
+<td>Hourly Scheduler</td>
+<td>✓ Enabled</td>
+<td>Auto-triggers hourly function</td>
+</tr>
+<tr>
+<td>5-Min Scheduler</td>
+<td>✓ Enabled</td>
+<td>Auto-triggers 5-min function</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>Access Your Data</h2>
+<h3>Python Example</h3>
+<pre class="codehilite"><code class="language-python">from google.cloud import bigquery
+
+client = bigquery.Client(project='cryptobot-462709')
+
+# Get latest data with indicators
+query = &quot;&quot;&quot;
+SELECT pair, close, rsi, macd, bb_percent, adx
+FROM `cryptobot-462709.crypto_trading_data.crypto_analysis`
+WHERE DATE(datetime) = CURRENT_DATE() - 1
+ORDER BY rsi DESC
+LIMIT 10
+&quot;&quot;&quot;
+
+df = client.query(query).to_dataframe()
+print(df)
+</code></pre>
+
+<h3>Sample Trading Query</h3>
+<pre class="codehilite"><code class="language-sql">-- Find oversold cryptos with strong trends
+SELECT pair, close, rsi, adx, sma_200, datetime
+FROM `cryptobot-462709.crypto_trading_data.crypto_analysis`
+WHERE DATE(datetime) = CURRENT_DATE() - 1
+  AND rsi &lt; 30  -- Oversold
+  AND adx &gt; 25  -- Strong trend
+  AND close &gt; sma_200  -- Above 200-day MA
+ORDER BY rsi ASC
+LIMIT 20;
+</code></pre>
+
+<hr />
+<h2>Need Help?</h2>
+<p><strong>Check Function Logs:</strong></p>
+<pre class="codehilite"><code class="language-bash">gcloud functions logs read daily-crypto-fetcher --project=cryptobot-462709 --limit=20
+</code></pre>
+
+<p><strong>Manually Trigger a Scheduler:</strong></p>
+<pre class="codehilite"><code class="language-bash">gcloud scheduler jobs run daily-crypto-fetch-job --location=us-central1 --project=cryptobot-462709
+</code></pre>
+
+<p><strong>Check Table Counts:</strong></p>
+<pre class="codehilite"><code class="language-bash">python check_bigquery_counts.py
+</code></pre>
+
+<hr />
+<h2>Cost Overview</h2>
+<p><strong>Monthly Costs:</strong> ~$135/month
+- Cloud Functions: $126/month
+- BigQuery: $2/month
+- Cloud Scheduler: $0.30/month
+- Cloud Run (if deployed): $5/month</p>
+<hr />
+<h2>Summary</h2>
+<p><strong>What's Done:</strong>
+✓ Complete infrastructure deployed
+✓ All schedulers configured and enabled
+✓ 29 technical indicators implemented
+✓ Multi-timeframe data collection ready</p>
+<p><strong>What You Need to Do:</strong>
+1. Run 3 commands to make functions public (1 minute)
+2. Trigger functions once to populate tables (30 minutes wait)
+3. Verify data is collecting properly (1 minute)</p>
+<p><strong>Total Your Time:</strong> ~5 minutes of active work
+<strong>Total Wait Time:</strong> ~30 minutes for initial data population</p>
+<hr />
+<p><strong>After setup, everything runs automatically 24/7!</strong></p>
+<p>Ready to build AI-powered trading algorithms with comprehensive technical analysis data.</p>
+</body>
+</html>

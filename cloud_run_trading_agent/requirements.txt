@@ -1,0 +1,21 @@
+# AIAlgoTradeHits Trading Agent - Cloud Run Dependencies
+
+# FastAPI framework
+fastapi==0.115.6
+uvicorn[standard]==0.34.0
+
+# Anthropic Claude API
+anthropic==0.75.0
+
+# Google Cloud
+google-cloud-bigquery==3.31.0
+google-cloud-firestore==2.20.1
+
+# Data processing
+pandas==2.2.3
+numpy==2.0.2
+
+# Utilities
+python-dateutil==2.9.0.post0
+requests==2.32.3
+pydantic==2.12.5

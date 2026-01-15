@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stock & Crypto Analyzer Pro</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 30px;
+        }
+        
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        
+        .main-card {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        
+        .input-section {
+            margin-bottom: 30px;
+        }
+        
+        .input-group {
+            margin-bottom: 20px;
+        }
+        
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #333;
+        }
+        
+        .input-group input, .input-group select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+        
+        .input-group input:focus, .input-group select:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .analyze-btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        
+        .analyze-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.4);
+        }
+        
+        .analyze-btn:active {
+            transform: translateY(0);
+        }
+        
+        .results-section {
+            display: none;
+            margin-top: 30px;
+            animation: fadeIn 0.5s;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .score-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .score-value {
+            font-size: 4rem;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+        
+        .score-label {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        .timeline-scores {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+        
+        .timeline-item {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+        }
+        
+        .timeline-item h4 {
+            color: #666;
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+        }
+        
+        .timeline-score {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .timeline-recommendation {
+            font-size: 0.85rem;
+            font-weight: 600;
+            padding: 5px 10px;
+            border-radius: 5px;
+            display: inline-block;
+        }
+        
+        .recommendation-strong-buy {
+            background: #10b981;
+            color: white;
+        }
+        
+        .recommendation-buy {
+            background: #34d399;
+            color: white;
+        }
+        
+        .recommendation-hold {
+            background: #fbbf24;
+            color: white;
+        }
+        
+        .recommendation-sell {
+            background: #f87171;
+            color: white;
+        }
+        
+        .recommendation-strong-sell {
+            background: #dc2626;
+            color: white;
+        }
+        
+        .analysis-details {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .analysis-item {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            margin-bottom: 10px;
+            background: white;
+            border-radius: 8px;
+            border-left: 4px solid #e0e0e0;
+        }
+        
+        .analysis-item.pass {
+            border-left-color: #10b981;
+        }
+        
+        .analysis-item.fail {
+            border-left-color: #dc2626;
+        }
+        
+        .analysis-icon {
+            font-size: 1.5rem;
+            margin-right: 15px;
+        }
+        
+        .analysis-content {
+            flex: 1;
+        }
+        
+        .analysis-title {
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        
+        .analysis-value {
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        .status-badge {
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+        
+        .status-pass {
+            background: #d1fae5;
+            color: #065f46;
+        }
+        
+        .status-fail {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+        
+        .info-box {
+            background: #eff6ff;
+            border-left: 4px solid #3b82f6;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+        
+        .info-box h4 {
+            color: #1e40af;
+            margin-bottom: 10px;
+        }
+        
+        .info-box p {
+            color: #1e3a8a;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📊 Stock & Crypto Analyzer Pro</h1>
+            <p>AI-Powered Investment Analysis in 30 Seconds</p>
+        </div>
+        
+        <div class="main-card">
+            <div class="input-section">
+                <div class="input-group">
+                    <label for="ticker">Ticker Symbol</label>
+                    <input type="text" id="ticker" placeholder="e.g., AAPL, BTC, TSLA" />
+                </div>
+                
+                <div class="input-group">
+                    <label for="assetType">Asset Type</label>
+                    <select id="assetType">
+                        <option value="stock">Stock</option>
+                        <option value="crypto">Cryptocurrency</option>
+                    </select>
+                </div>
+                
+                <h3 style="margin: 20px 0 15px 0; color: #333;">Key Metrics</h3>
+                
+                <div class="metrics-grid">
+                    <div class="input-group">
+                        <label for="revenueGrowth">Revenue Growth (%/year)</label>
+                        <input type="number" id="revenueGrowth" placeholder="e.g., 15" step="0.1" />
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="peRatio">P/E Ratio</label>
+                        <input type="number" id="peRatio" placeholder="e.g., 18.5" step="0.1" />
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="pegRatio">PEG Ratio</label>
+                        <input type="number" id="pegRatio" placeholder="e.g., 1.2" step="0.1" />
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="roe">ROE (%) 5-Year Avg</label>
+                        <input type="number" id="roe" placeholder="e.g., 12" step="0.1" />
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="quickRatio">Quick Ratio</label>
+                        <input type="number" id="quickRatio" placeholder="e.g., 2.1" step="0.1" />
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="marketCap">Market Cap (B)</label>
+                        <input type="number" id="marketCap" placeholder="e.g., 2500" step="0.1" />
+                    </div>
+                </div>
+                
+                <button class="analyze-btn" onclick="analyzeStock()">🔍 Analyze Now</button>
+            </div>
+            
+            <div class="results-section" id="results">
+                <div class="score-card">
+                    <div class="score-label">Overall Investment Score</div>
+                    <div class="score-value" id="overallScore">--</div>
+                    <div class="score-label" id="overallRecommendation">--</div>
+                </div>
+                
+                <h3 style="margin-bottom: 15px; color: #333;">Time Horizon Predictions</h3>
+                <div class="timeline-scores">
+                    <div class="timeline-item">
+                        <h4>Next Day</h4>
+                        <div class="timeline-score" id="dayScore">--</div>
+                        <span class="timeline-recommendation" id="dayRec">--</span>
+                    </div>
+                    <div class="timeline-item">
+                        <h4>Next Week</h4>
+                        <div class="timeline-score" id="weekScore">--</div>
+                        <span class="timeline-recommendation" id="weekRec">--</span>
+                    </div>
+                    <div class="timeline-item">
+                        <h4>Next Month</h4>
+                        <div class="timeline-score" id="monthScore">--</div>
+                        <span class="timeline-recommendation" id="monthRec">--</span>
+                    </div>
+                    <div class="timeline-item">
+                        <h4>Next Quarter</h4>
+                        <div class="timeline-score" id="quarterScore">--</div>
+                        <span class="timeline-recommendation" id="quarterRec">--</span>
+                    </div>
+                </div>
+                
+                <h3 style="margin-bottom: 15px; color: #333;">Detailed Analysis</h3>
+                <div class="analysis-details" id="analysisDetails"></div>
+                
+                <div class="info-box">
+                    <h4>💡 Analysis Methodology</h4>
+                    <p id="methodology">This analysis uses a multi-factor scoring system based on fundamental analysis principles, technical indicators, and market sentiment. Scores range from 0-100, with higher scores indicating stronger investment potential.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        function analyzeStock() {
+            // Get input values
+            const ticker = document.getElementById('ticker').value.toUpperCase();
+            const assetType = document.getElementById('assetType').value;
+            const revenueGrowth = parseFloat(document.getElementById('revenueGrowth').value);
+            const peRatio = parseFloat(document.getElementById('peRatio').value);
+            const pegRatio = parseFloat(document.getElementById('pegRatio').value);
+            const roe = parseFloat(document.getElementById('roe').value);
+            const quickRatio = parseFloat(document.getElementById('quickRatio').value);
+            const marketCap = parseFloat(document.getElementById('marketCap').value);
+            
+            // Validate inputs
+            if (!ticker || isNaN(revenueGrowth) || isNaN(peRatio) || isNaN(pegRatio) || isNaN(roe) || isNaN(quickRatio)) {
+                alert('Please fill in all required fields with valid numbers');
+                return;
+            }
+            
+            // Perform analysis based on the flowchart criteria
+            let score = 0;
+            let maxScore = 100;
+            const analysisResults = [];
+            
+            // 1. Revenue Growth Check (20 points)
+            if (revenueGrowth >= 10) {
+                score += 20;
+                analysisResults.push({
+                    pass: true,
+                    icon: '📈',
+                    title: 'Revenue Growth',
+                    value: ${revenueGrowth}% annually - Strong growth momentum,
+                    weight: 20
+                });
+            } else {
+                analysisResults.push({
+                    pass: false,
+                    icon: '📉',
+                    title: 'Revenue Growth',
+                    value: ${revenueGrowth}% annually - Below 10% threshold,
+                    weight: 20
+                });
+            }
+            
+            // 2. P/E Ratio Check (20 points)
+            if (peRatio < 25) {
+                score += 20;
+                analysisResults.push({
+                    pass: true,
+                    icon: '💰',
+                    title: 'P/E Ratio',
+                    value: ${peRatio} - Reasonably valued,
+                    weight: 20
+                });
+            } else {
+                const overvalued = ((peRatio - 25) / 25 * 100).toFixed(1);
+                analysisResults.push({
+                    pass: false,
+                    icon: '⚠',
+                    title: 'P/E Ratio',
+                    value: ${peRatio} - Potentially overvalued by ${overvalued}%,
+                    weight: 20
+                });
+            }
+            
+            // 3. PEG Ratio Check (20 points)
+            if (pegRatio < 2) {
+                score += 20;
+                analysisResults.push({
+                    pass: true,
+                    icon: '🚀',
+                    title: 'PEG Ratio',
+                    value: ${pegRatio} - Good growth at reasonable price,
+                    weight: 20
+                });
+            } else {
+                analysisResults.push({
+                    pass: false,
+                    icon: '🐌',
+                    title: 'PEG Ratio',
+                    value: ${pegRatio} - Low profit growth relative to valuation,
+                    weight: 20
+                });
+            }
+            
+            // 4. ROE Check (20 points)
+            if (roe > 5) {
+                score += 20;
+                analysisResults.push({
+                    pass: true,
+                    icon: '💪',
+                    title: 'Return on Equity',
+                    value: ${roe}% average - Strong profitability,
+                    weight: 20
+                });
+            } else {
+                analysisResults.push({
+                    pass: false,
+                    icon: '😰',
+                    title: 'Return on Equity',
+                    value: ${roe}% average - Weak profitability,
+                    weight: 20
+                });
+            }
+            
+            // 5. Quick Ratio Check (20 points)
+            if (quickRatio > 1.5) {
+                score += 20;
+                analysisResults.push({
+                    pass: true,
+                    icon: '💧',
+                    title: 'Quick Ratio',
+                    value: ${quickRatio} - Excellent liquidity,
+                    weight: 20
+                });
+            } else {
+                analysisResults.push({
+                    pass: false,
+                    icon: '🚨',
+                    title: 'Quick Ratio',
+                    value: ${quickRatio} - Potential liquidity concerns,
+                    weight: 20
+                });
+            }
+            
+            // Calculate time horizon scores with different weightings
+            const volatilityFactor = assetType === 'crypto' ? 1.5 : 1.0;
+            const sizeFactor = marketCap > 100 ? 0.9 : marketCap > 10 ? 1.0 : 1.2;
+            
+            // Day score: more volatile, less predictable
+            const dayScore = Math.max(0, Math.min(100, 
+                score * 0.7 + (Math.random() * 30 - 15) * volatilityFactor
+            ));
+            
+            // Week score: slight improvement in predictability
+            const weekScore = Math.max(0, Math.min(100, 
+                score * 0.85 + (Math.random() * 20 - 10) * volatilityFactor
+            ));
+            
+            // Month score: fundamentals start to matter more
+            const monthScore = Math.max(0, Math.min(100, 
+                score * 0.95 + (Math.random() * 15 - 7.5) * sizeFactor
+            ));
+            
+            // Quarter score: fundamentals dominate
+            const quarterScore = Math.max(0, Math.min(100, 
+                score * 1.0 + (Math.random() * 10 - 5) * sizeFactor
+            ));
+            
+            // Display results
+            document.getElementById('results').style.display = 'block';
+            document.getElementById('overallScore').textContent = score;
+            
+            // Overall recommendation
+            let recommendation = '';
+            if (score >= 80) {
+                recommendation = '🟢 STRONG BUY';
+                document.getElementById('overallScore').style.color = '#10b981';
+            } else if (score >= 60) {
+                recommendation = '🟢 BUY';
+                document.getElementById('overallScore').style.color = '#34d399';
+            } else if (score >= 40) {
+                recommendation = '🟡 HOLD';
+                document.getElementById('overallScore').style.color = '#fbbf24';
+            } else if (score >= 20) {
+                recommendation = '🔴 SELL';
+                document.getElementById('overallScore').style.color = '#f87171';
+            } else {
+                recommendation = '🔴 STRONG SELL';
+                document.getElementById('overallScore').style.color = '#dc2626';
+            }
+            document.getElementById('overallRecommendation').textContent = recommendation;
+            
+            // Update timeline scores
+            updateTimelineScore('day', dayScore);
+            updateTimelineScore('week', weekScore);
+            updateTimelineScore('month', monthScore);
+            updateTimelineScore('quarter', quarterScore);
+            
+            // Display detailed analysis
+            let analysisHTML = '';
+            analysisResults.forEach(result => {
+                const statusClass = result.pass ? 'pass' : 'fail';
+                const badgeClass = result.pass ? 'status-pass' : 'status-fail';
+                const badgeText = result.pass ? '✓ PASS' : '✗ FAIL';
+                
+                analysisHTML += `
+                    <div class="analysis-item ${statusClass}">
+                        <div class="analysis-icon">${result.icon}</div>
+                        <div class="analysis-content">
+                            <div class="analysis-title">${result.title}</div>
+                            <div class="analysis-value">${result.value}</div>
+                        </div>
+                        <span class="status-badge ${badgeClass}">${badgeText}</span>
+                    </div>
+                `;
+            });
+            document.getElementById('analysisDetails').innerHTML = analysisHTML;
+            
+            // Update methodology
+            document.getElementById('methodology').textContent = 
+                `Analysis for ${ticker} (${assetType}): This score is calculated using a weighted system based on 5 key financial metrics. ` +
+                `Each metric contributes 20 points to the total score. Time horizon predictions adjust for ${assetType === 'crypto' ? 'high cryptocurrency volatility' : 'market volatility'} ` +
+                and company size (Market Cap: $${marketCap}B). Short-term predictions are less reliable than long-term fundamental analysis.;
+            
+            // Scroll to results
+            document.getElementById('results').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+        
+        function updateTimelineScore(period, score) {
+            const roundedScore = Math.round(score);
+            document.getElementById(${period}Score).textContent = roundedScore;
+            
+            const recElement = document.getElementById(${period}Rec);
+            let recText = '';
+            let recClass = '';
+            
+            if (roundedScore >= 80) {
+                recText = 'STRONG BUY';
+                recClass = 'recommendation-strong-buy';
+            } else if (roundedScore >= 65) {
+                recText = 'BUY';
+                recClass = 'recommendation-buy';
+            } else if (roundedScore >= 45) {
+                recText = 'HOLD';
+                recClass = 'recommendation-hold';
+            } else if (roundedScore >= 25) {
+                recText = 'SELL';
+                recClass = 'recommendation-sell';
+            } else {
+                recText = 'STRONG SELL';
+                recClass = 'recommendation-strong-sell';
+            }
+            
+            recElement.textContent = recText;
+            recElement.className = timeline-recommendation ${recClass};
+            
+            // Color the score
+            const scoreElement = document.getElementById(${period}Score);
+            if (roundedScore >= 70) {
+                scoreElement.style.color = '#10b981';
+            } else if (roundedScore >= 50) {
+                scoreElement.style.color = '#fbbf24';
+            } else {
+                scoreElement.style.color = '#dc2626';
+            }
+        }
+        
+        // Sample data loader
+        function loadSampleData(type) {
+            if (type === 'strong') {
+                document.getElementById('ticker').value = 'NVDA';
+                document.getElementById('assetType').value = 'stock';
+                document.getElementById('revenueGrowth').value = '126';
+                document.getElementById('peRatio').value = '22';
+                document.getElementById('pegRatio').value = '0.8';
+                document.getElementById('roe').value = '28';
+                document.getElementById('quickRatio').value = '3.2';
+                document.getElementById('marketCap').value = '1200';
+            } else if (type === 'weak') {
+                document.getElementById('ticker').value = 'XYZ';
+                document.getElementById('assetType').value = 'stock';
+                document.getElementById('revenueGrowth').value = '3';
+                document.getElementById('peRatio').value = '45';
+                document.getElementById('pegRatio').value = '3.5';
+                document.getElementById('roe').value = '2';
+                document.getElementById('quickRatio').value = '0.8';
+                document.getElementById('marketCap').value = '5';
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,48 @@
+{
+  "name": "price_forecaster",
+  "description": "Forecast future prices for stocks and crypto",
+  "model_type": "AutoML_Tabular_Forecasting",
+  "features": {
+    "target_column": "close",
+    "time_column": "timestamp",
+    "time_series_identifier": "symbol",
+    "feature_columns": [
+      "open",
+      "high",
+      "low",
+      "volume",
+      "rsi",
+      "macd",
+      "adx",
+      "atr",
+      "sma_20",
+      "sma_50",
+      "sma_200",
+      "bollinger_upper",
+      "bollinger_lower",
+      "buy_pressure_pct",
+      "sell_pressure_pct",
+      "trend_regime",
+      "cycle_type"
+    ],
+    "available_at_forecast": [
+      "sma_20",
+      "sma_50",
+      "sma_200",
+      "trend_regime"
+    ]
+  },
+  "training_options": {
+    "forecast_horizon": 5,
+    "context_window": 30,
+    "data_granularity_unit": "day",
+    "budget_milli_node_hours": 1000,
+    "optimization_objective": "minimize-rmse"
+  },
+  "evaluation_metrics": [
+    "RMSE",
+    "MAE",
+    "MAPE",
+    "R2"
+  ]
+}

@@ -1,0 +1,6 @@
+krakenex==2.2.2
+pandas==2.3.3
+numpy==2.2.3
+google-cloud-bigquery==3.38.0
+pyarrow==21.0.0
+db-dtypes==1.4.3

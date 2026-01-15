@@ -1,0 +1,123 @@
+{
+  "generated": "2026-01-08T18:42:21.099648",
+  "symbols": [
+    "GOOGL",
+    "SPY",
+    "QQQ",
+    "QQQI",
+    "AAPL",
+    "NVDA",
+    "TSLA",
+    "AMZN"
+  ],
+  "reports": [
+    {
+      "symbol": "GOOGL",
+      "data_points": 2015,
+      "test_accuracy": 52.61,
+      "up_accuracy": 64.57,
+      "down_accuracy": 37.78,
+      "top_3_features": [
+        "awesome_osc",
+        "rsi_slope",
+        "cci"
+      ],
+      "class_balance": "UP: 862 (53.5%), DOWN: 750 (46.5%)",
+      "status": "OK"
+    },
+    {
+      "symbol": "SPY",
+      "data_points": 2015,
+      "test_accuracy": 58.81,
+      "up_accuracy": 45.11,
+      "down_accuracy": 77.98,
+      "top_3_features": [
+        "pivot_low_flag",
+        "pivot_high_flag",
+        "macd_cross"
+      ],
+      "class_balance": "UP: 877 (54.4%), DOWN: 735 (45.6%)",
+      "status": "NEEDS_REVIEW"
+    },
+    {
+      "symbol": "QQQ",
+      "data_points": 2014,
+      "test_accuracy": 52.85,
+      "up_accuracy": 34.32,
+      "down_accuracy": 79.04,
+      "top_3_features": [
+        "pivot_high_flag",
+        "pivot_low_flag",
+        "rsi"
+      ],
+      "class_balance": "UP: 894 (55.5%), DOWN: 717 (44.5%)",
+      "status": "NEEDS_REVIEW"
+    },
+    {
+      "symbol": "QQQI",
+      "data_points": 0,
+      "test_accuracy": 0.0,
+      "up_accuracy": 0.0,
+      "down_accuracy": 0.0,
+      "top_3_features": [],
+      "class_balance": "",
+      "status": "ERROR"
+    },
+    {
+      "symbol": "AAPL",
+      "data_points": 2015,
+      "test_accuracy": 51.12,
+      "up_accuracy": 53.81,
+      "down_accuracy": 47.78,
+      "top_3_features": [
+        "pivot_low_flag",
+        "pivot_high_flag",
+        "awesome_osc"
+      ],
+      "class_balance": "UP: 852 (52.9%), DOWN: 760 (47.1%)",
+      "status": "NEEDS_REVIEW"
+    },
+    {
+      "symbol": "NVDA",
+      "data_points": 2015,
+      "test_accuracy": 47.64,
+      "up_accuracy": 53.99,
+      "down_accuracy": 40.53,
+      "top_3_features": [
+        "macd_signal",
+        "momentum",
+        "macd"
+      ],
+      "class_balance": "UP: 873 (54.2%), DOWN: 739 (45.8%)",
+      "status": "NEEDS_REVIEW"
+    },
+    {
+      "symbol": "TSLA",
+      "data_points": 2015,
+      "test_accuracy": 53.1,
+      "up_accuracy": 57.0,
+      "down_accuracy": 48.98,
+      "top_3_features": [
+        "pivot_high_flag",
+        "rsi",
+        "macd"
+      ],
+      "class_balance": "UP: 837 (51.9%), DOWN: 775 (48.1%)",
+      "status": "NEEDS_REVIEW"
+    },
+    {
+      "symbol": "AMZN",
+      "data_points": 2015,
+      "test_accuracy": 51.61,
+      "up_accuracy": 55.35,
+      "down_accuracy": 47.34,
+      "top_3_features": [
+        "cci",
+        "macd",
+        "momentum"
+      ],
+      "class_balance": "UP: 855 (53.0%), DOWN: 757 (47.0%)",
+      "status": "NEEDS_REVIEW"
+    }
+  ]
+}

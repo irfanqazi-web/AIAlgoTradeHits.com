@@ -1,0 +1,1292 @@
+{
+  "audit_date": "2025-12-05T19:28:57.036863",
+  "project_id": "cryptobot-462709",
+  "dataset_id": "crypto_trading_data",
+  "summary": {
+    "total_tables": 140,
+    "total_rows": 7512683,
+    "total_size_mb": 2409.15,
+    "empty_tables_count": 26,
+    "small_tables_count": 7
+  },
+  "categories": {
+    "stocks": {
+      "count": 35,
+      "rows": 4118838,
+      "size_mb": 1273.2000000000005,
+      "avg_rows_per_table": 117681.08571428571
+    },
+    "etfs": {
+      "count": 15,
+      "rows": 1356436,
+      "size_mb": 444.81,
+      "avg_rows_per_table": 90429.06666666667
+    },
+    "crypto": {
+      "count": 30,
+      "rows": 925126,
+      "size_mb": 268.3200000000001,
+      "avg_rows_per_table": 30837.533333333333
+    },
+    "commodities": {
+      "count": 15,
+      "rows": 411142,
+      "size_mb": 133.49,
+      "avg_rows_per_table": 27409.466666666667
+    },
+    "forex": {
+      "count": 16,
+      "rows": 448862,
+      "size_mb": 204.55,
+      "avg_rows_per_table": 28053.875
+    },
+    "indices": {
+      "count": 15,
+      "rows": 235141,
+      "size_mb": 74.25000000000003,
+      "avg_rows_per_table": 15676.066666666668
+    },
+    "other": {
+      "count": 12,
+      "rows": 15606,
+      "size_mb": 10.36,
+      "avg_rows_per_table": 1300.5
+    },
+    "bonds": {
+      "count": 2,
+      "rows": 1532,
+      "size_mb": 0.17,
+      "avg_rows_per_table": 766.0
+    }
+  },
+  "empty_tables": [
+    "5min_stock",
+    "active_trading_list",
+    "bonds_daily_td",
+    "commodities_daily_td",
+    "commodities_hourly_td",
+    "crypto_daily_td",
+    "crypto_hourly_td",
+    "etfs_daily_td",
+    "etfs_hourly_td",
+    "forex_5min_td",
+    "forex_daily_td",
+    "forex_hourly_td",
+    "hourly_stock",
+    "indices_daily_td",
+    "indices_hourly_td",
+    "market_news_sentiment",
+    "scheduler_summary_view",
+    "social_sentiment",
+    "stock_5min_top10_gainers",
+    "stock_hourly_data",
+    "stocks_5min_td",
+    "stocks_daily_td",
+    "stocks_hourly_td",
+    "trading_sessions",
+    "unified_weekly_analysis",
+    "user_trades"
+  ],
+  "small_tables": [
+    {
+      "name": "search_history",
+      "rows": 86
+    },
+    {
+      "name": "v2_indices_hourly",
+      "rows": 76
+    },
+    {
+      "name": "commodities_weekly_summary",
+      "rows": 37
+    },
+    {
+      "name": "v2_commodities_weekly",
+      "rows": 37
+    },
+    {
+      "name": "v2_commodities_weekly_summary",
+      "rows": 37
+    },
+    {
+      "name": "scheduler_execution_log",
+      "rows": 9
+    },
+    {
+      "name": "users",
+      "rows": 5
+    }
+  ],
+  "other_category_tables": [
+    {
+      "name": "nvda_ai_training_daily",
+      "rows": 15000
+    },
+    {
+      "name": "kaamyabpakistan_opportunities",
+      "rows": 506
+    },
+    {
+      "name": "search_history",
+      "rows": 86
+    },
+    {
+      "name": "scheduler_execution_log",
+      "rows": 9
+    },
+    {
+      "name": "users",
+      "rows": 5
+    },
+    {
+      "name": "active_trading_list",
+      "rows": 0
+    },
+    {
+      "name": "market_news_sentiment",
+      "rows": 0
+    },
+    {
+      "name": "scheduler_summary_view",
+      "rows": 0
+    },
+    {
+      "name": "social_sentiment",
+      "rows": 0
+    },
+    {
+      "name": "trading_sessions",
+      "rows": 0
+    },
+    {
+      "name": "unified_weekly_analysis",
+      "rows": 0
+    },
+    {
+      "name": "user_trades",
+      "rows": 0
+    }
+  ],
+  "all_tables": [
+    {
+      "table_name": "stocks_historical_daily",
+      "row_count": 1483191,
+      "size_mb": 602.8,
+      "last_modified": "2025-11-24T20:03:45.238000+00:00",
+      "category": "stocks",
+      "timeframe": "daily"
+    },
+    {
+      "table_name": "v2_stocks_historical_daily",
+      "row_count": 1483191,
+      "size_mb": 112.0,
+      "last_modified": "2025-12-04T15:46:01.318000+00:00",
+      "category": "stocks",
+      "timeframe": "daily"
+    },
+    {
+      "table_name": "stocks_historical_daily_v2",
+      "row_count": 616546,
+      "size_mb": 424.1,
+      "last_modified": "2025-11-24T06:32:00.509000+00:00",
+      "category": "stocks",
+      "timeframe": "daily"
+    },
+    {
+      "table_name": "etfs_historical_daily",
+      "row_count": 527277,
+      "size_mb": 228.74,
+      "last_modified": "2025-11-24T20:34:03.327000+00:00",
+      "category": "etfs",
+      "timeframe": "daily"
+    },
+    {
+      "table_name": "v2_etfs_historical_daily",
+      "row_count": 527277,
+      "size_mb": 38.87,
+      "last_modified": "2025-12-04T15:46:12.920000+00:00",
+      "category": "etfs",
+      "timeframe": "daily"
+    },
+    {
+      "table_name": "etfs_historical_daily_v2",
+      "row_count": 229250,
+      "size_mb": 157.29,
+      "last_modified": "2025-11-24T06:43:58.671000+00:00",
+      "category": "etfs",
+      "timeframe": "daily"
+    },
+    {
+      "table_name": "daily_crypto",
+      "row_count": 196231,
+      "size_mb": 40.62,
+      "last_modified": "2025-11-18T02:12:16.569000+00:00",
+      "category": "crypto",
+      "timeframe": "daily"
+    },
+    {
+      "table_name": "v2_daily_crypto",
+      "row_count": 196231,
+      "size_mb": 24.86,
+      "last_modified": "2025-12-04T15:47:26.935000+00:00",
+      "category": "crypto",
+      "timeframe": "daily"
+    },
+    {
+      "table_name": "commodities_historical_daily",
+      "row_count": 163593,
+      "size_mb": 73.25,
+      "last_modified": "2025-11-24T20:59:18.841000+00:00",
+      "category": "commodities",
+      "timeframe": "daily"
+    },
+    {
+      "table_name": "v2_commodities_historical_daily",
+      "row_count": 163593,
+      "size_mb": 12.92,
+      "last_modified": "2025-12-04T15:46:27.478000+00:00",
+      "category": "commodities",
+      "timeframe": "daily"
+    },
+    {
+      "table_name": "forex_historical_daily_v2",
+      "row_count": 150000,
+      "size_mb": 100.17,
+      "last_modified": "2025-11-24T06:46:59.285000+00:00",
+      "category": "forex",
+      "timeframe": "daily"
+    },
+    {
+      "table_name": "stocks_daily",
+      "row_count": 110825,
+      "size_mb": 30.33,
+      "last_modified": "2025-12-05T05:08:47.694000+00:00",
+      "category": "stocks",
+      "timeframe": "daily"
+    },
+    {
+      "table_name": "v2_stocks_daily",
+      "row_count": 110775,
+      "size_mb": 20.41,
+      "last_modified": "2025-12-04T14:59:42.437000+00:00",
+      "category": "stocks",
+      "timeframe": "daily"
+    },
+    {
+      "table_name": "forex_historical_daily",
+      "row_count": 100000,
+      "size_mb": 66.06,
+      "last_modified": "2025-11-24T19:33:01.321000+00:00",
+      "category": "forex",
+      "timeframe": "daily"
+    },
+    {
+      "table_name": "v2_forex_historical_daily",
+      "row_count": 100000,
+      "size_mb": 7.06,
+      "last_modified": "2025-12-04T15:46:17.926000+00:00",
+      "category": "forex",
+      "timeframe": "daily"
+    },
+    {
+      "table_name": "cryptos_historical_daily_v2",
+      "row_count": 95386,
+      "size_mb": 63.59,
+      "last_modified": "2025-11-24T06:38:29.274000+00:00",
+      "category": "crypto",
+      "timeframe": "daily"
+    },
+    {
+      "table_name": "indices_historical_daily",
+      "row_count": 89119,
+      "size_mb": 38.33,
+      "last_modified": "2025-11-24T20:47:52.594000+00:00",
+      "category": "indices",
+      "timeframe": "daily"
+    },
+    {
+      "table_name": "v2_indices_historical_daily",
+      "row_count": 89119,
+      "size_mb": 6.81,
+      "last_modified": "2025-12-04T15:46:22.585000+00:00",
+      "category": "indices",
+      "timeframe": "daily"
+    },
+    {
+      "table_name": "crypto_daily",
+      "row_count": 64727,
+      "size_mb": 18.92,
+      "last_modified": "2025-12-05T05:13:15.994000+00:00",
+      "category": "crypto",
+      "timeframe": "daily"
+    },
+    {
+      "table_name": "v2_crypto_daily",
+      "row_count": 64681,
+      "size_mb": 11.54,
+      "last_modified": "2025-12-04T14:56:44.908000+00:00",
+      "category": "crypto",
+      "timeframe": "daily"
+    },
+    {
+      "table_name": "commodities_historical_daily_v2",
+      "row_count": 56039,
+      "size_mb": 38.39,
+      "last_modified": "2025-11-24T06:49:01.505000+00:00",
+      "category": "commodities",
+      "timeframe": "daily"
+    },
+    {
+      "table_name": "5min_crypto",
+      "row_count": 53676,
+      "size_mb": 17.2,
+      "last_modified": "2025-11-29T05:03:21.917000+00:00",
+      "category": "crypto",
+      "timeframe": "5min"
+    },
+    {
+      "table_name": "v2_5min_crypto",
+      "row_count": 53676,
+      "size_mb": 14.42,
+      "last_modified": "2025-12-04T15:48:21.843000+00:00",
+      "category": "crypto",
+      "timeframe": "5min"
+    },
+    {
+      "table_name": "cryptos_historical_daily",
+      "row_count": 41786,
+      "size_mb": 27.59,
+      "last_modified": "2025-11-24T19:32:45.142000+00:00",
+      "category": "crypto",
+      "timeframe": "daily"
+    },
+    {
+      "table_name": "v2_cryptos_historical_daily",
+      "row_count": 41786,
+      "size_mb": 3.04,
+      "last_modified": "2025-12-04T15:46:41.767000+00:00",
+      "category": "crypto",
+      "timeframe": "daily"
+    },
+    {
+      "table_name": "crypto_5min",
+      "row_count": 37059,
+      "size_mb": 23.01,
+      "last_modified": "2025-12-06T00:28:06.698000+00:00",
+      "category": "crypto",
+      "timeframe": "5min"
+    },
+    {
+      "table_name": "stocks_weekly_batch",
+      "row_count": 36193,
+      "size_mb": 3.24,
+      "last_modified": "2025-12-05T20:39:41.943000+00:00",
+      "category": "stocks",
+      "timeframe": "weekly"
+    },
+    {
+      "table_name": "daily_stock",
+      "row_count": 35987,
+      "size_mb": 18.58,
+      "last_modified": "2025-11-18T02:15:18.009000+00:00",
+      "category": "stocks",
+      "timeframe": "daily"
+    },
+    {
+      "table_name": "stock_analysis",
+      "row_count": 35987,
+      "size_mb": 18.58,
+      "last_modified": "2025-11-11T05:03:55.133000+00:00",
+      "category": "stocks",
+      "timeframe": "unknown"
+    },
+    {
+      "table_name": "v2_daily_stock",
+      "row_count": 35987,
+      "size_mb": 10.29,
+      "last_modified": "2025-12-04T15:47:35.125000+00:00",
+      "category": "stocks",
+      "timeframe": "daily"
+    },
+    {
+      "table_name": "v2_stock_analysis",
+      "row_count": 35987,
+      "size_mb": 10.29,
+      "last_modified": "2025-12-04T15:48:10.989000+00:00",
+      "category": "stocks",
+      "timeframe": "unknown"
+    },
+    {
+      "table_name": "indices_historical_daily_v2",
+      "row_count": 33862,
+      "size_mb": 23.23,
+      "last_modified": "2025-11-24T06:47:52.708000+00:00",
+      "category": "indices",
+      "timeframe": "daily"
+    },
+    {
+      "table_name": "etfs_daily",
+      "row_count": 29300,
+      "size_mb": 8.81,
+      "last_modified": "2025-12-05T05:19:23.043000+00:00",
+      "category": "etfs",
+      "timeframe": "daily"
+    },
+    {
+      "table_name": "v2_etfs_daily",
+      "row_count": 29275,
+      "size_mb": 5.13,
+      "last_modified": "2025-12-04T15:00:12.115000+00:00",
+      "category": "etfs",
+      "timeframe": "daily"
+    },
+    {
+      "table_name": "v2_crypto_5min",
+      "row_count": 28715,
+      "size_mb": 3.41,
+      "last_modified": "2025-12-04T14:56:52.269000+00:00",
+      "category": "crypto",
+      "timeframe": "5min"
+    },
+    {
+      "table_name": "forex_5min",
+      "row_count": 24738,
+      "size_mb": 15.15,
+      "last_modified": "2025-12-05T22:03:40.313000+00:00",
+      "category": "forex",
+      "timeframe": "5min"
+    },
+    {
+      "table_name": "forex_daily",
+      "row_count": 23825,
+      "size_mb": 7.17,
+      "last_modified": "2025-12-05T05:13:33.270000+00:00",
+      "category": "forex",
+      "timeframe": "daily"
+    },
+    {
+      "table_name": "v2_forex_daily",
+      "row_count": 23805,
+      "size_mb": 4.09,
+      "last_modified": "2025-12-04T14:59:52.485000+00:00",
+      "category": "forex",
+      "timeframe": "daily"
+    },
+    {
+      "table_name": "v2_forex_5min",
+      "row_count": 18245,
+      "size_mb": 2.14,
+      "last_modified": "2025-12-04T15:00:07.905000+00:00",
+      "category": "forex",
+      "timeframe": "5min"
+    },
+    {
+      "table_name": "stocks_master_list",
+      "row_count": 15231,
+      "size_mb": 2.95,
+      "last_modified": "2025-12-04T03:07:46.157000+00:00",
+      "category": "stocks",
+      "timeframe": "unknown"
+    },
+    {
+      "table_name": "v2_stocks_master",
+      "row_count": 15231,
+      "size_mb": 3.25,
+      "last_modified": "2025-12-04T15:20:31.257000+00:00",
+      "category": "stocks",
+      "timeframe": "unknown"
+    },
+    {
+      "table_name": "nvda_ai_training_daily",
+      "row_count": 15000,
+      "size_mb": 9.77,
+      "last_modified": "2025-11-23T17:16:05.104000+00:00",
+      "category": "other",
+      "timeframe": "daily"
+    },
+    {
+      "table_name": "btc_ai_training_daily",
+      "row_count": 12258,
+      "size_mb": 7.46,
+      "last_modified": "2025-11-23T17:15:43.046000+00:00",
+      "category": "crypto",
+      "timeframe": "daily"
+    },
+    {
+      "table_name": "indices_daily",
+      "row_count": 10621,
+      "size_mb": 3.22,
+      "last_modified": "2025-12-05T05:21:42.610000+00:00",
+      "category": "indices",
+      "timeframe": "daily"
+    },
+    {
+      "table_name": "v2_indices_daily",
+      "row_count": 10612,
+      "size_mb": 1.88,
+      "last_modified": "2025-12-04T15:00:26.288000+00:00",
+      "category": "indices",
+      "timeframe": "daily"
+    },
+    {
+      "table_name": "stocks_5min",
+      "row_count": 10074,
+      "size_mb": 6.25,
+      "last_modified": "2025-12-05T21:18:24.460000+00:00",
+      "category": "stocks",
+      "timeframe": "5min"
+    },
+    {
+      "table_name": "stocks_historical_daily_csi_temp_34",
+      "row_count": 10000,
+      "size_mb": 0.2,
+      "last_modified": "2025-11-24T19:21:17.373000+00:00",
+      "category": "stocks",
+      "timeframe": "daily"
+    },
+    {
+      "table_name": "stocks_historical_daily_csi_temp_37",
+      "row_count": 10000,
+      "size_mb": 0.2,
+      "last_modified": "2025-11-24T19:21:51.267000+00:00",
+      "category": "stocks",
+      "timeframe": "daily"
+    },
+    {
+      "table_name": "stocks_historical_daily_csi_temp_49",
+      "row_count": 10000,
+      "size_mb": 0.19,
+      "last_modified": "2025-11-24T19:24:19.942000+00:00",
+      "category": "stocks",
+      "timeframe": "daily"
+    },
+    {
+      "table_name": "stocks_historical_daily_csi_temp_69",
+      "row_count": 10000,
+      "size_mb": 0.2,
+      "last_modified": "2025-11-24T19:28:02.292000+00:00",
+      "category": "stocks",
+      "timeframe": "daily"
+    },
+    {
+      "table_name": "stocks_historical_daily_csi_temp_70",
+      "row_count": 10000,
+      "size_mb": 0.2,
+      "last_modified": "2025-11-24T19:28:07.632000+00:00",
+      "category": "stocks",
+      "timeframe": "daily"
+    },
+    {
+      "table_name": "crypto_hourly",
+      "row_count": 9107,
+      "size_mb": 4.51,
+      "last_modified": "2025-12-06T00:13:08.620000+00:00",
+      "category": "crypto",
+      "timeframe": "hourly"
+    },
+    {
+      "table_name": "commodities_daily",
+      "row_count": 8350,
+      "size_mb": 2.81,
+      "last_modified": "2025-12-05T05:26:24.343000+00:00",
+      "category": "commodities",
+      "timeframe": "daily"
+    },
+    {
+      "table_name": "v2_commodities_daily",
+      "row_count": 8344,
+      "size_mb": 1.49,
+      "last_modified": "2025-12-04T15:00:41.298000+00:00",
+      "category": "commodities",
+      "timeframe": "daily"
+    },
+    {
+      "table_name": "v2_crypto_hourly",
+      "row_count": 7797,
+      "size_mb": 0.98,
+      "last_modified": "2025-12-04T14:59:49.003000+00:00",
+      "category": "crypto",
+      "timeframe": "hourly"
+    },
+    {
+      "table_name": "v2_stocks_5min",
+      "row_count": 6577,
+      "size_mb": 0.81,
+      "last_modified": "2025-12-04T14:56:38.548000+00:00",
+      "category": "stocks",
+      "timeframe": "5min"
+    },
+    {
+      "table_name": "weekly_stocks_all",
+      "row_count": 6386,
+      "size_mb": 0.67,
+      "last_modified": "2025-12-06T00:13:54.085000+00:00",
+      "category": "stocks",
+      "timeframe": "weekly"
+    },
+    {
+      "table_name": "etfs_5min",
+      "row_count": 6279,
+      "size_mb": 3.87,
+      "last_modified": "2025-12-05T21:08:41.675000+00:00",
+      "category": "etfs",
+      "timeframe": "5min"
+    },
+    {
+      "table_name": "stocks_hourly",
+      "row_count": 6115,
+      "size_mb": 2.58,
+      "last_modified": "2025-12-05T22:20:42.636000+00:00",
+      "category": "stocks",
+      "timeframe": "hourly"
+    },
+    {
+      "table_name": "commodities_5min",
+      "row_count": 5731,
+      "size_mb": 3.51,
+      "last_modified": "2025-12-06T00:26:24.570000+00:00",
+      "category": "commodities",
+      "timeframe": "5min"
+    },
+    {
+      "table_name": "stocks_weekly_summary",
+      "row_count": 5440,
+      "size_mb": 1.63,
+      "last_modified": "2025-11-29T09:59:05.523000+00:00",
+      "category": "stocks",
+      "timeframe": "weekly"
+    },
+    {
+      "table_name": "v2_stocks_weekly",
+      "row_count": 5440,
+      "size_mb": 0.39,
+      "last_modified": "2025-12-04T14:53:12.955000+00:00",
+      "category": "stocks",
+      "timeframe": "weekly"
+    },
+    {
+      "table_name": "v2_stocks_weekly_summary",
+      "row_count": 5440,
+      "size_mb": 0.66,
+      "last_modified": "2025-12-04T15:46:46.105000+00:00",
+      "category": "stocks",
+      "timeframe": "weekly"
+    },
+    {
+      "table_name": "v2_stocks_hourly",
+      "row_count": 5427,
+      "size_mb": 0.68,
+      "last_modified": "2025-12-04T14:59:45.534000+00:00",
+      "category": "stocks",
+      "timeframe": "hourly"
+    },
+    {
+      "table_name": "hourly_crypto",
+      "row_count": 5244,
+      "size_mb": 1.79,
+      "last_modified": "2025-11-18T02:13:39.025000+00:00",
+      "category": "crypto",
+      "timeframe": "hourly"
+    },
+    {
+      "table_name": "v2_hourly_crypto",
+      "row_count": 5244,
+      "size_mb": 1.41,
+      "last_modified": "2025-12-04T15:47:43.043000+00:00",
+      "category": "crypto",
+      "timeframe": "hourly"
+    },
+    {
+      "table_name": "v2_commodities_5min",
+      "row_count": 4033,
+      "size_mb": 0.49,
+      "last_modified": "2025-12-04T15:00:49.370000+00:00",
+      "category": "commodities",
+      "timeframe": "5min"
+    },
+    {
+      "table_name": "v2_etfs_5min",
+      "row_count": 3820,
+      "size_mb": 0.46,
+      "last_modified": "2025-12-04T15:00:20.494000+00:00",
+      "category": "etfs",
+      "timeframe": "5min"
+    },
+    {
+      "table_name": "forex_hourly",
+      "row_count": 3565,
+      "size_mb": 1.69,
+      "last_modified": "2025-12-05T22:13:30.981000+00:00",
+      "category": "forex",
+      "timeframe": "hourly"
+    },
+    {
+      "table_name": "v2_forex_hourly",
+      "row_count": 3044,
+      "size_mb": 0.36,
+      "last_modified": "2025-12-04T14:59:55.691000+00:00",
+      "category": "forex",
+      "timeframe": "hourly"
+    },
+    {
+      "table_name": "stocks_weekly",
+      "row_count": 2600,
+      "size_mb": 1.63,
+      "last_modified": "2025-11-30T05:08:44.148000+00:00",
+      "category": "stocks",
+      "timeframe": "weekly"
+    },
+    {
+      "table_name": "crypto_weekly",
+      "row_count": 2392,
+      "size_mb": 1.5,
+      "last_modified": "2025-11-30T05:19:29.018000+00:00",
+      "category": "crypto",
+      "timeframe": "weekly"
+    },
+    {
+      "table_name": "v2_crypto_weekly_data",
+      "row_count": 2392,
+      "size_mb": 0.55,
+      "last_modified": "2025-12-04T15:47:50.667000+00:00",
+      "category": "crypto",
+      "timeframe": "weekly"
+    },
+    {
+      "table_name": "cryptos_weekly_summary",
+      "row_count": 1785,
+      "size_mb": 0.43,
+      "last_modified": "2025-11-29T09:45:57.805000+00:00",
+      "category": "crypto",
+      "timeframe": "weekly"
+    },
+    {
+      "table_name": "v2_cryptos_weekly_summary",
+      "row_count": 1785,
+      "size_mb": 0.1,
+      "last_modified": "2025-12-04T15:46:50.417000+00:00",
+      "category": "crypto",
+      "timeframe": "weekly"
+    },
+    {
+      "table_name": "interest_rates",
+      "row_count": 1532,
+      "size_mb": 0.17,
+      "last_modified": "2025-11-29T22:46:12.113000+00:00",
+      "category": "bonds",
+      "timeframe": "unknown"
+    },
+    {
+      "table_name": "etfs_weekly",
+      "row_count": 1300,
+      "size_mb": 0.81,
+      "last_modified": "2025-11-30T06:05:51.898000+00:00",
+      "category": "etfs",
+      "timeframe": "weekly"
+    },
+    {
+      "table_name": "forex_weekly",
+      "row_count": 1040,
+      "size_mb": 0.59,
+      "last_modified": "2025-11-30T06:13:32.310000+00:00",
+      "category": "forex",
+      "timeframe": "weekly"
+    },
+    {
+      "table_name": "etfs_hourly",
+      "row_count": 889,
+      "size_mb": 0.55,
+      "last_modified": "2025-12-05T22:19:33.557000+00:00",
+      "category": "etfs",
+      "timeframe": "hourly"
+    },
+    {
+      "table_name": "commodities_hourly",
+      "row_count": 571,
+      "size_mb": 0.35,
+      "last_modified": "2025-12-06T00:26:24.837000+00:00",
+      "category": "commodities",
+      "timeframe": "hourly"
+    },
+    {
+      "table_name": "v2_etfs_hourly",
+      "row_count": 542,
+      "size_mb": 0.07,
+      "last_modified": "2025-12-04T15:00:16.564000+00:00",
+      "category": "etfs",
+      "timeframe": "hourly"
+    },
+    {
+      "table_name": "indices_5min",
+      "row_count": 510,
+      "size_mb": 0.31,
+      "last_modified": "2025-12-05T21:02:30.878000+00:00",
+      "category": "indices",
+      "timeframe": "5min"
+    },
+    {
+      "table_name": "kaamyabpakistan_opportunities",
+      "row_count": 506,
+      "size_mb": 0.54,
+      "last_modified": "2025-12-03T20:52:02.743000+00:00",
+      "category": "other",
+      "timeframe": "unknown"
+    },
+    {
+      "table_name": "crypto_5min_top10_gainers",
+      "row_count": 500,
+      "size_mb": 0.3,
+      "last_modified": "2025-11-21T03:58:08.086000+00:00",
+      "category": "crypto",
+      "timeframe": "5min"
+    },
+    {
+      "table_name": "crypto_hourly_data",
+      "row_count": 500,
+      "size_mb": 0.3,
+      "last_modified": "2025-11-21T03:57:53.986000+00:00",
+      "category": "crypto",
+      "timeframe": "hourly"
+    },
+    {
+      "table_name": "v2_crypto_5min_top10_gainers",
+      "row_count": 500,
+      "size_mb": 0.14,
+      "last_modified": "2025-12-04T15:48:26.672000+00:00",
+      "category": "crypto",
+      "timeframe": "5min"
+    },
+    {
+      "table_name": "v2_crypto_hourly_data",
+      "row_count": 500,
+      "size_mb": 0.14,
+      "last_modified": "2025-12-04T15:48:31.009000+00:00",
+      "category": "crypto",
+      "timeframe": "hourly"
+    },
+    {
+      "table_name": "indices_weekly",
+      "row_count": 468,
+      "size_mb": 0.29,
+      "last_modified": "2025-11-30T06:07:34.998000+00:00",
+      "category": "indices",
+      "timeframe": "weekly"
+    },
+    {
+      "table_name": "v2_commodities_hourly",
+      "row_count": 413,
+      "size_mb": 0.05,
+      "last_modified": "2025-12-04T15:00:45.617000+00:00",
+      "category": "commodities",
+      "timeframe": "hourly"
+    },
+    {
+      "table_name": "etfs_weekly_summary",
+      "row_count": 409,
+      "size_mb": 0.12,
+      "last_modified": "2025-11-29T11:02:26.190000+00:00",
+      "category": "etfs",
+      "timeframe": "weekly"
+    },
+    {
+      "table_name": "v2_etfs_weekly",
+      "row_count": 409,
+      "size_mb": 0.04,
+      "last_modified": "2025-12-04T14:53:31.216000+00:00",
+      "category": "etfs",
+      "timeframe": "weekly"
+    },
+    {
+      "table_name": "v2_etfs_weekly_summary",
+      "row_count": 409,
+      "size_mb": 0.05,
+      "last_modified": "2025-12-04T15:46:54.925000+00:00",
+      "category": "etfs",
+      "timeframe": "weekly"
+    },
+    {
+      "table_name": "crypto_15min",
+      "row_count": 384,
+      "size_mb": 0.24,
+      "last_modified": "2025-11-21T00:40:05.323000+00:00",
+      "category": "crypto",
+      "timeframe": "5min"
+    },
+    {
+      "table_name": "v2_crypto_15min",
+      "row_count": 384,
+      "size_mb": 0.11,
+      "last_modified": "2025-12-04T15:48:35.165000+00:00",
+      "category": "crypto",
+      "timeframe": "5min"
+    },
+    {
+      "table_name": "commodities_weekly",
+      "row_count": 364,
+      "size_mb": 0.22,
+      "last_modified": "2025-11-30T06:09:22.084000+00:00",
+      "category": "commodities",
+      "timeframe": "weekly"
+    },
+    {
+      "table_name": "v2_indices_5min",
+      "row_count": 304,
+      "size_mb": 0.04,
+      "last_modified": "2025-12-04T15:00:37.653000+00:00",
+      "category": "indices",
+      "timeframe": "5min"
+    },
+    {
+      "table_name": "crypto_analysis",
+      "row_count": 200,
+      "size_mb": 0.11,
+      "last_modified": "2025-11-21T03:57:40.901000+00:00",
+      "category": "crypto",
+      "timeframe": "unknown"
+    },
+    {
+      "table_name": "forex_weekly_summary",
+      "row_count": 200,
+      "size_mb": 0.05,
+      "last_modified": "2025-11-29T11:31:48.818000+00:00",
+      "category": "forex",
+      "timeframe": "weekly"
+    },
+    {
+      "table_name": "v2_crypto_analysis",
+      "row_count": 200,
+      "size_mb": 0.05,
+      "last_modified": "2025-12-04T15:47:55.567000+00:00",
+      "category": "crypto",
+      "timeframe": "unknown"
+    },
+    {
+      "table_name": "v2_forex_weekly",
+      "row_count": 200,
+      "size_mb": 0.01,
+      "last_modified": "2025-12-04T14:53:23.974000+00:00",
+      "category": "forex",
+      "timeframe": "weekly"
+    },
+    {
+      "table_name": "v2_forex_weekly_summary",
+      "row_count": 200,
+      "size_mb": 0.01,
+      "last_modified": "2025-12-04T15:46:59.049000+00:00",
+      "category": "forex",
+      "timeframe": "weekly"
+    },
+    {
+      "table_name": "indices_hourly",
+      "row_count": 126,
+      "size_mb": 0.08,
+      "last_modified": "2025-12-05T22:21:45.166000+00:00",
+      "category": "indices",
+      "timeframe": "hourly"
+    },
+    {
+      "table_name": "indices_weekly_summary",
+      "row_count": 108,
+      "size_mb": 0.03,
+      "last_modified": "2025-11-29T12:01:55.052000+00:00",
+      "category": "indices",
+      "timeframe": "weekly"
+    },
+    {
+      "table_name": "v2_indices_weekly",
+      "row_count": 108,
+      "size_mb": 0.01,
+      "last_modified": "2025-12-04T14:53:38.657000+00:00",
+      "category": "indices",
+      "timeframe": "weekly"
+    },
+    {
+      "table_name": "v2_indices_weekly_summary",
+      "row_count": 108,
+      "size_mb": 0.01,
+      "last_modified": "2025-12-04T15:47:03.203000+00:00",
+      "category": "indices",
+      "timeframe": "weekly"
+    },
+    {
+      "table_name": "stocks_15min",
+      "row_count": 104,
+      "size_mb": 0.06,
+      "last_modified": "2025-11-21T00:39:12.775000+00:00",
+      "category": "stocks",
+      "timeframe": "5min"
+    },
+    {
+      "table_name": "v2_stocks_15min",
+      "row_count": 104,
+      "size_mb": 0.03,
+      "last_modified": "2025-12-04T15:48:39.371000+00:00",
+      "category": "stocks",
+      "timeframe": "5min"
+    },
+    {
+      "table_name": "search_history",
+      "row_count": 86,
+      "size_mb": 0.05,
+      "last_modified": "2025-11-18T22:33:55.185000+00:00",
+      "category": "other",
+      "timeframe": "unknown"
+    },
+    {
+      "table_name": "v2_indices_hourly",
+      "row_count": 76,
+      "size_mb": 0.01,
+      "last_modified": "2025-12-04T15:00:34.102000+00:00",
+      "category": "indices",
+      "timeframe": "hourly"
+    },
+    {
+      "table_name": "commodities_weekly_summary",
+      "row_count": 37,
+      "size_mb": 0.01,
+      "last_modified": "2025-11-29T12:31:38.322000+00:00",
+      "category": "commodities",
+      "timeframe": "weekly"
+    },
+    {
+      "table_name": "v2_commodities_weekly",
+      "row_count": 37,
+      "size_mb": 0.0,
+      "last_modified": "2025-12-04T14:53:46.036000+00:00",
+      "category": "commodities",
+      "timeframe": "weekly"
+    },
+    {
+      "table_name": "v2_commodities_weekly_summary",
+      "row_count": 37,
+      "size_mb": 0.0,
+      "last_modified": "2025-12-04T15:47:07.309000+00:00",
+      "category": "commodities",
+      "timeframe": "weekly"
+    },
+    {
+      "table_name": "scheduler_execution_log",
+      "row_count": 9,
+      "size_mb": 0.0,
+      "last_modified": "2025-11-29T10:01:17.252000+00:00",
+      "category": "other",
+      "timeframe": "unknown"
+    },
+    {
+      "table_name": "users",
+      "row_count": 5,
+      "size_mb": 0.0,
+      "last_modified": "2025-12-02T20:54:07.819000+00:00",
+      "category": "other",
+      "timeframe": "unknown"
+    },
+    {
+      "table_name": "5min_stock",
+      "row_count": 0,
+      "size_mb": 0,
+      "last_modified": "2025-11-18T02:18:37.591000+00:00",
+      "category": "stocks",
+      "timeframe": "5min"
+    },
+    {
+      "table_name": "active_trading_list",
+      "row_count": 0,
+      "size_mb": 0,
+      "last_modified": "2025-11-22T08:11:52.564000+00:00",
+      "category": "other",
+      "timeframe": "unknown"
+    },
+    {
+      "table_name": "bonds_daily_td",
+      "row_count": 0,
+      "size_mb": 0,
+      "last_modified": "2025-11-20T20:55:21.859000+00:00",
+      "category": "bonds",
+      "timeframe": "daily"
+    },
+    {
+      "table_name": "commodities_daily_td",
+      "row_count": 0,
+      "size_mb": 0,
+      "last_modified": "2025-11-20T20:55:20.748000+00:00",
+      "category": "commodities",
+      "timeframe": "daily"
+    },
+    {
+      "table_name": "commodities_hourly_td",
+      "row_count": 0,
+      "size_mb": 0,
+      "last_modified": "2025-11-20T20:55:20.971000+00:00",
+      "category": "commodities",
+      "timeframe": "hourly"
+    },
+    {
+      "table_name": "crypto_daily_td",
+      "row_count": 0,
+      "size_mb": 0,
+      "last_modified": "2025-11-20T20:55:20.330000+00:00",
+      "category": "crypto",
+      "timeframe": "daily"
+    },
+    {
+      "table_name": "crypto_hourly_td",
+      "row_count": 0,
+      "size_mb": 0,
+      "last_modified": "2025-11-20T20:55:20.542000+00:00",
+      "category": "crypto",
+      "timeframe": "hourly"
+    },
+    {
+      "table_name": "etfs_daily_td",
+      "row_count": 0,
+      "size_mb": 0,
+      "last_modified": "2025-11-20T20:55:19.334000+00:00",
+      "category": "etfs",
+      "timeframe": "daily"
+    },
+    {
+      "table_name": "etfs_hourly_td",
+      "row_count": 0,
+      "size_mb": 0,
+      "last_modified": "2025-11-20T20:55:19.536000+00:00",
+      "category": "etfs",
+      "timeframe": "hourly"
+    },
+    {
+      "table_name": "forex_5min_td",
+      "row_count": 0,
+      "size_mb": 0,
+      "last_modified": "2025-11-20T20:55:20.133000+00:00",
+      "category": "forex",
+      "timeframe": "5min"
+    },
+    {
+      "table_name": "forex_daily_td",
+      "row_count": 0,
+      "size_mb": 0,
+      "last_modified": "2025-11-20T20:55:19.746000+00:00",
+      "category": "forex",
+      "timeframe": "daily"
+    },
+    {
+      "table_name": "forex_hourly_td",
+      "row_count": 0,
+      "size_mb": 0,
+      "last_modified": "2025-11-20T20:55:19.958000+00:00",
+      "category": "forex",
+      "timeframe": "hourly"
+    },
+    {
+      "table_name": "hourly_stock",
+      "row_count": 0,
+      "size_mb": 0,
+      "last_modified": "2025-11-18T02:17:43.183000+00:00",
+      "category": "stocks",
+      "timeframe": "hourly"
+    },
+    {
+      "table_name": "indices_daily_td",
+      "row_count": 0,
+      "size_mb": 0,
+      "last_modified": "2025-11-20T20:55:21.161000+00:00",
+      "category": "indices",
+      "timeframe": "daily"
+    },
+    {
+      "table_name": "indices_hourly_td",
+      "row_count": 0,
+      "size_mb": 0,
+      "last_modified": "2025-11-20T20:55:21.627000+00:00",
+      "category": "indices",
+      "timeframe": "hourly"
+    },
+    {
+      "table_name": "market_news_sentiment",
+      "row_count": 0,
+      "size_mb": 0,
+      "last_modified": "2025-11-20T20:55:22.028000+00:00",
+      "category": "other",
+      "timeframe": "unknown"
+    },
+    {
+      "table_name": "scheduler_summary_view",
+      "row_count": 0,
+      "size_mb": 0,
+      "last_modified": "2025-11-22T08:16:58.481000+00:00",
+      "category": "other",
+      "timeframe": "unknown"
+    },
+    {
+      "table_name": "social_sentiment",
+      "row_count": 0,
+      "size_mb": 0,
+      "last_modified": "2025-11-20T20:55:22.558000+00:00",
+      "category": "other",
+      "timeframe": "unknown"
+    },
+    {
+      "table_name": "stock_5min_top10_gainers",
+      "row_count": 0,
+      "size_mb": 0,
+      "last_modified": "2025-11-12T21:58:23.212000+00:00",
+      "category": "stocks",
+      "timeframe": "5min"
+    },
+    {
+      "table_name": "stock_hourly_data",
+      "row_count": 0,
+      "size_mb": 0,
+      "last_modified": "2025-11-12T21:58:16.197000+00:00",
+      "category": "stocks",
+      "timeframe": "hourly"
+    },
+    {
+      "table_name": "stocks_5min_td",
+      "row_count": 0,
+      "size_mb": 0,
+      "last_modified": "2025-11-20T20:55:19.131000+00:00",
+      "category": "stocks",
+      "timeframe": "5min"
+    },
+    {
+      "table_name": "stocks_daily_td",
+      "row_count": 0,
+      "size_mb": 0,
+      "last_modified": "2025-11-20T20:55:18.742000+00:00",
+      "category": "stocks",
+      "timeframe": "daily"
+    },
+    {
+      "table_name": "stocks_hourly_td",
+      "row_count": 0,
+      "size_mb": 0,
+      "last_modified": "2025-11-20T20:55:18.938000+00:00",
+      "category": "stocks",
+      "timeframe": "hourly"
+    },
+    {
+      "table_name": "trading_sessions",
+      "row_count": 0,
+      "size_mb": 0,
+      "last_modified": "2025-11-07T20:55:48.720000+00:00",
+      "category": "other",
+      "timeframe": "unknown"
+    },
+    {
+      "table_name": "unified_weekly_analysis",
+      "row_count": 0,
+      "size_mb": 0,
+      "last_modified": "2025-11-22T09:22:51.815000+00:00",
+      "category": "other",
+      "timeframe": "weekly"
+    },
+    {
+      "table_name": "user_trades",
+      "row_count": 0,
+      "size_mb": 0,
+      "last_modified": "2025-11-07T20:55:55.490000+00:00",
+      "category": "other",
+      "timeframe": "unknown"
+    }
+  ]
+}

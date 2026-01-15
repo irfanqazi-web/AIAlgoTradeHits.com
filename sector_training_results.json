@@ -1,0 +1,262 @@
+{
+  "Semiconductors": [
+    {
+      "run_id": "cff4afbc",
+      "status": "completed",
+      "sector": "Semiconductors",
+      "batch": [
+        "NVDA",
+        "AMD",
+        "MU",
+        "AVGO",
+        "LRCX"
+      ]
+    },
+    {
+      "sector": "Semiconductors",
+      "batch": [
+        "AMAT",
+        "KLAC",
+        "ASML",
+        "QCOM",
+        "MRVL"
+      ],
+      "status": "timeout"
+    },
+    {
+      "correct_predictions": 416,
+      "down_accuracy": 0.8898488120950324,
+      "overall_accuracy": 0.8109161793372319,
+      "run_id": "b2c3099e",
+      "status": "completed",
+      "total_predictions": 513,
+      "up_accuracy": 0.08,
+      "sector": "Semiconductors",
+      "batch": [
+        "INTC",
+        "NXPI",
+        "ON",
+        "TXN",
+        "MCHP"
+      ]
+    },
+    {
+      "correct_predictions": 276,
+      "down_accuracy": 0.8323170731707317,
+      "overall_accuracy": 0.8141592920353983,
+      "run_id": "5168b72b",
+      "status": "completed",
+      "total_predictions": 339,
+      "up_accuracy": 0.2727272727272727,
+      "sector": "Semiconductors",
+      "batch": [
+        "SNPS",
+        "CDNS",
+        "ADI",
+        "SMCI"
+      ]
+    }
+  ],
+  "AI_Cloud": [
+    {
+      "correct_predictions": 1316,
+      "down_accuracy": 0.9114365411436541,
+      "overall_accuracy": 0.8334388853704876,
+      "run_id": "bd53a116",
+      "status": "completed",
+      "total_predictions": 1579,
+      "up_accuracy": 0.06206896551724138,
+      "sector": "AI_Cloud",
+      "batch": [
+        "MSFT",
+        "AMZN",
+        "GOOGL",
+        "META",
+        "CRM"
+      ]
+    },
+    {
+      "correct_predictions": 113,
+      "down_accuracy": 0.6991150442477876,
+      "overall_accuracy": 0.6384180790960452,
+      "run_id": "0e70697e",
+      "status": "completed",
+      "total_predictions": 177,
+      "up_accuracy": 0.53125,
+      "sector": "AI_Cloud",
+      "batch": [
+        "NOW",
+        "PLTR",
+        "PATH",
+        "DDOG",
+        "MDB"
+      ]
+    },
+    {
+      "run_id": "18ffa2bb",
+      "status": "completed",
+      "sector": "AI_Cloud",
+      "batch": [
+        "TEAM",
+        "IONQ"
+      ]
+    }
+  ],
+  "Defense_Aerospace": [
+    {
+      "correct_predictions": 479,
+      "down_accuracy": 0.8471454880294659,
+      "overall_accuracy": 0.7956810631229236,
+      "run_id": "d7ae6431",
+      "status": "completed",
+      "total_predictions": 602,
+      "up_accuracy": 0.3220338983050847,
+      "sector": "Defense_Aerospace",
+      "batch": [
+        "LMT",
+        "NOC",
+        "RTX",
+        "GD",
+        "BA"
+      ]
+    },
+    {
+      "run_id": "4d6d37bc",
+      "status": "completed",
+      "sector": "Defense_Aerospace",
+      "batch": [
+        "RKLB",
+        "JOBY"
+      ]
+    }
+  ],
+  "Cybersecurity": [
+    {
+      "run_id": "e5f6979a",
+      "status": "completed",
+      "sector": "Cybersecurity",
+      "batch": [
+        "PANW",
+        "CRWD",
+        "ZS",
+        "FTNT"
+      ]
+    }
+  ],
+  "Healthcare_Biotech": [
+    {
+      "correct_predictions": 659,
+      "down_accuracy": 0.8451443569553806,
+      "overall_accuracy": 0.7707602339181286,
+      "run_id": "7baee0da",
+      "status": "completed",
+      "total_predictions": 855,
+      "up_accuracy": 0.16129032258064516,
+      "sector": "Healthcare_Biotech",
+      "batch": [
+        "LLY",
+        "VRTX",
+        "ISRG",
+        "ABT",
+        "UNH"
+      ]
+    },
+    {
+      "correct_predictions": 342,
+      "down_accuracy": 0.8384615384615385,
+      "overall_accuracy": 0.7685393258426966,
+      "run_id": "4277d7f1",
+      "status": "completed",
+      "total_predictions": 445,
+      "up_accuracy": 0.2727272727272727,
+      "sector": "Healthcare_Biotech",
+      "batch": [
+        "TMO",
+        "REGN",
+        "MRNA",
+        "BIIB",
+        "CRSP"
+      ]
+    }
+  ],
+  "Power_Utilities": [
+    {
+      "correct_predictions": 239,
+      "down_accuracy": 0.7817460317460317,
+      "overall_accuracy": 0.6620498614958449,
+      "run_id": "39191fa1",
+      "status": "completed",
+      "total_predictions": 361,
+      "up_accuracy": 0.3853211009174312,
+      "sector": "Power_Utilities",
+      "batch": [
+        "NEE",
+        "DUK",
+        "EXC",
+        "SO",
+        "CEG"
+      ]
+    },
+    {
+      "run_id": "557b98d7",
+      "status": "completed",
+      "sector": "Power_Utilities",
+      "batch": [
+        "ENPH",
+        "FSLR"
+      ]
+    }
+  ],
+  "Financials": [
+    {
+      "correct_predictions": 747,
+      "down_accuracy": 0.84,
+      "overall_accuracy": 0.7599186164801628,
+      "run_id": "b523ccf6",
+      "status": "completed",
+      "total_predictions": 983,
+      "up_accuracy": 0.1111111111111111,
+      "sector": "Financials",
+      "batch": [
+        "JPM",
+        "BAC",
+        "V",
+        "MA",
+        "GS"
+      ]
+    },
+    {
+      "correct_predictions": 339,
+      "down_accuracy": 0.8373983739837398,
+      "overall_accuracy": 0.7450549450549451,
+      "run_id": "82595c05",
+      "status": "completed",
+      "total_predictions": 455,
+      "up_accuracy": 0.3488372093023256,
+      "sector": "Financials",
+      "batch": [
+        "MS",
+        "COF",
+        "BLK"
+      ]
+    }
+  ],
+  "Space_Robotics": [
+    {
+      "correct_predictions": 1068,
+      "down_accuracy": 0.9843317972350231,
+      "overall_accuracy": 0.9798165137614679,
+      "run_id": "74589150",
+      "status": "completed",
+      "total_predictions": 1090,
+      "up_accuracy": 0.0,
+      "sector": "Space_Robotics",
+      "batch": [
+        "RKLB",
+        "ISRG",
+        "ROK",
+        "HON"
+      ]
+    }
+  ]
+}

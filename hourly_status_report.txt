@@ -1,0 +1,29 @@
+
+================================================================================
+HOURLY STATUS REPORT - 2025-12-13 22:35:59
+================================================================================
+
+BIGQUERY DATA STATUS (stocks_daily_clean)
+-----------------------------------------
+Total Records:    936,811
+Unique Symbols:   216
+Date Range:       2006-01-27 to 2025-12-12
+
+BACKFILL PROGRESS
+-----------------
+Completed:        144/647 symbols (22.3%)
+Failed:           120
+Records Added:    658,786
+Elapsed Time:     1.84 hours
+Rate:             78.4 symbols/hour
+ETA:              6.4 hours remaining
+
+Last Completed:   CPB, CPRT, CPT, CRM, CROX
+Failed Symbols:   A, AAP, A, AAP, AAPL, A, AAP, AAPL, A, AAP
+
+================================================================================
+TwelveData $229 Plan Optimization:
+- 1,597 API credits/minute
+- Time series = 1 credit per symbol
+- Current rate optimizes API usage while ensuring data quality
+================================================================================

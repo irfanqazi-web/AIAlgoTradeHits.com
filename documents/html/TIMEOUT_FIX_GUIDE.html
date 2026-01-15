@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TIMEOUT_FIX_GUIDE</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #24292e;
+            background: #ffffff;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            margin-top: 24px;
+            margin-bottom: 16px;
+            font-weight: 600;
+            line-height: 1.25;
+        }
+        h1 { border-bottom: 1px solid #eaecef; padding-bottom: 0.3em; }
+        h2 { border-bottom: 1px solid #eaecef; padding-bottom: 0.3em; }
+        code {
+            background-color: rgba(27,31,35,0.05);
+            border-radius: 3px;
+            font-size: 85%;
+            margin: 0;
+            padding: 0.2em 0.4em;
+            font-family: 'Courier New', monospace;
+        }
+        pre {
+            background-color: #f6f8fa;
+            border-radius: 3px;
+            font-size: 85%;
+            line-height: 1.45;
+            overflow: auto;
+            padding: 16px;
+        }
+        pre code {
+            background-color: transparent;
+            border: 0;
+            display: inline;
+            line-height: inherit;
+            margin: 0;
+            overflow: visible;
+            padding: 0;
+            word-wrap: normal;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 16px 0;
+        }
+        table th, table td {
+            border: 1px solid #dfe2e5;
+            padding: 6px 13px;
+        }
+        table tr:nth-child(2n) {
+            background-color: #f6f8fa;
+        }
+        blockquote {
+            border-left: 4px solid #dfe2e5;
+            color: #6a737d;
+            padding: 0 1em;
+            margin: 0;
+        }
+        a {
+            color: #0366d6;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+<h1>Cloud Scheduler Timeout Fix Guide</h1>
+<h2>Problem</h2>
+<p>Cloud Scheduler is timing out with <code>DEADLINE_EXCEEDED</code> errors (HTTP 504) when triggering Cloud Functions. This happens because:</p>
+<ol>
+<li><strong>Hourly function</strong> processes ~675 crypto pairs with 1.5s rate limiting = 15-20 minutes execution time</li>
+<li><strong>Daily function</strong> processes ~675 crypto pairs with 1.5s rate limiting = 15-20 minutes execution time</li>
+<li><strong>5-minute function</strong> processes 10 pairs but calculates 29 indicators = 5-10 minutes execution time</li>
+</ol>
+<p>The original timeouts were too short:
+- Cloud Functions: 540s (9 minutes) - not enough time to complete
+- Cloud Schedulers: 180s (3 minutes) - scheduler gave up before function finished</p>
+<h2>Solution</h2>
+<p>Increase both Cloud Function and Cloud Scheduler timeouts to allow full execution.</p>
+<h3>Option 1: Quick Fix - Update Schedulers Only (Recommended First Step)</h3>
+<p>Run this Python script to update all scheduler timeouts immediately:</p>
+<pre class="codehilite"><code class="language-bash">python fix_scheduler_timeouts.py
+</code></pre>
+
+<p>This updates:
+- <strong>Daily scheduler</strong>: 1200s (20 minutes)
+- <strong>Hourly scheduler</strong>: 1200s (20 minutes)
+- <strong>5-minute scheduler</strong>: 600s (10 minutes)</p>
+<h3>Option 2: Full Fix - Redeploy Functions with New Timeouts</h3>
+<p>For a complete fix, redeploy all functions with increased timeouts:</p>
+<h4>1. Redeploy Daily Function</h4>
+<pre class="codehilite"><code class="language-bash">cd cloud_function_daily
+python deploy_via_api.py
+</code></pre>
+
+<p>New timeout: 1200s (20 minutes)</p>
+<h4>2. Redeploy Hourly Function</h4>
+<pre class="codehilite"><code class="language-bash">cd cloud_function_hourly
+python deploy.py
+</code></pre>
+
+<p>New timeout: 1200s (20 minutes)</p>
+<h4>3. Redeploy 5-Minute Function</h4>
+<pre class="codehilite"><code class="language-bash">cd cloud_function_5min
+python deploy_all.py
+</code></pre>
+
+<p>New timeout: 600s (10 minutes)</p>
+<p><strong>Note:</strong> Each deployment takes 2-3 minutes. The 5-minute deployment also updates its scheduler automatically.</p>
+<h2>What Changed</h2>
+<h3>Cloud Function Timeouts</h3>
+<p>All deployment scripts have been updated:</p>
+<p><strong>cloud_function_daily/deploy_via_api.py:25</strong></p>
+<pre class="codehilite"><code class="language-python">TIMEOUT_SECONDS = 1200  # 20 minutes - enough for ~675 pairs with 1.5s rate limiting
+</code></pre>
+
+<p><strong>cloud_function_hourly/deploy.py:24</strong></p>
+<pre class="codehilite"><code class="language-python">TIMEOUT_SECONDS = 1200  # 20 minutes - enough for ~675 pairs with 1.5s rate limiting
+</code></pre>
+
+<p><strong>cloud_function_5min/deploy_all.py:21</strong></p>
+<pre class="codehilite"><code class="language-python">TIMEOUT_SECONDS = 600  # 10 minutes - fetches only 10 pairs but calculates indicators
+</code></pre>
+
+<h3>Cloud Scheduler Timeouts</h3>
+<p>All scheduler setup scripts now include <code>attempt_deadline</code>:</p>
+<pre class="codehilite"><code class="language-python">job = scheduler_v1.Job(
+    name=job_path,
+    # ... other config ...
+    attempt_deadline=duration_pb2.Duration(seconds=1200),  # 20 minutes
+    retry_config=scheduler_v1.RetryConfig(
+        retry_count=2,
+        max_retry_duration=duration_pb2.Duration(seconds=1200),
+    ),
+)
+</code></pre>
+
+<h2>Verification</h2>
+<h3>1. Check Scheduler Status</h3>
+<pre class="codehilite"><code class="language-bash">gcloud scheduler jobs list --project=cryptobot-462709 --location=us-central1
+</code></pre>
+
+<p>All jobs should show <code>STATE: ENABLED</code>.</p>
+<h3>2. Monitor Next Scheduled Run</h3>
+<p>Wait for the next scheduled run (hourly runs every hour at :00). Check logs:</p>
+<pre class="codehilite"><code class="language-bash">gcloud functions logs read hourly-crypto-fetcher --project=cryptobot-462709 --limit=50
+</code></pre>
+
+<p>Look for:
+- <code>"Starting Hourly Crypto Data Fetch with Technical Indicators"</code>
+- <code>"Successfully processed X/675 pairs"</code>
+- <code>"Hourly data fetch with indicators completed successfully!"</code></p>
+<h3>3. Check for Errors</h3>
+<pre class="codehilite"><code class="language-bash">gcloud scheduler jobs describe hourly-crypto-fetch-job \
+  --location=us-central1 \
+  --project=cryptobot-462709
+</code></pre>
+
+<p>Check the <code>lastAttemptTime</code> and <code>status</code> fields. Should show <code>SUCCESS</code> instead of <code>DEADLINE_EXCEEDED</code>.</p>
+<h3>4. Verify Data is Being Collected</h3>
+<pre class="codehilite"><code class="language-bash">python check_bigquery_counts.py
+</code></pre>
+
+<p>Should show recent timestamps and increasing record counts.</p>
+<h2>Expected Execution Times</h2>
+<p>With 1.5 second rate limiting per pair:</p>
+<table>
+<thead>
+<tr>
+<th>Function</th>
+<th>Pairs</th>
+<th>Time per Pair</th>
+<th>Total Time</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Daily</td>
+<td>~675</td>
+<td>1.5s</td>
+<td>15-20 min</td>
+</tr>
+<tr>
+<td>Hourly</td>
+<td>~675</td>
+<td>1.5s</td>
+<td>15-20 min</td>
+</tr>
+<tr>
+<td>5-Minute</td>
+<td>10</td>
+<td>1.5s + indicators</td>
+<td>5-10 min</td>
+</tr>
+</tbody>
+</table>
+<h2>Troubleshooting</h2>
+<h3>Issue: Still getting timeout errors after fix</h3>
+<p><strong>Solution:</strong>
+1. Verify scheduler was actually updated:
+   <code>bash
+   gcloud scheduler jobs describe hourly-crypto-fetch-job --location=us-central1 --project=cryptobot-462709 | grep attemptDeadline</code>
+   Should show <code>attemptDeadline: 1200s</code></p>
+<ol>
+<li>If not updated, run <code>python fix_scheduler_timeouts.py</code> again</li>
+</ol>
+<h3>Issue: Function still times out at 9 minutes</h3>
+<p><strong>Solution:</strong>
+Function timeout wasn't increased. Redeploy the function:</p>
+<pre class="codehilite"><code class="language-bash">cd cloud_function_hourly
+python deploy.py
+</code></pre>
+
+<h3>Issue: Python script fails with "No module named 'google.cloud'"</h3>
+<p><strong>Solution:</strong>
+Install required packages:</p>
+<pre class="codehilite"><code class="language-bash">pip install google-cloud-scheduler google-cloud-functions
+</code></pre>
+
+<h3>Issue: gcloud commands fail with "grpc" module error</h3>
+<p><strong>Solution:</strong>
+This is a known gcloud CLI issue on Windows. Use the Python API scripts instead:
+- Don't use: <code>gcloud functions deploy</code>
+- Use: <code>python deploy.py</code> or <code>python deploy_via_api.py</code></p>
+<h2>Cost Impact</h2>
+<p>Increasing timeouts doesn't directly increase costs. You only pay for actual execution time, not the timeout limit.</p>
+<p>However, your functions DO run for 15-20 minutes per execution:
+- <strong>Daily function</strong>: Runs once per day = ~20 minutes/day
+- <strong>Hourly function</strong>: Runs 24 times per day = ~8 hours/day
+- <strong>5-minute function</strong>: Runs 288 times per day (every 5 min) = ~24 hours/day</p>
+<p>Current estimated costs remain the same (~$135/month) since the execution time hasn't changed, only the timeout limits.</p>
+<h2>Prevention</h2>
+<p>For future deployments:
+1. Always set function timeout &gt; expected execution time + buffer
+2. Set scheduler <code>attempt_deadline</code> &gt;= function timeout
+3. Set scheduler <code>max_retry_duration</code> &gt;= function timeout
+4. Test with a manual trigger before relying on schedulers</p>
+<h2>Files Modified</h2>
+<ul>
+<li><code>cloud_function_daily/deploy_via_api.py</code> - Updated TIMEOUT_SECONDS to 1200</li>
+<li><code>cloud_function_hourly/deploy.py</code> - Updated TIMEOUT_SECONDS to 1200</li>
+<li><code>cloud_function_5min/deploy_all.py</code> - Updated TIMEOUT_SECONDS to 600</li>
+<li><code>setup_schedulers_cryptobot.py</code> - Added attempt_deadline to both schedulers</li>
+<li><code>fix_scheduler_timeouts.py</code> - NEW: Script to fix existing schedulers</li>
+</ul>
+<h2>Summary</h2>
+<p>✓ <strong>Root cause</strong>: Cloud Scheduler timeout (180s) was too short for functions that need 15-20 minutes</p>
+<p>✓ <strong>Quick fix</strong>: Run <code>python fix_scheduler_timeouts.py</code> to update schedulers immediately</p>
+<p>✓ <strong>Complete fix</strong>: Redeploy all functions with increased timeouts using their deploy scripts</p>
+<p>✓ <strong>Verification</strong>: Check logs and BigQuery data to confirm successful execution</p>
+<p>The functions will now complete successfully without DEADLINE_EXCEEDED errors.</p>
+</body>
+</html>

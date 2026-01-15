@@ -1,0 +1,344 @@
+#!/usr/bin/env python3
+"""
+Backfill SPY with ALL 97 Fields
+"""
+
+import sys
+import io
+if sys.platform == 'win32':
+    sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
+
+import time
+import requests
+import pandas as pd
+import numpy as np
+from datetime import datetime, timezone
+from google.cloud import bigquery
+
+# Configuration
+PROJECT_ID = 'aialgotradehits'
+DATASET_ID = 'crypto_trading_data'
+TABLE_NAME = 'stocks_daily_clean'
+TWELVEDATA_API_KEY = '16ee060fd4d34a628a14bcb6f0167565'
+BASE_URL = 'https://api.twelvedata.com'
+
+# Initialize BigQuery client
+client = bigquery.Client(project=PROJECT_ID)
+
+# Copy all the calculation functions from previous script
+def calculate_sma(series, period):
+    return series.rolling(window=period, min_periods=period).mean()
+
+def calculate_ema(series, period):
+    return series.ewm(span=period, adjust=False, min_periods=period).mean()
+
+def calculate_rsi(series, period=14):
+    delta = series.diff()
+    gain = delta.where(delta > 0, 0).rolling(window=period, min_periods=period).mean()
+    loss = (-delta.where(delta < 0, 0)).rolling(window=period, min_periods=period).mean()
+    rs = gain / loss
+    return (100 - (100 / (1 + rs))).replace([np.inf, -np.inf], np.nan)
+
+def calculate_macd(series, fast=12, slow=26, signal=9):
+    ema_fast = calculate_ema(series, fast)
+    ema_slow = calculate_ema(series, slow)
+    macd = ema_fast - ema_slow
+    macd_signal = calculate_ema(macd, signal)
+    macd_histogram = macd - macd_signal
+    return macd, macd_signal, macd_histogram
+
+def calculate_bollinger_bands(series, period=20, std_dev=2):
+    middle = calculate_sma(series, period)
+    std = series.rolling(window=period, min_periods=period).std()
+    upper = middle + (std * std_dev)
+    lower = middle - (std * std_dev)
+    width = ((upper - lower) / middle * 100).replace([np.inf, -np.inf], np.nan)
+    return upper, middle, lower, width
+
+def calculate_stochastic(high, low, close, k_period=14, d_period=3):
+    lowest_low = low.rolling(window=k_period, min_periods=k_period).min()
+    highest_high = high.rolling(window=k_period, min_periods=k_period).max()
+    denom = highest_high - lowest_low
+    stoch_k = (100 * (close - lowest_low) / denom).replace([np.inf, -np.inf], np.nan)
+    stoch_d = stoch_k.rolling(window=d_period, min_periods=d_period).mean()
+    return stoch_k, stoch_d
+
+def calculate_atr(high, low, close, period=14):
+    prev_close = close.shift(1)
+    tr1 = high - low
+    tr2 = abs(high - prev_close)
+    tr3 = abs(low - prev_close)
+    tr = pd.concat([tr1, tr2, tr3], axis=1).max(axis=1)
+    return tr.rolling(window=period, min_periods=period).mean()
+
+def calculate_adx(high, low, close, period=14):
+    prev_high = high.shift(1)
+    prev_low = low.shift(1)
+    prev_close = close.shift(1)
+    plus_dm = high - prev_high
+    minus_dm = prev_low - low
+    plus_dm = plus_dm.where((plus_dm > minus_dm) & (plus_dm > 0), 0)
+    minus_dm = minus_dm.where((minus_dm > plus_dm) & (minus_dm > 0), 0)
+    tr1 = high - low
+    tr2 = abs(high - prev_close)
+    tr3 = abs(low - prev_close)
+    tr = pd.concat([tr1, tr2, tr3], axis=1).max(axis=1)
+    atr = tr.rolling(window=period, min_periods=period).mean()
+    plus_di = (100 * (plus_dm.rolling(window=period, min_periods=period).mean() / atr)).replace([np.inf, -np.inf], np.nan)
+    minus_di = (100 * (minus_dm.rolling(window=period, min_periods=period).mean() / atr)).replace([np.inf, -np.inf], np.nan)
+    dx = (100 * abs(plus_di - minus_di) / (plus_di + minus_di)).replace([np.inf, -np.inf], np.nan)
+    adx = dx.rolling(window=period, min_periods=period).mean()
+    return adx, plus_di, minus_di
+
+def calculate_cci(high, low, close, period=20):
+    tp = (high + low + close) / 3
+    sma_tp = tp.rolling(window=period, min_periods=period).mean()
+    mad = tp.rolling(window=period, min_periods=period).apply(lambda x: np.abs(x - x.mean()).mean())
+    return ((tp - sma_tp) / (0.015 * mad)).replace([np.inf, -np.inf], np.nan)
+
+def calculate_williams_r(high, low, close, period=14):
+    highest_high = high.rolling(window=period, min_periods=period).max()
+    lowest_low = low.rolling(window=period, min_periods=period).min()
+    return (-100 * (highest_high - close) / (highest_high - lowest_low)).replace([np.inf, -np.inf], np.nan)
+
+def calculate_obv(close, volume):
+    obv = pd.Series(index=close.index, dtype=float)
+    obv.iloc[0] = volume.iloc[0] if len(close) > 0 else 0
+    for i in range(1, len(close)):
+        if close.iloc[i] > close.iloc[i-1]:
+            obv.iloc[i] = obv.iloc[i-1] + volume.iloc[i]
+        elif close.iloc[i] < close.iloc[i-1]:
+            obv.iloc[i] = obv.iloc[i-1] - volume.iloc[i]
+        else:
+            obv.iloc[i] = obv.iloc[i-1]
+    return obv
+
+def calculate_mfi(high, low, close, volume, period=14):
+    tp = (high + low + close) / 3
+    mf = tp * volume
+    positive_mf = mf.where(tp > tp.shift(1), 0).rolling(window=period, min_periods=period).sum()
+    negative_mf = mf.where(tp < tp.shift(1), 0).rolling(window=period, min_periods=period).sum()
+    mfr = positive_mf / negative_mf
+    return (100 - (100 / (1 + mfr))).replace([np.inf, -np.inf], np.nan)
+
+def calculate_cmf(high, low, close, volume, period=20):
+    denom = high - low
+    mfm = ((close - low) - (high - close)) / denom
+    mfm = mfm.replace([np.inf, -np.inf], 0).fillna(0)
+    mfv = mfm * volume
+    vol_sum = volume.rolling(window=period, min_periods=period).sum()
+    return (mfv.rolling(window=period, min_periods=period).sum() / vol_sum).replace([np.inf, -np.inf], np.nan)
+
+def calculate_ichimoku(high, low, close):
+    tenkan = (high.rolling(window=9, min_periods=9).max() + low.rolling(window=9, min_periods=9).min()) / 2
+    kijun = (high.rolling(window=26, min_periods=26).max() + low.rolling(window=26, min_periods=26).min()) / 2
+    senkou_a = ((tenkan + kijun) / 2).shift(26)
+    senkou_b = ((high.rolling(window=52, min_periods=52).max() + low.rolling(window=52, min_periods=52).min()) / 2).shift(26)
+    chikou = close.shift(-26)
+    return tenkan, kijun, senkou_a, senkou_b, chikou
+
+def calculate_vwap(high, low, close, volume):
+    tp = (high + low + close) / 3
+    vol_cum = volume.cumsum()
+    return ((tp * volume).cumsum() / vol_cum).replace([np.inf, -np.inf], np.nan)
+
+def calculate_kama(close, period=10, fast=2, slow=30):
+    change = abs(close - close.shift(period))
+    volatility = abs(close.diff()).rolling(window=period, min_periods=period).sum()
+    er = (change / volatility).replace([np.inf, -np.inf], 0).fillna(0)
+    fast_sc = 2 / (fast + 1)
+    slow_sc = 2 / (slow + 1)
+    sc = (er * (fast_sc - slow_sc) + slow_sc) ** 2
+    kama = pd.Series(index=close.index, dtype=float)
+    if len(close) > period:
+        kama.iloc[period-1] = close.iloc[period-1]
+        for i in range(period, len(close)):
+            kama.iloc[i] = kama.iloc[i-1] + sc.iloc[i] * (close.iloc[i] - kama.iloc[i-1])
+    return kama
+
+def calculate_trix(close, period=15):
+    ema1 = calculate_ema(close, period)
+    ema2 = calculate_ema(ema1, period)
+    ema3 = calculate_ema(ema2, period)
+    return (100 * (ema3 - ema3.shift(1)) / ema3.shift(1)).replace([np.inf, -np.inf], np.nan)
+
+def calculate_roc(close, period=12):
+    return (100 * (close - close.shift(period)) / close.shift(period)).replace([np.inf, -np.inf], np.nan)
+
+def calculate_pvo(volume, fast=12, slow=26):
+    ema_fast = calculate_ema(volume.astype(float), fast)
+    ema_slow = calculate_ema(volume.astype(float), slow)
+    return (100 * (ema_fast - ema_slow) / ema_slow).replace([np.inf, -np.inf], np.nan)
+
+def calculate_ppo(close, fast=12, slow=26):
+    ema_fast = calculate_ema(close, fast)
+    ema_slow = calculate_ema(close, slow)
+    return (100 * (ema_fast - ema_slow) / ema_slow).replace([np.inf, -np.inf], np.nan)
+
+def calculate_ultimate_oscillator(high, low, close, period1=7, period2=14, period3=28):
+    prev_close = close.shift(1)
+    bp = close - pd.concat([low, prev_close], axis=1).min(axis=1)
+    tr = pd.concat([high, prev_close], axis=1).max(axis=1) - pd.concat([low, prev_close], axis=1).min(axis=1)
+    tr_sum1 = tr.rolling(window=period1, min_periods=period1).sum()
+    tr_sum2 = tr.rolling(window=period2, min_periods=period2).sum()
+    tr_sum3 = tr.rolling(window=period3, min_periods=period3).sum()
+    avg1 = bp.rolling(window=period1, min_periods=period1).sum() / tr_sum1
+    avg2 = bp.rolling(window=period2, min_periods=period2).sum() / tr_sum2
+    avg3 = bp.rolling(window=period3, min_periods=period3).sum() / tr_sum3
+    return (100 * (4 * avg1 + 2 * avg2 + avg3) / 7).replace([np.inf, -np.inf], np.nan)
+
+def calculate_awesome_oscillator(high, low):
+    midpoint = (high + low) / 2
+    return calculate_sma(midpoint, 5) - calculate_sma(midpoint, 34)
+
+def calculate_all_indicators(df):
+    print("    Calculating all 97 fields...")
+    df['previous_close'] = df['close'].shift(1)
+    df['change'] = df['close'] - df['previous_close']
+    df['percent_change'] = (100 * df['change'] / df['previous_close']).replace([np.inf, -np.inf], np.nan)
+    df['high_low'] = df['high'] - df['low']
+    df['pct_high_low'] = (100 * df['high_low'] / df['low']).replace([np.inf, -np.inf], np.nan)
+    df['week_52_high'] = df['high'].rolling(window=252, min_periods=50).max()
+    df['week_52_low'] = df['low'].rolling(window=252, min_periods=50).min()
+    df['average_volume'] = df['volume'].rolling(window=20, min_periods=5).mean()
+    df['rsi'] = calculate_rsi(df['close'], 14)
+    df['macd'], df['macd_signal'], df['macd_histogram'] = calculate_macd(df['close'])
+    df['stoch_k'], df['stoch_d'] = calculate_stochastic(df['high'], df['low'], df['close'])
+    df['cci'] = calculate_cci(df['high'], df['low'], df['close'])
+    df['williams_r'] = calculate_williams_r(df['high'], df['low'], df['close'])
+    df['momentum'] = df['close'] - df['close'].shift(10)
+    df['sma_20'] = calculate_sma(df['close'], 20)
+    df['sma_50'] = calculate_sma(df['close'], 50)
+    df['sma_200'] = calculate_sma(df['close'], 200)
+    df['ema_12'] = calculate_ema(df['close'], 12)
+    df['ema_20'] = calculate_ema(df['close'], 20)
+    df['ema_26'] = calculate_ema(df['close'], 26)
+    df['ema_50'] = calculate_ema(df['close'], 50)
+    df['ema_200'] = calculate_ema(df['close'], 200)
+    df['kama'] = calculate_kama(df['close'])
+    df['bollinger_upper'], df['bollinger_middle'], df['bollinger_lower'], df['bb_width'] = calculate_bollinger_bands(df['close'])
+    df['adx'], df['plus_di'], df['minus_di'] = calculate_adx(df['high'], df['low'], df['close'])
+    df['atr'] = calculate_atr(df['high'], df['low'], df['close'])
+    df['trix'] = calculate_trix(df['close'])
+    df['roc'] = calculate_roc(df['close'])
+    df['obv'] = calculate_obv(df['close'], df['volume'])
+    df['pvo'] = calculate_pvo(df['volume'])
+    df['ppo'] = calculate_ppo(df['close'])
+    df['ultimate_osc'] = calculate_ultimate_oscillator(df['high'], df['low'], df['close'])
+    df['awesome_osc'] = calculate_awesome_oscillator(df['high'], df['low'])
+    df['log_return'] = np.log(df['close'] / df['close'].shift(1))
+    df['log_return'] = df['log_return'].replace([np.inf, -np.inf], np.nan)
+    df['return_2w'] = (100 * (df['close'] - df['close'].shift(10)) / df['close'].shift(10)).replace([np.inf, -np.inf], np.nan)
+    df['return_4w'] = (100 * (df['close'] - df['close'].shift(20)) / df['close'].shift(20)).replace([np.inf, -np.inf], np.nan)
+    df['close_vs_sma20_pct'] = (100 * (df['close'] - df['sma_20']) / df['sma_20']).replace([np.inf, -np.inf], np.nan)
+    df['close_vs_sma50_pct'] = (100 * (df['close'] - df['sma_50']) / df['sma_50']).replace([np.inf, -np.inf], np.nan)
+    df['close_vs_sma200_pct'] = (100 * (df['close'] - df['sma_200']) / df['sma_200']).replace([np.inf, -np.inf], np.nan)
+    df['rsi_slope'] = df['rsi'] - df['rsi'].shift(5)
+    rsi_mean = df['rsi'].rolling(window=20, min_periods=10).mean()
+    rsi_std = df['rsi'].rolling(window=20, min_periods=10).std()
+    df['rsi_zscore'] = ((df['rsi'] - rsi_mean) / rsi_std).replace([np.inf, -np.inf], np.nan)
+    df['rsi_overbought'] = (df['rsi'] > 70).astype(int)
+    df['rsi_oversold'] = (df['rsi'] < 30).astype(int)
+    df['macd_cross'] = ((df['macd'] > df['macd_signal']) & (df['macd'].shift(1) <= df['macd_signal'].shift(1))).astype(int) - \
+                       ((df['macd'] < df['macd_signal']) & (df['macd'].shift(1) >= df['macd_signal'].shift(1))).astype(int)
+    df['ema20_slope'] = df['ema_20'] - df['ema_20'].shift(5)
+    df['ema50_slope'] = df['ema_50'] - df['ema_50'].shift(5)
+    atr_mean = df['atr'].rolling(window=20, min_periods=10).mean()
+    atr_std = df['atr'].rolling(window=20, min_periods=10).std()
+    df['atr_zscore'] = ((df['atr'] - atr_mean) / atr_std).replace([np.inf, -np.inf], np.nan)
+    df['atr_slope'] = df['atr'] - df['atr'].shift(5)
+    vol_mean = df['volume'].rolling(window=20, min_periods=10).mean()
+    vol_std = df['volume'].rolling(window=20, min_periods=10).std()
+    df['volume_zscore'] = ((df['volume'] - vol_mean) / vol_std).replace([np.inf, -np.inf], np.nan)
+    df['volume_ratio'] = (df['volume'] / vol_mean).replace([np.inf, -np.inf], np.nan)
+    df['pivot_high_flag'] = ((df['high'] > df['high'].shift(1)) & (df['high'] > df['high'].shift(-1).fillna(0))).astype(int)
+    df['pivot_low_flag'] = ((df['low'] < df['low'].shift(1)) & (df['low'] < df['low'].shift(-1).fillna(float('inf')))).astype(int)
+    recent_pivot_high = df['high'].where(df['pivot_high_flag'] == 1).ffill()
+    recent_pivot_low = df['low'].where(df['pivot_low_flag'] == 1).ffill()
+    df['dist_to_pivot_high'] = (100 * (df['close'] - recent_pivot_high) / recent_pivot_high).replace([np.inf, -np.inf], np.nan)
+    df['dist_to_pivot_low'] = (100 * (df['close'] - recent_pivot_low) / recent_pivot_low).replace([np.inf, -np.inf], np.nan)
+    df['trend_regime'] = 0
+    df.loc[(df['close'] > df['sma_50']) & (df['sma_50'] > df['sma_200']), 'trend_regime'] = 1
+    df.loc[(df['close'] < df['sma_50']) & (df['sma_50'] < df['sma_200']), 'trend_regime'] = -1
+    df['vol_regime'] = 0
+    df.loc[df['volume_zscore'] > 1, 'vol_regime'] = 1
+    df.loc[df['volume_zscore'] < -1, 'vol_regime'] = -1
+    df['regime_confidence'] = (df['adx'] / 100).clip(0, 1)
+    df['mfi'] = calculate_mfi(df['high'], df['low'], df['close'], df['volume'])
+    df['cmf'] = calculate_cmf(df['high'], df['low'], df['close'], df['volume'])
+    df['ichimoku_tenkan'], df['ichimoku_kijun'], df['ichimoku_senkou_a'], df['ichimoku_senkou_b'], df['ichimoku_chikou'] = \
+        calculate_ichimoku(df['high'], df['low'], df['close'])
+    df['vwap_daily'] = calculate_vwap(df['high'], df['low'], df['close'], df['volume'])
+    df['week_num'] = (df.index // 5)
+    grouped = df.groupby('week_num')
+    df['vwap_weekly'] = grouped.apply(lambda x: calculate_vwap(x['high'], x['low'], x['close'], x['volume']), include_groups=False).reset_index(level=0, drop=True)
+    df = df.drop('week_num', axis=1)
+    df['volume_profile_poc'] = df['close'].rolling(window=20, min_periods=10).median()
+    df['volume_profile_vah'] = df['high'].rolling(window=20, min_periods=10).quantile(0.7)
+    df['volume_profile_val'] = df['low'].rolling(window=20, min_periods=10).quantile(0.3)
+    return df
+
+def main():
+    symbol = 'SPY'
+    print(f"Processing {symbol}...")
+
+    # Fetch historical data
+    print(f"  Fetching 5000 days of historical data...")
+    url = f"{BASE_URL}/time_series"
+    params = {'symbol': symbol, 'interval': '1day', 'outputsize': 5000, 'apikey': TWELVEDATA_API_KEY}
+    response = requests.get(url, params=params, timeout=60)
+    data = response.json()
+
+    if 'values' not in data:
+        print(f"  API Error: {data.get('message', 'Unknown error')}")
+        return
+
+    df = pd.DataFrame(data['values'])
+    df['datetime'] = pd.to_datetime(df['datetime'])
+    df = df.sort_values('datetime').reset_index(drop=True)
+    for col in ['open', 'high', 'low', 'close', 'volume']:
+        df[col] = pd.to_numeric(df[col], errors='coerce')
+
+    print(f"  Got {len(df)} days of data (from {df['datetime'].min().date()} to {df['datetime'].max().date()})")
+
+    # Calculate all indicators
+    df = calculate_all_indicators(df)
+
+    # Save to CSV
+    csv_path = f"C:/1AITrading/Trading/{symbol}_all_97_fields.csv"
+    df.to_csv(csv_path, index=False)
+    print(f"  Saved CSV: {csv_path}")
+
+    # Add metadata
+    df['symbol'] = symbol
+    df['name'] = 'SPDR S&P 500 ETF Trust'
+    df['sector'] = 'Diversified'
+    df['industry'] = 'Exchange Traded Fund'
+    df['asset_type'] = 'ETF'
+    df['exchange'] = 'NYSE'
+    df['mic_code'] = 'XNYS'
+    df['country'] = 'United States'
+    df['currency'] = 'USD'
+    df['type'] = 'etf'
+    df['data_source'] = 'twelvedata'
+    df['timestamp'] = df['datetime'].astype(np.int64) // 10**9
+    df['created_at'] = datetime.now(timezone.utc)
+    df['updated_at'] = datetime.now(timezone.utc)
+    df['average_volume'] = df['average_volume'].fillna(0).astype(int)
+    df = df.replace([np.inf, -np.inf], np.nan)
+
+    # Update BigQuery
+    print(f"  Updating BigQuery...")
+    delete_query = f"DELETE FROM `{PROJECT_ID}.{DATASET_ID}.{TABLE_NAME}` WHERE symbol = '{symbol}'"
+    client.query(delete_query).result()
+
+    table_ref = f"{PROJECT_ID}.{DATASET_ID}.{TABLE_NAME}"
+    job_config = bigquery.LoadJobConfig(write_disposition=bigquery.WriteDisposition.WRITE_APPEND)
+    job = client.load_table_from_dataframe(df, table_ref, job_config=job_config)
+    job.result()
+
+    print(f"  SUCCESS: {len(df)} rows uploaded for {symbol}")
+    print(f"  CSV file available at: {csv_path}")
+
+if __name__ == "__main__":
+    main()

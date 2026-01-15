@@ -1,0 +1,35 @@
+{
+  "stocks": {
+    "cv_accuracy": 0.5271255060728746,
+    "cv_std": 0.02533520299135548,
+    "top_features": [
+      "trend_regime",
+      "macd_histogram",
+      "minus_di",
+      "stoch_d",
+      "rsi_change",
+      "price_vs_sma50",
+      "price_vs_sma20",
+      "williams_r",
+      "stoch_k",
+      "volume_ratio"
+    ]
+  },
+  "crypto": {
+    "cv_accuracy": 0.5269102990033223,
+    "cv_std": 0.023170226942408893,
+    "top_features": [
+      "price_vs_sma20",
+      "stoch_d",
+      "price_vs_sma50",
+      "adx",
+      "rsi",
+      "williams_r",
+      "cci",
+      "plus_di",
+      "stoch_k",
+      "macd_histogram"
+    ]
+  },
+  "trained_at": "2025-12-15T18:54:47.493344"
+}

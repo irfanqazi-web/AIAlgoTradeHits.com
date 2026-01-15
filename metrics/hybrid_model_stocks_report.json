@@ -1,0 +1,89 @@
+{
+  "model_name": "hybrid_model",
+  "asset_type": "stocks",
+  "generated_at": "2025-12-15T18:57:19.502118",
+  "sections": {
+    "performance": {
+      "status": "insufficient_data",
+      "sample_count": 0,
+      "required": 20
+    },
+    "data_drift": {
+      "asset_type": "stocks",
+      "reference_period": "90 days",
+      "current_period": "7 days",
+      "reference_samples": 11536,
+      "current_samples": 889,
+      "features": {
+        "rsi": {
+          "ks_statistic": 0.21948477617482276,
+          "ks_pvalue": 2.219284894194715e-35,
+          "kl_divergence": 0.19333289575178397,
+          "reference_mean": 49.30482416732005,
+          "current_mean": 58.301498877474266,
+          "mean_shift_std": 0.5773034707228721,
+          "drift_detected": true
+        },
+        "macd": {
+          "ks_statistic": 0.12660196904998527,
+          "ks_pvalue": 5.502662468614065e-12,
+          "kl_divergence": 0.021853358391229635,
+          "reference_mean": 0.10118884104783518,
+          "current_mean": 1.1025627234765902,
+          "mean_shift_std": 0.1111006007054803,
+          "drift_detected": true
+        },
+        "adx": {
+          "ks_statistic": 0.07401274476612757,
+          "ks_pvalue": 0.00022410878809111116,
+          "kl_divergence": 0.02564230533866214,
+          "reference_mean": 30.20361931787274,
+          "current_mean": 31.268980194972496,
+          "mean_shift_std": 0.07613317906730242,
+          "drift_detected": true
+        },
+        "atr": {
+          "ks_statistic": 0.06866761497045876,
+          "ks_pvalue": 0.0007936140972480265,
+          "kl_divergence": 0.013493322782876283,
+          "reference_mean": 5.56083337165747,
+          "current_mean": 5.565376237244088,
+          "mean_shift_std": 0.00037437998415541356,
+          "drift_detected": true
+        },
+        "volume": {
+          "ks_statistic": 0.06150073170465342,
+          "ks_pvalue": 0.003726337840706244,
+          "kl_divergence": 0.004591070774020543,
+          "reference_mean": 8954106.699549237,
+          "current_mean": 6748165.2362204725,
+          "mean_shift_std": 0.10086046938272426,
+          "drift_detected": true
+        },
+        "close": {
+          "ks_statistic": 0.04291324931470952,
+          "ks_pvalue": 0.0930562250773409,
+          "kl_divergence": 0.02713218820049583,
+          "reference_mean": 224.89108576275657,
+          "current_mean": 219.71019727874014,
+          "mean_shift_std": 0.011064835073334235,
+          "drift_detected": false
+        }
+      },
+      "drift_detected": true,
+      "calculated_at": "2025-12-15T18:57:26.061114"
+    },
+    "concept_drift": {
+      "status": "insufficient_data",
+      "window_metrics": {}
+    }
+  },
+  "alerts": [
+    {
+      "type": "DATA_DRIFT",
+      "severity": "MEDIUM",
+      "message": "Data drift detected in features: rsi, macd, adx, atr, volume"
+    }
+  ],
+  "alert_count": 1
+}

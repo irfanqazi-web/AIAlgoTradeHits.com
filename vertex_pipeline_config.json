@@ -1,0 +1,54 @@
+{
+  "display_name": "trading_forecast_pipeline",
+  "stages": [
+    {
+      "name": "data_prep",
+      "type": "BigQueryExportOp",
+      "config": {
+        "project": "aialgotradehits",
+        "dataset": "crypto_trading_data",
+        "table": "stocks_timeseries_view"
+      }
+    },
+    {
+      "name": "feature_engineering",
+      "type": "DataTransformOp",
+      "config": {
+        "transformations": [
+          "fill_missing_values",
+          "normalize_features",
+          "create_lag_features"
+        ]
+      }
+    },
+    {
+      "name": "model_training",
+      "type": "AutoMLForecastingTrainOp",
+      "config": {
+        "target_column": "close",
+        "time_column": "timestamp",
+        "forecast_horizon": 5,
+        "optimization_objective": "minimize-rmse"
+      }
+    },
+    {
+      "name": "model_evaluation",
+      "type": "ModelEvaluationOp",
+      "config": {
+        "metrics": [
+          "rmse",
+          "mae",
+          "mape"
+        ]
+      }
+    },
+    {
+      "name": "model_deployment",
+      "type": "ModelDeployOp",
+      "config": {
+        "endpoint_name": "trading_forecast_endpoint",
+        "machine_type": "n1-standard-4"
+      }
+    }
+  ]
+}

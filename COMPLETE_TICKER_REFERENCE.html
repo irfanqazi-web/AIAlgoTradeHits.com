@@ -1,0 +1,1622 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Complete Ticker Reference - AIAlgoTradeHits</title>
+<style>
+body { font-family: Arial, sans-serif; margin: 40px; line-height: 1.6; max-width: 1200px; margin: 0 auto; padding: 40px; }
+h1 { color: #1e293b; border-bottom: 3px solid #10b981; padding-bottom: 10px; }
+h2 { color: #334155; border-bottom: 2px solid #3b82f6; padding-bottom: 8px; margin-top: 30px; }
+h3 { color: #475569; margin-top: 20px; }
+table { border-collapse: collapse; width: 100%; margin: 15px 0; }
+th, td { border: 1px solid #e2e8f0; padding: 10px 12px; text-align: left; }
+th { background: #f1f5f9; font-weight: 600; }
+tr:nth-child(even) { background: #f8fafc; }
+code { background: #f1f5f9; padding: 2px 6px; border-radius: 4px; font-family: monospace; color: #0f172a; }
+strong { color: #1e293b; }
+hr { border: none; border-top: 1px solid #e2e8f0; margin: 20px 0; }
+@media print {
+    body { margin: 20px; }
+    h1 { page-break-after: avoid; }
+    h2 { page-break-after: avoid; }
+    table { page-break-inside: avoid; }
+}
+</style>
+</head>
+<body>
+<h1>Complete Ticker Reference Guide</h1>
+<h2>AIAlgoTradeHits Trading Platform</h2>
+<p><strong>Generated:</strong> December 15, 2025
+<strong>Total Assets Available:</strong> 300+ symbols across 6 asset classes</p>
+<hr />
+<h2>Data Coverage Summary</h2>
+<h3>Overall Statistics by Timeframe</h3>
+<table>
+<thead>
+<tr>
+<th>Dataset</th>
+<th>Records</th>
+<th>Symbols</th>
+<th>Start Date</th>
+<th>End Date</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Crypto Daily</strong></td>
+<td>94,048</td>
+<td>46</td>
+<td>2014-09-17</td>
+<td>2025-12-11</td>
+</tr>
+<tr>
+<td><strong>Stocks Daily</strong></td>
+<td>936,811</td>
+<td>216</td>
+<td>2006-01-27</td>
+<td>2025-12-12</td>
+</tr>
+<tr>
+<td><strong>ETFs Daily</strong></td>
+<td>36,500</td>
+<td>25</td>
+<td>2024-07-01</td>
+<td>2025-12-12</td>
+</tr>
+<tr>
+<td><strong>Forex Daily</strong></td>
+<td>29,200</td>
+<td>20</td>
+<td>2024-08-19</td>
+<td>2025-12-15</td>
+</tr>
+<tr>
+<td><strong>Commodities Daily</strong></td>
+<td>16,439</td>
+<td>12</td>
+<td>2024-07-01</td>
+<td>2025-12-15</td>
+</tr>
+<tr>
+<td><strong>Indices Daily</strong></td>
+<td>1,460</td>
+<td>1</td>
+<td>2024-07-05</td>
+<td>2025-12-12</td>
+</tr>
+<tr>
+<td><strong>Crypto Hourly</strong></td>
+<td>695,520</td>
+<td>45</td>
+<td>2025-12-05</td>
+<td>2025-12-15</td>
+</tr>
+<tr>
+<td><strong>Stocks Hourly</strong></td>
+<td>937,440</td>
+<td>60</td>
+<td>2025-11-06</td>
+<td>2025-12-15</td>
+</tr>
+<tr>
+<td><strong>Crypto 5min</strong></td>
+<td>14,252,256</td>
+<td>45</td>
+<td>2025-12-10</td>
+<td>2025-12-15</td>
+</tr>
+<tr>
+<td><strong>Stocks 5min</strong></td>
+<td>3,093,120</td>
+<td>60</td>
+<td>2025-12-08</td>
+<td>2025-12-15</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Total Records: ~20 Million+</strong></p>
+<hr />
+<h2>Quick Format Reference</h2>
+<table>
+<thead>
+<tr>
+<th>Asset Type</th>
+<th>Format</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Cryptocurrencies</td>
+<td><code>SYMBOL/USD</code></td>
+<td><code>BTC/USD</code>, <code>ETH/USD</code></td>
+</tr>
+<tr>
+<td>Stocks</td>
+<td><code>SYMBOL</code></td>
+<td><code>AAPL</code>, <code>MSFT</code></td>
+</tr>
+<tr>
+<td>ETFs</td>
+<td><code>SYMBOL</code></td>
+<td><code>SPY</code>, <code>QQQ</code></td>
+</tr>
+<tr>
+<td>Forex</td>
+<td><code>XXXYYY</code> (no slash)</td>
+<td><code>EURUSD</code>, <code>GBPUSD</code></td>
+</tr>
+<tr>
+<td>Commodities</td>
+<td><code>SYMBOL</code> or <code>XXXUSD</code></td>
+<td><code>XAUUSD</code>, <code>CL</code></td>
+</tr>
+<tr>
+<td>Indices</td>
+<td><code>SYMBOL</code></td>
+<td><code>SPX</code></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>1. CRYPTOCURRENCIES (46 Assets)</h2>
+<p><strong>Format: <code>SYMBOL/USD</code></strong> - Always include the <code>/USD</code> suffix</p>
+<h3>Data Coverage: Daily</h3>
+<ul>
+<li><strong>Total Records:</strong> 94,048</li>
+<li><strong>Date Range:</strong> September 17, 2014 - December 11, 2025</li>
+<li><strong>Oldest Asset:</strong> BTC/USD (since 2014)</li>
+</ul>
+<h3>Per-Symbol Statistics</h3>
+<table>
+<thead>
+<tr>
+<th>Ticker</th>
+<th>Full Name</th>
+<th>Daily Records</th>
+<th>Start Date</th>
+<th>End Date</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>BTC/USD</strong></td>
+<td>Bitcoin</td>
+<td>4,104</td>
+<td>2014-09-17</td>
+<td>2025-12-11</td>
+</tr>
+<tr>
+<td><strong>ETH/USD</strong></td>
+<td>Ethereum</td>
+<td>1,551</td>
+<td>2021-09-13</td>
+<td>2025-12-11</td>
+</tr>
+<tr>
+<td><strong>SOL/USD</strong></td>
+<td>Solana</td>
+<td>1,564</td>
+<td>2021-08-31</td>
+<td>2025-12-11</td>
+</tr>
+<tr>
+<td><strong>XRP/USD</strong></td>
+<td>Ripple</td>
+<td>2,886</td>
+<td>2018-01-17</td>
+<td>2025-12-11</td>
+</tr>
+<tr>
+<td><strong>DOGE/USD</strong></td>
+<td>Dogecoin</td>
+<td>1,652</td>
+<td>2021-06-04</td>
+<td>2025-12-11</td>
+</tr>
+<tr>
+<td><strong>ADA/USD</strong></td>
+<td>Cardano</td>
+<td>2,744</td>
+<td>2018-06-08</td>
+<td>2025-12-11</td>
+</tr>
+<tr>
+<td>AAVE/USD</td>
+<td>Aave</td>
+<td>1,625</td>
+<td>2021-07-01</td>
+<td>2025-12-11</td>
+</tr>
+<tr>
+<td>ALGO/USD</td>
+<td>Algorand</td>
+<td>2,333</td>
+<td>2019-07-24</td>
+<td>2025-12-11</td>
+</tr>
+<tr>
+<td>APT/USD</td>
+<td>Aptos</td>
+<td>1,150</td>
+<td>2022-10-19</td>
+<td>2025-12-11</td>
+</tr>
+<tr>
+<td>ARB/USD</td>
+<td>Arbitrum</td>
+<td>995</td>
+<td>2023-03-23</td>
+<td>2025-12-11</td>
+</tr>
+<tr>
+<td>ATOM/USD</td>
+<td>Cosmos</td>
+<td>2,404</td>
+<td>2019-05-14</td>
+<td>2025-12-11</td>
+</tr>
+<tr>
+<td>AVAX/USD</td>
+<td>Avalanche</td>
+<td>1,814</td>
+<td>2020-12-24</td>
+<td>2025-12-11</td>
+</tr>
+<tr>
+<td>BAT/USD</td>
+<td>Basic Attention Token</td>
+<td>2,391</td>
+<td>2019-05-27</td>
+<td>2025-12-11</td>
+</tr>
+<tr>
+<td>BCH/USD</td>
+<td>Bitcoin Cash</td>
+<td>2,576</td>
+<td>2018-11-18</td>
+<td>2025-12-11</td>
+</tr>
+<tr>
+<td>BNB/USD</td>
+<td>Binance Coin</td>
+<td>2,956</td>
+<td>2017-11-08</td>
+<td>2025-12-11</td>
+</tr>
+<tr>
+<td>CFX/USD</td>
+<td>Conflux</td>
+<td>1,506</td>
+<td>2021-10-28</td>
+<td>2025-12-11</td>
+</tr>
+<tr>
+<td>COMP/USD</td>
+<td>Compound</td>
+<td>1,943</td>
+<td>2020-08-17</td>
+<td>2025-12-11</td>
+</tr>
+<tr>
+<td>CRO/USD</td>
+<td>Cronos</td>
+<td>2,335</td>
+<td>2019-07-21</td>
+<td>2025-12-11</td>
+</tr>
+<tr>
+<td>DASH/USD</td>
+<td>Dash</td>
+<td>2,794</td>
+<td>2018-01-17</td>
+<td>2025-12-11</td>
+</tr>
+<tr>
+<td>DOT/USD</td>
+<td>Polkadot</td>
+<td>1,940</td>
+<td>2020-08-20</td>
+<td>2025-12-11</td>
+</tr>
+<tr>
+<td>ETC/USD</td>
+<td>Ethereum Classic</td>
+<td>2,192</td>
+<td>2019-04-18</td>
+<td>2025-12-11</td>
+</tr>
+<tr>
+<td>FIL/USD</td>
+<td>Filecoin</td>
+<td>1,695</td>
+<td>2021-04-22</td>
+<td>2025-12-11</td>
+</tr>
+<tr>
+<td>FLOW/USD</td>
+<td>Flow</td>
+<td>1,672</td>
+<td>2021-05-15</td>
+<td>2025-12-11</td>
+</tr>
+<tr>
+<td>GRT/USD</td>
+<td>The Graph</td>
+<td>1,225</td>
+<td>2022-08-05</td>
+<td>2025-12-11</td>
+</tr>
+<tr>
+<td>HBAR/USD</td>
+<td>Hedera</td>
+<td>2,255</td>
+<td>2019-10-10</td>
+<td>2025-12-11</td>
+</tr>
+<tr>
+<td>IMX/USD</td>
+<td>Immutable X</td>
+<td>898</td>
+<td>2018-02-28</td>
+<td>2025-12-11</td>
+</tr>
+<tr>
+<td>INJ/USD</td>
+<td>Injective</td>
+<td>1,511</td>
+<td>2021-10-23</td>
+<td>2025-12-11</td>
+</tr>
+<tr>
+<td>LDO/USD</td>
+<td>Lido DAO</td>
+<td>1,225</td>
+<td>2022-08-05</td>
+<td>2025-12-11</td>
+</tr>
+<tr>
+<td>LINK/USD</td>
+<td>Chainlink</td>
+<td>2,371</td>
+<td>2019-06-16</td>
+<td>2025-12-11</td>
+</tr>
+<tr>
+<td>LTC/USD</td>
+<td>Litecoin</td>
+<td>2,752</td>
+<td>2017-12-14</td>
+<td>2025-12-11</td>
+</tr>
+<tr>
+<td>MANA/USD</td>
+<td>Decentraland</td>
+<td>1,314</td>
+<td>2022-05-08</td>
+<td>2025-12-11</td>
+</tr>
+<tr>
+<td>NEAR/USD</td>
+<td>Near Protocol</td>
+<td>1,672</td>
+<td>2021-05-15</td>
+<td>2025-12-11</td>
+</tr>
+<tr>
+<td>OP/USD</td>
+<td>Optimism</td>
+<td>1,230</td>
+<td>2022-07-31</td>
+<td>2025-12-11</td>
+</tr>
+<tr>
+<td>RPL/USD</td>
+<td>Rocket Pool</td>
+<td>2,657</td>
+<td>2018-07-18</td>
+<td>2025-12-11</td>
+</tr>
+<tr>
+<td>RUNE/USD</td>
+<td>THORChain</td>
+<td>1,667</td>
+<td>2021-05-20</td>
+<td>2025-12-11</td>
+</tr>
+<tr>
+<td>SAND/USD</td>
+<td>The Sandbox</td>
+<td>1,511</td>
+<td>2021-10-23</td>
+<td>2025-12-11</td>
+</tr>
+<tr>
+<td>SHIB/USD</td>
+<td>Shiba Inu</td>
+<td>1,676</td>
+<td>2021-05-11</td>
+<td>2025-12-11</td>
+</tr>
+<tr>
+<td>SNX/USD</td>
+<td>Synthetix</td>
+<td>1,769</td>
+<td>2021-02-07</td>
+<td>2025-12-11</td>
+</tr>
+<tr>
+<td>THETA/USD</td>
+<td>Theta Network</td>
+<td>2,108</td>
+<td>2020-03-05</td>
+<td>2025-12-11</td>
+</tr>
+<tr>
+<td>TRX/USD</td>
+<td>TRON</td>
+<td>2,535</td>
+<td>2019-01-03</td>
+<td>2025-12-11</td>
+</tr>
+<tr>
+<td>UNI/USD</td>
+<td>Uniswap</td>
+<td>1,911</td>
+<td>2020-09-18</td>
+<td>2025-12-11</td>
+</tr>
+<tr>
+<td>VET/USD</td>
+<td>VeChain</td>
+<td>2,685</td>
+<td>2018-08-05</td>
+<td>2025-12-11</td>
+</tr>
+<tr>
+<td>XLM/USD</td>
+<td>Stellar</td>
+<td>2,427</td>
+<td>2019-04-21</td>
+<td>2025-12-11</td>
+</tr>
+<tr>
+<td>XMR/USD</td>
+<td>Monero</td>
+<td>3,039</td>
+<td>2017-08-16</td>
+<td>2025-12-11</td>
+</tr>
+<tr>
+<td>XTZ/USD</td>
+<td>Tezos</td>
+<td>1,994</td>
+<td>2020-06-27</td>
+<td>2025-12-11</td>
+</tr>
+<tr>
+<td>ZEC/USD</td>
+<td>Zcash</td>
+<td>2,794</td>
+<td>2018-01-17</td>
+<td>2025-12-11</td>
+</tr>
+</tbody>
+</table>
+<h3>Crypto Hourly Data</h3>
+<ul>
+<li><strong>Records:</strong> 695,520</li>
+<li><strong>Symbols:</strong> 45</li>
+<li><strong>Date Range:</strong> Dec 5, 2025 - Dec 15, 2025</li>
+</ul>
+<h3>Crypto 5-Minute Data</h3>
+<ul>
+<li><strong>Records:</strong> 14,252,256</li>
+<li><strong>Symbols:</strong> 45</li>
+<li><strong>Date Range:</strong> Dec 10, 2025 - Dec 15, 2025</li>
+</ul>
+<hr />
+<h2>2. STOCKS (216 Assets)</h2>
+<p><strong>Format: <code>SYMBOL</code></strong> - Standard stock ticker symbols</p>
+<h3>Data Coverage: Daily</h3>
+<ul>
+<li><strong>Total Records:</strong> 936,811</li>
+<li><strong>Date Range:</strong> January 27, 2006 - December 12, 2025</li>
+<li><strong>Most stocks have 5,000 daily records (nearly 20 years)</strong></li>
+</ul>
+<h3>Stocks Hourly Data</h3>
+<ul>
+<li><strong>Records:</strong> 937,440</li>
+<li><strong>Symbols:</strong> 60</li>
+<li><strong>Date Range:</strong> Nov 6, 2025 - Dec 15, 2025</li>
+</ul>
+<h3>Stocks 5-Minute Data</h3>
+<ul>
+<li><strong>Records:</strong> 3,093,120</li>
+<li><strong>Symbols:</strong> 60</li>
+<li><strong>Date Range:</strong> Dec 8, 2025 - Dec 15, 2025</li>
+</ul>
+<h3>Per-Symbol Statistics (Major Stocks)</h3>
+<table>
+<thead>
+<tr>
+<th>Ticker</th>
+<th>Full Name</th>
+<th>Daily Records</th>
+<th>Start Date</th>
+<th>End Date</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>AAPL</strong></td>
+<td>Apple Inc.</td>
+<td>5,000</td>
+<td>2006-01-31</td>
+<td>2025-12-12</td>
+</tr>
+<tr>
+<td><strong>MSFT</strong></td>
+<td>Microsoft Corporation</td>
+<td>5,000</td>
+<td>2006-01-27</td>
+<td>2025-12-10</td>
+</tr>
+<tr>
+<td><strong>GOOGL</strong></td>
+<td>Alphabet Inc.</td>
+<td>5,000</td>
+<td>2006-01-27</td>
+<td>2025-12-10</td>
+</tr>
+<tr>
+<td><strong>AMZN</strong></td>
+<td>Amazon.com Inc.</td>
+<td>5,000</td>
+<td>2006-01-31</td>
+<td>2025-12-12</td>
+</tr>
+<tr>
+<td><strong>NVDA</strong></td>
+<td>NVIDIA Corporation</td>
+<td>5,000</td>
+<td>2006-01-27</td>
+<td>2025-12-10</td>
+</tr>
+<tr>
+<td><strong>TSLA</strong></td>
+<td>Tesla Inc.</td>
+<td>3,888</td>
+<td>2010-06-29</td>
+<td>2025-12-10</td>
+</tr>
+<tr>
+<td><strong>META</strong></td>
+<td>Meta Platforms Inc.</td>
+<td>3,411</td>
+<td>2012-05-18</td>
+<td>2025-12-10</td>
+</tr>
+<tr>
+<td><strong>JPM</strong></td>
+<td>JPMorgan Chase</td>
+<td>5,000</td>
+<td>2006-01-27</td>
+<td>2025-12-10</td>
+</tr>
+<tr>
+<td><strong>V</strong></td>
+<td>Visa Inc.</td>
+<td>4,462</td>
+<td>2008-03-19</td>
+<td>2025-12-10</td>
+</tr>
+<tr>
+<td><strong>JNJ</strong></td>
+<td>Johnson &amp; Johnson</td>
+<td>5,000</td>
+<td>2006-01-27</td>
+<td>2025-12-10</td>
+</tr>
+<tr>
+<td><strong>UNH</strong></td>
+<td>UnitedHealth Group</td>
+<td>5,000</td>
+<td>2006-01-27</td>
+<td>2025-12-10</td>
+</tr>
+<tr>
+<td><strong>WMT</strong></td>
+<td>Walmart Inc.</td>
+<td>5,000</td>
+<td>2006-01-27</td>
+<td>2025-12-10</td>
+</tr>
+<tr>
+<td><strong>BAC</strong></td>
+<td>Bank of America</td>
+<td>5,000</td>
+<td>2006-01-31</td>
+<td>2025-12-12</td>
+</tr>
+<tr>
+<td><strong>HD</strong></td>
+<td>Home Depot</td>
+<td>5,000</td>
+<td>2006-01-27</td>
+<td>2025-12-10</td>
+</tr>
+<tr>
+<td><strong>PG</strong></td>
+<td>Procter &amp; Gamble</td>
+<td>5,000</td>
+<td>2006-01-27</td>
+<td>2025-12-10</td>
+</tr>
+<tr>
+<td><strong>XOM</strong></td>
+<td>Exxon Mobil</td>
+<td>5,000</td>
+<td>2006-01-27</td>
+<td>2025-12-10</td>
+</tr>
+<tr>
+<td><strong>KO</strong></td>
+<td>Coca-Cola</td>
+<td>5,000</td>
+<td>2006-01-27</td>
+<td>2025-12-10</td>
+</tr>
+<tr>
+<td><strong>DIS</strong></td>
+<td>Walt Disney (via other)</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td><strong>COST</strong></td>
+<td>Costco</td>
+<td>5,000</td>
+<td>2006-01-31</td>
+<td>2025-12-12</td>
+</tr>
+<tr>
+<td><strong>ABBV</strong></td>
+<td>AbbVie Inc.</td>
+<td>3,258</td>
+<td>2013-01-02</td>
+<td>2025-12-12</td>
+</tr>
+</tbody>
+</table>
+<h3>Complete Stock List (A-C) with Statistics</h3>
+<table>
+<thead>
+<tr>
+<th>Ticker</th>
+<th>Full Name</th>
+<th>Records</th>
+<th>Start</th>
+<th>End</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A</td>
+<td>Agilent Technologies Inc.</td>
+<td>5,000</td>
+<td>2006-01-31</td>
+<td>2025-12-12</td>
+</tr>
+<tr>
+<td>AAP</td>
+<td>Advance Auto Parts Inc.</td>
+<td>5,000</td>
+<td>2006-01-31</td>
+<td>2025-12-12</td>
+</tr>
+<tr>
+<td>AAPL</td>
+<td>Apple Inc.</td>
+<td>5,000</td>
+<td>2006-01-31</td>
+<td>2025-12-12</td>
+</tr>
+<tr>
+<td>ABBV</td>
+<td>AbbVie Inc.</td>
+<td>3,258</td>
+<td>2013-01-02</td>
+<td>2025-12-12</td>
+</tr>
+<tr>
+<td>ABNB</td>
+<td>Airbnb, Inc.</td>
+<td>1,258</td>
+<td>2020-12-10</td>
+<td>2025-12-12</td>
+</tr>
+<tr>
+<td>ABT</td>
+<td>Abbott Laboratories</td>
+<td>5,000</td>
+<td>2006-01-31</td>
+<td>2025-12-12</td>
+</tr>
+<tr>
+<td>ACI</td>
+<td>Albertsons Companies</td>
+<td>1,374</td>
+<td>2020-06-26</td>
+<td>2025-12-12</td>
+</tr>
+<tr>
+<td>ACN</td>
+<td>Accenture plc</td>
+<td>5,000</td>
+<td>2006-01-31</td>
+<td>2025-12-12</td>
+</tr>
+<tr>
+<td>ADBE</td>
+<td>Adobe Inc.</td>
+<td>5,000</td>
+<td>2006-01-31</td>
+<td>2025-12-12</td>
+</tr>
+<tr>
+<td>ADI</td>
+<td>Analog Devices</td>
+<td>5,000</td>
+<td>2006-01-31</td>
+<td>2025-12-12</td>
+</tr>
+<tr>
+<td>ADM</td>
+<td>Archer-Daniels-Midland</td>
+<td>5,000</td>
+<td>2006-01-31</td>
+<td>2025-12-12</td>
+</tr>
+<tr>
+<td>ADP</td>
+<td>Automatic Data Processing</td>
+<td>5,000</td>
+<td>2006-01-31</td>
+<td>2025-12-12</td>
+</tr>
+<tr>
+<td>ADSK</td>
+<td>Autodesk Inc.</td>
+<td>5,000</td>
+<td>2006-01-31</td>
+<td>2025-12-12</td>
+</tr>
+<tr>
+<td>AFL</td>
+<td>Aflac Inc.</td>
+<td>5,000</td>
+<td>2006-01-31</td>
+<td>2025-12-12</td>
+</tr>
+<tr>
+<td>AIG</td>
+<td>American International Group</td>
+<td>5,000</td>
+<td>2006-01-31</td>
+<td>2025-12-12</td>
+</tr>
+<tr>
+<td>ALL</td>
+<td>Allstate Corporation</td>
+<td>5,000</td>
+<td>2006-01-31</td>
+<td>2025-12-12</td>
+</tr>
+<tr>
+<td>AMAT</td>
+<td>Applied Materials</td>
+<td>5,000</td>
+<td>2006-01-31</td>
+<td>2025-12-12</td>
+</tr>
+<tr>
+<td>AMD</td>
+<td>Advanced Micro Devices</td>
+<td>5,000</td>
+<td>2006-01-31</td>
+<td>2025-12-12</td>
+</tr>
+<tr>
+<td>AMGN</td>
+<td>Amgen Inc.</td>
+<td>5,000</td>
+<td>2006-01-31</td>
+<td>2025-12-12</td>
+</tr>
+<tr>
+<td>AMT</td>
+<td>American Tower</td>
+<td>5,000</td>
+<td>2006-01-31</td>
+<td>2025-12-12</td>
+</tr>
+<tr>
+<td>AMZN</td>
+<td>Amazon.com Inc.</td>
+<td>5,000</td>
+<td>2006-01-31</td>
+<td>2025-12-12</td>
+</tr>
+<tr>
+<td>AON</td>
+<td>Aon plc</td>
+<td>5,000</td>
+<td>2006-01-31</td>
+<td>2025-12-12</td>
+</tr>
+<tr>
+<td>APD</td>
+<td>Air Products</td>
+<td>5,000</td>
+<td>2006-01-31</td>
+<td>2025-12-12</td>
+</tr>
+<tr>
+<td>ASML</td>
+<td>ASML Holding</td>
+<td>5,000</td>
+<td>2006-01-31</td>
+<td>2025-12-12</td>
+</tr>
+<tr>
+<td>AVGO</td>
+<td>Broadcom Inc.</td>
+<td>4,115</td>
+<td>2009-08-06</td>
+<td>2025-12-12</td>
+</tr>
+<tr>
+<td>AXP</td>
+<td>American Express</td>
+<td>5,000</td>
+<td>2006-01-31</td>
+<td>2025-12-12</td>
+</tr>
+<tr>
+<td>AZO</td>
+<td>AutoZone Inc.</td>
+<td>5,000</td>
+<td>2006-01-31</td>
+<td>2025-12-12</td>
+</tr>
+<tr>
+<td>BA</td>
+<td>The Boeing Company</td>
+<td>5,000</td>
+<td>2006-01-31</td>
+<td>2025-12-12</td>
+</tr>
+<tr>
+<td>BAC</td>
+<td>Bank of America</td>
+<td>5,000</td>
+<td>2006-01-31</td>
+<td>2025-12-12</td>
+</tr>
+<tr>
+<td>BBY</td>
+<td>Best Buy Co.</td>
+<td>5,000</td>
+<td>2006-01-31</td>
+<td>2025-12-12</td>
+</tr>
+<tr>
+<td>BDX</td>
+<td>Becton Dickinson</td>
+<td>5,000</td>
+<td>2006-01-31</td>
+<td>2025-12-12</td>
+</tr>
+<tr>
+<td>BIIB</td>
+<td>Biogen Inc.</td>
+<td>5,000</td>
+<td>2006-01-31</td>
+<td>2025-12-12</td>
+</tr>
+<tr>
+<td>BK</td>
+<td>Bank of New York Mellon</td>
+<td>5,000</td>
+<td>2006-01-31</td>
+<td>2025-12-12</td>
+</tr>
+<tr>
+<td>BKNG</td>
+<td>Booking Holdings</td>
+<td>5,000</td>
+<td>2006-01-31</td>
+<td>2025-12-12</td>
+</tr>
+<tr>
+<td>BLK</td>
+<td>BlackRock Inc.</td>
+<td>5,000</td>
+<td>2006-01-31</td>
+<td>2025-12-12</td>
+</tr>
+<tr>
+<td>BMY</td>
+<td>Bristol-Myers Squibb</td>
+<td>5,000</td>
+<td>2006-01-31</td>
+<td>2025-12-12</td>
+</tr>
+<tr>
+<td>BRK.B</td>
+<td>Berkshire Hathaway</td>
+<td>5,000</td>
+<td>2006-01-27</td>
+<td>2025-12-10</td>
+</tr>
+<tr>
+<td>BSX</td>
+<td>Boston Scientific</td>
+<td>5,000</td>
+<td>2006-02-01</td>
+<td>2025-12-12</td>
+</tr>
+<tr>
+<td>C</td>
+<td>Citigroup Inc.</td>
+<td>5,000</td>
+<td>2006-01-31</td>
+<td>2025-12-12</td>
+</tr>
+<tr>
+<td>CAT</td>
+<td>Caterpillar Inc.</td>
+<td>5,000</td>
+<td>2006-01-31</td>
+<td>2025-12-12</td>
+</tr>
+<tr>
+<td>CB</td>
+<td>Chubb Limited</td>
+<td>5,000</td>
+<td>2006-01-31</td>
+<td>2025-12-12</td>
+</tr>
+<tr>
+<td>CCI</td>
+<td>Crown Castle</td>
+<td>5,000</td>
+<td>2006-01-31</td>
+<td>2025-12-12</td>
+</tr>
+<tr>
+<td>CDNS</td>
+<td>Cadence Design Systems</td>
+<td>5,000</td>
+<td>2006-01-31</td>
+<td>2025-12-12</td>
+</tr>
+<tr>
+<td>CEG</td>
+<td>Constellation Energy</td>
+<td>980</td>
+<td>2022-01-19</td>
+<td>2025-12-12</td>
+</tr>
+<tr>
+<td>CHTR</td>
+<td>Charter Communications</td>
+<td>4,011</td>
+<td>2010-01-05</td>
+<td>2025-12-12</td>
+</tr>
+<tr>
+<td>CI</td>
+<td>The Cigna Group</td>
+<td>5,000</td>
+<td>2006-01-31</td>
+<td>2025-12-12</td>
+</tr>
+<tr>
+<td>CL</td>
+<td>Colgate-Palmolive</td>
+<td>5,000</td>
+<td>2006-01-31</td>
+<td>2025-12-12</td>
+</tr>
+<tr>
+<td>CMCSA</td>
+<td>Comcast Corporation</td>
+<td>5,000</td>
+<td>2006-01-31</td>
+<td>2025-12-12</td>
+</tr>
+<tr>
+<td>CME</td>
+<td>CME Group Inc.</td>
+<td>5,000</td>
+<td>2006-01-31</td>
+<td>2025-12-12</td>
+</tr>
+<tr>
+<td>CMG</td>
+<td>Chipotle Mexican Grill</td>
+<td>5,000</td>
+<td>2006-01-31</td>
+<td>2025-12-12</td>
+</tr>
+<tr>
+<td>CNC</td>
+<td>Centene Corporation</td>
+<td>5,000</td>
+<td>2006-01-31</td>
+<td>2025-12-12</td>
+</tr>
+<tr>
+<td>COF</td>
+<td>Capital One</td>
+<td>5,000</td>
+<td>2006-01-31</td>
+<td>2025-12-12</td>
+</tr>
+<tr>
+<td>COP</td>
+<td>ConocoPhillips</td>
+<td>5,000</td>
+<td>2006-01-31</td>
+<td>2025-12-12</td>
+</tr>
+<tr>
+<td>COST</td>
+<td>Costco Wholesale</td>
+<td>5,000</td>
+<td>2006-01-31</td>
+<td>2025-12-12</td>
+</tr>
+<tr>
+<td>CRM</td>
+<td>Salesforce Inc.</td>
+<td>5,000</td>
+<td>2006-01-31</td>
+<td>2025-12-12</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>3. ETFs (25 Assets)</h2>
+<p><strong>Format: <code>SYMBOL</code></strong> - Standard ETF ticker symbols</p>
+<h3>Data Coverage: Daily</h3>
+<ul>
+<li><strong>Total Records:</strong> 36,500</li>
+<li><strong>Symbols:</strong> 25</li>
+<li><strong>Date Range:</strong> July 1, 2024 - December 12, 2025</li>
+<li><strong>Each ETF has ~1,460 daily records</strong></li>
+</ul>
+<h3>Per-Symbol Statistics</h3>
+<table>
+<thead>
+<tr>
+<th>Ticker</th>
+<th>Full Name</th>
+<th>Daily Records</th>
+<th>Start Date</th>
+<th>End Date</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>SPY</strong></td>
+<td>SPDR S&amp;P 500 ETF Trust</td>
+<td>1,460</td>
+<td>2024-07-01</td>
+<td>2025-12-12</td>
+</tr>
+<tr>
+<td><strong>QQQ</strong></td>
+<td>Invesco QQQ Trust</td>
+<td>1,460</td>
+<td>2024-07-01</td>
+<td>2025-12-12</td>
+</tr>
+<tr>
+<td><strong>IWM</strong></td>
+<td>iShares Russell 2000 ETF</td>
+<td>1,460</td>
+<td>2024-07-01</td>
+<td>2025-12-12</td>
+</tr>
+<tr>
+<td><strong>DIA</strong></td>
+<td>SPDR Dow Jones ETF</td>
+<td>1,460</td>
+<td>2024-07-01</td>
+<td>2025-12-12</td>
+</tr>
+<tr>
+<td>VOO</td>
+<td>Vanguard S&amp;P 500 ETF</td>
+<td>1,460</td>
+<td>2024-07-01</td>
+<td>2025-12-12</td>
+</tr>
+<tr>
+<td>VTI</td>
+<td>Vanguard Total Stock Market</td>
+<td>1,460</td>
+<td>2024-07-01</td>
+<td>2025-12-12</td>
+</tr>
+<tr>
+<td>ARKK</td>
+<td>ARK Innovation ETF</td>
+<td>1,460</td>
+<td>2024-07-01</td>
+<td>2025-12-12</td>
+</tr>
+<tr>
+<td>EEM</td>
+<td>iShares Emerging Markets</td>
+<td>1,460</td>
+<td>2024-07-01</td>
+<td>2025-12-12</td>
+</tr>
+<tr>
+<td>EFA</td>
+<td>iShares MSCI EAFE</td>
+<td>1,460</td>
+<td>2024-07-01</td>
+<td>2025-12-12</td>
+</tr>
+<tr>
+<td>VEA</td>
+<td>Vanguard Developed Markets</td>
+<td>1,460</td>
+<td>2024-07-01</td>
+<td>2025-12-12</td>
+</tr>
+<tr>
+<td>VWO</td>
+<td>Vanguard Emerging Markets</td>
+<td>1,460</td>
+<td>2024-07-01</td>
+<td>2025-12-12</td>
+</tr>
+<tr>
+<td><strong>GLD</strong></td>
+<td>SPDR Gold Shares</td>
+<td>1,460</td>
+<td>2024-07-01</td>
+<td>2025-12-12</td>
+</tr>
+<tr>
+<td><strong>SLV</strong></td>
+<td>iShares Silver Trust</td>
+<td>1,460</td>
+<td>2024-07-01</td>
+<td>2025-12-12</td>
+</tr>
+<tr>
+<td>USO</td>
+<td>United States Oil Fund</td>
+<td>1,460</td>
+<td>2024-07-01</td>
+<td>2025-12-12</td>
+</tr>
+<tr>
+<td>HYG</td>
+<td>iShares High Yield Bond</td>
+<td>1,460</td>
+<td>2024-07-01</td>
+<td>2025-12-12</td>
+</tr>
+<tr>
+<td>LQD</td>
+<td>iShares Investment Grade Bond</td>
+<td>1,460</td>
+<td>2024-07-01</td>
+<td>2025-12-12</td>
+</tr>
+<tr>
+<td>IEF</td>
+<td>iShares 7-10 Year Treasury</td>
+<td>1,460</td>
+<td>2024-07-01</td>
+<td>2025-12-12</td>
+</tr>
+<tr>
+<td>TLT</td>
+<td>iShares 20+ Year Treasury</td>
+<td>1,460</td>
+<td>2024-07-01</td>
+<td>2025-12-12</td>
+</tr>
+<tr>
+<td>VNQ</td>
+<td>Vanguard Real Estate ETF</td>
+<td>1,460</td>
+<td>2024-07-01</td>
+<td>2025-12-12</td>
+</tr>
+<tr>
+<td>SMH</td>
+<td>VanEck Semiconductor ETF</td>
+<td>1,460</td>
+<td>2024-07-01</td>
+<td>2025-12-12</td>
+</tr>
+<tr>
+<td>SOXX</td>
+<td>iShares Semiconductor ETF</td>
+<td>1,460</td>
+<td>2024-07-01</td>
+<td>2025-12-12</td>
+</tr>
+<tr>
+<td><strong>XLK</strong></td>
+<td>Technology Select SPDR</td>
+<td>1,460</td>
+<td>2024-07-01</td>
+<td>2025-12-12</td>
+</tr>
+<tr>
+<td><strong>XLF</strong></td>
+<td>Financial Select SPDR</td>
+<td>1,460</td>
+<td>2024-07-01</td>
+<td>2025-12-12</td>
+</tr>
+<tr>
+<td>XLE</td>
+<td>Energy Select SPDR</td>
+<td>1,460</td>
+<td>2024-07-01</td>
+<td>2025-12-12</td>
+</tr>
+<tr>
+<td>XLV</td>
+<td>Health Care Select SPDR</td>
+<td>1,460</td>
+<td>2024-07-01</td>
+<td>2025-12-12</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>4. FOREX (20 Currency Pairs)</h2>
+<p><strong>Format: <code>XXXYYY</code></strong> - NO slash between currencies</p>
+<h3>Data Coverage: Daily</h3>
+<ul>
+<li><strong>Total Records:</strong> 29,200</li>
+<li><strong>Symbols:</strong> 20</li>
+<li><strong>Date Range:</strong> August 19, 2024 - December 15, 2025</li>
+</ul>
+<h3>Per-Symbol Statistics</h3>
+<table>
+<thead>
+<tr>
+<th>Ticker</th>
+<th>Currency Pair</th>
+<th>Daily Records</th>
+<th>Start Date</th>
+<th>End Date</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>EURUSD</strong></td>
+<td>EUR/USD</td>
+<td>1,460</td>
+<td>2024-08-19</td>
+<td>2025-12-15</td>
+</tr>
+<tr>
+<td><strong>GBPUSD</strong></td>
+<td>GBP/USD</td>
+<td>1,460</td>
+<td>2024-09-02</td>
+<td>2025-12-15</td>
+</tr>
+<tr>
+<td><strong>USDJPY</strong></td>
+<td>USD/JPY</td>
+<td>1,460</td>
+<td>2024-09-16</td>
+<td>2025-12-15</td>
+</tr>
+<tr>
+<td><strong>AUDUSD</strong></td>
+<td>AUD/USD</td>
+<td>1,460</td>
+<td>2024-10-14</td>
+<td>2025-12-15</td>
+</tr>
+<tr>
+<td><strong>USDCAD</strong></td>
+<td>USD/CAD</td>
+<td>1,460</td>
+<td>2024-10-12</td>
+<td>2025-12-15</td>
+</tr>
+<tr>
+<td><strong>USDCHF</strong></td>
+<td>USD/CHF</td>
+<td>1,460</td>
+<td>2024-09-23</td>
+<td>2025-12-15</td>
+</tr>
+<tr>
+<td>NZDUSD</td>
+<td>NZD/USD</td>
+<td>1,460</td>
+<td>2024-10-14</td>
+<td>2025-12-15</td>
+</tr>
+<tr>
+<td>EURJPY</td>
+<td>EUR/JPY</td>
+<td>1,460</td>
+<td>2024-10-14</td>
+<td>2025-12-15</td>
+</tr>
+<tr>
+<td>GBPJPY</td>
+<td>GBP/JPY</td>
+<td>1,460</td>
+<td>2024-10-14</td>
+<td>2025-12-15</td>
+</tr>
+<tr>
+<td>EURGBP</td>
+<td>EUR/GBP</td>
+<td>1,460</td>
+<td>2024-10-14</td>
+<td>2025-12-15</td>
+</tr>
+<tr>
+<td>AUDJPY</td>
+<td>AUD/JPY</td>
+<td>1,460</td>
+<td>2024-10-14</td>
+<td>2025-12-15</td>
+</tr>
+<tr>
+<td>EURAUD</td>
+<td>EUR/AUD</td>
+<td>1,460</td>
+<td>2024-10-14</td>
+<td>2025-12-15</td>
+</tr>
+<tr>
+<td>EURCAD</td>
+<td>EUR/CAD</td>
+<td>1,460</td>
+<td>2024-08-19</td>
+<td>2025-12-15</td>
+</tr>
+<tr>
+<td>EURCHF</td>
+<td>EUR/CHF</td>
+<td>1,460</td>
+<td>2024-10-14</td>
+<td>2025-12-15</td>
+</tr>
+<tr>
+<td>AUDNZD</td>
+<td>AUD/NZD</td>
+<td>1,460</td>
+<td>2024-10-14</td>
+<td>2025-12-15</td>
+</tr>
+<tr>
+<td>GBPCHF</td>
+<td>GBP/CHF</td>
+<td>1,460</td>
+<td>2024-10-12</td>
+<td>2025-12-15</td>
+</tr>
+<tr>
+<td>USDHKD</td>
+<td>USD/HKD</td>
+<td>1,460</td>
+<td>2024-10-14</td>
+<td>2025-12-15</td>
+</tr>
+<tr>
+<td>USDINR</td>
+<td>USD/INR</td>
+<td>1,460</td>
+<td>2024-10-12</td>
+<td>2025-12-15</td>
+</tr>
+<tr>
+<td>USDMXN</td>
+<td>USD/MXN</td>
+<td>1,460</td>
+<td>2024-10-09</td>
+<td>2025-12-15</td>
+</tr>
+<tr>
+<td>USDSGD</td>
+<td>USD/SGD</td>
+<td>1,460</td>
+<td>2024-10-12</td>
+<td>2025-12-15</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>5. COMMODITIES (12 Assets)</h2>
+<p><strong>Format: Mixed</strong> - Some use <code>XXXUSD</code> format, others use futures codes</p>
+<h3>Data Coverage: Daily</h3>
+<ul>
+<li><strong>Total Records:</strong> 16,439</li>
+<li><strong>Symbols:</strong> 12</li>
+<li><strong>Date Range:</strong> July 1, 2024 - December 15, 2025</li>
+</ul>
+<h3>Per-Symbol Statistics</h3>
+<table>
+<thead>
+<tr>
+<th>Ticker</th>
+<th>Full Name</th>
+<th>Daily Records</th>
+<th>Start Date</th>
+<th>End Date</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>XAUUSD</strong></td>
+<td>Gold</td>
+<td>1,460</td>
+<td>2024-10-26</td>
+<td>2025-12-15</td>
+</tr>
+<tr>
+<td><strong>XAGUSD</strong></td>
+<td>Silver</td>
+<td>1,460</td>
+<td>2024-10-12</td>
+<td>2025-12-15</td>
+</tr>
+<tr>
+<td>XPTUSD</td>
+<td>Platinum</td>
+<td>1,460</td>
+<td>2024-10-09</td>
+<td>2025-12-15</td>
+</tr>
+<tr>
+<td>XPDUSD</td>
+<td>Palladium</td>
+<td>1,460</td>
+<td>2024-10-28</td>
+<td>2025-12-15</td>
+</tr>
+<tr>
+<td><strong>CL</strong></td>
+<td>Crude Oil (WTI)</td>
+<td>1,460</td>
+<td>2024-07-01</td>
+<td>2025-12-12</td>
+</tr>
+<tr>
+<td><strong>NG</strong></td>
+<td>Natural Gas</td>
+<td>1,460</td>
+<td>2024-07-01</td>
+<td>2025-12-12</td>
+</tr>
+<tr>
+<td>BZ</td>
+<td>Brent Crude</td>
+<td>1,460</td>
+<td>2024-07-01</td>
+<td>2025-12-12</td>
+</tr>
+<tr>
+<td>HO</td>
+<td>Heating Oil</td>
+<td>1,460</td>
+<td>2024-07-11</td>
+<td>2025-12-12</td>
+</tr>
+<tr>
+<td>HG</td>
+<td>Copper</td>
+<td>1,460</td>
+<td>2024-07-01</td>
+<td>2025-12-12</td>
+</tr>
+<tr>
+<td>SI</td>
+<td>Silver Futures</td>
+<td>379</td>
+<td>2025-07-31</td>
+<td>2025-12-12</td>
+</tr>
+<tr>
+<td>ZC</td>
+<td>Corn</td>
+<td>1,460</td>
+<td>2024-07-02</td>
+<td>2025-12-11</td>
+</tr>
+<tr>
+<td>ZS</td>
+<td>Soybeans</td>
+<td>1,460</td>
+<td>2024-07-01</td>
+<td>2025-12-12</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>6. INDICES (1 Asset)</h2>
+<p><strong>Format: <code>SYMBOL</code></strong></p>
+<h3>Data Coverage: Daily</h3>
+<ul>
+<li><strong>Total Records:</strong> 1,460</li>
+<li><strong>Date Range:</strong> July 5, 2024 - December 12, 2025</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Ticker</th>
+<th>Full Name</th>
+<th>Daily Records</th>
+<th>Start Date</th>
+<th>End Date</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>SPX</strong></td>
+<td>S&amp;P 500 Index</td>
+<td>1,460</td>
+<td>2024-07-05</td>
+<td>2025-12-12</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>Popular Tickers Quick Reference</h2>
+<h3>Most Downloaded Cryptos</h3>
+<p><code>BTC/USD</code> <code>ETH/USD</code> <code>SOL/USD</code> <code>XRP/USD</code> <code>DOGE/USD</code> <code>ADA/USD</code></p>
+<h3>Most Downloaded Stocks</h3>
+<p><code>AAPL</code> <code>MSFT</code> <code>GOOGL</code> <code>AMZN</code> <code>NVDA</code> <code>TSLA</code> <code>META</code></p>
+<h3>Most Downloaded ETFs</h3>
+<p><code>SPY</code> <code>QQQ</code> <code>IWM</code> <code>DIA</code> <code>GLD</code> <code>VOO</code></p>
+<h3>Most Downloaded Forex</h3>
+<p><code>EURUSD</code> <code>GBPUSD</code> <code>USDJPY</code> <code>AUDUSD</code></p>
+<h3>Most Downloaded Commodities</h3>
+<p><code>XAUUSD</code> <code>XAGUSD</code> <code>CL</code> <code>NG</code></p>
+<hr />
+<h2>Tips for Using Tickers</h2>
+<ol>
+<li><strong>Crypto</strong>: Always include <code>/USD</code> suffix (e.g., <code>BTC/USD</code> not <code>BTC</code>)</li>
+<li><strong>Forex</strong>: No slash - combine currencies (e.g., <code>EURUSD</code> not <code>EUR/USD</code>)</li>
+<li><strong>Stocks/ETFs</strong>: Use standard ticker symbols as-is</li>
+<li><strong>Case</strong>: Tickers are case-insensitive, but displayed in uppercase</li>
+<li><strong>Search</strong>: You can search by company name OR ticker in the app</li>
+</ol>
+<hr />
+<h2>API Endpoints for Ticker Discovery</h2>
+<ul>
+<li><strong>Browse All Symbols</strong>: <code>GET /api/download/symbols/browse?type=all</code></li>
+<li><strong>Browse by Asset Type</strong>: <code>GET /api/download/symbols/browse?type=crypto</code></li>
+<li><strong>Search Symbols</strong>: <code>GET /api/download/symbols/search?q=bitcoin&amp;type=crypto</code></li>
+</ul>
+<hr />
+<p><em>Document generated from AIAlgoTradeHits Trading Platform database</em>
+<em>Last Updated: December 15, 2025</em>
+<em>For the latest symbols, use the Browse feature in the app</em></p>
+</body>
+</html>

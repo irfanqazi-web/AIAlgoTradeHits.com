@@ -1,0 +1,89 @@
+{
+  "model_name": "hybrid_model",
+  "asset_type": "crypto",
+  "generated_at": "2025-12-15T18:57:26.116834",
+  "sections": {
+    "performance": {
+      "status": "insufficient_data",
+      "sample_count": 0,
+      "required": 20
+    },
+    "data_drift": {
+      "asset_type": "crypto",
+      "reference_period": "90 days",
+      "current_period": "7 days",
+      "reference_samples": 3542,
+      "current_samples": 184,
+      "features": {
+        "rsi": {
+          "ks_statistic": 0.16791360813099943,
+          "ks_pvalue": 8.862553613770902e-05,
+          "kl_divergence": 0.18390616020142134,
+          "reference_mean": 43.14423111387944,
+          "current_mean": 43.57758493020978,
+          "mean_shift_std": 0.03971957544054486,
+          "drift_detected": true
+        },
+        "macd": {
+          "ks_statistic": 0.15711462450592886,
+          "ks_pvalue": 0.00030863090671706716,
+          "kl_divergence": 0.0714272481710755,
+          "reference_mean": -33.521105915595655,
+          "current_mean": -38.96140201539037,
+          "mean_shift_std": 0.013761161066657231,
+          "drift_detected": true
+        },
+        "adx": {
+          "ks_statistic": 0.17666572557876906,
+          "ks_pvalue": 3.0301327181705892e-05,
+          "kl_divergence": 0.16845279219462417,
+          "reference_mean": 31.304165442375957,
+          "current_mean": 27.904081097584307,
+          "mean_shift_std": 0.29438286893021903,
+          "drift_detected": true
+        },
+        "atr": {
+          "ks_statistic": 0.11462450592885376,
+          "ks_pvalue": 0.018544356605127127,
+          "kl_divergence": 0.03931946745547368,
+          "reference_mean": 86.32791946164875,
+          "current_mean": 89.16605222895028,
+          "mean_shift_std": 0.005395572825626727,
+          "drift_detected": true
+        },
+        "volume": {
+          "ks_statistic": 0.0,
+          "ks_pvalue": 1.0,
+          "kl_divergence": 0.0,
+          "reference_mean": 0.0,
+          "current_mean": 0.0,
+          "mean_shift_std": 0.0,
+          "drift_detected": false
+        },
+        "close": {
+          "ks_statistic": 0.10333145115753811,
+          "ks_pvalue": 0.04435188551162278,
+          "kl_divergence": 0.04433968442153103,
+          "reference_mean": 2464.6398943178765,
+          "current_mean": 2118.1217781748264,
+          "mean_shift_std": 0.02217166183467845,
+          "drift_detected": true
+        }
+      },
+      "drift_detected": true,
+      "calculated_at": "2025-12-15T18:57:31.545189"
+    },
+    "concept_drift": {
+      "status": "insufficient_data",
+      "window_metrics": {}
+    }
+  },
+  "alerts": [
+    {
+      "type": "DATA_DRIFT",
+      "severity": "MEDIUM",
+      "message": "Data drift detected in features: rsi, macd, adx, atr, close"
+    }
+  ],
+  "alert_count": 1
+}

@@ -1,0 +1,106 @@
+# Dependencies
+node_modules/
+package-lock.json
+
+# Build outputs
+dist/
+build/
+*.pyc
+__pycache__/
+*.pyo
+*.pyd
+.Python
+*.so
+
+# Environment files
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+.env.coinmarketcap
+
+# IDE and editors
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+backfill_log.txt
+crypto_backfill_log.txt
+stock_backfill_log.txt
+
+# Temporary files
+*.tmp
+*.temp
+nul
+~$*
+
+# Python virtual environments
+venv/
+env/
+.venv/
+
+# Test and coverage
+coverage/
+.coverage
+htmlcov/
+.pytest_cache/
+.tox/
+
+# Office temp files
+~$*.docx
+~$*.xlsx
+~$*.pptx
+
+# Large data files (can be regenerated)
+*.csv
+!stock_symbols_list.csv
+
+# Sensitive credentials
+credentials.json
+*.pem
+*.key
+
+# GCP specific
+.gcloudignore
+
+# Vite specific
+.vite/
+
+# Docker
+.dockerignore
+
+# Large folders (not needed for trading app)
+kaamyabpakistan_app/
+marketingai_app/
+
+# Archive files
+*.zip
+*.ZIP
+
+# Large binary files
+*.pdf
+*.PDF
+*.docx
+*.xlsx
+*.pptx
+*.jpg
+*.JPG
+*.jpeg
+*.png
+*.PNG
+
+# Temp and backup files
+~$*
+*.tmp
+*.bak
+aialgotradehits-*.json

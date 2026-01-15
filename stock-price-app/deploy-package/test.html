@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chart Test - NVDA & BTC Daily</title>
+    <style>
+        body {
+            font-family: monospace;
+            padding: 20px;
+            background: #0a0e27;
+            color: #fff;
+        }
+        .test {
+            margin: 20px 0;
+            padding: 15px;
+            background: #1a1e3a;
+            border-radius: 8px;
+        }
+        .success { color: #10b981; }
+        .error { color: #ef4444; }
+        button {
+            padding: 10px 20px;
+            margin: 5px;
+            background: #3b82f6;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        pre {
+            background: #0d1117;
+            padding: 10px;
+            overflow-x: auto;
+            max-height: 400px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Daily Charts Debug Test</h1>
+
+    <div class="test">
+        <h2>Test 1: Stock Daily API</h2>
+        <button onclick="testStockDaily()">Test NVDA Daily</button>
+        <pre id="stock-daily-result">Click button to test...</pre>
+    </div>
+
+    <div class="test">
+        <h2>Test 2: Crypto Daily API</h2>
+        <button onclick="testCryptoDaily()">Test BTC Daily</button>
+        <pre id="crypto-daily-result">Click button to test...</pre>
+    </div>
+
+    <div class="test">
+        <h2>Test 3: Check if timestamps are valid for charts</h2>
+        <pre id="timestamp-check">Will check after API tests...</pre>
+    </div>
+
+    <script>
+        async function testStockDaily() {
+            const result = document.getElementById('stock-daily-result');
+            result.innerHTML = 'Loading...';
+
+            try {
+                const response = await fetch('http://localhost:8080/api/stocks/history?symbol=NVDA&limit=10');
+                const data = await response.json();
+
+                if (data.success && data.data && data.data.length > 0) {
+                    result.innerHTML = `<span class="success">✓ SUCCESS</span>\n\n`;
+                    result.innerHTML += `Count: ${data.count}\n`;
+                    result.innerHTML += `Data length: ${data.data.length}\n\n`;
+                    result.innerHTML += `First candle:\n`;
+                    result.innerHTML += JSON.stringify(data.data[0], null, 2);
+                    result.innerHTML += `\n\nLast candle:\n`;
+                    result.innerHTML += JSON.stringify(data.data[data.data.length-1], null, 2);
+
+                    checkTimestamps('stock', data.data);
+                } else {
+                    result.innerHTML = `<span class="error">✗ ERROR</span>\n${JSON.stringify(data, null, 2)}`;
+                }
+            } catch (error) {
+                result.innerHTML = `<span class="error">✗ ERROR</span>\n${error.message}`;
+            }
+        }
+
+        async function testCryptoDaily() {
+            const result = document.getElementById('crypto-daily-result');
+            result.innerHTML = 'Loading...';
+
+            try {
+                const response = await fetch('http://localhost:8080/api/crypto/daily/history?pair=BTC/USD&limit=10');
+                const data = await response.json();
+
+                if (data.success && data.data && data.data.length > 0) {
+                    result.innerHTML = `<span class="success">✓ SUCCESS</span>\n\n`;
+                    result.innerHTML += `Count: ${data.count}\n`;
+                    result.innerHTML += `Data length: ${data.data.length}\n\n`;
+                    result.innerHTML += `First candle:\n`;
+                    result.innerHTML += JSON.stringify(data.data[0], null, 2);
+                    result.innerHTML += `\n\nLast candle:\n`;
+                    result.innerHTML += JSON.stringify(data.data[data.data.length-1], null, 2);
+
+                    checkTimestamps('crypto', data.data);
+                } else {
+                    result.innerHTML = `<span class="error">✗ ERROR</span>\n${JSON.stringify(data, null, 2)}`;
+                }
+            } catch (error) {
+                result.innerHTML = `<span class="error">✗ ERROR</span>\n${error.message}`;
+            }
+        }
+
+        function checkTimestamps(type, data) {
+            const check = document.getElementById('timestamp-check');
+            let html = check.innerHTML;
+
+            html += `\n\n<strong>${type.toUpperCase()} Timestamps:</strong>\n`;
+
+            for (let i = 0; i < Math.min(3, data.length); i++) {
+                const candle = data[i];
+                const timestamp = candle.timestamp;
+                const datetime = candle.datetime;
+
+                // Check if timestamp is valid (should be 10 digits, in seconds)
+                const isValidTimestamp = timestamp && String(timestamp).length === 10;
+                const date = new Date(timestamp * 1000);
+
+                html += `Candle ${i}: `;
+                html += `timestamp=${timestamp} (${isValidTimestamp ? '<span class="success">✓ VALID</span>' : '<span class="error">✗ INVALID</span>'}) `;
+                html += `→ ${date.toISOString()}\n`;
+            }
+
+            check.innerHTML = html;
+        }
+    </script>
+</body>
+</html>

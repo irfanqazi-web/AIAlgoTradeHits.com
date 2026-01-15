@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CLAUDE</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #24292e;
+            background: #ffffff;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            margin-top: 24px;
+            margin-bottom: 16px;
+            font-weight: 600;
+            line-height: 1.25;
+        }
+        h1 { border-bottom: 1px solid #eaecef; padding-bottom: 0.3em; }
+        h2 { border-bottom: 1px solid #eaecef; padding-bottom: 0.3em; }
+        code {
+            background-color: rgba(27,31,35,0.05);
+            border-radius: 3px;
+            font-size: 85%;
+            margin: 0;
+            padding: 0.2em 0.4em;
+            font-family: 'Courier New', monospace;
+        }
+        pre {
+            background-color: #f6f8fa;
+            border-radius: 3px;
+            font-size: 85%;
+            line-height: 1.45;
+            overflow: auto;
+            padding: 16px;
+        }
+        pre code {
+            background-color: transparent;
+            border: 0;
+            display: inline;
+            line-height: inherit;
+            margin: 0;
+            overflow: visible;
+            padding: 0;
+            word-wrap: normal;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 16px 0;
+        }
+        table th, table td {
+            border: 1px solid #dfe2e5;
+            padding: 6px 13px;
+        }
+        table tr:nth-child(2n) {
+            background-color: #f6f8fa;
+        }
+        blockquote {
+            border-left: 4px solid #dfe2e5;
+            color: #6a737d;
+            padding: 0 1em;
+            margin: 0;
+        }
+        a {
+            color: #0366d6;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+<h1>CLAUDE.md</h1>
+<p>This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.</p>
+<h2>Project Overview</h2>
+<p>This is a KrakenPro cryptocurrency trading data pipeline that collects, processes, and stores multi-timeframe OHLC data with 29 technical indicators. The system is deployed on Google Cloud Platform (GCP) project <code>cryptobot-462709</code> and consists of three automated data collection pipelines (daily, hourly, and 5-minute intervals) that feed into BigQuery for AI-powered trading analysis.</p>
+<h2>Architecture</h2>
+<h3>Data Collection Pipeline</h3>
+<p>Three Cloud Functions run on different schedules:
+- <strong>Daily Function</strong> (<code>cloud_function_daily/</code>): Fetches daily OHLC for all ~675 USD trading pairs at midnight ET
+- <strong>Hourly Function</strong> (<code>cloud_function_hourly/</code>): Fetches hourly OHLC for all USD pairs every hour
+- <strong>5-Minute Function</strong> (<code>cloud_function_5min/</code>): Fetches 5-minute OHLC for top 10 hourly gainers every 5 minutes</p>
+<p>Each function:
+1. Queries Kraken Pro API for OHLC data
+2. Calculates 29 technical indicators (RSI, MACD, Bollinger Bands, ADX, CCI, etc.)
+3. Uploads to BigQuery with duplicate detection
+4. Implements rate limiting (1.5s between API calls)</p>
+<h3>Technical Indicators Calculation</h3>
+<p>All three pipelines share identical <code>calculate_technical_indicators(df)</code> function that computes:
+- Momentum: RSI, MACD, ROC, Momentum, Stochastic, Williams %R
+- Trend: SMA (20/50/200), EMA (12/26/50), ADX, KAMA, TRIX
+- Volatility: Bollinger Bands, ATR
+- Volume: OBV, PVO
+- Oscillators: CCI, PPO, Ultimate Oscillator, Awesome Oscillator</p>
+<p>The function requires minimum data points (50-200 candles depending on indicator) to calculate properly.</p>
+<h3>BigQuery Schema</h3>
+<p>Dataset: <code>cryptobot-462709.crypto_trading_data</code></p>
+<p>Tables:
+- <code>crypto_analysis</code> (45 fields): Daily data
+- <code>crypto_hourly_data</code> (46 fields): Hourly data
+- <code>crypto_5min_top10_gainers</code> (43 fields): 5-minute data for top gainers</p>
+<p>All tables share same schema except 5-minute lacks <code>altname</code>, <code>base</code>, <code>quote</code> fields. The 5-minute function depends on hourly data to identify top gainers.</p>
+<h3>Cloud Schedulers</h3>
+<p>Three schedulers trigger functions via HTTP:
+- <code>daily-crypto-fetch-job</code>: 0 0 * * * (midnight ET)
+- <code>hourly-crypto-fetch-job</code>: 0 * * * * (hourly)
+- <code>fivemin-top10-fetch-job</code>: */5 * * * * (every 5 minutes)</p>
+<p>Timezone: America/New_York</p>
+<h3>Stock Price App</h3>
+<p>React + Vite application in <code>stock-price-app/</code> for visualizing trading data:
+- Uses Recharts and Lightweight Charts for visualization
+- Deploys to Cloud Run
+- Dockerfile + nginx for production serving</p>
+<h2>Common Commands</h2>
+<h3>Check BigQuery Data</h3>
+<pre class="codehilite"><code class="language-bash">python check_bigquery_counts.py
+</code></pre>
+
+<p>Displays record counts, recent data, latest timestamps, and unique pairs for all three tables.</p>
+<h3>Manually Trigger Cloud Functions</h3>
+<pre class="codehilite"><code class="language-bash"># Make functions publicly accessible first (required for schedulers)
+gcloud functions add-invoker-policy-binding daily-crypto-fetcher --region=us-central1 --member=allUsers --project=cryptobot-462709
+gcloud functions add-invoker-policy-binding hourly-crypto-fetcher --region=us-central1 --member=allUsers --project=cryptobot-462709
+gcloud functions add-invoker-policy-binding fivemin-top10-fetcher --region=us-central1 --member=allUsers --project=cryptobot-462709
+
+# Trigger functions via HTTP
+curl https://daily-crypto-fetcher-cnyn5l4u2a-uc.a.run.app
+curl https://hourly-crypto-fetcher-cnyn5l4u2a-uc.a.run.app
+curl https://fivemin-top10-fetcher-cnyn5l4u2a-uc.a.run.app
+</code></pre>
+
+<h3>View Cloud Function Logs</h3>
+<pre class="codehilite"><code class="language-bash">gcloud functions logs read daily-crypto-fetcher --project=cryptobot-462709 --limit=20
+gcloud functions logs read hourly-crypto-fetcher --project=cryptobot-462709 --limit=20
+gcloud functions logs read fivemin-top10-fetcher --project=cryptobot-462709 --limit=20
+</code></pre>
+
+<h3>Check Cloud Schedulers</h3>
+<pre class="codehilite"><code class="language-bash">gcloud scheduler jobs list --project=cryptobot-462709 --location=us-central1
+
+# Manually trigger a scheduler
+gcloud scheduler jobs run daily-crypto-fetch-job --location=us-central1 --project=cryptobot-462709
+</code></pre>
+
+<h3>Deploy Cloud Functions</h3>
+<pre class="codehilite"><code class="language-bash"># From root directory
+cd cloud_function_daily &amp;&amp; python deploy_via_api.py
+cd cloud_function_hourly &amp;&amp; python deploy.py
+cd cloud_function_5min &amp;&amp; python deploy_all.py
+</code></pre>
+
+<h3>Deploy Trading App to Cloud Run</h3>
+<pre class="codehilite"><code class="language-bash">cd stock-price-app
+
+gcloud run deploy crypto-trading-app \
+  --source . \
+  --platform managed \
+  --region us-central1 \
+  --allow-unauthenticated \
+  --port 8080 \
+  --project cryptobot-462709
+</code></pre>
+
+<h3>Local Development - Trading App</h3>
+<pre class="codehilite"><code class="language-bash">cd stock-price-app
+npm install
+npm run dev      # Development server
+npm run build    # Production build
+npm run preview  # Preview production build
+npm run lint     # Run ESLint
+</code></pre>
+
+<h2>Key Implementation Details</h2>
+<h3>Duplicate Detection</h3>
+<p>All functions implement duplicate detection before uploading to BigQuery:</p>
+<pre class="codehilite"><code class="language-python"># Query existing records by timestamp range
+# Create composite key: pair + timestamp
+# Filter out existing records
+# Upload only new records
+</code></pre>
+
+<h3>Rate Limiting</h3>
+<p>Kraken API requires rate limiting between calls:</p>
+<pre class="codehilite"><code class="language-python">time.sleep(1.5)  # 1.5 seconds between pair requests
+</code></pre>
+
+<h3>Error Handling</h3>
+<ul>
+<li>Failed pairs are logged but don't stop the entire fetch</li>
+<li>Functions return 200 even if some pairs fail</li>
+<li>Minimum data checks prevent indicator calculation on insufficient data</li>
+</ul>
+<h3>Project Migration Pattern</h3>
+<p>When migrating between GCP projects, use <code>deploy_all_to_cryptobot.py</code> as reference:
+1. Update PROJECT_ID constants in all main.py files
+2. Update DATASET_ID references
+3. Update deploy scripts
+4. Maintain same function names and entry points</p>
+<h2>Deployment Status</h2>
+<p>The system is 95% deployed. All infrastructure exists but requires:
+1. Making functions publicly accessible (3 gcloud commands)
+2. Initial function triggers to populate tables
+3. Optional trading app deployment</p>
+<p>See <code>QUICK_START_GUIDE.md</code> for step-by-step setup instructions.</p>
+<h2>Cost Structure</h2>
+<p>Monthly estimated costs (~$135/month):
+- Cloud Functions: $126 (daily: $4, hourly: $72, 5-min: $50)
+- BigQuery Storage: $2
+- Cloud Scheduler: $0.30
+- Cloud Run: $5 (if deployed)</p>
+<h2>Important Files</h2>
+<ul>
+<li><code>cloud_function_*/main.py</code>: Core data fetching and indicator calculation logic</li>
+<li><code>check_bigquery_counts.py</code>: Verify data collection is working</li>
+<li><code>setup_schedulers_cryptobot.py</code>: Configure Cloud Schedulers</li>
+<li><code>deploy_all_to_cryptobot.py</code>: Reference for project migration</li>
+<li><code>QUICK_START_GUIDE.md</code>: Step-by-step deployment instructions</li>
+<li><code>FINAL_DEPLOYMENT_STATUS.md</code>: Current deployment status</li>
+</ul>
+<h2>Technical Constraints</h2>
+<ol>
+<li><strong>Windows Environment</strong>: Several scripts include Windows-specific encoding fixes:</li>
+</ol>
+<pre class="codehilite"><code class="language-python">import sys
+import io
+if sys.platform == 'win32':
+    sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
+</code></pre>
+
+<ol>
+<li>
+<p><strong>Data Dependencies</strong>: 5-minute function requires hourly table to be populated first to identify top gainers</p>
+</li>
+<li>
+<p><strong>Indicator Calculation</strong>: Requires minimum historical data (50-200 candles) for accurate technical indicators</p>
+</li>
+<li>
+<p><strong>API Limits</strong>: Kraken API enforces rate limits; functions implement 1.5s delays between requests</p>
+</li>
+</ol>
+<h2>Query Examples</h2>
+<p>Find oversold cryptos with strong trends:</p>
+<pre class="codehilite"><code class="language-sql">SELECT pair, close, rsi, adx, sma_200, datetime
+FROM `cryptobot-462709.crypto_trading_data.crypto_analysis`
+WHERE DATE(datetime) = CURRENT_DATE() - 1
+  AND rsi &lt; 30       -- Oversold
+  AND adx &gt; 25       -- Strong trend
+  AND close &gt; sma_200 -- Above 200-day MA
+ORDER BY rsi ASC
+LIMIT 20;
+</code></pre>
+
+<p>Get top 10 gainers from hourly data:</p>
+<pre class="codehilite"><code class="language-sql">WITH latest_hour AS (
+    SELECT pair, close, timestamp,
+           ROW_NUMBER() OVER (PARTITION BY pair ORDER BY timestamp DESC) as rn
+    FROM `cryptobot-462709.crypto_trading_data.crypto_hourly_data`
+    WHERE datetime &gt;= TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 2 HOUR)
+)
+SELECT pair, close
+FROM latest_hour
+WHERE rn = 1
+ORDER BY close DESC
+LIMIT 10;
+</code></pre>
+</body>
+</html>

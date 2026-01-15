@@ -1,0 +1,5080 @@
+{
+  "generated": "2025-12-07T08:58:57.895031",
+  "project": "aialgotradehits",
+  "dataset": "crypto_trading_data",
+  "field_descriptions": {
+    "symbol": {
+      "description": "Unique ticker symbol identifying the trading asset",
+      "trading_meaning": "The standardized code used to identify a security on exchanges (e.g., AAPL for Apple, BTCUSD for Bitcoin)",
+      "data_type": "STRING",
+      "example": "AAPL, TSLA, BTCUSD, EUR/USD"
+    },
+    "name": {
+      "description": "Full name of the trading asset or company",
+      "trading_meaning": "Human-readable name of the asset for display purposes",
+      "data_type": "STRING",
+      "example": "Apple Inc., Bitcoin, Euro/US Dollar"
+    },
+    "asset_type": {
+      "description": "Classification of the asset type",
+      "trading_meaning": "Categorizes assets into: stocks, crypto, forex, etfs, indices, commodities, bonds",
+      "data_type": "STRING",
+      "example": "Common Stock, Digital Currency, Currency Pair"
+    },
+    "exchange": {
+      "description": "Stock exchange or trading venue where the asset is listed",
+      "trading_meaning": "Indicates market hours, liquidity, and regulatory jurisdiction",
+      "data_type": "STRING",
+      "example": "NASDAQ, NYSE, Binance, FOREX"
+    },
+    "country": {
+      "description": "Country where the asset is domiciled or primarily traded",
+      "trading_meaning": "Important for tax implications, currency exposure, and geopolitical risk assessment",
+      "data_type": "STRING",
+      "example": "United States, United Kingdom, Global"
+    },
+    "sector": {
+      "description": "Economic sector classification of the asset",
+      "trading_meaning": "Used for sector rotation strategies and portfolio diversification. Common sectors: Technology, Healthcare, Energy, Financial Services",
+      "data_type": "STRING",
+      "example": "Technology, Healthcare, Energy, Consumer Cyclical"
+    },
+    "industry": {
+      "description": "Specific industry within a sector",
+      "trading_meaning": "More granular classification for industry-specific analysis and peer comparison",
+      "data_type": "STRING",
+      "example": "Software - Infrastructure, Biotechnology, Oil & Gas"
+    },
+    "currency": {
+      "description": "Currency in which the asset is priced",
+      "trading_meaning": "Determines currency exposure and conversion requirements for international traders",
+      "data_type": "STRING",
+      "example": "USD, EUR, GBP, JPY"
+    },
+    "open": {
+      "description": "Opening price at the start of the trading period",
+      "trading_meaning": "First traded price of the period. Gap analysis uses open vs previous close. Opening range breakout strategies use this level.",
+      "data_type": "FLOAT",
+      "trading_signals": "Gap up (open > prev_close) = bullish; Gap down (open < prev_close) = bearish",
+      "example": "150.25"
+    },
+    "high": {
+      "description": "Highest price reached during the trading period",
+      "trading_meaning": "Intraday resistance level. Upper shadow in candlestick patterns. Used in calculating ATR, Stochastic, and range analysis.",
+      "data_type": "FLOAT",
+      "trading_signals": "Rejection from highs = selling pressure; Breaking previous highs = bullish momentum",
+      "example": "155.75"
+    },
+    "low": {
+      "description": "Lowest price reached during the trading period",
+      "trading_meaning": "Intraday support level. Lower shadow in candlestick patterns. Used in calculating ATR, Stochastic, and range analysis.",
+      "data_type": "FLOAT",
+      "trading_signals": "Bounce from lows = buying pressure; Breaking previous lows = bearish momentum",
+      "example": "148.50"
+    },
+    "close": {
+      "description": "Closing/last traded price of the period",
+      "trading_meaning": "Most important price for technical analysis. Most indicators use close price. Settlement price for many derivatives.",
+      "data_type": "FLOAT",
+      "trading_signals": "Close near high = bullish; Close near low = bearish; Close near open = indecision (doji)",
+      "example": "153.20"
+    },
+    "previous_close": {
+      "description": "Closing price from the previous trading period",
+      "trading_meaning": "Reference point for calculating daily change and identifying gaps. Used for after-hours movement analysis.",
+      "data_type": "FLOAT",
+      "example": "151.00"
+    },
+    "volume": {
+      "description": "Number of shares/units traded during the period",
+      "trading_meaning": "Measures market participation and conviction. High volume confirms price moves; Low volume suggests weak moves.",
+      "data_type": "FLOAT",
+      "trading_signals": "Volume spike + price up = strong buying; Volume spike + price down = strong selling; Low volume move = likely reversal",
+      "example": "75000000"
+    },
+    "average_volume": {
+      "description": "Average trading volume over a lookback period (typically 10-30 days)",
+      "trading_meaning": "Baseline for volume comparison. Current volume / average volume = relative volume ratio.",
+      "data_type": "FLOAT",
+      "trading_signals": "Volume > 2x average = significant activity; Volume < 0.5x average = low interest",
+      "example": "50000000"
+    },
+    "change": {
+      "description": "Absolute price change from previous close (close - previous_close)",
+      "trading_meaning": "Dollar/unit change in price. Important for position sizing and P&L calculations.",
+      "data_type": "FLOAT",
+      "example": "2.20"
+    },
+    "percent_change": {
+      "description": "Percentage price change from previous close ((close - previous_close) / previous_close * 100)",
+      "trading_meaning": "Normalized change for comparing assets of different prices. Basis for screening gainers/losers.",
+      "data_type": "FLOAT",
+      "trading_signals": "> 5% daily move = significant; > 10% = major move; > 20% = extreme volatility",
+      "example": "1.46"
+    },
+    "hi_lo": {
+      "description": "Daily trading range (high - low)",
+      "trading_meaning": "Measures intraday volatility. Wide range = volatile trading; Narrow range = consolidation.",
+      "data_type": "FLOAT",
+      "example": "7.25"
+    },
+    "pct_hi_lo": {
+      "description": "Daily range as percentage of price ((high - low) / low * 100)",
+      "trading_meaning": "Normalized volatility measure for comparing assets. Useful for day trading stock selection.",
+      "data_type": "FLOAT",
+      "example": "4.88"
+    },
+    "week_52_high": {
+      "description": "Highest price in the last 52 weeks (1 year)",
+      "trading_meaning": "Major resistance level. Breaking 52-week high = strong bullish signal. Used for breakout strategies.",
+      "data_type": "FLOAT",
+      "trading_signals": "Price near 52w high = potential breakout or resistance; Breaking 52w high on volume = very bullish",
+      "example": "180.00"
+    },
+    "week_52_low": {
+      "description": "Lowest price in the last 52 weeks (1 year)",
+      "trading_meaning": "Major support level. Breaking 52-week low = strong bearish signal. Value investors look for bounces here.",
+      "data_type": "FLOAT",
+      "trading_signals": "Price near 52w low = potential value or falling knife; Bounce from 52w low on volume = potentially bullish",
+      "example": "120.00"
+    },
+    "rsi": {
+      "description": "Relative Strength Index (14-period default)",
+      "trading_meaning": "Oscillator measuring speed and magnitude of price changes. Range 0-100. Most popular momentum indicator.",
+      "data_type": "FLOAT",
+      "trading_signals": "RSI < 30 = oversold (buy signal); RSI > 70 = overbought (sell signal); Divergence with price = reversal signal",
+      "formula": "RSI = 100 - (100 / (1 + RS)) where RS = avg gain / avg loss over 14 periods",
+      "example": "45.5"
+    },
+    "stoch_k": {
+      "description": "Stochastic %K (Fast Stochastic)",
+      "trading_meaning": "Shows where close is relative to high-low range. Range 0-100. More sensitive than %D.",
+      "data_type": "FLOAT",
+      "trading_signals": "%K crossing above %D = bullish; %K crossing below %D = bearish",
+      "formula": "%K = ((Close - Lowest Low) / (Highest High - Lowest Low)) * 100",
+      "example": "55.2"
+    },
+    "stoch_d": {
+      "description": "Stochastic %D (Slow Stochastic)",
+      "trading_meaning": "3-period SMA of %K. Smoother signal line. Used for crossover signals.",
+      "data_type": "FLOAT",
+      "trading_signals": "%K < 20 and crossing above %D = buy; %K > 80 and crossing below %D = sell",
+      "example": "52.8"
+    },
+    "momentum": {
+      "description": "Price momentum (close - close[n periods ago])",
+      "trading_meaning": "Raw momentum calculation showing acceleration/deceleration of price.",
+      "data_type": "FLOAT",
+      "trading_signals": "Positive momentum = upward acceleration; Negative momentum = downward acceleration",
+      "example": "5.50"
+    },
+    "roc": {
+      "description": "Rate of Change ((close - close[n]) / close[n] * 100)",
+      "trading_meaning": "Percentage-based momentum. Shows speed of price change. Used for momentum ranking.",
+      "data_type": "FLOAT",
+      "trading_signals": "ROC > 0 = bullish momentum; ROC < 0 = bearish momentum; Extreme values = potential reversal",
+      "example": "3.75"
+    },
+    "williams_r": {
+      "description": "Williams %R (Williams Percent Range)",
+      "trading_meaning": "Momentum indicator similar to Stochastic but inverted. Range -100 to 0.",
+      "data_type": "FLOAT",
+      "trading_signals": "%R > -20 = overbought; %R < -80 = oversold",
+      "formula": "%R = ((Highest High - Close) / (Highest High - Lowest Low)) * -100",
+      "example": "-35.5"
+    },
+    "sma_20": {
+      "description": "20-period Simple Moving Average",
+      "trading_meaning": "Short-term trend indicator. Used for short-term trading and Bollinger Bands middle line.",
+      "data_type": "FLOAT",
+      "trading_signals": "Price > SMA20 = short-term uptrend; Price < SMA20 = short-term downtrend; SMA20 slope indicates trend strength",
+      "example": "152.50"
+    },
+    "sma_50": {
+      "description": "50-period Simple Moving Average",
+      "trading_meaning": "Medium-term trend indicator. Key level for swing traders. Often acts as dynamic support/resistance.",
+      "data_type": "FLOAT",
+      "trading_signals": "Price crossing SMA50 = trend change; SMA50 > SMA200 = bullish market; Golden/Death cross reference",
+      "example": "148.00"
+    },
+    "sma_200": {
+      "description": "200-period Simple Moving Average",
+      "trading_meaning": "Long-term trend indicator. Institutional reference. Defines bull/bear market boundary.",
+      "data_type": "FLOAT",
+      "trading_signals": "Price > SMA200 = bull market; Price < SMA200 = bear market; SMA50 crossing SMA200 = major signal",
+      "example": "140.00"
+    },
+    "ema_12": {
+      "description": "12-period Exponential Moving Average",
+      "trading_meaning": "Fast EMA for MACD calculation. More weight on recent prices than SMA.",
+      "data_type": "FLOAT",
+      "trading_signals": "EMA12 > EMA26 = bullish MACD; EMA12 < EMA26 = bearish MACD",
+      "example": "153.00"
+    },
+    "ema_26": {
+      "description": "26-period Exponential Moving Average",
+      "trading_meaning": "Slow EMA for MACD calculation. Signal line base.",
+      "data_type": "FLOAT",
+      "trading_signals": "Crossover with EMA12 generates MACD signals",
+      "example": "151.50"
+    },
+    "ema_50": {
+      "description": "50-period Exponential Moving Average",
+      "trading_meaning": "Medium-term EMA. Alternative to SMA50 with more responsiveness to recent price.",
+      "data_type": "FLOAT",
+      "example": "149.00"
+    },
+    "macd": {
+      "description": "MACD Line (EMA12 - EMA26)",
+      "trading_meaning": "Trend-following momentum indicator. Shows relationship between two EMAs.",
+      "data_type": "FLOAT",
+      "trading_signals": "MACD > 0 = bullish; MACD < 0 = bearish; Crossing signal line = trade signal",
+      "formula": "MACD = EMA(12) - EMA(26)",
+      "example": "1.50"
+    },
+    "macd_signal": {
+      "description": "MACD Signal Line (9-period EMA of MACD)",
+      "trading_meaning": "Trigger line for MACD crossover signals.",
+      "data_type": "FLOAT",
+      "trading_signals": "MACD crossing above signal = buy; MACD crossing below signal = sell",
+      "example": "1.20"
+    },
+    "macd_histogram": {
+      "description": "MACD Histogram (MACD - Signal)",
+      "trading_meaning": "Visual representation of MACD/Signal difference. Shows momentum acceleration.",
+      "data_type": "FLOAT",
+      "trading_signals": "Histogram increasing = momentum building; Histogram decreasing = momentum fading; Histogram crossing zero = trend change",
+      "example": "0.30"
+    },
+    "bollinger_upper": {
+      "description": "Upper Bollinger Band (SMA20 + 2*StdDev)",
+      "trading_meaning": "Dynamic resistance level based on volatility. Price touching = potentially overbought.",
+      "data_type": "FLOAT",
+      "trading_signals": "Price at upper band = overbought/breakout; Walking the band = strong trend",
+      "example": "158.00"
+    },
+    "bollinger_middle": {
+      "description": "Middle Bollinger Band (SMA20)",
+      "trading_meaning": "Center line and dynamic support/resistance. Same as SMA20.",
+      "data_type": "FLOAT",
+      "trading_signals": "Price crossing middle = trend change; Price bouncing off = support/resistance",
+      "example": "152.50"
+    },
+    "bollinger_lower": {
+      "description": "Lower Bollinger Band (SMA20 - 2*StdDev)",
+      "trading_meaning": "Dynamic support level based on volatility. Price touching = potentially oversold.",
+      "data_type": "FLOAT",
+      "trading_signals": "Price at lower band = oversold/breakdown; Band squeeze = low volatility, breakout coming",
+      "example": "147.00"
+    },
+    "atr": {
+      "description": "Average True Range (14-period)",
+      "trading_meaning": "Volatility indicator showing average price range. Used for stop-loss placement and position sizing.",
+      "data_type": "FLOAT",
+      "trading_signals": "High ATR = high volatility, use wider stops; Low ATR = low volatility, potential breakout setup",
+      "formula": "ATR = EMA of TR; TR = max(high-low, |high-prev_close|, |low-prev_close|)",
+      "example": "3.50"
+    },
+    "adx": {
+      "description": "Average Directional Index (14-period)",
+      "trading_meaning": "Measures trend strength (not direction). Range 0-100. Core trend strength indicator.",
+      "data_type": "FLOAT",
+      "trading_signals": "ADX > 25 = strong trend; ADX < 20 = weak/no trend; ADX rising = trend strengthening",
+      "example": "28.5"
+    },
+    "plus_di": {
+      "description": "Positive Directional Indicator (+DI)",
+      "trading_meaning": "Measures bullish trend strength. Part of ADX system.",
+      "data_type": "FLOAT",
+      "trading_signals": "+DI > -DI = uptrend; +DI crossing above -DI = bullish signal",
+      "example": "22.0"
+    },
+    "minus_di": {
+      "description": "Negative Directional Indicator (-DI)",
+      "trading_meaning": "Measures bearish trend strength. Part of ADX system.",
+      "data_type": "FLOAT",
+      "trading_signals": "-DI > +DI = downtrend; -DI crossing above +DI = bearish signal",
+      "example": "18.0"
+    },
+    "cci": {
+      "description": "Commodity Channel Index (20-period)",
+      "trading_meaning": "Oscillator measuring price relative to average. Range typically -300 to +300.",
+      "data_type": "FLOAT",
+      "trading_signals": "CCI > 100 = overbought; CCI < -100 = oversold; CCI crossing 0 = trend change",
+      "formula": "CCI = (Typical Price - SMA) / (0.015 * Mean Deviation)",
+      "example": "75.5"
+    },
+    "ultimate_osc": {
+      "description": "Ultimate Oscillator",
+      "trading_meaning": "Combines short, medium, and long-term momentum. Range 0-100.",
+      "data_type": "FLOAT",
+      "trading_signals": "UO > 70 = overbought; UO < 30 = oversold; Divergence = reversal signal",
+      "example": "55.0"
+    },
+    "awesome_osc": {
+      "description": "Awesome Oscillator (AO)",
+      "trading_meaning": "Momentum indicator comparing recent momentum to larger momentum. Histogram format.",
+      "data_type": "FLOAT",
+      "trading_signals": "AO > 0 = bullish momentum; AO < 0 = bearish momentum; Twin peaks = reversal signal",
+      "formula": "AO = SMA(5, Median Price) - SMA(34, Median Price)",
+      "example": "2.50"
+    },
+    "obv": {
+      "description": "On-Balance Volume",
+      "trading_meaning": "Cumulative volume indicator. Shows if volume is flowing into or out of the asset.",
+      "data_type": "FLOAT",
+      "trading_signals": "OBV rising with price = confirmed uptrend; OBV falling with price rising = potential reversal",
+      "formula": "OBV adds volume on up days, subtracts on down days",
+      "example": "150000000"
+    },
+    "pvo": {
+      "description": "Percentage Volume Oscillator",
+      "trading_meaning": "Shows relationship between two volume EMAs. Similar to MACD for volume.",
+      "data_type": "FLOAT",
+      "trading_signals": "PVO > 0 = above average volume activity; PVO crossing signal line = volume momentum change",
+      "example": "5.5"
+    },
+    "ppo": {
+      "description": "Percentage Price Oscillator",
+      "trading_meaning": "MACD expressed as percentage. Useful for comparing different priced assets.",
+      "data_type": "FLOAT",
+      "trading_signals": "Similar to MACD but normalized; PPO > 0 = bullish; PPO < 0 = bearish",
+      "example": "1.2"
+    },
+    "kama": {
+      "description": "Kaufman's Adaptive Moving Average",
+      "trading_meaning": "Adaptive moving average that adjusts to market volatility. Less whipsaws than traditional MAs.",
+      "data_type": "FLOAT",
+      "trading_signals": "Price > KAMA = uptrend; Price < KAMA = downtrend; KAMA slope shows trend direction",
+      "example": "151.75"
+    },
+    "trix": {
+      "description": "Triple Exponential Average (TRIX)",
+      "trading_meaning": "Triple smoothed exponential moving average. Filters out market noise.",
+      "data_type": "FLOAT",
+      "trading_signals": "TRIX > 0 = bullish; TRIX < 0 = bearish; TRIX crossing zero = potential trend change",
+      "example": "0.15"
+    },
+    "datetime": {
+      "description": "Timestamp of the data point",
+      "trading_meaning": "When the candle/bar closed. Essential for time-series analysis and backtesting.",
+      "data_type": "TIMESTAMP",
+      "example": "2024-12-07 16:00:00 UTC"
+    },
+    "timestamp": {
+      "description": "Unix timestamp (seconds since epoch)",
+      "trading_meaning": "Machine-readable time format. Useful for calculations and sorting.",
+      "data_type": "INTEGER",
+      "example": "1733594400"
+    },
+    "created_at": {
+      "description": "When the record was inserted into the database",
+      "trading_meaning": "Data freshness indicator. Useful for debugging and audit trails.",
+      "data_type": "TIMESTAMP",
+      "example": "2024-12-07 16:05:00 UTC"
+    },
+    "data_source": {
+      "description": "Origin of the data",
+      "trading_meaning": "Identifies API source (TwelveData, Kraken, etc.). Important for data quality assessment.",
+      "data_type": "STRING",
+      "example": "twelvedata, kraken, coinmarketcap"
+    }
+  },
+  "asset_types": {
+    "stocks": {
+      "description": "Equities - ownership shares in public companies",
+      "typical_count": "15,000+ US stocks from TwelveData",
+      "trading_hours": "US markets: 9:30 AM - 4:00 PM ET (pre/post market available)",
+      "key_metrics": [
+        "sector",
+        "industry",
+        "market_cap",
+        "pe_ratio",
+        "dividend_yield"
+      ]
+    },
+    "crypto": {
+      "description": "Cryptocurrencies - digital assets on blockchain",
+      "typical_count": "200+ major cryptocurrencies",
+      "trading_hours": "24/7/365",
+      "key_metrics": [
+        "market_cap",
+        "circulating_supply",
+        "total_supply",
+        "dominance"
+      ]
+    },
+    "forex": {
+      "description": "Foreign Exchange - currency pairs",
+      "typical_count": "50+ major and minor pairs",
+      "trading_hours": "24/5 (Sunday 5 PM - Friday 5 PM ET)",
+      "key_metrics": [
+        "pip_value",
+        "spread",
+        "interest_rate_differential"
+      ]
+    },
+    "etfs": {
+      "description": "Exchange-Traded Funds - baskets of securities",
+      "typical_count": "3,000+ ETFs",
+      "trading_hours": "Same as underlying market",
+      "key_metrics": [
+        "expense_ratio",
+        "aum",
+        "holdings",
+        "tracking_error"
+      ]
+    },
+    "indices": {
+      "description": "Market Indices - benchmarks representing market segments",
+      "typical_count": "50+ major indices",
+      "trading_hours": "Varies by index",
+      "key_metrics": [
+        "composition",
+        "weighting_method",
+        "rebalancing_frequency"
+      ]
+    },
+    "commodities": {
+      "description": "Raw materials and natural resources",
+      "typical_count": "30+ major commodities",
+      "trading_hours": "Varies by commodity and exchange",
+      "key_metrics": [
+        "futures_curve",
+        "seasonality",
+        "inventory_levels"
+      ]
+    }
+  },
+  "table_types": {
+    "5min": {
+      "timeframe": "5-minute intervals",
+      "use_case": "Intraday scalping and day trading",
+      "typical_lookback": "Last 1-5 trading days",
+      "strategies": "Scalping, momentum plays, opening range breakouts"
+    },
+    "hourly": {
+      "timeframe": "Hourly intervals",
+      "use_case": "Day trading and short-term swing trading",
+      "typical_lookback": "Last 1-4 weeks",
+      "strategies": "Intraday trends, session trading, short swings"
+    },
+    "daily": {
+      "timeframe": "Daily intervals (end of day)",
+      "use_case": "Swing trading and position trading",
+      "typical_lookback": "3-12 months",
+      "strategies": "Trend following, breakouts, mean reversion"
+    },
+    "weekly_summary": {
+      "timeframe": "Weekly aggregate data",
+      "use_case": "Position trading and long-term analysis",
+      "typical_lookback": "1-5 years",
+      "strategies": "Long-term trends, sector rotation, value investing"
+    },
+    "historical_daily": {
+      "timeframe": "Daily data with extended history",
+      "use_case": "Backtesting and long-term analysis",
+      "typical_lookback": "5-20+ years",
+      "strategies": "Strategy backtesting, statistical analysis, machine learning training"
+    }
+  },
+  "tables": {
+    "v2_commodities_5min": {
+      "full_path": "aialgotradehits.crypto_trading_data.v2_commodities_5min",
+      "num_rows": 4033,
+      "num_bytes": 513239,
+      "columns": [
+        {
+          "name": "symbol",
+          "type": "STRING"
+        },
+        {
+          "name": "name",
+          "type": "STRING"
+        },
+        {
+          "name": "asset_type",
+          "type": "STRING"
+        },
+        {
+          "name": "exchange",
+          "type": "STRING"
+        },
+        {
+          "name": "currency",
+          "type": "STRING"
+        },
+        {
+          "name": "open",
+          "type": "FLOAT"
+        },
+        {
+          "name": "high",
+          "type": "FLOAT"
+        },
+        {
+          "name": "low",
+          "type": "FLOAT"
+        },
+        {
+          "name": "close",
+          "type": "FLOAT"
+        },
+        {
+          "name": "volume",
+          "type": "FLOAT"
+        },
+        {
+          "name": "change",
+          "type": "FLOAT"
+        },
+        {
+          "name": "percent_change",
+          "type": "FLOAT"
+        },
+        {
+          "name": "rsi",
+          "type": "FLOAT"
+        },
+        {
+          "name": "sma_20",
+          "type": "FLOAT"
+        },
+        {
+          "name": "sma_50",
+          "type": "FLOAT"
+        },
+        {
+          "name": "ema_12",
+          "type": "FLOAT"
+        },
+        {
+          "name": "ema_26",
+          "type": "FLOAT"
+        },
+        {
+          "name": "macd",
+          "type": "FLOAT"
+        },
+        {
+          "name": "macd_signal",
+          "type": "FLOAT"
+        },
+        {
+          "name": "bollinger_upper",
+          "type": "FLOAT"
+        },
+        {
+          "name": "bollinger_middle",
+          "type": "FLOAT"
+        },
+        {
+          "name": "bollinger_lower",
+          "type": "FLOAT"
+        },
+        {
+          "name": "atr",
+          "type": "FLOAT"
+        },
+        {
+          "name": "adx",
+          "type": "FLOAT"
+        },
+        {
+          "name": "datetime",
+          "type": "TIMESTAMP"
+        },
+        {
+          "name": "timestamp",
+          "type": "INTEGER"
+        },
+        {
+          "name": "data_source",
+          "type": "STRING"
+        }
+      ]
+    },
+    "v2_commodities_daily": {
+      "full_path": "aialgotradehits.crypto_trading_data.v2_commodities_daily",
+      "num_rows": 8344,
+      "num_bytes": 1563904,
+      "columns": [
+        {
+          "name": "symbol",
+          "type": "STRING"
+        },
+        {
+          "name": "name",
+          "type": "STRING"
+        },
+        {
+          "name": "asset_type",
+          "type": "STRING"
+        },
+        {
+          "name": "exchange",
+          "type": "STRING"
+        },
+        {
+          "name": "country",
+          "type": "STRING"
+        },
+        {
+          "name": "currency",
+          "type": "STRING"
+        },
+        {
+          "name": "open",
+          "type": "FLOAT"
+        },
+        {
+          "name": "high",
+          "type": "FLOAT"
+        },
+        {
+          "name": "low",
+          "type": "FLOAT"
+        },
+        {
+          "name": "close",
+          "type": "FLOAT"
+        },
+        {
+          "name": "previous_close",
+          "type": "FLOAT"
+        },
+        {
+          "name": "volume",
+          "type": "FLOAT"
+        },
+        {
+          "name": "average_volume",
+          "type": "FLOAT"
+        },
+        {
+          "name": "change",
+          "type": "FLOAT"
+        },
+        {
+          "name": "percent_change",
+          "type": "FLOAT"
+        },
+        {
+          "name": "hi_lo",
+          "type": "FLOAT"
+        },
+        {
+          "name": "pct_hi_lo",
+          "type": "FLOAT"
+        },
+        {
+          "name": "week_52_high",
+          "type": "FLOAT"
+        },
+        {
+          "name": "week_52_low",
+          "type": "FLOAT"
+        },
+        {
+          "name": "rsi",
+          "type": "FLOAT"
+        },
+        {
+          "name": "stoch_k",
+          "type": "FLOAT"
+        },
+        {
+          "name": "stoch_d",
+          "type": "FLOAT"
+        },
+        {
+          "name": "momentum",
+          "type": "FLOAT"
+        },
+        {
+          "name": "roc",
+          "type": "FLOAT"
+        },
+        {
+          "name": "williams_r",
+          "type": "FLOAT"
+        },
+        {
+          "name": "sma_20",
+          "type": "FLOAT"
+        },
+        {
+          "name": "sma_50",
+          "type": "FLOAT"
+        },
+        {
+          "name": "sma_200",
+          "type": "FLOAT"
+        },
+        {
+          "name": "ema_12",
+          "type": "FLOAT"
+        },
+        {
+          "name": "ema_26",
+          "type": "FLOAT"
+        },
+        {
+          "name": "ema_50",
+          "type": "FLOAT"
+        },
+        {
+          "name": "macd",
+          "type": "FLOAT"
+        },
+        {
+          "name": "macd_signal",
+          "type": "FLOAT"
+        },
+        {
+          "name": "macd_histogram",
+          "type": "FLOAT"
+        },
+        {
+          "name": "bollinger_upper",
+          "type": "FLOAT"
+        },
+        {
+          "name": "bollinger_middle",
+          "type": "FLOAT"
+        },
+        {
+          "name": "bollinger_lower",
+          "type": "FLOAT"
+        },
+        {
+          "name": "atr",
+          "type": "FLOAT"
+        },
+        {
+          "name": "adx",
+          "type": "FLOAT"
+        },
+        {
+          "name": "plus_di",
+          "type": "FLOAT"
+        },
+        {
+          "name": "minus_di",
+          "type": "FLOAT"
+        },
+        {
+          "name": "cci",
+          "type": "FLOAT"
+        },
+        {
+          "name": "obv",
+          "type": "FLOAT"
+        },
+        {
+          "name": "pvo",
+          "type": "FLOAT"
+        },
+        {
+          "name": "ppo",
+          "type": "FLOAT"
+        },
+        {
+          "name": "kama",
+          "type": "FLOAT"
+        },
+        {
+          "name": "trix",
+          "type": "FLOAT"
+        },
+        {
+          "name": "ultimate_osc",
+          "type": "FLOAT"
+        },
+        {
+          "name": "awesome_osc",
+          "type": "FLOAT"
+        },
+        {
+          "name": "datetime",
+          "type": "TIMESTAMP"
+        },
+        {
+          "name": "timestamp",
+          "type": "INTEGER"
+        },
+        {
+          "name": "data_source",
+          "type": "STRING"
+        },
+        {
+          "name": "created_at",
+          "type": "TIMESTAMP"
+        }
+      ]
+    },
+    "v2_commodities_historical_daily": {
+      "full_path": "aialgotradehits.crypto_trading_data.v2_commodities_historical_daily",
+      "num_rows": 163593,
+      "num_bytes": 13549059,
+      "columns": [
+        {
+          "name": "symbol",
+          "type": "STRING"
+        },
+        {
+          "name": "name",
+          "type": "STRING"
+        },
+        {
+          "name": "asset_type",
+          "type": "STRING"
+        },
+        {
+          "name": "exchange",
+          "type": "STRING"
+        },
+        {
+          "name": "country",
+          "type": "STRING"
+        },
+        {
+          "name": "currency",
+          "type": "STRING"
+        },
+        {
+          "name": "open",
+          "type": "FLOAT"
+        },
+        {
+          "name": "high",
+          "type": "FLOAT"
+        },
+        {
+          "name": "low",
+          "type": "FLOAT"
+        },
+        {
+          "name": "close",
+          "type": "FLOAT"
+        },
+        {
+          "name": "volume",
+          "type": "FLOAT"
+        },
+        {
+          "name": "change",
+          "type": "FLOAT"
+        },
+        {
+          "name": "percent_change",
+          "type": "FLOAT"
+        },
+        {
+          "name": "datetime",
+          "type": "TIMESTAMP"
+        },
+        {
+          "name": "data_source",
+          "type": "STRING"
+        },
+        {
+          "name": "created_at",
+          "type": "TIMESTAMP"
+        }
+      ]
+    },
+    "v2_commodities_hourly": {
+      "full_path": "aialgotradehits.crypto_trading_data.v2_commodities_hourly",
+      "num_rows": 413,
+      "num_bytes": 52635,
+      "columns": [
+        {
+          "name": "symbol",
+          "type": "STRING"
+        },
+        {
+          "name": "name",
+          "type": "STRING"
+        },
+        {
+          "name": "asset_type",
+          "type": "STRING"
+        },
+        {
+          "name": "exchange",
+          "type": "STRING"
+        },
+        {
+          "name": "currency",
+          "type": "STRING"
+        },
+        {
+          "name": "open",
+          "type": "FLOAT"
+        },
+        {
+          "name": "high",
+          "type": "FLOAT"
+        },
+        {
+          "name": "low",
+          "type": "FLOAT"
+        },
+        {
+          "name": "close",
+          "type": "FLOAT"
+        },
+        {
+          "name": "volume",
+          "type": "FLOAT"
+        },
+        {
+          "name": "change",
+          "type": "FLOAT"
+        },
+        {
+          "name": "percent_change",
+          "type": "FLOAT"
+        },
+        {
+          "name": "rsi",
+          "type": "FLOAT"
+        },
+        {
+          "name": "sma_20",
+          "type": "FLOAT"
+        },
+        {
+          "name": "sma_50",
+          "type": "FLOAT"
+        },
+        {
+          "name": "ema_12",
+          "type": "FLOAT"
+        },
+        {
+          "name": "ema_26",
+          "type": "FLOAT"
+        },
+        {
+          "name": "macd",
+          "type": "FLOAT"
+        },
+        {
+          "name": "macd_signal",
+          "type": "FLOAT"
+        },
+        {
+          "name": "bollinger_upper",
+          "type": "FLOAT"
+        },
+        {
+          "name": "bollinger_middle",
+          "type": "FLOAT"
+        },
+        {
+          "name": "bollinger_lower",
+          "type": "FLOAT"
+        },
+        {
+          "name": "atr",
+          "type": "FLOAT"
+        },
+        {
+          "name": "adx",
+          "type": "FLOAT"
+        },
+        {
+          "name": "datetime",
+          "type": "TIMESTAMP"
+        },
+        {
+          "name": "timestamp",
+          "type": "INTEGER"
+        },
+        {
+          "name": "data_source",
+          "type": "STRING"
+        }
+      ]
+    },
+    "v2_commodities_weekly_summary": {
+      "full_path": "aialgotradehits.crypto_trading_data.v2_commodities_weekly_summary",
+      "num_rows": 37,
+      "num_bytes": 3951,
+      "columns": [
+        {
+          "name": "symbol",
+          "type": "STRING"
+        },
+        {
+          "name": "name",
+          "type": "STRING"
+        },
+        {
+          "name": "asset_type",
+          "type": "STRING"
+        },
+        {
+          "name": "exchange",
+          "type": "STRING"
+        },
+        {
+          "name": "country",
+          "type": "STRING"
+        },
+        {
+          "name": "sector",
+          "type": "STRING"
+        },
+        {
+          "name": "industry",
+          "type": "STRING"
+        },
+        {
+          "name": "currency",
+          "type": "STRING"
+        },
+        {
+          "name": "open",
+          "type": "FLOAT"
+        },
+        {
+          "name": "high",
+          "type": "FLOAT"
+        },
+        {
+          "name": "low",
+          "type": "FLOAT"
+        },
+        {
+          "name": "close",
+          "type": "FLOAT"
+        },
+        {
+          "name": "previous_close",
+          "type": "FLOAT"
+        },
+        {
+          "name": "volume",
+          "type": "FLOAT"
+        },
+        {
+          "name": "average_volume",
+          "type": "FLOAT"
+        },
+        {
+          "name": "change",
+          "type": "FLOAT"
+        },
+        {
+          "name": "percent_change",
+          "type": "FLOAT"
+        },
+        {
+          "name": "hi_lo",
+          "type": "FLOAT"
+        },
+        {
+          "name": "pct_hi_lo",
+          "type": "FLOAT"
+        },
+        {
+          "name": "week_52_high",
+          "type": "FLOAT"
+        },
+        {
+          "name": "week_52_low",
+          "type": "FLOAT"
+        },
+        {
+          "name": "rsi",
+          "type": "FLOAT"
+        },
+        {
+          "name": "stoch_k",
+          "type": "FLOAT"
+        },
+        {
+          "name": "stoch_d",
+          "type": "FLOAT"
+        },
+        {
+          "name": "momentum",
+          "type": "FLOAT"
+        },
+        {
+          "name": "roc",
+          "type": "FLOAT"
+        },
+        {
+          "name": "williams_r",
+          "type": "FLOAT"
+        },
+        {
+          "name": "sma_20",
+          "type": "FLOAT"
+        },
+        {
+          "name": "sma_50",
+          "type": "FLOAT"
+        },
+        {
+          "name": "sma_200",
+          "type": "FLOAT"
+        },
+        {
+          "name": "ema_12",
+          "type": "FLOAT"
+        },
+        {
+          "name": "ema_26",
+          "type": "FLOAT"
+        },
+        {
+          "name": "ema_50",
+          "type": "FLOAT"
+        },
+        {
+          "name": "macd",
+          "type": "FLOAT"
+        },
+        {
+          "name": "macd_signal",
+          "type": "FLOAT"
+        },
+        {
+          "name": "macd_histogram",
+          "type": "FLOAT"
+        },
+        {
+          "name": "bollinger_upper",
+          "type": "FLOAT"
+        },
+        {
+          "name": "bollinger_middle",
+          "type": "FLOAT"
+        },
+        {
+          "name": "bollinger_lower",
+          "type": "FLOAT"
+        },
+        {
+          "name": "atr",
+          "type": "FLOAT"
+        },
+        {
+          "name": "adx",
+          "type": "FLOAT"
+        },
+        {
+          "name": "plus_di",
+          "type": "FLOAT"
+        },
+        {
+          "name": "minus_di",
+          "type": "FLOAT"
+        },
+        {
+          "name": "cci",
+          "type": "FLOAT"
+        },
+        {
+          "name": "obv",
+          "type": "FLOAT"
+        },
+        {
+          "name": "pvo",
+          "type": "FLOAT"
+        },
+        {
+          "name": "ppo",
+          "type": "FLOAT"
+        },
+        {
+          "name": "kama",
+          "type": "FLOAT"
+        },
+        {
+          "name": "trix",
+          "type": "FLOAT"
+        },
+        {
+          "name": "ultimate_osc",
+          "type": "FLOAT"
+        },
+        {
+          "name": "awesome_osc",
+          "type": "FLOAT"
+        },
+        {
+          "name": "datetime",
+          "type": "TIMESTAMP"
+        },
+        {
+          "name": "timestamp",
+          "type": "INTEGER"
+        },
+        {
+          "name": "data_source",
+          "type": "STRING"
+        },
+        {
+          "name": "created_at",
+          "type": "TIMESTAMP"
+        }
+      ]
+    },
+    "v2_crypto_5min": {
+      "full_path": "aialgotradehits.crypto_trading_data.v2_crypto_5min",
+      "num_rows": 28715,
+      "num_bytes": 3576130,
+      "columns": [
+        {
+          "name": "symbol",
+          "type": "STRING"
+        },
+        {
+          "name": "name",
+          "type": "STRING"
+        },
+        {
+          "name": "asset_type",
+          "type": "STRING"
+        },
+        {
+          "name": "exchange",
+          "type": "STRING"
+        },
+        {
+          "name": "currency",
+          "type": "STRING"
+        },
+        {
+          "name": "open",
+          "type": "FLOAT"
+        },
+        {
+          "name": "high",
+          "type": "FLOAT"
+        },
+        {
+          "name": "low",
+          "type": "FLOAT"
+        },
+        {
+          "name": "close",
+          "type": "FLOAT"
+        },
+        {
+          "name": "volume",
+          "type": "FLOAT"
+        },
+        {
+          "name": "change",
+          "type": "FLOAT"
+        },
+        {
+          "name": "percent_change",
+          "type": "FLOAT"
+        },
+        {
+          "name": "rsi",
+          "type": "FLOAT"
+        },
+        {
+          "name": "sma_20",
+          "type": "FLOAT"
+        },
+        {
+          "name": "sma_50",
+          "type": "FLOAT"
+        },
+        {
+          "name": "ema_12",
+          "type": "FLOAT"
+        },
+        {
+          "name": "ema_26",
+          "type": "FLOAT"
+        },
+        {
+          "name": "macd",
+          "type": "FLOAT"
+        },
+        {
+          "name": "macd_signal",
+          "type": "FLOAT"
+        },
+        {
+          "name": "bollinger_upper",
+          "type": "FLOAT"
+        },
+        {
+          "name": "bollinger_middle",
+          "type": "FLOAT"
+        },
+        {
+          "name": "bollinger_lower",
+          "type": "FLOAT"
+        },
+        {
+          "name": "atr",
+          "type": "FLOAT"
+        },
+        {
+          "name": "adx",
+          "type": "FLOAT"
+        },
+        {
+          "name": "datetime",
+          "type": "TIMESTAMP"
+        },
+        {
+          "name": "timestamp",
+          "type": "INTEGER"
+        },
+        {
+          "name": "data_source",
+          "type": "STRING"
+        }
+      ]
+    },
+    "v2_crypto_daily": {
+      "full_path": "aialgotradehits.crypto_trading_data.v2_crypto_daily",
+      "num_rows": 64681,
+      "num_bytes": 12096058,
+      "columns": [
+        {
+          "name": "symbol",
+          "type": "STRING"
+        },
+        {
+          "name": "name",
+          "type": "STRING"
+        },
+        {
+          "name": "asset_type",
+          "type": "STRING"
+        },
+        {
+          "name": "exchange",
+          "type": "STRING"
+        },
+        {
+          "name": "country",
+          "type": "STRING"
+        },
+        {
+          "name": "currency",
+          "type": "STRING"
+        },
+        {
+          "name": "open",
+          "type": "FLOAT"
+        },
+        {
+          "name": "high",
+          "type": "FLOAT"
+        },
+        {
+          "name": "low",
+          "type": "FLOAT"
+        },
+        {
+          "name": "close",
+          "type": "FLOAT"
+        },
+        {
+          "name": "previous_close",
+          "type": "FLOAT"
+        },
+        {
+          "name": "volume",
+          "type": "FLOAT"
+        },
+        {
+          "name": "average_volume",
+          "type": "FLOAT"
+        },
+        {
+          "name": "change",
+          "type": "FLOAT"
+        },
+        {
+          "name": "percent_change",
+          "type": "FLOAT"
+        },
+        {
+          "name": "hi_lo",
+          "type": "FLOAT"
+        },
+        {
+          "name": "pct_hi_lo",
+          "type": "FLOAT"
+        },
+        {
+          "name": "week_52_high",
+          "type": "FLOAT"
+        },
+        {
+          "name": "week_52_low",
+          "type": "FLOAT"
+        },
+        {
+          "name": "rsi",
+          "type": "FLOAT"
+        },
+        {
+          "name": "stoch_k",
+          "type": "FLOAT"
+        },
+        {
+          "name": "stoch_d",
+          "type": "FLOAT"
+        },
+        {
+          "name": "momentum",
+          "type": "FLOAT"
+        },
+        {
+          "name": "roc",
+          "type": "FLOAT"
+        },
+        {
+          "name": "williams_r",
+          "type": "FLOAT"
+        },
+        {
+          "name": "sma_20",
+          "type": "FLOAT"
+        },
+        {
+          "name": "sma_50",
+          "type": "FLOAT"
+        },
+        {
+          "name": "sma_200",
+          "type": "FLOAT"
+        },
+        {
+          "name": "ema_12",
+          "type": "FLOAT"
+        },
+        {
+          "name": "ema_26",
+          "type": "FLOAT"
+        },
+        {
+          "name": "ema_50",
+          "type": "FLOAT"
+        },
+        {
+          "name": "macd",
+          "type": "FLOAT"
+        },
+        {
+          "name": "macd_signal",
+          "type": "FLOAT"
+        },
+        {
+          "name": "macd_histogram",
+          "type": "FLOAT"
+        },
+        {
+          "name": "bollinger_upper",
+          "type": "FLOAT"
+        },
+        {
+          "name": "bollinger_middle",
+          "type": "FLOAT"
+        },
+        {
+          "name": "bollinger_lower",
+          "type": "FLOAT"
+        },
+        {
+          "name": "atr",
+          "type": "FLOAT"
+        },
+        {
+          "name": "adx",
+          "type": "FLOAT"
+        },
+        {
+          "name": "plus_di",
+          "type": "FLOAT"
+        },
+        {
+          "name": "minus_di",
+          "type": "FLOAT"
+        },
+        {
+          "name": "cci",
+          "type": "FLOAT"
+        },
+        {
+          "name": "obv",
+          "type": "FLOAT"
+        },
+        {
+          "name": "pvo",
+          "type": "FLOAT"
+        },
+        {
+          "name": "ppo",
+          "type": "FLOAT"
+        },
+        {
+          "name": "kama",
+          "type": "FLOAT"
+        },
+        {
+          "name": "trix",
+          "type": "FLOAT"
+        },
+        {
+          "name": "ultimate_osc",
+          "type": "FLOAT"
+        },
+        {
+          "name": "awesome_osc",
+          "type": "FLOAT"
+        },
+        {
+          "name": "datetime",
+          "type": "TIMESTAMP"
+        },
+        {
+          "name": "timestamp",
+          "type": "INTEGER"
+        },
+        {
+          "name": "data_source",
+          "type": "STRING"
+        },
+        {
+          "name": "created_at",
+          "type": "TIMESTAMP"
+        }
+      ]
+    },
+    "v2_crypto_hourly": {
+      "full_path": "aialgotradehits.crypto_trading_data.v2_crypto_hourly",
+      "num_rows": 7797,
+      "num_bytes": 1030224,
+      "columns": [
+        {
+          "name": "symbol",
+          "type": "STRING"
+        },
+        {
+          "name": "name",
+          "type": "STRING"
+        },
+        {
+          "name": "asset_type",
+          "type": "STRING"
+        },
+        {
+          "name": "exchange",
+          "type": "STRING"
+        },
+        {
+          "name": "currency",
+          "type": "STRING"
+        },
+        {
+          "name": "open",
+          "type": "FLOAT"
+        },
+        {
+          "name": "high",
+          "type": "FLOAT"
+        },
+        {
+          "name": "low",
+          "type": "FLOAT"
+        },
+        {
+          "name": "close",
+          "type": "FLOAT"
+        },
+        {
+          "name": "volume",
+          "type": "FLOAT"
+        },
+        {
+          "name": "change",
+          "type": "FLOAT"
+        },
+        {
+          "name": "percent_change",
+          "type": "FLOAT"
+        },
+        {
+          "name": "rsi",
+          "type": "FLOAT"
+        },
+        {
+          "name": "sma_20",
+          "type": "FLOAT"
+        },
+        {
+          "name": "sma_50",
+          "type": "FLOAT"
+        },
+        {
+          "name": "ema_12",
+          "type": "FLOAT"
+        },
+        {
+          "name": "ema_26",
+          "type": "FLOAT"
+        },
+        {
+          "name": "macd",
+          "type": "FLOAT"
+        },
+        {
+          "name": "macd_signal",
+          "type": "FLOAT"
+        },
+        {
+          "name": "bollinger_upper",
+          "type": "FLOAT"
+        },
+        {
+          "name": "bollinger_middle",
+          "type": "FLOAT"
+        },
+        {
+          "name": "bollinger_lower",
+          "type": "FLOAT"
+        },
+        {
+          "name": "atr",
+          "type": "FLOAT"
+        },
+        {
+          "name": "adx",
+          "type": "FLOAT"
+        },
+        {
+          "name": "datetime",
+          "type": "TIMESTAMP"
+        },
+        {
+          "name": "timestamp",
+          "type": "INTEGER"
+        },
+        {
+          "name": "data_source",
+          "type": "STRING"
+        }
+      ]
+    },
+    "v2_cryptos_historical_daily": {
+      "full_path": "aialgotradehits.crypto_trading_data.v2_cryptos_historical_daily",
+      "num_rows": 41786,
+      "num_bytes": 3189485,
+      "columns": [
+        {
+          "name": "symbol",
+          "type": "STRING"
+        },
+        {
+          "name": "name",
+          "type": "STRING"
+        },
+        {
+          "name": "asset_type",
+          "type": "STRING"
+        },
+        {
+          "name": "exchange",
+          "type": "STRING"
+        },
+        {
+          "name": "country",
+          "type": "STRING"
+        },
+        {
+          "name": "currency",
+          "type": "STRING"
+        },
+        {
+          "name": "open",
+          "type": "FLOAT"
+        },
+        {
+          "name": "high",
+          "type": "FLOAT"
+        },
+        {
+          "name": "low",
+          "type": "FLOAT"
+        },
+        {
+          "name": "close",
+          "type": "FLOAT"
+        },
+        {
+          "name": "volume",
+          "type": "FLOAT"
+        },
+        {
+          "name": "change",
+          "type": "FLOAT"
+        },
+        {
+          "name": "percent_change",
+          "type": "FLOAT"
+        },
+        {
+          "name": "datetime",
+          "type": "TIMESTAMP"
+        },
+        {
+          "name": "data_source",
+          "type": "STRING"
+        },
+        {
+          "name": "created_at",
+          "type": "TIMESTAMP"
+        }
+      ]
+    },
+    "v2_cryptos_weekly_summary": {
+      "full_path": "aialgotradehits.crypto_trading_data.v2_cryptos_weekly_summary",
+      "num_rows": 1785,
+      "num_bytes": 107561,
+      "columns": [
+        {
+          "name": "symbol",
+          "type": "STRING"
+        },
+        {
+          "name": "name",
+          "type": "STRING"
+        },
+        {
+          "name": "asset_type",
+          "type": "STRING"
+        },
+        {
+          "name": "exchange",
+          "type": "STRING"
+        },
+        {
+          "name": "country",
+          "type": "STRING"
+        },
+        {
+          "name": "sector",
+          "type": "STRING"
+        },
+        {
+          "name": "industry",
+          "type": "STRING"
+        },
+        {
+          "name": "currency",
+          "type": "STRING"
+        },
+        {
+          "name": "open",
+          "type": "FLOAT"
+        },
+        {
+          "name": "high",
+          "type": "FLOAT"
+        },
+        {
+          "name": "low",
+          "type": "FLOAT"
+        },
+        {
+          "name": "close",
+          "type": "FLOAT"
+        },
+        {
+          "name": "previous_close",
+          "type": "FLOAT"
+        },
+        {
+          "name": "volume",
+          "type": "FLOAT"
+        },
+        {
+          "name": "average_volume",
+          "type": "FLOAT"
+        },
+        {
+          "name": "change",
+          "type": "FLOAT"
+        },
+        {
+          "name": "percent_change",
+          "type": "FLOAT"
+        },
+        {
+          "name": "hi_lo",
+          "type": "FLOAT"
+        },
+        {
+          "name": "pct_hi_lo",
+          "type": "FLOAT"
+        },
+        {
+          "name": "week_52_high",
+          "type": "FLOAT"
+        },
+        {
+          "name": "week_52_low",
+          "type": "FLOAT"
+        },
+        {
+          "name": "rsi",
+          "type": "FLOAT"
+        },
+        {
+          "name": "stoch_k",
+          "type": "FLOAT"
+        },
+        {
+          "name": "stoch_d",
+          "type": "FLOAT"
+        },
+        {
+          "name": "momentum",
+          "type": "FLOAT"
+        },
+        {
+          "name": "roc",
+          "type": "FLOAT"
+        },
+        {
+          "name": "williams_r",
+          "type": "FLOAT"
+        },
+        {
+          "name": "sma_20",
+          "type": "FLOAT"
+        },
+        {
+          "name": "sma_50",
+          "type": "FLOAT"
+        },
+        {
+          "name": "sma_200",
+          "type": "FLOAT"
+        },
+        {
+          "name": "ema_12",
+          "type": "FLOAT"
+        },
+        {
+          "name": "ema_26",
+          "type": "FLOAT"
+        },
+        {
+          "name": "ema_50",
+          "type": "FLOAT"
+        },
+        {
+          "name": "macd",
+          "type": "FLOAT"
+        },
+        {
+          "name": "macd_signal",
+          "type": "FLOAT"
+        },
+        {
+          "name": "macd_histogram",
+          "type": "FLOAT"
+        },
+        {
+          "name": "bollinger_upper",
+          "type": "FLOAT"
+        },
+        {
+          "name": "bollinger_middle",
+          "type": "FLOAT"
+        },
+        {
+          "name": "bollinger_lower",
+          "type": "FLOAT"
+        },
+        {
+          "name": "atr",
+          "type": "FLOAT"
+        },
+        {
+          "name": "adx",
+          "type": "FLOAT"
+        },
+        {
+          "name": "plus_di",
+          "type": "FLOAT"
+        },
+        {
+          "name": "minus_di",
+          "type": "FLOAT"
+        },
+        {
+          "name": "cci",
+          "type": "FLOAT"
+        },
+        {
+          "name": "obv",
+          "type": "FLOAT"
+        },
+        {
+          "name": "pvo",
+          "type": "FLOAT"
+        },
+        {
+          "name": "ppo",
+          "type": "FLOAT"
+        },
+        {
+          "name": "kama",
+          "type": "FLOAT"
+        },
+        {
+          "name": "trix",
+          "type": "FLOAT"
+        },
+        {
+          "name": "ultimate_osc",
+          "type": "FLOAT"
+        },
+        {
+          "name": "awesome_osc",
+          "type": "FLOAT"
+        },
+        {
+          "name": "datetime",
+          "type": "TIMESTAMP"
+        },
+        {
+          "name": "timestamp",
+          "type": "INTEGER"
+        },
+        {
+          "name": "data_source",
+          "type": "STRING"
+        },
+        {
+          "name": "created_at",
+          "type": "TIMESTAMP"
+        }
+      ]
+    },
+    "v2_etfs_5min": {
+      "full_path": "aialgotradehits.crypto_trading_data.v2_etfs_5min",
+      "num_rows": 3820,
+      "num_bytes": 482962,
+      "columns": [
+        {
+          "name": "symbol",
+          "type": "STRING"
+        },
+        {
+          "name": "name",
+          "type": "STRING"
+        },
+        {
+          "name": "asset_type",
+          "type": "STRING"
+        },
+        {
+          "name": "exchange",
+          "type": "STRING"
+        },
+        {
+          "name": "currency",
+          "type": "STRING"
+        },
+        {
+          "name": "open",
+          "type": "FLOAT"
+        },
+        {
+          "name": "high",
+          "type": "FLOAT"
+        },
+        {
+          "name": "low",
+          "type": "FLOAT"
+        },
+        {
+          "name": "close",
+          "type": "FLOAT"
+        },
+        {
+          "name": "volume",
+          "type": "FLOAT"
+        },
+        {
+          "name": "change",
+          "type": "FLOAT"
+        },
+        {
+          "name": "percent_change",
+          "type": "FLOAT"
+        },
+        {
+          "name": "rsi",
+          "type": "FLOAT"
+        },
+        {
+          "name": "sma_20",
+          "type": "FLOAT"
+        },
+        {
+          "name": "sma_50",
+          "type": "FLOAT"
+        },
+        {
+          "name": "ema_12",
+          "type": "FLOAT"
+        },
+        {
+          "name": "ema_26",
+          "type": "FLOAT"
+        },
+        {
+          "name": "macd",
+          "type": "FLOAT"
+        },
+        {
+          "name": "macd_signal",
+          "type": "FLOAT"
+        },
+        {
+          "name": "bollinger_upper",
+          "type": "FLOAT"
+        },
+        {
+          "name": "bollinger_middle",
+          "type": "FLOAT"
+        },
+        {
+          "name": "bollinger_lower",
+          "type": "FLOAT"
+        },
+        {
+          "name": "atr",
+          "type": "FLOAT"
+        },
+        {
+          "name": "adx",
+          "type": "FLOAT"
+        },
+        {
+          "name": "datetime",
+          "type": "TIMESTAMP"
+        },
+        {
+          "name": "timestamp",
+          "type": "INTEGER"
+        },
+        {
+          "name": "data_source",
+          "type": "STRING"
+        }
+      ]
+    },
+    "v2_etfs_daily": {
+      "full_path": "aialgotradehits.crypto_trading_data.v2_etfs_daily",
+      "num_rows": 29275,
+      "num_bytes": 5374552,
+      "columns": [
+        {
+          "name": "symbol",
+          "type": "STRING"
+        },
+        {
+          "name": "name",
+          "type": "STRING"
+        },
+        {
+          "name": "asset_type",
+          "type": "STRING"
+        },
+        {
+          "name": "exchange",
+          "type": "STRING"
+        },
+        {
+          "name": "country",
+          "type": "STRING"
+        },
+        {
+          "name": "currency",
+          "type": "STRING"
+        },
+        {
+          "name": "open",
+          "type": "FLOAT"
+        },
+        {
+          "name": "high",
+          "type": "FLOAT"
+        },
+        {
+          "name": "low",
+          "type": "FLOAT"
+        },
+        {
+          "name": "close",
+          "type": "FLOAT"
+        },
+        {
+          "name": "previous_close",
+          "type": "FLOAT"
+        },
+        {
+          "name": "volume",
+          "type": "FLOAT"
+        },
+        {
+          "name": "average_volume",
+          "type": "FLOAT"
+        },
+        {
+          "name": "change",
+          "type": "FLOAT"
+        },
+        {
+          "name": "percent_change",
+          "type": "FLOAT"
+        },
+        {
+          "name": "hi_lo",
+          "type": "FLOAT"
+        },
+        {
+          "name": "pct_hi_lo",
+          "type": "FLOAT"
+        },
+        {
+          "name": "week_52_high",
+          "type": "FLOAT"
+        },
+        {
+          "name": "week_52_low",
+          "type": "FLOAT"
+        },
+        {
+          "name": "rsi",
+          "type": "FLOAT"
+        },
+        {
+          "name": "stoch_k",
+          "type": "FLOAT"
+        },
+        {
+          "name": "stoch_d",
+          "type": "FLOAT"
+        },
+        {
+          "name": "momentum",
+          "type": "FLOAT"
+        },
+        {
+          "name": "roc",
+          "type": "FLOAT"
+        },
+        {
+          "name": "williams_r",
+          "type": "FLOAT"
+        },
+        {
+          "name": "sma_20",
+          "type": "FLOAT"
+        },
+        {
+          "name": "sma_50",
+          "type": "FLOAT"
+        },
+        {
+          "name": "sma_200",
+          "type": "FLOAT"
+        },
+        {
+          "name": "ema_12",
+          "type": "FLOAT"
+        },
+        {
+          "name": "ema_26",
+          "type": "FLOAT"
+        },
+        {
+          "name": "ema_50",
+          "type": "FLOAT"
+        },
+        {
+          "name": "macd",
+          "type": "FLOAT"
+        },
+        {
+          "name": "macd_signal",
+          "type": "FLOAT"
+        },
+        {
+          "name": "macd_histogram",
+          "type": "FLOAT"
+        },
+        {
+          "name": "bollinger_upper",
+          "type": "FLOAT"
+        },
+        {
+          "name": "bollinger_middle",
+          "type": "FLOAT"
+        },
+        {
+          "name": "bollinger_lower",
+          "type": "FLOAT"
+        },
+        {
+          "name": "atr",
+          "type": "FLOAT"
+        },
+        {
+          "name": "adx",
+          "type": "FLOAT"
+        },
+        {
+          "name": "plus_di",
+          "type": "FLOAT"
+        },
+        {
+          "name": "minus_di",
+          "type": "FLOAT"
+        },
+        {
+          "name": "cci",
+          "type": "FLOAT"
+        },
+        {
+          "name": "obv",
+          "type": "FLOAT"
+        },
+        {
+          "name": "pvo",
+          "type": "FLOAT"
+        },
+        {
+          "name": "ppo",
+          "type": "FLOAT"
+        },
+        {
+          "name": "kama",
+          "type": "FLOAT"
+        },
+        {
+          "name": "trix",
+          "type": "FLOAT"
+        },
+        {
+          "name": "ultimate_osc",
+          "type": "FLOAT"
+        },
+        {
+          "name": "awesome_osc",
+          "type": "FLOAT"
+        },
+        {
+          "name": "datetime",
+          "type": "TIMESTAMP"
+        },
+        {
+          "name": "timestamp",
+          "type": "INTEGER"
+        },
+        {
+          "name": "data_source",
+          "type": "STRING"
+        },
+        {
+          "name": "created_at",
+          "type": "TIMESTAMP"
+        }
+      ]
+    },
+    "v2_etfs_historical_daily": {
+      "full_path": "aialgotradehits.crypto_trading_data.v2_etfs_historical_daily",
+      "num_rows": 527277,
+      "num_bytes": 40758480,
+      "columns": [
+        {
+          "name": "symbol",
+          "type": "STRING"
+        },
+        {
+          "name": "name",
+          "type": "STRING"
+        },
+        {
+          "name": "asset_type",
+          "type": "STRING"
+        },
+        {
+          "name": "exchange",
+          "type": "STRING"
+        },
+        {
+          "name": "country",
+          "type": "STRING"
+        },
+        {
+          "name": "currency",
+          "type": "STRING"
+        },
+        {
+          "name": "open",
+          "type": "FLOAT"
+        },
+        {
+          "name": "high",
+          "type": "FLOAT"
+        },
+        {
+          "name": "low",
+          "type": "FLOAT"
+        },
+        {
+          "name": "close",
+          "type": "FLOAT"
+        },
+        {
+          "name": "volume",
+          "type": "FLOAT"
+        },
+        {
+          "name": "change",
+          "type": "FLOAT"
+        },
+        {
+          "name": "percent_change",
+          "type": "FLOAT"
+        },
+        {
+          "name": "datetime",
+          "type": "TIMESTAMP"
+        },
+        {
+          "name": "data_source",
+          "type": "STRING"
+        },
+        {
+          "name": "created_at",
+          "type": "TIMESTAMP"
+        }
+      ]
+    },
+    "v2_etfs_hourly": {
+      "full_path": "aialgotradehits.crypto_trading_data.v2_etfs_hourly",
+      "num_rows": 542,
+      "num_bytes": 68544,
+      "columns": [
+        {
+          "name": "symbol",
+          "type": "STRING"
+        },
+        {
+          "name": "name",
+          "type": "STRING"
+        },
+        {
+          "name": "asset_type",
+          "type": "STRING"
+        },
+        {
+          "name": "exchange",
+          "type": "STRING"
+        },
+        {
+          "name": "currency",
+          "type": "STRING"
+        },
+        {
+          "name": "open",
+          "type": "FLOAT"
+        },
+        {
+          "name": "high",
+          "type": "FLOAT"
+        },
+        {
+          "name": "low",
+          "type": "FLOAT"
+        },
+        {
+          "name": "close",
+          "type": "FLOAT"
+        },
+        {
+          "name": "volume",
+          "type": "FLOAT"
+        },
+        {
+          "name": "change",
+          "type": "FLOAT"
+        },
+        {
+          "name": "percent_change",
+          "type": "FLOAT"
+        },
+        {
+          "name": "rsi",
+          "type": "FLOAT"
+        },
+        {
+          "name": "sma_20",
+          "type": "FLOAT"
+        },
+        {
+          "name": "sma_50",
+          "type": "FLOAT"
+        },
+        {
+          "name": "ema_12",
+          "type": "FLOAT"
+        },
+        {
+          "name": "ema_26",
+          "type": "FLOAT"
+        },
+        {
+          "name": "macd",
+          "type": "FLOAT"
+        },
+        {
+          "name": "macd_signal",
+          "type": "FLOAT"
+        },
+        {
+          "name": "bollinger_upper",
+          "type": "FLOAT"
+        },
+        {
+          "name": "bollinger_middle",
+          "type": "FLOAT"
+        },
+        {
+          "name": "bollinger_lower",
+          "type": "FLOAT"
+        },
+        {
+          "name": "atr",
+          "type": "FLOAT"
+        },
+        {
+          "name": "adx",
+          "type": "FLOAT"
+        },
+        {
+          "name": "datetime",
+          "type": "TIMESTAMP"
+        },
+        {
+          "name": "timestamp",
+          "type": "INTEGER"
+        },
+        {
+          "name": "data_source",
+          "type": "STRING"
+        }
+      ]
+    },
+    "v2_etfs_weekly_summary": {
+      "full_path": "aialgotradehits.crypto_trading_data.v2_etfs_weekly_summary",
+      "num_rows": 409,
+      "num_bytes": 53062,
+      "columns": [
+        {
+          "name": "symbol",
+          "type": "STRING"
+        },
+        {
+          "name": "name",
+          "type": "STRING"
+        },
+        {
+          "name": "asset_type",
+          "type": "STRING"
+        },
+        {
+          "name": "exchange",
+          "type": "STRING"
+        },
+        {
+          "name": "country",
+          "type": "STRING"
+        },
+        {
+          "name": "sector",
+          "type": "STRING"
+        },
+        {
+          "name": "industry",
+          "type": "STRING"
+        },
+        {
+          "name": "currency",
+          "type": "STRING"
+        },
+        {
+          "name": "open",
+          "type": "FLOAT"
+        },
+        {
+          "name": "high",
+          "type": "FLOAT"
+        },
+        {
+          "name": "low",
+          "type": "FLOAT"
+        },
+        {
+          "name": "close",
+          "type": "FLOAT"
+        },
+        {
+          "name": "previous_close",
+          "type": "FLOAT"
+        },
+        {
+          "name": "volume",
+          "type": "FLOAT"
+        },
+        {
+          "name": "average_volume",
+          "type": "FLOAT"
+        },
+        {
+          "name": "change",
+          "type": "FLOAT"
+        },
+        {
+          "name": "percent_change",
+          "type": "FLOAT"
+        },
+        {
+          "name": "hi_lo",
+          "type": "FLOAT"
+        },
+        {
+          "name": "pct_hi_lo",
+          "type": "FLOAT"
+        },
+        {
+          "name": "week_52_high",
+          "type": "FLOAT"
+        },
+        {
+          "name": "week_52_low",
+          "type": "FLOAT"
+        },
+        {
+          "name": "rsi",
+          "type": "FLOAT"
+        },
+        {
+          "name": "stoch_k",
+          "type": "FLOAT"
+        },
+        {
+          "name": "stoch_d",
+          "type": "FLOAT"
+        },
+        {
+          "name": "momentum",
+          "type": "FLOAT"
+        },
+        {
+          "name": "roc",
+          "type": "FLOAT"
+        },
+        {
+          "name": "williams_r",
+          "type": "FLOAT"
+        },
+        {
+          "name": "sma_20",
+          "type": "FLOAT"
+        },
+        {
+          "name": "sma_50",
+          "type": "FLOAT"
+        },
+        {
+          "name": "sma_200",
+          "type": "FLOAT"
+        },
+        {
+          "name": "ema_12",
+          "type": "FLOAT"
+        },
+        {
+          "name": "ema_26",
+          "type": "FLOAT"
+        },
+        {
+          "name": "ema_50",
+          "type": "FLOAT"
+        },
+        {
+          "name": "macd",
+          "type": "FLOAT"
+        },
+        {
+          "name": "macd_signal",
+          "type": "FLOAT"
+        },
+        {
+          "name": "macd_histogram",
+          "type": "FLOAT"
+        },
+        {
+          "name": "bollinger_upper",
+          "type": "FLOAT"
+        },
+        {
+          "name": "bollinger_middle",
+          "type": "FLOAT"
+        },
+        {
+          "name": "bollinger_lower",
+          "type": "FLOAT"
+        },
+        {
+          "name": "atr",
+          "type": "FLOAT"
+        },
+        {
+          "name": "adx",
+          "type": "FLOAT"
+        },
+        {
+          "name": "plus_di",
+          "type": "FLOAT"
+        },
+        {
+          "name": "minus_di",
+          "type": "FLOAT"
+        },
+        {
+          "name": "cci",
+          "type": "FLOAT"
+        },
+        {
+          "name": "obv",
+          "type": "FLOAT"
+        },
+        {
+          "name": "pvo",
+          "type": "FLOAT"
+        },
+        {
+          "name": "ppo",
+          "type": "FLOAT"
+        },
+        {
+          "name": "kama",
+          "type": "FLOAT"
+        },
+        {
+          "name": "trix",
+          "type": "FLOAT"
+        },
+        {
+          "name": "ultimate_osc",
+          "type": "FLOAT"
+        },
+        {
+          "name": "awesome_osc",
+          "type": "FLOAT"
+        },
+        {
+          "name": "datetime",
+          "type": "TIMESTAMP"
+        },
+        {
+          "name": "timestamp",
+          "type": "INTEGER"
+        },
+        {
+          "name": "data_source",
+          "type": "STRING"
+        },
+        {
+          "name": "created_at",
+          "type": "TIMESTAMP"
+        }
+      ]
+    },
+    "v2_forex_5min": {
+      "full_path": "aialgotradehits.crypto_trading_data.v2_forex_5min",
+      "num_rows": 18245,
+      "num_bytes": 2243543,
+      "columns": [
+        {
+          "name": "symbol",
+          "type": "STRING"
+        },
+        {
+          "name": "name",
+          "type": "STRING"
+        },
+        {
+          "name": "asset_type",
+          "type": "STRING"
+        },
+        {
+          "name": "exchange",
+          "type": "STRING"
+        },
+        {
+          "name": "currency",
+          "type": "STRING"
+        },
+        {
+          "name": "open",
+          "type": "FLOAT"
+        },
+        {
+          "name": "high",
+          "type": "FLOAT"
+        },
+        {
+          "name": "low",
+          "type": "FLOAT"
+        },
+        {
+          "name": "close",
+          "type": "FLOAT"
+        },
+        {
+          "name": "volume",
+          "type": "FLOAT"
+        },
+        {
+          "name": "change",
+          "type": "FLOAT"
+        },
+        {
+          "name": "percent_change",
+          "type": "FLOAT"
+        },
+        {
+          "name": "rsi",
+          "type": "FLOAT"
+        },
+        {
+          "name": "sma_20",
+          "type": "FLOAT"
+        },
+        {
+          "name": "sma_50",
+          "type": "FLOAT"
+        },
+        {
+          "name": "ema_12",
+          "type": "FLOAT"
+        },
+        {
+          "name": "ema_26",
+          "type": "FLOAT"
+        },
+        {
+          "name": "macd",
+          "type": "FLOAT"
+        },
+        {
+          "name": "macd_signal",
+          "type": "FLOAT"
+        },
+        {
+          "name": "bollinger_upper",
+          "type": "FLOAT"
+        },
+        {
+          "name": "bollinger_middle",
+          "type": "FLOAT"
+        },
+        {
+          "name": "bollinger_lower",
+          "type": "FLOAT"
+        },
+        {
+          "name": "atr",
+          "type": "FLOAT"
+        },
+        {
+          "name": "adx",
+          "type": "FLOAT"
+        },
+        {
+          "name": "datetime",
+          "type": "TIMESTAMP"
+        },
+        {
+          "name": "timestamp",
+          "type": "INTEGER"
+        },
+        {
+          "name": "data_source",
+          "type": "STRING"
+        }
+      ]
+    },
+    "v2_forex_daily": {
+      "full_path": "aialgotradehits.crypto_trading_data.v2_forex_daily",
+      "num_rows": 23805,
+      "num_bytes": 4291479,
+      "columns": [
+        {
+          "name": "symbol",
+          "type": "STRING"
+        },
+        {
+          "name": "name",
+          "type": "STRING"
+        },
+        {
+          "name": "asset_type",
+          "type": "STRING"
+        },
+        {
+          "name": "exchange",
+          "type": "STRING"
+        },
+        {
+          "name": "country",
+          "type": "STRING"
+        },
+        {
+          "name": "currency",
+          "type": "STRING"
+        },
+        {
+          "name": "open",
+          "type": "FLOAT"
+        },
+        {
+          "name": "high",
+          "type": "FLOAT"
+        },
+        {
+          "name": "low",
+          "type": "FLOAT"
+        },
+        {
+          "name": "close",
+          "type": "FLOAT"
+        },
+        {
+          "name": "previous_close",
+          "type": "FLOAT"
+        },
+        {
+          "name": "volume",
+          "type": "FLOAT"
+        },
+        {
+          "name": "average_volume",
+          "type": "FLOAT"
+        },
+        {
+          "name": "change",
+          "type": "FLOAT"
+        },
+        {
+          "name": "percent_change",
+          "type": "FLOAT"
+        },
+        {
+          "name": "hi_lo",
+          "type": "FLOAT"
+        },
+        {
+          "name": "pct_hi_lo",
+          "type": "FLOAT"
+        },
+        {
+          "name": "week_52_high",
+          "type": "FLOAT"
+        },
+        {
+          "name": "week_52_low",
+          "type": "FLOAT"
+        },
+        {
+          "name": "rsi",
+          "type": "FLOAT"
+        },
+        {
+          "name": "stoch_k",
+          "type": "FLOAT"
+        },
+        {
+          "name": "stoch_d",
+          "type": "FLOAT"
+        },
+        {
+          "name": "momentum",
+          "type": "FLOAT"
+        },
+        {
+          "name": "roc",
+          "type": "FLOAT"
+        },
+        {
+          "name": "williams_r",
+          "type": "FLOAT"
+        },
+        {
+          "name": "sma_20",
+          "type": "FLOAT"
+        },
+        {
+          "name": "sma_50",
+          "type": "FLOAT"
+        },
+        {
+          "name": "sma_200",
+          "type": "FLOAT"
+        },
+        {
+          "name": "ema_12",
+          "type": "FLOAT"
+        },
+        {
+          "name": "ema_26",
+          "type": "FLOAT"
+        },
+        {
+          "name": "ema_50",
+          "type": "FLOAT"
+        },
+        {
+          "name": "macd",
+          "type": "FLOAT"
+        },
+        {
+          "name": "macd_signal",
+          "type": "FLOAT"
+        },
+        {
+          "name": "macd_histogram",
+          "type": "FLOAT"
+        },
+        {
+          "name": "bollinger_upper",
+          "type": "FLOAT"
+        },
+        {
+          "name": "bollinger_middle",
+          "type": "FLOAT"
+        },
+        {
+          "name": "bollinger_lower",
+          "type": "FLOAT"
+        },
+        {
+          "name": "atr",
+          "type": "FLOAT"
+        },
+        {
+          "name": "adx",
+          "type": "FLOAT"
+        },
+        {
+          "name": "plus_di",
+          "type": "FLOAT"
+        },
+        {
+          "name": "minus_di",
+          "type": "FLOAT"
+        },
+        {
+          "name": "cci",
+          "type": "FLOAT"
+        },
+        {
+          "name": "obv",
+          "type": "FLOAT"
+        },
+        {
+          "name": "pvo",
+          "type": "FLOAT"
+        },
+        {
+          "name": "ppo",
+          "type": "FLOAT"
+        },
+        {
+          "name": "kama",
+          "type": "FLOAT"
+        },
+        {
+          "name": "trix",
+          "type": "FLOAT"
+        },
+        {
+          "name": "ultimate_osc",
+          "type": "FLOAT"
+        },
+        {
+          "name": "awesome_osc",
+          "type": "FLOAT"
+        },
+        {
+          "name": "datetime",
+          "type": "TIMESTAMP"
+        },
+        {
+          "name": "timestamp",
+          "type": "INTEGER"
+        },
+        {
+          "name": "data_source",
+          "type": "STRING"
+        },
+        {
+          "name": "created_at",
+          "type": "TIMESTAMP"
+        }
+      ]
+    },
+    "v2_forex_historical_daily": {
+      "full_path": "aialgotradehits.crypto_trading_data.v2_forex_historical_daily",
+      "num_rows": 100000,
+      "num_bytes": 7400000,
+      "columns": [
+        {
+          "name": "symbol",
+          "type": "STRING"
+        },
+        {
+          "name": "name",
+          "type": "STRING"
+        },
+        {
+          "name": "asset_type",
+          "type": "STRING"
+        },
+        {
+          "name": "exchange",
+          "type": "STRING"
+        },
+        {
+          "name": "country",
+          "type": "STRING"
+        },
+        {
+          "name": "currency",
+          "type": "STRING"
+        },
+        {
+          "name": "open",
+          "type": "FLOAT"
+        },
+        {
+          "name": "high",
+          "type": "FLOAT"
+        },
+        {
+          "name": "low",
+          "type": "FLOAT"
+        },
+        {
+          "name": "close",
+          "type": "FLOAT"
+        },
+        {
+          "name": "volume",
+          "type": "FLOAT"
+        },
+        {
+          "name": "change",
+          "type": "FLOAT"
+        },
+        {
+          "name": "percent_change",
+          "type": "FLOAT"
+        },
+        {
+          "name": "datetime",
+          "type": "TIMESTAMP"
+        },
+        {
+          "name": "data_source",
+          "type": "STRING"
+        },
+        {
+          "name": "created_at",
+          "type": "TIMESTAMP"
+        }
+      ]
+    },
+    "v2_forex_hourly": {
+      "full_path": "aialgotradehits.crypto_trading_data.v2_forex_hourly",
+      "num_rows": 3044,
+      "num_bytes": 374132,
+      "columns": [
+        {
+          "name": "symbol",
+          "type": "STRING"
+        },
+        {
+          "name": "name",
+          "type": "STRING"
+        },
+        {
+          "name": "asset_type",
+          "type": "STRING"
+        },
+        {
+          "name": "exchange",
+          "type": "STRING"
+        },
+        {
+          "name": "currency",
+          "type": "STRING"
+        },
+        {
+          "name": "open",
+          "type": "FLOAT"
+        },
+        {
+          "name": "high",
+          "type": "FLOAT"
+        },
+        {
+          "name": "low",
+          "type": "FLOAT"
+        },
+        {
+          "name": "close",
+          "type": "FLOAT"
+        },
+        {
+          "name": "volume",
+          "type": "FLOAT"
+        },
+        {
+          "name": "change",
+          "type": "FLOAT"
+        },
+        {
+          "name": "percent_change",
+          "type": "FLOAT"
+        },
+        {
+          "name": "rsi",
+          "type": "FLOAT"
+        },
+        {
+          "name": "sma_20",
+          "type": "FLOAT"
+        },
+        {
+          "name": "sma_50",
+          "type": "FLOAT"
+        },
+        {
+          "name": "ema_12",
+          "type": "FLOAT"
+        },
+        {
+          "name": "ema_26",
+          "type": "FLOAT"
+        },
+        {
+          "name": "macd",
+          "type": "FLOAT"
+        },
+        {
+          "name": "macd_signal",
+          "type": "FLOAT"
+        },
+        {
+          "name": "bollinger_upper",
+          "type": "FLOAT"
+        },
+        {
+          "name": "bollinger_middle",
+          "type": "FLOAT"
+        },
+        {
+          "name": "bollinger_lower",
+          "type": "FLOAT"
+        },
+        {
+          "name": "atr",
+          "type": "FLOAT"
+        },
+        {
+          "name": "adx",
+          "type": "FLOAT"
+        },
+        {
+          "name": "datetime",
+          "type": "TIMESTAMP"
+        },
+        {
+          "name": "timestamp",
+          "type": "INTEGER"
+        },
+        {
+          "name": "data_source",
+          "type": "STRING"
+        }
+      ]
+    },
+    "v2_forex_weekly_summary": {
+      "full_path": "aialgotradehits.crypto_trading_data.v2_forex_weekly_summary",
+      "num_rows": 200,
+      "num_bytes": 15400,
+      "columns": [
+        {
+          "name": "symbol",
+          "type": "STRING"
+        },
+        {
+          "name": "name",
+          "type": "STRING"
+        },
+        {
+          "name": "asset_type",
+          "type": "STRING"
+        },
+        {
+          "name": "exchange",
+          "type": "STRING"
+        },
+        {
+          "name": "country",
+          "type": "STRING"
+        },
+        {
+          "name": "sector",
+          "type": "STRING"
+        },
+        {
+          "name": "industry",
+          "type": "STRING"
+        },
+        {
+          "name": "currency",
+          "type": "STRING"
+        },
+        {
+          "name": "open",
+          "type": "FLOAT"
+        },
+        {
+          "name": "high",
+          "type": "FLOAT"
+        },
+        {
+          "name": "low",
+          "type": "FLOAT"
+        },
+        {
+          "name": "close",
+          "type": "FLOAT"
+        },
+        {
+          "name": "previous_close",
+          "type": "FLOAT"
+        },
+        {
+          "name": "volume",
+          "type": "FLOAT"
+        },
+        {
+          "name": "average_volume",
+          "type": "FLOAT"
+        },
+        {
+          "name": "change",
+          "type": "FLOAT"
+        },
+        {
+          "name": "percent_change",
+          "type": "FLOAT"
+        },
+        {
+          "name": "hi_lo",
+          "type": "FLOAT"
+        },
+        {
+          "name": "pct_hi_lo",
+          "type": "FLOAT"
+        },
+        {
+          "name": "week_52_high",
+          "type": "FLOAT"
+        },
+        {
+          "name": "week_52_low",
+          "type": "FLOAT"
+        },
+        {
+          "name": "rsi",
+          "type": "FLOAT"
+        },
+        {
+          "name": "stoch_k",
+          "type": "FLOAT"
+        },
+        {
+          "name": "stoch_d",
+          "type": "FLOAT"
+        },
+        {
+          "name": "momentum",
+          "type": "FLOAT"
+        },
+        {
+          "name": "roc",
+          "type": "FLOAT"
+        },
+        {
+          "name": "williams_r",
+          "type": "FLOAT"
+        },
+        {
+          "name": "sma_20",
+          "type": "FLOAT"
+        },
+        {
+          "name": "sma_50",
+          "type": "FLOAT"
+        },
+        {
+          "name": "sma_200",
+          "type": "FLOAT"
+        },
+        {
+          "name": "ema_12",
+          "type": "FLOAT"
+        },
+        {
+          "name": "ema_26",
+          "type": "FLOAT"
+        },
+        {
+          "name": "ema_50",
+          "type": "FLOAT"
+        },
+        {
+          "name": "macd",
+          "type": "FLOAT"
+        },
+        {
+          "name": "macd_signal",
+          "type": "FLOAT"
+        },
+        {
+          "name": "macd_histogram",
+          "type": "FLOAT"
+        },
+        {
+          "name": "bollinger_upper",
+          "type": "FLOAT"
+        },
+        {
+          "name": "bollinger_middle",
+          "type": "FLOAT"
+        },
+        {
+          "name": "bollinger_lower",
+          "type": "FLOAT"
+        },
+        {
+          "name": "atr",
+          "type": "FLOAT"
+        },
+        {
+          "name": "adx",
+          "type": "FLOAT"
+        },
+        {
+          "name": "plus_di",
+          "type": "FLOAT"
+        },
+        {
+          "name": "minus_di",
+          "type": "FLOAT"
+        },
+        {
+          "name": "cci",
+          "type": "FLOAT"
+        },
+        {
+          "name": "obv",
+          "type": "FLOAT"
+        },
+        {
+          "name": "pvo",
+          "type": "FLOAT"
+        },
+        {
+          "name": "ppo",
+          "type": "FLOAT"
+        },
+        {
+          "name": "kama",
+          "type": "FLOAT"
+        },
+        {
+          "name": "trix",
+          "type": "FLOAT"
+        },
+        {
+          "name": "ultimate_osc",
+          "type": "FLOAT"
+        },
+        {
+          "name": "awesome_osc",
+          "type": "FLOAT"
+        },
+        {
+          "name": "datetime",
+          "type": "TIMESTAMP"
+        },
+        {
+          "name": "timestamp",
+          "type": "INTEGER"
+        },
+        {
+          "name": "data_source",
+          "type": "STRING"
+        },
+        {
+          "name": "created_at",
+          "type": "TIMESTAMP"
+        }
+      ]
+    },
+    "v2_indices_5min": {
+      "full_path": "aialgotradehits.crypto_trading_data.v2_indices_5min",
+      "num_rows": 304,
+      "num_bytes": 39430,
+      "columns": [
+        {
+          "name": "symbol",
+          "type": "STRING"
+        },
+        {
+          "name": "name",
+          "type": "STRING"
+        },
+        {
+          "name": "asset_type",
+          "type": "STRING"
+        },
+        {
+          "name": "exchange",
+          "type": "STRING"
+        },
+        {
+          "name": "currency",
+          "type": "STRING"
+        },
+        {
+          "name": "open",
+          "type": "FLOAT"
+        },
+        {
+          "name": "high",
+          "type": "FLOAT"
+        },
+        {
+          "name": "low",
+          "type": "FLOAT"
+        },
+        {
+          "name": "close",
+          "type": "FLOAT"
+        },
+        {
+          "name": "volume",
+          "type": "FLOAT"
+        },
+        {
+          "name": "change",
+          "type": "FLOAT"
+        },
+        {
+          "name": "percent_change",
+          "type": "FLOAT"
+        },
+        {
+          "name": "rsi",
+          "type": "FLOAT"
+        },
+        {
+          "name": "sma_20",
+          "type": "FLOAT"
+        },
+        {
+          "name": "sma_50",
+          "type": "FLOAT"
+        },
+        {
+          "name": "ema_12",
+          "type": "FLOAT"
+        },
+        {
+          "name": "ema_26",
+          "type": "FLOAT"
+        },
+        {
+          "name": "macd",
+          "type": "FLOAT"
+        },
+        {
+          "name": "macd_signal",
+          "type": "FLOAT"
+        },
+        {
+          "name": "bollinger_upper",
+          "type": "FLOAT"
+        },
+        {
+          "name": "bollinger_middle",
+          "type": "FLOAT"
+        },
+        {
+          "name": "bollinger_lower",
+          "type": "FLOAT"
+        },
+        {
+          "name": "atr",
+          "type": "FLOAT"
+        },
+        {
+          "name": "adx",
+          "type": "FLOAT"
+        },
+        {
+          "name": "datetime",
+          "type": "TIMESTAMP"
+        },
+        {
+          "name": "timestamp",
+          "type": "INTEGER"
+        },
+        {
+          "name": "data_source",
+          "type": "STRING"
+        }
+      ]
+    },
+    "v2_indices_daily": {
+      "full_path": "aialgotradehits.crypto_trading_data.v2_indices_daily",
+      "num_rows": 10612,
+      "num_bytes": 1973872,
+      "columns": [
+        {
+          "name": "symbol",
+          "type": "STRING"
+        },
+        {
+          "name": "name",
+          "type": "STRING"
+        },
+        {
+          "name": "asset_type",
+          "type": "STRING"
+        },
+        {
+          "name": "exchange",
+          "type": "STRING"
+        },
+        {
+          "name": "country",
+          "type": "STRING"
+        },
+        {
+          "name": "currency",
+          "type": "STRING"
+        },
+        {
+          "name": "open",
+          "type": "FLOAT"
+        },
+        {
+          "name": "high",
+          "type": "FLOAT"
+        },
+        {
+          "name": "low",
+          "type": "FLOAT"
+        },
+        {
+          "name": "close",
+          "type": "FLOAT"
+        },
+        {
+          "name": "previous_close",
+          "type": "FLOAT"
+        },
+        {
+          "name": "volume",
+          "type": "FLOAT"
+        },
+        {
+          "name": "average_volume",
+          "type": "FLOAT"
+        },
+        {
+          "name": "change",
+          "type": "FLOAT"
+        },
+        {
+          "name": "percent_change",
+          "type": "FLOAT"
+        },
+        {
+          "name": "hi_lo",
+          "type": "FLOAT"
+        },
+        {
+          "name": "pct_hi_lo",
+          "type": "FLOAT"
+        },
+        {
+          "name": "week_52_high",
+          "type": "FLOAT"
+        },
+        {
+          "name": "week_52_low",
+          "type": "FLOAT"
+        },
+        {
+          "name": "rsi",
+          "type": "FLOAT"
+        },
+        {
+          "name": "stoch_k",
+          "type": "FLOAT"
+        },
+        {
+          "name": "stoch_d",
+          "type": "FLOAT"
+        },
+        {
+          "name": "momentum",
+          "type": "FLOAT"
+        },
+        {
+          "name": "roc",
+          "type": "FLOAT"
+        },
+        {
+          "name": "williams_r",
+          "type": "FLOAT"
+        },
+        {
+          "name": "sma_20",
+          "type": "FLOAT"
+        },
+        {
+          "name": "sma_50",
+          "type": "FLOAT"
+        },
+        {
+          "name": "sma_200",
+          "type": "FLOAT"
+        },
+        {
+          "name": "ema_12",
+          "type": "FLOAT"
+        },
+        {
+          "name": "ema_26",
+          "type": "FLOAT"
+        },
+        {
+          "name": "ema_50",
+          "type": "FLOAT"
+        },
+        {
+          "name": "macd",
+          "type": "FLOAT"
+        },
+        {
+          "name": "macd_signal",
+          "type": "FLOAT"
+        },
+        {
+          "name": "macd_histogram",
+          "type": "FLOAT"
+        },
+        {
+          "name": "bollinger_upper",
+          "type": "FLOAT"
+        },
+        {
+          "name": "bollinger_middle",
+          "type": "FLOAT"
+        },
+        {
+          "name": "bollinger_lower",
+          "type": "FLOAT"
+        },
+        {
+          "name": "atr",
+          "type": "FLOAT"
+        },
+        {
+          "name": "adx",
+          "type": "FLOAT"
+        },
+        {
+          "name": "plus_di",
+          "type": "FLOAT"
+        },
+        {
+          "name": "minus_di",
+          "type": "FLOAT"
+        },
+        {
+          "name": "cci",
+          "type": "FLOAT"
+        },
+        {
+          "name": "obv",
+          "type": "FLOAT"
+        },
+        {
+          "name": "pvo",
+          "type": "FLOAT"
+        },
+        {
+          "name": "ppo",
+          "type": "FLOAT"
+        },
+        {
+          "name": "kama",
+          "type": "FLOAT"
+        },
+        {
+          "name": "trix",
+          "type": "FLOAT"
+        },
+        {
+          "name": "ultimate_osc",
+          "type": "FLOAT"
+        },
+        {
+          "name": "awesome_osc",
+          "type": "FLOAT"
+        },
+        {
+          "name": "datetime",
+          "type": "TIMESTAMP"
+        },
+        {
+          "name": "timestamp",
+          "type": "INTEGER"
+        },
+        {
+          "name": "data_source",
+          "type": "STRING"
+        },
+        {
+          "name": "created_at",
+          "type": "TIMESTAMP"
+        }
+      ]
+    },
+    "v2_indices_historical_daily": {
+      "full_path": "aialgotradehits.crypto_trading_data.v2_indices_historical_daily",
+      "num_rows": 89119,
+      "num_bytes": 7144956,
+      "columns": [
+        {
+          "name": "symbol",
+          "type": "STRING"
+        },
+        {
+          "name": "name",
+          "type": "STRING"
+        },
+        {
+          "name": "asset_type",
+          "type": "STRING"
+        },
+        {
+          "name": "exchange",
+          "type": "STRING"
+        },
+        {
+          "name": "country",
+          "type": "STRING"
+        },
+        {
+          "name": "currency",
+          "type": "STRING"
+        },
+        {
+          "name": "open",
+          "type": "FLOAT"
+        },
+        {
+          "name": "high",
+          "type": "FLOAT"
+        },
+        {
+          "name": "low",
+          "type": "FLOAT"
+        },
+        {
+          "name": "close",
+          "type": "FLOAT"
+        },
+        {
+          "name": "volume",
+          "type": "FLOAT"
+        },
+        {
+          "name": "change",
+          "type": "FLOAT"
+        },
+        {
+          "name": "percent_change",
+          "type": "FLOAT"
+        },
+        {
+          "name": "datetime",
+          "type": "TIMESTAMP"
+        },
+        {
+          "name": "data_source",
+          "type": "STRING"
+        },
+        {
+          "name": "created_at",
+          "type": "TIMESTAMP"
+        }
+      ]
+    },
+    "v2_indices_hourly": {
+      "full_path": "aialgotradehits.crypto_trading_data.v2_indices_hourly",
+      "num_rows": 76,
+      "num_bytes": 9849,
+      "columns": [
+        {
+          "name": "symbol",
+          "type": "STRING"
+        },
+        {
+          "name": "name",
+          "type": "STRING"
+        },
+        {
+          "name": "asset_type",
+          "type": "STRING"
+        },
+        {
+          "name": "exchange",
+          "type": "STRING"
+        },
+        {
+          "name": "currency",
+          "type": "STRING"
+        },
+        {
+          "name": "open",
+          "type": "FLOAT"
+        },
+        {
+          "name": "high",
+          "type": "FLOAT"
+        },
+        {
+          "name": "low",
+          "type": "FLOAT"
+        },
+        {
+          "name": "close",
+          "type": "FLOAT"
+        },
+        {
+          "name": "volume",
+          "type": "FLOAT"
+        },
+        {
+          "name": "change",
+          "type": "FLOAT"
+        },
+        {
+          "name": "percent_change",
+          "type": "FLOAT"
+        },
+        {
+          "name": "rsi",
+          "type": "FLOAT"
+        },
+        {
+          "name": "sma_20",
+          "type": "FLOAT"
+        },
+        {
+          "name": "sma_50",
+          "type": "FLOAT"
+        },
+        {
+          "name": "ema_12",
+          "type": "FLOAT"
+        },
+        {
+          "name": "ema_26",
+          "type": "FLOAT"
+        },
+        {
+          "name": "macd",
+          "type": "FLOAT"
+        },
+        {
+          "name": "macd_signal",
+          "type": "FLOAT"
+        },
+        {
+          "name": "bollinger_upper",
+          "type": "FLOAT"
+        },
+        {
+          "name": "bollinger_middle",
+          "type": "FLOAT"
+        },
+        {
+          "name": "bollinger_lower",
+          "type": "FLOAT"
+        },
+        {
+          "name": "atr",
+          "type": "FLOAT"
+        },
+        {
+          "name": "adx",
+          "type": "FLOAT"
+        },
+        {
+          "name": "datetime",
+          "type": "TIMESTAMP"
+        },
+        {
+          "name": "timestamp",
+          "type": "INTEGER"
+        },
+        {
+          "name": "data_source",
+          "type": "STRING"
+        }
+      ]
+    },
+    "v2_indices_weekly_summary": {
+      "full_path": "aialgotradehits.crypto_trading_data.v2_indices_weekly_summary",
+      "num_rows": 108,
+      "num_bytes": 13878,
+      "columns": [
+        {
+          "name": "symbol",
+          "type": "STRING"
+        },
+        {
+          "name": "name",
+          "type": "STRING"
+        },
+        {
+          "name": "asset_type",
+          "type": "STRING"
+        },
+        {
+          "name": "exchange",
+          "type": "STRING"
+        },
+        {
+          "name": "country",
+          "type": "STRING"
+        },
+        {
+          "name": "sector",
+          "type": "STRING"
+        },
+        {
+          "name": "industry",
+          "type": "STRING"
+        },
+        {
+          "name": "currency",
+          "type": "STRING"
+        },
+        {
+          "name": "open",
+          "type": "FLOAT"
+        },
+        {
+          "name": "high",
+          "type": "FLOAT"
+        },
+        {
+          "name": "low",
+          "type": "FLOAT"
+        },
+        {
+          "name": "close",
+          "type": "FLOAT"
+        },
+        {
+          "name": "previous_close",
+          "type": "FLOAT"
+        },
+        {
+          "name": "volume",
+          "type": "FLOAT"
+        },
+        {
+          "name": "average_volume",
+          "type": "FLOAT"
+        },
+        {
+          "name": "change",
+          "type": "FLOAT"
+        },
+        {
+          "name": "percent_change",
+          "type": "FLOAT"
+        },
+        {
+          "name": "hi_lo",
+          "type": "FLOAT"
+        },
+        {
+          "name": "pct_hi_lo",
+          "type": "FLOAT"
+        },
+        {
+          "name": "week_52_high",
+          "type": "FLOAT"
+        },
+        {
+          "name": "week_52_low",
+          "type": "FLOAT"
+        },
+        {
+          "name": "rsi",
+          "type": "FLOAT"
+        },
+        {
+          "name": "stoch_k",
+          "type": "FLOAT"
+        },
+        {
+          "name": "stoch_d",
+          "type": "FLOAT"
+        },
+        {
+          "name": "momentum",
+          "type": "FLOAT"
+        },
+        {
+          "name": "roc",
+          "type": "FLOAT"
+        },
+        {
+          "name": "williams_r",
+          "type": "FLOAT"
+        },
+        {
+          "name": "sma_20",
+          "type": "FLOAT"
+        },
+        {
+          "name": "sma_50",
+          "type": "FLOAT"
+        },
+        {
+          "name": "sma_200",
+          "type": "FLOAT"
+        },
+        {
+          "name": "ema_12",
+          "type": "FLOAT"
+        },
+        {
+          "name": "ema_26",
+          "type": "FLOAT"
+        },
+        {
+          "name": "ema_50",
+          "type": "FLOAT"
+        },
+        {
+          "name": "macd",
+          "type": "FLOAT"
+        },
+        {
+          "name": "macd_signal",
+          "type": "FLOAT"
+        },
+        {
+          "name": "macd_histogram",
+          "type": "FLOAT"
+        },
+        {
+          "name": "bollinger_upper",
+          "type": "FLOAT"
+        },
+        {
+          "name": "bollinger_middle",
+          "type": "FLOAT"
+        },
+        {
+          "name": "bollinger_lower",
+          "type": "FLOAT"
+        },
+        {
+          "name": "atr",
+          "type": "FLOAT"
+        },
+        {
+          "name": "adx",
+          "type": "FLOAT"
+        },
+        {
+          "name": "plus_di",
+          "type": "FLOAT"
+        },
+        {
+          "name": "minus_di",
+          "type": "FLOAT"
+        },
+        {
+          "name": "cci",
+          "type": "FLOAT"
+        },
+        {
+          "name": "obv",
+          "type": "FLOAT"
+        },
+        {
+          "name": "pvo",
+          "type": "FLOAT"
+        },
+        {
+          "name": "ppo",
+          "type": "FLOAT"
+        },
+        {
+          "name": "kama",
+          "type": "FLOAT"
+        },
+        {
+          "name": "trix",
+          "type": "FLOAT"
+        },
+        {
+          "name": "ultimate_osc",
+          "type": "FLOAT"
+        },
+        {
+          "name": "awesome_osc",
+          "type": "FLOAT"
+        },
+        {
+          "name": "datetime",
+          "type": "TIMESTAMP"
+        },
+        {
+          "name": "timestamp",
+          "type": "INTEGER"
+        },
+        {
+          "name": "data_source",
+          "type": "STRING"
+        },
+        {
+          "name": "created_at",
+          "type": "TIMESTAMP"
+        }
+      ]
+    },
+    "v2_stocks_5min": {
+      "full_path": "aialgotradehits.crypto_trading_data.v2_stocks_5min",
+      "num_rows": 6577,
+      "num_bytes": 853877,
+      "columns": [
+        {
+          "name": "symbol",
+          "type": "STRING"
+        },
+        {
+          "name": "name",
+          "type": "STRING"
+        },
+        {
+          "name": "asset_type",
+          "type": "STRING"
+        },
+        {
+          "name": "exchange",
+          "type": "STRING"
+        },
+        {
+          "name": "currency",
+          "type": "STRING"
+        },
+        {
+          "name": "open",
+          "type": "FLOAT"
+        },
+        {
+          "name": "high",
+          "type": "FLOAT"
+        },
+        {
+          "name": "low",
+          "type": "FLOAT"
+        },
+        {
+          "name": "close",
+          "type": "FLOAT"
+        },
+        {
+          "name": "volume",
+          "type": "FLOAT"
+        },
+        {
+          "name": "change",
+          "type": "FLOAT"
+        },
+        {
+          "name": "percent_change",
+          "type": "FLOAT"
+        },
+        {
+          "name": "rsi",
+          "type": "FLOAT"
+        },
+        {
+          "name": "sma_20",
+          "type": "FLOAT"
+        },
+        {
+          "name": "sma_50",
+          "type": "FLOAT"
+        },
+        {
+          "name": "ema_12",
+          "type": "FLOAT"
+        },
+        {
+          "name": "ema_26",
+          "type": "FLOAT"
+        },
+        {
+          "name": "macd",
+          "type": "FLOAT"
+        },
+        {
+          "name": "macd_signal",
+          "type": "FLOAT"
+        },
+        {
+          "name": "bollinger_upper",
+          "type": "FLOAT"
+        },
+        {
+          "name": "bollinger_middle",
+          "type": "FLOAT"
+        },
+        {
+          "name": "bollinger_lower",
+          "type": "FLOAT"
+        },
+        {
+          "name": "atr",
+          "type": "FLOAT"
+        },
+        {
+          "name": "adx",
+          "type": "FLOAT"
+        },
+        {
+          "name": "datetime",
+          "type": "TIMESTAMP"
+        },
+        {
+          "name": "timestamp",
+          "type": "INTEGER"
+        },
+        {
+          "name": "data_source",
+          "type": "STRING"
+        }
+      ]
+    },
+    "v2_stocks_daily": {
+      "full_path": "aialgotradehits.crypto_trading_data.v2_stocks_daily",
+      "num_rows": 110775,
+      "num_bytes": 21397451,
+      "columns": [
+        {
+          "name": "symbol",
+          "type": "STRING"
+        },
+        {
+          "name": "name",
+          "type": "STRING"
+        },
+        {
+          "name": "asset_type",
+          "type": "STRING"
+        },
+        {
+          "name": "exchange",
+          "type": "STRING"
+        },
+        {
+          "name": "country",
+          "type": "STRING"
+        },
+        {
+          "name": "currency",
+          "type": "STRING"
+        },
+        {
+          "name": "open",
+          "type": "FLOAT"
+        },
+        {
+          "name": "high",
+          "type": "FLOAT"
+        },
+        {
+          "name": "low",
+          "type": "FLOAT"
+        },
+        {
+          "name": "close",
+          "type": "FLOAT"
+        },
+        {
+          "name": "previous_close",
+          "type": "FLOAT"
+        },
+        {
+          "name": "volume",
+          "type": "FLOAT"
+        },
+        {
+          "name": "average_volume",
+          "type": "FLOAT"
+        },
+        {
+          "name": "change",
+          "type": "FLOAT"
+        },
+        {
+          "name": "percent_change",
+          "type": "FLOAT"
+        },
+        {
+          "name": "hi_lo",
+          "type": "FLOAT"
+        },
+        {
+          "name": "pct_hi_lo",
+          "type": "FLOAT"
+        },
+        {
+          "name": "week_52_high",
+          "type": "FLOAT"
+        },
+        {
+          "name": "week_52_low",
+          "type": "FLOAT"
+        },
+        {
+          "name": "rsi",
+          "type": "FLOAT"
+        },
+        {
+          "name": "stoch_k",
+          "type": "FLOAT"
+        },
+        {
+          "name": "stoch_d",
+          "type": "FLOAT"
+        },
+        {
+          "name": "momentum",
+          "type": "FLOAT"
+        },
+        {
+          "name": "roc",
+          "type": "FLOAT"
+        },
+        {
+          "name": "williams_r",
+          "type": "FLOAT"
+        },
+        {
+          "name": "sma_20",
+          "type": "FLOAT"
+        },
+        {
+          "name": "sma_50",
+          "type": "FLOAT"
+        },
+        {
+          "name": "sma_200",
+          "type": "FLOAT"
+        },
+        {
+          "name": "ema_12",
+          "type": "FLOAT"
+        },
+        {
+          "name": "ema_26",
+          "type": "FLOAT"
+        },
+        {
+          "name": "ema_50",
+          "type": "FLOAT"
+        },
+        {
+          "name": "macd",
+          "type": "FLOAT"
+        },
+        {
+          "name": "macd_signal",
+          "type": "FLOAT"
+        },
+        {
+          "name": "macd_histogram",
+          "type": "FLOAT"
+        },
+        {
+          "name": "bollinger_upper",
+          "type": "FLOAT"
+        },
+        {
+          "name": "bollinger_middle",
+          "type": "FLOAT"
+        },
+        {
+          "name": "bollinger_lower",
+          "type": "FLOAT"
+        },
+        {
+          "name": "atr",
+          "type": "FLOAT"
+        },
+        {
+          "name": "adx",
+          "type": "FLOAT"
+        },
+        {
+          "name": "plus_di",
+          "type": "FLOAT"
+        },
+        {
+          "name": "minus_di",
+          "type": "FLOAT"
+        },
+        {
+          "name": "cci",
+          "type": "FLOAT"
+        },
+        {
+          "name": "obv",
+          "type": "FLOAT"
+        },
+        {
+          "name": "pvo",
+          "type": "FLOAT"
+        },
+        {
+          "name": "ppo",
+          "type": "FLOAT"
+        },
+        {
+          "name": "kama",
+          "type": "FLOAT"
+        },
+        {
+          "name": "trix",
+          "type": "FLOAT"
+        },
+        {
+          "name": "ultimate_osc",
+          "type": "FLOAT"
+        },
+        {
+          "name": "awesome_osc",
+          "type": "FLOAT"
+        },
+        {
+          "name": "datetime",
+          "type": "TIMESTAMP"
+        },
+        {
+          "name": "timestamp",
+          "type": "INTEGER"
+        },
+        {
+          "name": "data_source",
+          "type": "STRING"
+        },
+        {
+          "name": "created_at",
+          "type": "TIMESTAMP"
+        }
+      ]
+    },
+    "v2_stocks_historical_daily": {
+      "full_path": "aialgotradehits.crypto_trading_data.v2_stocks_historical_daily",
+      "num_rows": 1483191,
+      "num_bytes": 117442252,
+      "columns": [
+        {
+          "name": "symbol",
+          "type": "STRING"
+        },
+        {
+          "name": "name",
+          "type": "STRING"
+        },
+        {
+          "name": "asset_type",
+          "type": "STRING"
+        },
+        {
+          "name": "exchange",
+          "type": "STRING"
+        },
+        {
+          "name": "country",
+          "type": "STRING"
+        },
+        {
+          "name": "currency",
+          "type": "STRING"
+        },
+        {
+          "name": "open",
+          "type": "FLOAT"
+        },
+        {
+          "name": "high",
+          "type": "FLOAT"
+        },
+        {
+          "name": "low",
+          "type": "FLOAT"
+        },
+        {
+          "name": "close",
+          "type": "FLOAT"
+        },
+        {
+          "name": "volume",
+          "type": "FLOAT"
+        },
+        {
+          "name": "change",
+          "type": "FLOAT"
+        },
+        {
+          "name": "percent_change",
+          "type": "FLOAT"
+        },
+        {
+          "name": "datetime",
+          "type": "TIMESTAMP"
+        },
+        {
+          "name": "data_source",
+          "type": "STRING"
+        },
+        {
+          "name": "created_at",
+          "type": "TIMESTAMP"
+        }
+      ]
+    },
+    "v2_stocks_hourly": {
+      "full_path": "aialgotradehits.crypto_trading_data.v2_stocks_hourly",
+      "num_rows": 5427,
+      "num_bytes": 713773,
+      "columns": [
+        {
+          "name": "symbol",
+          "type": "STRING"
+        },
+        {
+          "name": "name",
+          "type": "STRING"
+        },
+        {
+          "name": "asset_type",
+          "type": "STRING"
+        },
+        {
+          "name": "exchange",
+          "type": "STRING"
+        },
+        {
+          "name": "currency",
+          "type": "STRING"
+        },
+        {
+          "name": "open",
+          "type": "FLOAT"
+        },
+        {
+          "name": "high",
+          "type": "FLOAT"
+        },
+        {
+          "name": "low",
+          "type": "FLOAT"
+        },
+        {
+          "name": "close",
+          "type": "FLOAT"
+        },
+        {
+          "name": "volume",
+          "type": "FLOAT"
+        },
+        {
+          "name": "change",
+          "type": "FLOAT"
+        },
+        {
+          "name": "percent_change",
+          "type": "FLOAT"
+        },
+        {
+          "name": "rsi",
+          "type": "FLOAT"
+        },
+        {
+          "name": "sma_20",
+          "type": "FLOAT"
+        },
+        {
+          "name": "sma_50",
+          "type": "FLOAT"
+        },
+        {
+          "name": "ema_12",
+          "type": "FLOAT"
+        },
+        {
+          "name": "ema_26",
+          "type": "FLOAT"
+        },
+        {
+          "name": "macd",
+          "type": "FLOAT"
+        },
+        {
+          "name": "macd_signal",
+          "type": "FLOAT"
+        },
+        {
+          "name": "bollinger_upper",
+          "type": "FLOAT"
+        },
+        {
+          "name": "bollinger_middle",
+          "type": "FLOAT"
+        },
+        {
+          "name": "bollinger_lower",
+          "type": "FLOAT"
+        },
+        {
+          "name": "atr",
+          "type": "FLOAT"
+        },
+        {
+          "name": "adx",
+          "type": "FLOAT"
+        },
+        {
+          "name": "datetime",
+          "type": "TIMESTAMP"
+        },
+        {
+          "name": "timestamp",
+          "type": "INTEGER"
+        },
+        {
+          "name": "data_source",
+          "type": "STRING"
+        }
+      ]
+    },
+    "v2_stocks_master": {
+      "full_path": "aialgotradehits.crypto_trading_data.v2_stocks_master",
+      "num_rows": 15231,
+      "num_bytes": 3500311,
+      "columns": [
+        {
+          "name": "symbol",
+          "type": "STRING"
+        },
+        {
+          "name": "name",
+          "type": "STRING"
+        },
+        {
+          "name": "asset_type",
+          "type": "STRING"
+        },
+        {
+          "name": "exchange",
+          "type": "STRING"
+        },
+        {
+          "name": "country",
+          "type": "STRING"
+        },
+        {
+          "name": "sector",
+          "type": "STRING"
+        },
+        {
+          "name": "industry",
+          "type": "STRING"
+        },
+        {
+          "name": "currency",
+          "type": "STRING"
+        },
+        {
+          "name": "mic_code",
+          "type": "STRING"
+        },
+        {
+          "name": "type",
+          "type": "STRING"
+        },
+        {
+          "name": "open",
+          "type": "FLOAT"
+        },
+        {
+          "name": "high",
+          "type": "FLOAT"
+        },
+        {
+          "name": "low",
+          "type": "FLOAT"
+        },
+        {
+          "name": "close",
+          "type": "FLOAT"
+        },
+        {
+          "name": "previous_close",
+          "type": "FLOAT"
+        },
+        {
+          "name": "volume",
+          "type": "INTEGER"
+        },
+        {
+          "name": "average_volume",
+          "type": "INTEGER"
+        },
+        {
+          "name": "change",
+          "type": "FLOAT"
+        },
+        {
+          "name": "percent_change",
+          "type": "FLOAT"
+        },
+        {
+          "name": "hi_lo",
+          "type": "FLOAT"
+        },
+        {
+          "name": "pct_hi_lo",
+          "type": "FLOAT"
+        },
+        {
+          "name": "week_52_high",
+          "type": "FLOAT"
+        },
+        {
+          "name": "week_52_low",
+          "type": "FLOAT"
+        },
+        {
+          "name": "datetime",
+          "type": "TIMESTAMP"
+        },
+        {
+          "name": "data_source",
+          "type": "STRING"
+        },
+        {
+          "name": "created_at",
+          "type": "TIMESTAMP"
+        },
+        {
+          "name": "updated_at",
+          "type": "TIMESTAMP"
+        }
+      ]
+    },
+    "v2_stocks_weekly_summary": {
+      "full_path": "aialgotradehits.crypto_trading_data.v2_stocks_weekly_summary",
+      "num_rows": 5440,
+      "num_bytes": 695690,
+      "columns": [
+        {
+          "name": "symbol",
+          "type": "STRING"
+        },
+        {
+          "name": "name",
+          "type": "STRING"
+        },
+        {
+          "name": "asset_type",
+          "type": "STRING"
+        },
+        {
+          "name": "exchange",
+          "type": "STRING"
+        },
+        {
+          "name": "country",
+          "type": "STRING"
+        },
+        {
+          "name": "sector",
+          "type": "STRING"
+        },
+        {
+          "name": "industry",
+          "type": "STRING"
+        },
+        {
+          "name": "currency",
+          "type": "STRING"
+        },
+        {
+          "name": "open",
+          "type": "FLOAT"
+        },
+        {
+          "name": "high",
+          "type": "FLOAT"
+        },
+        {
+          "name": "low",
+          "type": "FLOAT"
+        },
+        {
+          "name": "close",
+          "type": "FLOAT"
+        },
+        {
+          "name": "previous_close",
+          "type": "FLOAT"
+        },
+        {
+          "name": "volume",
+          "type": "FLOAT"
+        },
+        {
+          "name": "average_volume",
+          "type": "FLOAT"
+        },
+        {
+          "name": "change",
+          "type": "FLOAT"
+        },
+        {
+          "name": "percent_change",
+          "type": "FLOAT"
+        },
+        {
+          "name": "hi_lo",
+          "type": "FLOAT"
+        },
+        {
+          "name": "pct_hi_lo",
+          "type": "FLOAT"
+        },
+        {
+          "name": "week_52_high",
+          "type": "FLOAT"
+        },
+        {
+          "name": "week_52_low",
+          "type": "FLOAT"
+        },
+        {
+          "name": "rsi",
+          "type": "FLOAT"
+        },
+        {
+          "name": "stoch_k",
+          "type": "FLOAT"
+        },
+        {
+          "name": "stoch_d",
+          "type": "FLOAT"
+        },
+        {
+          "name": "momentum",
+          "type": "FLOAT"
+        },
+        {
+          "name": "roc",
+          "type": "FLOAT"
+        },
+        {
+          "name": "williams_r",
+          "type": "FLOAT"
+        },
+        {
+          "name": "sma_20",
+          "type": "FLOAT"
+        },
+        {
+          "name": "sma_50",
+          "type": "FLOAT"
+        },
+        {
+          "name": "sma_200",
+          "type": "FLOAT"
+        },
+        {
+          "name": "ema_12",
+          "type": "FLOAT"
+        },
+        {
+          "name": "ema_26",
+          "type": "FLOAT"
+        },
+        {
+          "name": "ema_50",
+          "type": "FLOAT"
+        },
+        {
+          "name": "macd",
+          "type": "FLOAT"
+        },
+        {
+          "name": "macd_signal",
+          "type": "FLOAT"
+        },
+        {
+          "name": "macd_histogram",
+          "type": "FLOAT"
+        },
+        {
+          "name": "bollinger_upper",
+          "type": "FLOAT"
+        },
+        {
+          "name": "bollinger_middle",
+          "type": "FLOAT"
+        },
+        {
+          "name": "bollinger_lower",
+          "type": "FLOAT"
+        },
+        {
+          "name": "atr",
+          "type": "FLOAT"
+        },
+        {
+          "name": "adx",
+          "type": "FLOAT"
+        },
+        {
+          "name": "plus_di",
+          "type": "FLOAT"
+        },
+        {
+          "name": "minus_di",
+          "type": "FLOAT"
+        },
+        {
+          "name": "cci",
+          "type": "FLOAT"
+        },
+        {
+          "name": "obv",
+          "type": "FLOAT"
+        },
+        {
+          "name": "pvo",
+          "type": "FLOAT"
+        },
+        {
+          "name": "ppo",
+          "type": "FLOAT"
+        },
+        {
+          "name": "kama",
+          "type": "FLOAT"
+        },
+        {
+          "name": "trix",
+          "type": "FLOAT"
+        },
+        {
+          "name": "ultimate_osc",
+          "type": "FLOAT"
+        },
+        {
+          "name": "awesome_osc",
+          "type": "FLOAT"
+        },
+        {
+          "name": "datetime",
+          "type": "TIMESTAMP"
+        },
+        {
+          "name": "timestamp",
+          "type": "INTEGER"
+        },
+        {
+          "name": "data_source",
+          "type": "STRING"
+        },
+        {
+          "name": "created_at",
+          "type": "TIMESTAMP"
+        }
+      ]
+    }
+  }
+}

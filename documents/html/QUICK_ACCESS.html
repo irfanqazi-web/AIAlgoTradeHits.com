@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QUICK_ACCESS</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #24292e;
+            background: #ffffff;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            margin-top: 24px;
+            margin-bottom: 16px;
+            font-weight: 600;
+            line-height: 1.25;
+        }
+        h1 { border-bottom: 1px solid #eaecef; padding-bottom: 0.3em; }
+        h2 { border-bottom: 1px solid #eaecef; padding-bottom: 0.3em; }
+        code {
+            background-color: rgba(27,31,35,0.05);
+            border-radius: 3px;
+            font-size: 85%;
+            margin: 0;
+            padding: 0.2em 0.4em;
+            font-family: 'Courier New', monospace;
+        }
+        pre {
+            background-color: #f6f8fa;
+            border-radius: 3px;
+            font-size: 85%;
+            line-height: 1.45;
+            overflow: auto;
+            padding: 16px;
+        }
+        pre code {
+            background-color: transparent;
+            border: 0;
+            display: inline;
+            line-height: inherit;
+            margin: 0;
+            overflow: visible;
+            padding: 0;
+            word-wrap: normal;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 16px 0;
+        }
+        table th, table td {
+            border: 1px solid #dfe2e5;
+            padding: 6px 13px;
+        }
+        table tr:nth-child(2n) {
+            background-color: #f6f8fa;
+        }
+        blockquote {
+            border-left: 4px solid #dfe2e5;
+            color: #6a737d;
+            padding: 0 1em;
+            margin: 0;
+        }
+        a {
+            color: #0366d6;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+<h1>Quick Access - Trading App</h1>
+<h2>Live Application URLs</h2>
+<h3>Main Trading Application</h3>
+<p>🌐 <strong>https://crypto-trading-app-252370699783.us-central1.run.app</strong></p>
+<p><strong>Features:</strong>
+- Toggle between Crypto and Stock markets
+- View Daily, Hourly, and 5-Minute timeframes
+- Expand any timeframe for detailed analytics
+- Access Admin Panel for user management</p>
+<h3>Backend API</h3>
+<p>🔌 <strong>https://trading-api-cnyn5l4u2a-uc.a.run.app</strong></p>
+<p><strong>Quick Test Endpoints:</strong></p>
+<pre class="codehilite"><code class="language-bash"># Health Check
+curl https://trading-api-cnyn5l4u2a-uc.a.run.app/health
+
+# Get 5 crypto records
+curl &quot;https://trading-api-cnyn5l4u2a-uc.a.run.app/api/crypto/daily?limit=5&quot;
+
+# Get 5 stock records
+curl &quot;https://trading-api-cnyn5l4u2a-uc.a.run.app/api/stocks?limit=5&quot;
+
+# Crypto market summary
+curl &quot;https://trading-api-cnyn5l4u2a-uc.a.run.app/api/summary/crypto&quot;
+
+# Stock market summary
+curl &quot;https://trading-api-cnyn5l4u2a-uc.a.run.app/api/summary/stock&quot;
+</code></pre>
+
+<hr />
+<h2>Data Pipeline Status</h2>
+<h3>Cloud Functions (Data Collection)</h3>
+<pre class="codehilite"><code class="language-bash"># Check if functions are running
+gcloud functions list --project=cryptobot-462709
+
+# Trigger manual data collection
+curl https://daily-crypto-fetcher-cnyn5l4u2a-uc.a.run.app
+curl https://hourly-crypto-fetcher-cnyn5l4u2a-uc.a.run.app
+curl https://fivemin-top10-fetcher-cnyn5l4u2a-uc.a.run.app
+</code></pre>
+
+<h3>BigQuery Tables</h3>
+<pre class="codehilite"><code class="language-bash"># Check data counts
+python check_bigquery_counts.py
+
+# Query latest crypto data
+bq query --use_legacy_sql=false \
+  'SELECT pair, close, rsi, macd, datetime
+   FROM `cryptobot-462709.crypto_trading_data.crypto_analysis`
+   ORDER BY datetime DESC LIMIT 10'
+
+# Query latest stock data
+bq query --use_legacy_sql=false \
+  'SELECT symbol, company_name, close, rsi, macd, datetime
+   FROM `cryptobot-462709.crypto_trading_data.stock_analysis`
+   ORDER BY datetime DESC LIMIT 10'
+</code></pre>
+
+<hr />
+<h2>Deployment Commands</h2>
+<h3>Redeploy Backend API</h3>
+<pre class="codehilite"><code class="language-bash">cd cloud_function_api
+python deploy_api.py
+</code></pre>
+
+<h3>Redeploy Frontend</h3>
+<pre class="codehilite"><code class="language-bash">cd stock-price-app
+gcloud run deploy crypto-trading-app \
+  --source . \
+  --platform managed \
+  --region us-central1 \
+  --allow-unauthenticated \
+  --port 8080 \
+  --project cryptobot-462709
+</code></pre>
+
+<hr />
+<h2>Monitoring</h2>
+<h3>View Logs</h3>
+<pre class="codehilite"><code class="language-bash"># API logs
+gcloud run services logs read trading-api --project=cryptobot-462709 --limit=20
+
+# Frontend logs
+gcloud run services logs read crypto-trading-app --project=cryptobot-462709 --limit=20
+
+# Cloud Function logs
+gcloud functions logs read daily-crypto-fetcher --project=cryptobot-462709 --limit=20
+</code></pre>
+
+<h3>Service Info</h3>
+<pre class="codehilite"><code class="language-bash"># API service details
+gcloud run services describe trading-api --region=us-central1 --project=cryptobot-462709
+
+# Frontend service details
+gcloud run services describe crypto-trading-app --region=us-central1 --project=cryptobot-462709
+</code></pre>
+
+<hr />
+<h2>Project Structure</h2>
+<pre class="codehilite"><code>Trading/
+├── cloud_function_api/          # Backend API (Flask + BigQuery)
+│   ├── main.py                  # API endpoints
+│   ├── requirements.txt
+│   └── deploy_api.py           # Deployment script
+│
+├── stock-price-app/            # Frontend React App
+│   ├── src/
+│   │   ├── App.jsx
+│   │   ├── components/
+│   │   │   ├── AIAlgoTradeHitsReal.jsx  # Main dashboard
+│   │   │   └── AdminPanel.jsx           # User management
+│   │   └── services/
+│   │       └── api.js          # API service layer
+│   ├── Dockerfile
+│   ├── nginx.conf
+│   └── package.json
+│
+├── cloud_function_daily/       # Daily crypto data collection
+├── cloud_function_hourly/      # Hourly crypto data collection
+├── cloud_function_5min/        # 5-min top gainers collection
+├── cloud_function_daily_stocks/  # Daily stock data collection
+│
+└── Documentation/
+    ├── CLAUDE.md               # Project overview
+    ├── QUICK_START_GUIDE.md
+    ├── FINAL_DEPLOYMENT_STATUS.md
+    ├── TRADING_APP_DEPLOYMENT_COMPLETE.md
+    └── QUICK_ACCESS.md         # This file
+</code></pre>
+
+<hr />
+<h2>GCP Console Links</h2>
+<ul>
+<li><strong>Cloud Run:</strong> https://console.cloud.google.com/run?project=cryptobot-462709</li>
+<li><strong>BigQuery:</strong> https://console.cloud.google.com/bigquery?project=cryptobot-462709</li>
+<li><strong>Cloud Functions:</strong> https://console.cloud.google.com/functions?project=cryptobot-462709</li>
+<li><strong>Cloud Scheduler:</strong> https://console.cloud.google.com/cloudscheduler?project=cryptobot-462709</li>
+<li><strong>Logs Explorer:</strong> https://console.cloud.google.com/logs?project=cryptobot-462709</li>
+</ul>
+<hr />
+<h2>Quick Troubleshooting</h2>
+<h3>Problem: App shows "Loading..." forever</h3>
+<p><strong>Solution:</strong>
+1. Check API health: <code>curl https://trading-api-cnyn5l4u2a-uc.a.run.app/health</code>
+2. Check BigQuery has data: <code>python check_bigquery_counts.py</code>
+3. View API logs for errors</p>
+<h3>Problem: No data in BigQuery</h3>
+<p><strong>Solution:</strong>
+1. Manually trigger data collection functions
+2. Check Cloud Scheduler jobs are enabled
+3. Review function logs for errors</p>
+<h3>Problem: API returns errors</h3>
+<p><strong>Solution:</strong>
+1. Check BigQuery tables exist and have correct schema
+2. Verify service account permissions
+3. Review API logs: <code>gcloud run services logs read trading-api</code></p>
+<hr />
+<h2>API Reference</h2>
+<h3>Crypto Data Endpoints</h3>
+<ul>
+<li><code>GET /api/crypto/daily?limit=100</code> - Daily OHLC + indicators</li>
+<li><code>GET /api/crypto/hourly?limit=100</code> - Hourly OHLC + indicators</li>
+<li><code>GET /api/crypto/5min?limit=100</code> - 5-min top gainers data</li>
+</ul>
+<h3>Stock Data Endpoints</h3>
+<ul>
+<li><code>GET /api/stocks?limit=100</code> - Daily stock OHLC + indicators</li>
+</ul>
+<h3>Summary Endpoints</h3>
+<ul>
+<li><code>GET /api/summary/crypto</code> - Crypto market statistics</li>
+<li><code>GET /api/summary/stock</code> - Stock market statistics</li>
+</ul>
+<h3>User Management (Admin)</h3>
+<ul>
+<li><code>GET /api/users</code> - List all users</li>
+<li><code>POST /api/users</code> - Create user (body: {email, name, role})</li>
+<li><code>PUT /api/users/{id}</code> - Update user (body: {name, role, is_active})</li>
+<li><code>DELETE /api/users/{id}</code> - Soft delete user</li>
+</ul>
+<hr />
+<p><em>Last Updated: November 11, 2025</em></p>
+</body>
+</html>

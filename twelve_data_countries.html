@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Twelve Data - Supported Countries & Markets</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        
+        header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+        
+        .section {
+            padding: 30px;
+        }
+        
+        .section h2 {
+            color: #1e3c72;
+            margin-bottom: 20px;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+        }
+        
+        .section h3 {
+            color: #2a5298;
+            margin-top: 25px;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .stat-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+        
+        .stat-card .number {
+            font-size: 3em;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .stat-card .label {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+        
+        .country-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .country-card {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        
+        .country-card:hover {
+            transform: translateX(5px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        
+        .country-card .flag {
+            font-size: 2.5em;
+        }
+        
+        .country-card .info {
+            flex: 1;
+        }
+        
+        .country-card .name {
+            font-weight: 600;
+            color: #1e3c72;
+            font-size: 1.1em;
+        }
+        
+        .country-card .region {
+            font-size: 0.9em;
+            color: #666;
+        }
+        
+        .api-section {
+            background: #f0f4ff;
+            padding: 25px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        
+        .api-section h4 {
+            color: #1e3c72;
+            margin-bottom: 15px;
+        }
+        
+        .code-block {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 20px;
+            border-radius: 6px;
+            font-family: 'Courier New', monospace;
+            overflow-x: auto;
+            margin: 15px 0;
+        }
+        
+        .code-block code {
+            font-size: 0.95em;
+            line-height: 1.6;
+        }
+        
+        .note {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+        
+        .note strong {
+            color: #856404;
+            display: block;
+            margin-bottom: 10px;
+        }
+        
+        .info-box {
+            background: #d1ecf1;
+            border-left: 4px solid #0c5460;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+        
+        .info-box strong {
+            color: #0c5460;
+            display: block;
+            margin-bottom: 10px;
+        }
+        
+        .region-section {
+            margin-bottom: 30px;
+        }
+        
+        .region-header {
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px 20px;
+            border-radius: 8px 8px 0 0;
+            margin-top: 20px;
+        }
+        
+        .region-content {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 0 0 8px 8px;
+            border: 1px solid #e0e0e0;
+            border-top: none;
+        }
+        
+        footer {
+            background: #1e3c72;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 0;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 12px 25px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background 0.3s ease;
+            margin: 10px 5px;
+        }
+        
+        .btn:hover {
+            background: #5568d3;
+        }
+        
+        .method-card {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 15px 0;
+            border: 2px solid #667eea;
+        }
+        
+        .method-card h5 {
+            color: #1e3c72;
+            margin-bottom: 10px;
+        }
+        
+        ul {
+            margin-left: 20px;
+            margin-top: 10px;
+        }
+        
+        li {
+            margin: 8px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🌍 Twelve Data - Supported Countries & Markets</h1>
+            <p>Comprehensive Global Market Coverage Across 50+ Countries</p>
+            <p style="font-size: 0.9em; margin-top: 10px;">Last Updated: November 2025</p>
+        </header>
+        
+        <div class="section">
+            <h2>Coverage Overview</h2>
+            
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="number">50+</div>
+                    <div class="label">Countries</div>
+                </div>
+                <div class="stat-card">
+                    <div class="number">90+</div>
+                    <div class="label">International Exchanges</div>
+                </div>
+                <div class="stat-card">
+                    <div class="number">180+</div>
+                    <div class="label">Crypto Exchanges</div>
+                </div>
+                <div class="stat-card">
+                    <div class="number">100K+</div>
+                    <div class="label">Financial Instruments</div>
+                </div>
+            </div>
+            
+            <div class="info-box">
+                <strong>Global Coverage Across 5 Continents:</strong>
+                Twelve Data provides financial market data from North America, South America, Europe, Asia, Africa, and Australia. Their unified API delivers standardized data formats across all markets, making it easy to access global financial information from a single source.
+            </div>
+        </div>
+        
+        <div class="section" style="background: #f8f9fa;">
+            <h2>Confirmed Supported Countries</h2>
+            <p style="margin-bottom: 20px;">The following countries are explicitly confirmed to be supported by Twelve Data based on their official documentation and exchange listings:</p>
+            
+            <div class="region-section">
+                <div class="region-header">
+                    <h3 style="margin: 0;">🌎 Americas (5+ Countries)</h3>
+                </div>
+                <div class="region-content">
+                    <div class="country-grid">
+                        <div class="country-card">
+                            <div class="flag">🇺🇸</div>
+                            <div class="info">
+                                <div class="name">United States</div>
+                                <div class="region">All US stock exchanges</div>
+                            </div>
+                        </div>
+                        <div class="country-card">
+                            <div class="flag">🇨🇦</div>
+                            <div class="info">
+                                <div class="name">Canada</div>
+                                <div class="region">TSX, TSX-V exchanges</div>
+                            </div>
+                        </div>
+                        <div class="country-card">
+                            <div class="flag">🇧🇷</div>
+                            <div class="info">
+                                <div class="name">Brazil</div>
+                                <div class="region">B3 exchange</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="region-section">
+                <div class="region-header">
+                    <h3 style="margin: 0;">🌍 Europe (15+ Countries)</h3>
+                </div>
+                <div class="region-content">
+                    <div class="country-grid">
+                        <div class="country-card">
+                            <div class="flag">🇬🇧</div>
+                            <div class="info">
+                                <div class="name">United Kingdom</div>
+                                <div class="region">LSE, AIM exchanges</div>
+                            </div>
+                        </div>
+                        <div class="country-card">
+                            <div class="flag">🇩🇪</div>
+                            <div class="info">
+                                <div class="name">Germany</div>
+                                <div class="region">XETRA, Frankfurt</div>
+                            </div>
+                        </div>
+                        <div class="country-card">
+                            <div class="flag">🇫🇷</div>
+                            <div class="info">
+                                <div class="name">France</div>
+                                <div class="region">Euronext Paris</div>
+                            </div>
+                        </div>
+                        <div class="country-card">
+                            <div class="flag">🇳🇱</div>
+                            <div class="info">
+                                <div class="name">Netherlands</div>
+                                <div class="region">Euronext Amsterdam</div>
+                            </div>
+                        </div>
+                        <div class="country-card">
+                            <div class="flag">🇧🇪</div>
+                            <div class="info">
+                                <div class="name">Belgium</div>
+                                <div class="region">Euronext Brussels</div>
+                            </div>
+                        </div>
+                        <div class="country-card">
+                            <div class="flag">🇵🇹</div>
+                            <div class="info">
+                                <div class="name">Portugal</div>
+                                <div class="region">Euronext Lisbon</div>
+                            </div>
+                        </div>
+                        <div class="country-card">
+                            <div class="flag">🇮🇪</div>
+                            <div class="info">
+                                <div class="name">Ireland</div>
+                                <div class="region">Euronext Dublin</div>
+                            </div>
+                        </div>
+                        <div class="country-card">
+                            <div class="flag">🇹🇷</div>
+                            <div class="info">
+                                <div class="name">Turkey</div>
+                                <div class="region">Borsa Istanbul</div>
+                            </div>
+                        </div>
+                    </div>
+                    <p style="margin-top: 15px; color: #666; font-style: italic;">+ Additional European markets including Nordic countries, Eastern Europe, and Switzerland</p>
+                </div>
+            </div>
+            
+            <div class="region-section">
+                <div class="region-header">
+                    <h3 style="margin: 0;">🌏 Asia & Oceania (15+ Countries)</h3>
+                </div>
+                <div class="region-content">
+                    <div class="country-grid">
+                        <div class="country-card">
+                            <div class="flag">🇮🇳</div>
+                            <div class="info">
+                                <div class="name">India</div>
+                                <div class="region">NSE, BSE exchanges</div>
+                            </div>
+                        </div>
+                        <div class="country-card">
+                            <div class="flag">🇸🇬</div>
+                            <div class="info">
+                                <div class="name">Singapore</div>
+                                <div class="region">SGX exchange</div>
+                            </div>
+                        </div>
+                        <div class="country-card">
+                            <div class="flag">🇱🇰</div>
+                            <div class="info">
+                                <div class="name">Sri Lanka</div>
+                                <div class="region">CSE exchange</div>
+                            </div>
+                        </div>
+                        <div class="country-card">
+                            <div class="flag">🇯🇵</div>
+                            <div class="info">
+                                <div class="name">Japan</div>
+                                <div class="region">Tokyo Stock Exchange</div>
+                            </div>
+                        </div>
+                        <div class="country-card">
+                            <div class="flag">🇨🇳</div>
+                            <div class="info">
+                                <div class="name">China</div>
+                                <div class="region">Shanghai, Shenzhen</div>
+                            </div>
+                        </div>
+                        <div class="country-card">
+                            <div class="flag">🇦🇺</div>
+                            <div class="info">
+                                <div class="name">Australia</div>
+                                <div class="region">ASX exchange</div>
+                            </div>
+                        </div>
+                    </div>
+                    <p style="margin-top: 15px; color: #666; font-style: italic;">+ Additional Asian markets including Hong Kong, South Korea, Taiwan, Thailand, Malaysia, and more</p>
+                </div>
+            </div>
+            
+            <div class="region-section">
+                <div class="region-header">
+                    <h3 style="margin: 0;">🌍 Africa & Middle East (5+ Countries)</h3>
+                </div>
+                <div class="region-content">
+                    <p style="margin-bottom: 15px;">Twelve Data provides coverage of major African and Middle Eastern financial markets including:</p>
+                    <ul>
+                        <li>South Africa (JSE)</li>
+                        <li>Egypt (EGX)</li>
+                        <li>Nigeria (NSE)</li>
+                        <li>Kenya (NSE)</li>
+                        <li>Saudi Arabia (Tadawul)</li>
+                        <li>UAE (DFM, ADX)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2>How to Get the Complete Country List</h2>
+            
+            <div class="note">
+                <strong>Note:</strong>
+                Twelve Data does not publish a complete list of all 50+ supported countries on their public website. However, you can retrieve the full, current list programmatically using their API.
+            </div>
+            
+            <div class="method-card">
+                <h5>Method 1: Countries API Endpoint (Recommended)</h5>
+                <p>Query the countries endpoint to get the complete list with ISO codes, capitals, and currencies:</p>
+                <div class="code-block">
+                    <code>GET https://api.twelvedata.com/countries</code>
+                </div>
+                <p style="margin-top: 15px;"><strong>Returns:</strong></p>
+                <div class="code-block">
+                    <code>{
+  "data": [
+    {
+      "iso2": "US",
+      "iso3": "USA",
+      "numeric": "840",
+      "name": "United States",
+      "official_name": "United States of America",
+      "capital": "Washington D.C.",
+      "currency": "USD"
+    },
+    ...
+  ]
+}</code>
+                </div>
+            </div>
+            
+            <div class="method-card">
+                <h5>Method 2: Exchanges API Endpoint</h5>
+                <p>Get all exchanges which will show you which countries have market coverage:</p>
+                <div class="code-block">
+                    <code>GET https://api.twelvedata.com/exchanges</code>
+                </div>
+                <p style="margin-top: 15px;">This returns exchange details including country names and Market Identifier Codes (MIC).</p>
+            </div>
+            
+            <div class="method-card">
+                <h5>Method 3: Filter Stocks by Country</h5>
+                <p>Query stocks for specific countries using 3-letter ISO codes:</p>
+                <div class="code-block">
+                    <code>GET https://api.twelvedata.com/stocks?country=USA</code>
+                </div>
+                <p style="margin-top: 15px;">Replace "USA" with other country codes to explore available markets.</p>
+            </div>
+        </div>
+        
+        <div class="section" style="background: #f8f9fa;">
+            <h2>Python Code Example</h2>
+            <p style="margin-bottom: 15px;">Use this Python script to retrieve and display all supported countries:</p>
+            
+            <div class="code-block">
+                <code>import requests
+import json
+
+# Replace with your API key
+API_KEY = "YOUR_API_KEY_HERE"
+
+# Get all countries
+response = requests.get(
+    "https://api.twelvedata.com/countries",
+    params={"apikey": API_KEY}
+)
+
+if response.status_code == 200:
+    countries = response.json()["data"]
+    
+    print(f"Total Countries: {len(countries)}\n")
+    
+    # Print all countries
+    for country in countries:
+        print(f"{country['name']} ({country['iso3']}) - {country['currency']}")
+    
+    # Save to file
+    with open('twelve_data_countries.json', 'w') as f:
+        json.dump(countries, f, indent=2)
+    
+    print(f"\n✓ Saved complete list to twelve_data_countries.json")
+else:
+    print(f"Error: {response.status_code}")
+
+# Get all exchanges
+exchanges_response = requests.get(
+    "https://api.twelvedata.com/exchanges",
+    params={"apikey": API_KEY}
+)
+
+if exchanges_response.status_code == 200:
+    exchanges = exchanges_response.json()["data"]
+    
+    # Group by country
+    by_country = {}
+    for exchange in exchanges:
+        country = exchange.get("country", "Unknown")
+        if country not in by_country:
+            by_country[country] = []
+        by_country[country].append(exchange["name"])
+    
+    print(f"\n\nExchanges by Country:")
+    for country, exch_list in sorted(by_country.items()):
+        print(f"\n{country}: {len(exch_list)} exchanges")
+        for exch in exch_list:
+            print(f"  - {exch}")</code>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2>API Access & Authentication</h2>
+            
+            <div class="api-section">
+                <h4>Getting Your API Key</h4>
+                <ol>
+                    <li>Sign up for a free account at <a href="https://twelvedata.com" target="_blank">twelvedata.com</a></li>
+                    <li>Navigate to your dashboard</li>
+                    <li>Click "API Keys" in the left sidebar</li>
+                    <li>Click "Reveal" to see your API key</li>
+                    <li>Use this key in all API requests</li>
+                </ol>
+                
+                <h4 style="margin-top: 20px;">Free Tier Includes:</h4>
+                <ul>
+                    <li>800 API calls per day</li>
+                    <li>8 calls per minute</li>
+                    <li>Access to US stocks, forex, and crypto</li>
+                    <li>Basic real-time data</li>
+                </ul>
+                
+                <h4 style="margin-top: 20px;">Paid Plans for International Markets:</h4>
+                <ul>
+                    <li><strong>Grow ($29.99/mo):</strong> Canada, India, Europe, Turkey, Brazil markets</li>
+                    <li><strong>Pro ($79.99/mo):</strong> All international markets + WebSocket</li>
+                    <li><strong>Ultra ($149.99/mo):</strong> Complete India coverage + advanced features</li>
+                    <li><strong>Mega ($399.99/mo):</strong> All markets, priority support</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="section" style="background: #f8f9fa;">
+            <h2>Market Coverage Details</h2>
+            
+            <h3>Stock Exchanges (90+)</h3>
+            <p>Twelve Data provides access to over 90 international stock exchanges including:</p>
+            <ul>
+                <li><strong>US Markets:</strong> NYSE, NASDAQ, AMEX, OTC, BATS</li>
+                <li><strong>European Markets:</strong> LSE, Euronext, Deutsche Börse, SIX Swiss, BME Spanish</li>
+                <li><strong>Asian Markets:</strong> Tokyo Stock Exchange, Shanghai, Shenzhen, Hong Kong, NSE India, BSE India</li>
+                <li><strong>Other Major Markets:</strong> TSX Canada, ASX Australia, JSE South Africa, B3 Brazil</li>
+            </ul>
+            
+            <h3>Cryptocurrency Exchanges (180+)</h3>
+            <p>Access to 180+ cryptocurrency exchanges worldwide including:</p>
+            <ul>
+                <li>Binance, Coinbase, Kraken, Bitfinex, Bitstamp</li>
+                <li>Huobi, OKX, KuCoin, Gate.io, Bybit</li>
+                <li>Uniswap, PancakeSwap (DEX)</li>
+                <li>And 170+ more exchanges</li>
+            </ul>
+            
+            <h3>Asset Types Covered</h3>
+            <ul>
+                <li>Common Stocks</li>
+                <li>ETFs (12,000+ instruments)</li>
+                <li>Mutual Funds</li>
+                <li>Indices</li>
+                <li>Forex Pairs (physical currencies)</li>
+                <li>Cryptocurrencies</li>
+                <li>Commodities</li>
+                <li>Bonds & Fixed Income</li>
+                <li>Options (US markets)</li>
+            </ul>
+        </div>
+        
+        <div class="section">
+            <h2>Additional Resources</h2>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-top: 20px;">
+                <div class="info-box" style="margin: 0;">
+                    <strong>📚 Documentation</strong>
+                    <a href="https://twelvedata.com/docs" target="_blank" class="btn">View API Docs</a>
+                </div>
+                
+                <div class="info-box" style="margin: 0;">
+                    <strong>💬 Support</strong>
+                    <a href="https://support.twelvedata.com" target="_blank" class="btn">Get Help</a>
+                </div>
+                
+                <div class="info-box" style="margin: 0;">
+                    <strong>💰 Pricing</strong>
+                    <a href="https://twelvedata.com/pricing" target="_blank" class="btn">View Plans</a>
+                </div>
+            </div>
+        </div>
+        
+        <footer>
+            <p><strong>Twelve Data - Global Financial Market Data</strong></p>
+            <p style="margin-top: 10px;">Coverage: 50+ Countries | 90+ Stock Exchanges | 180+ Crypto Exchanges | 100,000+ Instruments</p>
+            <p style="margin-top: 15px; font-size: 0.9em; opacity: 0.8;">
+                Document Last Updated: November 2025<br>
+                For the most current list of supported countries and markets, use the API methods described above.
+            </p>
+            <p style="margin-top: 15px;">
+                <a href="https://twelvedata.com" target="_blank" style="color: white;">twelvedata.com</a>
+            </p>
+        </footer>
+    </div>
+</body>
+</html>

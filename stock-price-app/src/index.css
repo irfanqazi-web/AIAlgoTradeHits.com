@@ -1,0 +1,193 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Base Layer Customizations */
+@layer base {
+  :root {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    line-height: 1.5;
+    font-weight: 400;
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    @apply m-0 p-0 min-w-full min-h-screen w-full box-border;
+  }
+
+  #root {
+    @apply w-full m-0 p-0;
+  }
+
+  /* Dark mode defaults for trading app */
+  .dark {
+    @apply bg-trading-dark text-gray-100;
+  }
+}
+
+/* Component Layer - Reusable Trading Components */
+@layer components {
+  /* Card Styles */
+  .trading-card {
+    @apply bg-trading-card border border-trading-border rounded-lg p-4 transition-all duration-200;
+  }
+
+  .trading-card:hover {
+    @apply bg-trading-cardHover border-trading-accent/30;
+  }
+
+  /* Button Styles */
+  .btn-primary {
+    @apply bg-trading-accent hover:bg-trading-accentHover text-white font-medium py-2 px-4 rounded-lg transition-all duration-200;
+  }
+
+  .btn-secondary {
+    @apply bg-trading-card hover:bg-trading-cardHover text-gray-300 border border-trading-border font-medium py-2 px-4 rounded-lg transition-all duration-200;
+  }
+
+  .btn-success {
+    @apply bg-signal-buy hover:bg-signal-strongBuy text-white font-medium py-2 px-4 rounded-lg transition-all duration-200;
+  }
+
+  .btn-danger {
+    @apply bg-signal-sell hover:bg-signal-strongSell text-white font-medium py-2 px-4 rounded-lg transition-all duration-200;
+  }
+
+  /* Signal Badge Styles */
+  .signal-badge {
+    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium;
+  }
+
+  .signal-buy {
+    @apply bg-signal-buy/20 text-signal-buy border border-signal-buy/30;
+  }
+
+  .signal-strong-buy {
+    @apply bg-signal-strongBuy/20 text-signal-strongBuy border border-signal-strongBuy/30;
+  }
+
+  .signal-sell {
+    @apply bg-signal-sell/20 text-signal-sell border border-signal-sell/30;
+  }
+
+  .signal-hold {
+    @apply bg-signal-hold/20 text-signal-hold border border-signal-hold/30;
+  }
+
+  .signal-watch {
+    @apply bg-signal-watch/20 text-signal-watch border border-signal-watch/30;
+  }
+
+  .signal-execute {
+    @apply bg-signal-execute/20 text-signal-execute border border-signal-execute/30;
+  }
+
+  .signal-ready {
+    @apply bg-signal-ready/20 text-signal-ready border border-signal-ready/30;
+  }
+
+  /* Input Styles */
+  .input-field {
+    @apply w-full bg-trading-dark border border-trading-border rounded-lg px-4 py-2 text-gray-100 placeholder-gray-500 focus:outline-none focus:border-trading-accent focus:ring-1 focus:ring-trading-accent transition-all duration-200;
+  }
+
+  /* Table Styles */
+  .trading-table {
+    @apply w-full border-collapse;
+  }
+
+  .trading-table th {
+    @apply bg-trading-card text-gray-400 text-left px-4 py-3 text-sm font-medium border-b border-trading-border;
+  }
+
+  .trading-table td {
+    @apply px-4 py-3 text-sm border-b border-trading-border/50;
+  }
+
+  .trading-table tr:hover td {
+    @apply bg-trading-cardHover;
+  }
+
+  /* Price Display */
+  .price-up {
+    @apply text-trend-up;
+  }
+
+  .price-down {
+    @apply text-trend-down;
+  }
+
+  .price-neutral {
+    @apply text-trend-neutral;
+  }
+
+  /* Chart Container */
+  .chart-container {
+    @apply bg-trading-card border border-trading-border rounded-lg overflow-hidden;
+  }
+
+  /* Scrollbar Styles */
+  .custom-scrollbar::-webkit-scrollbar {
+    @apply w-2;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-track {
+    @apply bg-trading-dark;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    @apply bg-trading-border rounded-full hover:bg-trading-accent/50;
+  }
+
+  /* Loading States */
+  .skeleton {
+    @apply animate-pulse bg-trading-border rounded;
+  }
+
+  /* Tooltip */
+  .tooltip {
+    @apply absolute z-50 px-2 py-1 text-xs bg-trading-card border border-trading-border rounded shadow-lg;
+  }
+}
+
+/* Utility Layer - Custom Utilities */
+@layer utilities {
+  /* Text Utilities */
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  /* Gradient Utilities */
+  .gradient-trading {
+    @apply bg-gradient-to-br from-trading-accent to-purple-600;
+  }
+
+  .gradient-success {
+    @apply bg-gradient-to-br from-signal-buy to-signal-strongBuy;
+  }
+
+  .gradient-danger {
+    @apply bg-gradient-to-br from-signal-sell to-red-700;
+  }
+
+  /* Glass Effect */
+  .glass {
+    @apply bg-trading-card/80 backdrop-blur-sm;
+  }
+
+  /* Glow Effects */
+  .glow-accent {
+    box-shadow: 0 0 20px theme('colors.trading.accent / 30%');
+  }
+
+  .glow-success {
+    box-shadow: 0 0 20px theme('colors.signal.buy / 30%');
+  }
+
+  .glow-danger {
+    box-shadow: 0 0 20px theme('colors.signal.sell / 30%');
+  }
+}
